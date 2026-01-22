@@ -16,10 +16,6 @@ import stoneVeneerBefore2Img from "@/assets/stone-veneer-before-2.jpg";
 import stoneVeneerAfter2Img from "@/assets/stone-veneer-after-2.jpg";
 import stoneVeneerBefore3Img from "@/assets/stone-veneer-before-3.jpg";
 import stoneVeneerAfter3Img from "@/assets/stone-veneer-after-3.jpg";
-import waterproofingImg from "@/assets/waterproofing.webp";
-import birdControlImg from "@/assets/bird-control.webp";
-import specialProjectsImg from "@/assets/special-projects.webp";
-import stoneCladding from "@/assets/stone-cladding.jpg";
 
 interface Project {
   id: number;
@@ -144,38 +140,6 @@ const HomeProjects = () => {
       location: "רמת גן",
       images: [stoneVeneerBefore3Img, stoneVeneerAfter3Img],
       description: "עיגון מחדש של אבני חזית שהשתחררו עם אבטחה מקצועית."
-    },
-    {
-      id: 5,
-      title: "איטום גג מסחרי",
-      category: "איטום בגובה",
-      location: "הרצליה",
-      images: [waterproofingImg],
-      description: "איטום מלא של גג מסחרי בשיטת ריסוס פוליאוריטן."
-    },
-    {
-      id: 6,
-      title: "הרחקת יונים ממגדלים",
-      category: "הרחקת מעופפים",
-      location: "רמת גן",
-      images: [birdControlImg],
-      description: "התקנת מערכת הרחקת יונים מקיפה כולל רשתות וקוצים."
-    },
-    {
-      id: 7,
-      title: "חיפוי אבן ירושלמית",
-      category: "חיפוי אבן",
-      location: "ירושלים",
-      images: [stoneCladding],
-      description: "חיפוי מלא באבן ירושלמית טבעית עם עיגון מקצועי."
-    },
-    {
-      id: 8,
-      title: "פרויקט שיקום מיוחד",
-      category: "עבודות מיוחדות",
-      location: "תל אביב",
-      images: [specialProjectsImg],
-      description: "עבודות גובה מיוחדות הכוללות שיקום אלמנטים ארכיטקטוניים."
     },
   ];
 
