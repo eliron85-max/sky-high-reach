@@ -84,7 +84,7 @@ export default function Header() {
         <div className="h-full w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-gold-border-sweep" />
       </div>
       {/* ================= ROW 1 (Desktop only) - CSS Grid for bulletproof centering ================= */}
-      <div className="hidden lg:block relative z-20 bg-black/20 backdrop-blur-2xl border-b border-[#c9a84c]/20">
+      <div className="hidden lg:block relative z-20 bg-black/60 backdrop-blur-2xl border-b border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           {/* RIGHT column: NAV (justify-self-end for RTL) */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
@@ -176,7 +176,7 @@ export default function Header() {
       </div>
 
       {/* ================= ROW 2 (NAVY BAR) - dir="ltr" for physical left placement ================= */}
-      <div className="hidden lg:block relative z-10 bg-black/20 backdrop-blur-2xl border-t border-[#c9a84c]/10">
+      <div className="hidden lg:block relative z-10 bg-black/60 backdrop-blur-2xl border-t border-[#c9a84c]/10">
         <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[44px] grid grid-cols-[auto_1fr_auto] items-center">
           {/* LEFT (physical): Language Switcher */}
           <div className="flex items-center">
