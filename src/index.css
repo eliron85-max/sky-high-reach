@@ -338,12 +338,11 @@ All colors MUST be HSL.
 }
 /* ===== Lovable: Mobile header edge glow pulse + CTA hover boost ===== */
 @media (max-width: 1024px) {
-  /* סלקטור להדר שלך לפי הצילום: header fixed top-0 ... z-50 */
+  /* Mobile header - הסרת padding-top כפול, ה-Mobile Bar ב-Header.tsx מטפל בזה */
   header.fixed.top-0 {
-    background: #000 !important; /* אטום */
-    /* position: relative הוסר - נשאיר fixed */
-    transform: translateY(0); /* תוקן: היה -18px שחתך את ההדר */
-    padding-top: env(safe-area-inset-top, 0px); /* תמיכה במכשירים עם notch */
+    background: transparent !important; /* שקוף - ה-Mobile Bar עושה את העבודה */
+    transform: translateY(0);
+    /* padding-top מוסר - מוגדר ב-Mobile Fixed Bar עצמו */
     transition:
       transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 800ms cubic-bezier(0.16, 1, 0.3, 1);
