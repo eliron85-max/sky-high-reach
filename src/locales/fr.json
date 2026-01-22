@@ -1,0 +1,177 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "projects": "Projets",
+    "pricing": "Tarifs",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "cta": "Demander un devis"
+  },
+  "serviceCategories": {
+    "restoration": "Restauration & Rénovation",
+    "coating": "Revêtement & Étanchéité",
+    "additional": "Services supplémentaires"
+  },
+  "serviceItems": {
+    "facadeRestoration": "Restauration de façade",
+    "demolitionOrders": "Ordres de démolition",
+    "stoneVeneer": "Revêtement en pierre",
+    "waterproofing": "Étanchéité",
+    "birdControl": "Contrôle des oiseaux",
+    "specialProjects": "Projets spéciaux"
+  },
+  "quickLinks": {
+    "facadeRestoration": "Restauration de façade",
+    "stoneVeneer": "Revêtement en pierre",
+    "waterproofing": "Étanchéité",
+    "birdControl": "Contrôle des pigeons",
+    "demolitionOrders": "Ordres de démolition"
+  },
+  "hero": {
+    "slide1Title": "Experts en travaux en hauteur au plus haut niveau",
+    "slide1Subtitle": "Restauration de façade, étanchéité en hauteur, revêtement en pierre et contrôle des oiseaux - des solutions professionnelles pour chaque défi",
+    "slide2Title": "Accès sur corde et solutions avancées",
+    "slide2Subtitle": "Technologie avancée et sécurité maximale pour les travaux en altitude",
+    "slide3Title": "Plus de 15 ans d'expérience",
+    "slide3Subtitle": "Des centaines de projets réussis et de clients satisfaits à travers le pays",
+    "ctaPrimary": "Demander un devis",
+    "ctaSecondary": "Voir nos projets",
+    "prevSlide": "Diapositive précédente",
+    "nextSlide": "Diapositive suivante",
+    "goToSlide": "Aller à la diapositive"
+  },
+  "about": {
+    "title": "À propos de nous",
+    "paragraph1": "Nous sommes une entreprise leader dans le domaine des travaux en hauteur en Israël, avec plus de 15 ans d'expérience dans l'exécution de projets complexes à travers le pays. Notre expertise réside dans l'accès sur corde, la restauration de façades de bâtiments, l'étanchéité en hauteur, le revêtement et l'ancrage de pierres, et le contrôle des oiseaux.",
+    "paragraph2": "Notre équipe est composée de grimpeurs certifiés et expérimentés avec le plus haut niveau de formation professionnelle. Nous utilisons les équipements les plus avancés et respectons toutes les normes de sécurité requises.",
+    "historyTitle": "Comment tout a commencé",
+    "historyText": "L'entreprise a été fondée en 2009 par notre fondateur, un grimpeur professionnel avec une vaste expérience internationale en travaux en hauteur. La vision était de créer une entreprise combinant un haut professionnalisme, une sécurité maximale et un service personnalisé pour chaque client. Aujourd'hui, nous sommes fiers d'être l'une des entreprises leaders du secteur en Israël.",
+    "stats": {
+      "experience": "Années d'expérience",
+      "projects": "Projets réussis",
+      "safety": "Sécurité maximale"
+    },
+    "imagePlaceholder": "Image équipe / travail",
+    "clientsTitle": "Clients qui nous font confiance",
+    "logoPlaceholder": "Logo"
+  },
+  "services": {
+    "title": "Nos services",
+    "subtitle": "Une large gamme de services professionnels de travaux en hauteur avec un accent sur la sécurité, la qualité et un service fiable",
+    "items": {
+      "facadeRestoration": {
+        "title": "Restauration et rénovation de façade",
+        "description": "Réparation et rénovation des façades de bâtiments, traitement des fissures, remplacement des éléments endommagés et restauration de la structure de façade."
+      },
+      "stoneVeneer": {
+        "title": "Revêtement et ancrage de pierre",
+        "description": "Installation de revêtement en pierre en hauteur, ancrage de pierres desserrées et traitement des façades en pierre naturelle et artificielle."
+      },
+      "waterproofing": {
+        "title": "Étanchéité en hauteur",
+        "description": "Étanchéité des toits, murs extérieurs, balcons et fenêtres. Prévention de la pénétration de l'eau et de l'humidité dans le bâtiment."
+      },
+      "birdControl": {
+        "title": "Contrôle des oiseaux",
+        "description": "Installation de systèmes de dissuasion des pigeons et oiseaux, filets, pics et systèmes électroniques."
+      },
+      "specialWorks": {
+        "title": "Travaux spéciaux en hauteur",
+        "description": "Projets uniques nécessitant un accès sur corde, y compris des installations spéciales et des projets artistiques."
+      },
+      "safetyInspections": {
+        "title": "Inspections de sécurité",
+        "description": "Inspections périodiques des façades de bâtiments, identification des risques et rédaction de rapports détaillés."
+      },
+      "anchoring": {
+        "title": "Forage d'ancrage",
+        "description": "Forage et ancrage professionnels pour le renforcement des bâtiments, installation de garde-corps et systèmes de support."
+      },
+      "generalRenovations": {
+        "title": "Rénovations générales",
+        "description": "Travaux de rénovation et d'entretien régulier pour les bâtiments, y compris peinture, plâtrage et diverses réparations."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Intéressé par une consultation ou un devis? Remplissez les détails et nous vous répondrons rapidement",
+    "form": {
+      "fullName": "Nom complet *",
+      "fullNamePlaceholder": "Prénom et nom de famille",
+      "company": "Nom de l'entreprise",
+      "companyPlaceholder": "Nom de l'entreprise (facultatif)",
+      "phone": "Téléphone *",
+      "phonePlaceholder": "050-1234567",
+      "email": "Email *",
+      "emailPlaceholder": "exemple@email.com",
+      "projectType": "Type de projet *",
+      "projectTypePlaceholder": "Sélectionnez le type de projet",
+      "projectTypes": {
+        "restoration": "Restauration et rénovation de façade",
+        "stone": "Revêtement et ancrage de pierre",
+        "sealing": "Étanchéité en hauteur",
+        "birds": "Contrôle des oiseaux",
+        "special": "Travaux spéciaux en hauteur",
+        "other": "Autre"
+      },
+      "preferredDate": "Date préférée (facultatif)",
+      "preferredDatePlaceholder": "Sélectionner une date",
+      "message": "Description du projet *",
+      "messagePlaceholder": "Parlez-nous de votre projet - emplacement, portée, défis particuliers et toute information pertinente",
+      "fileUpload": "Télécharger des fichiers (plans, photos, documents)",
+      "chooseFile": "Choisir un fichier",
+      "supportedFormats": "Formats supportés: PDF, JPG, PNG, DWG, DOC (jusqu'à 10 Mo)",
+      "submit": "Envoyer la demande",
+      "successTitle": "Demande envoyée avec succès!",
+      "successMessage": "Nous vous répondrons dès que possible"
+    },
+    "info": {
+      "title": "Coordonnées",
+      "phone": "Téléphone",
+      "email": "Email",
+      "address": "Adresse",
+      "addressValue": "123 Rue Exemple\nTel Aviv, Israël"
+    },
+    "hours": {
+      "title": "Heures d'ouverture",
+      "weekdays": "Dimanche - Jeudi: 7h00 - 18h00",
+      "friday": "Vendredi: 7h00 - 12h00",
+      "saturday": "Samedi: Fermé",
+      "urgent": "* Les demandes urgentes sont traitées en dehors des heures d'ouverture"
+    }
+  },
+  "footer": {
+    "phone": "Téléphone",
+    "email": "Email",
+    "address": "Adresse",
+    "addressValue": "Tel Aviv, Israël",
+    "quickNav": "Navigation rapide",
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Nos services",
+    "projects": "Nos projets",
+    "moreInfo": "Plus d'infos",
+    "pricing": "Tarifs",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "companyTitle": "Travaux en hauteur",
+    "companyHighlight": "professionnels",
+    "companyDescription": "Leader des travaux en hauteur en Israël avec plus de 15 ans d'expérience",
+    "copyright": "Travaux en hauteur professionnels. Tous droits réservés."
+  },
+  "theme": {
+    "light": "Mode clair",
+    "dark": "Mode sombre",
+    "label": "Thème",
+    "tooltip": "Passer en {{mode}}",
+    "firstTimeTip": "Cliquez ici pour basculer entre le mode clair et sombre"
+  },
+  "language": {
+    "he": "עברית",
+    "en": "English",
+    "fr": "Français"
+  }
+}

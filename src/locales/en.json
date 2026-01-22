@@ -1,0 +1,177 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "pricing": "Pricing",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "cta": "Request a Quote"
+  },
+  "serviceCategories": {
+    "restoration": "Restoration & Renovation",
+    "coating": "Coating & Sealing",
+    "additional": "Additional Services"
+  },
+  "serviceItems": {
+    "facadeRestoration": "Facade Restoration",
+    "demolitionOrders": "Demolition Orders",
+    "stoneVeneer": "Stone Veneer",
+    "waterproofing": "Waterproofing",
+    "birdControl": "Bird Control",
+    "specialProjects": "Special Projects"
+  },
+  "quickLinks": {
+    "facadeRestoration": "Facade Restoration",
+    "stoneVeneer": "Stone Veneer",
+    "waterproofing": "Waterproofing",
+    "birdControl": "Bird Control",
+    "demolitionOrders": "Demolition Orders"
+  },
+  "hero": {
+    "slide1Title": "Experts in High-Rise Work at the Highest Level",
+    "slide1Subtitle": "Facade restoration, high-rise sealing, stone cladding and bird control - professional solutions for every challenge",
+    "slide2Title": "Rope Access & Advanced Solutions",
+    "slide2Subtitle": "Advanced technology and maximum security for high-altitude work",
+    "slide3Title": "Over 15 Years of Experience",
+    "slide3Subtitle": "Hundreds of successful projects and satisfied clients across the country",
+    "ctaPrimary": "Request a Quote",
+    "ctaSecondary": "View Our Projects",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "goToSlide": "Go to slide"
+  },
+  "about": {
+    "title": "About Us",
+    "paragraph1": "We are a leading company in the field of high-rise work in Israel, with over 15 years of experience in executing complex projects across the country. Our expertise is in rope access, building facade restoration, high-altitude sealing, stone cladding and anchoring, and bird control.",
+    "paragraph2": "Our team consists of certified and experienced climbers with the highest level of professional training. We use the most advanced equipment and meet all required safety standards.",
+    "historyTitle": "How It All Started",
+    "historyText": "The company was founded in 2009 by our founder, a professional climber with extensive international high-rise work experience. The vision was to create a company that combines high professionalism, maximum safety, and personal service for every client. Today, we are proud to be one of the leading companies in the field in Israel.",
+    "stats": {
+      "experience": "Years of Experience",
+      "projects": "Successful Projects",
+      "safety": "Maximum Safety"
+    },
+    "imagePlaceholder": "Team / Work Image",
+    "clientsTitle": "Clients Who Trust Us",
+    "logoPlaceholder": "Logo"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "A wide range of professional high-rise work services with emphasis on safety, quality and reliable service",
+    "items": {
+      "facadeRestoration": {
+        "title": "Facade Restoration & Renovation",
+        "description": "Repair and renovation of building facades, crack treatment, replacement of damaged elements and facade structure restoration."
+      },
+      "stoneVeneer": {
+        "title": "Stone Cladding & Anchoring",
+        "description": "Installation of stone cladding at height, anchoring loose stones and treatment of natural and artificial stone facades."
+      },
+      "waterproofing": {
+        "title": "High-Rise Waterproofing",
+        "description": "Sealing roofs, exterior walls, balconies and windows. Prevention of water and moisture penetration into the building."
+      },
+      "birdControl": {
+        "title": "Bird Control",
+        "description": "Installation of pigeon and bird deterrent systems, nets, spikes and electronic systems."
+      },
+      "specialWorks": {
+        "title": "Special High-Rise Works",
+        "description": "Unique projects requiring rope access, including special installations and art projects."
+      },
+      "safetyInspections": {
+        "title": "Safety Inspections",
+        "description": "Periodic inspections of building facades, risk identification and detailed report writing."
+      },
+      "anchoring": {
+        "title": "Anchor Drilling",
+        "description": "Professional drilling and anchoring for building reinforcement, railing installation and support systems."
+      },
+      "generalRenovations": {
+        "title": "General Renovations",
+        "description": "Renovation and regular maintenance work for buildings, including painting, plastering and various repairs."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Interested in a consultation or quote? Fill in the details and we'll get back to you soon",
+    "form": {
+      "fullName": "Full Name *",
+      "fullNamePlaceholder": "First and last name",
+      "company": "Company Name",
+      "companyPlaceholder": "Company name (optional)",
+      "phone": "Phone *",
+      "phonePlaceholder": "050-1234567",
+      "email": "Email *",
+      "emailPlaceholder": "example@email.com",
+      "projectType": "Project Type *",
+      "projectTypePlaceholder": "Select project type",
+      "projectTypes": {
+        "restoration": "Facade Restoration & Renovation",
+        "stone": "Stone Cladding & Anchoring",
+        "sealing": "High-Rise Waterproofing",
+        "birds": "Bird Control",
+        "special": "Special High-Rise Works",
+        "other": "Other"
+      },
+      "preferredDate": "Preferred Date (optional)",
+      "preferredDatePlaceholder": "Select a date",
+      "message": "Project Description *",
+      "messagePlaceholder": "Tell us about your project - location, scope, special challenges and any relevant information",
+      "fileUpload": "Upload Files (plans, photos, documents)",
+      "chooseFile": "Choose File",
+      "supportedFormats": "Supported formats: PDF, JPG, PNG, DWG, DOC (up to 10MB)",
+      "submit": "Send Inquiry",
+      "successTitle": "Inquiry sent successfully!",
+      "successMessage": "We'll get back to you as soon as possible"
+    },
+    "info": {
+      "title": "Contact Information",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "addressValue": "123 Example Street\nTel Aviv, Israel"
+    },
+    "hours": {
+      "title": "Business Hours",
+      "weekdays": "Sunday - Thursday: 7:00 AM - 6:00 PM",
+      "friday": "Friday: 7:00 AM - 12:00 PM",
+      "saturday": "Saturday: Closed",
+      "urgent": "* Urgent inquiries are handled outside business hours"
+    }
+  },
+  "footer": {
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "addressValue": "Tel Aviv, Israel",
+    "quickNav": "Quick Navigation",
+    "home": "Home",
+    "about": "About",
+    "services": "Our Services",
+    "projects": "Our Projects",
+    "moreInfo": "More Info",
+    "pricing": "Pricing",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "companyTitle": "Professional",
+    "companyHighlight": "High-Rise Work",
+    "companyDescription": "Leading in high-rise work in Israel with over 15 years of experience",
+    "copyright": "Professional High-Rise Work. All rights reserved."
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "label": "Theme",
+    "tooltip": "Switch to {{mode}}",
+    "firstTimeTip": "Click here to toggle between light and dark mode"
+  },
+  "language": {
+    "he": "עברית",
+    "en": "English",
+    "fr": "Français"
+  }
+}
