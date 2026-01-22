@@ -60,16 +60,16 @@ const Hero = () => {
       </video>
 
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" />
 
       {/* Gold gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
 
       {/* Content - positioned to the right with parallax */}
-      <div className="container relative z-10 px-[20px] my-[136px] mx-[72px]">
+      <div className="container relative z-10 px-4 md:px-6 pt-24 md:pt-32 mx-auto">
         <div
           ref={contentRef}
-          className={`max-w-xl ${dir === "rtl" ? "mr-4 md:mr-8 lg:mr-16 text-right" : "ml-4 md:ml-8 lg:ml-16 text-left"}`}
+          className={`max-w-xl mx-auto text-center md:mx-0 ${dir === "rtl" ? "md:mr-8 lg:mr-16 md:text-right" : "md:ml-8 lg:ml-16 md:text-left"}`}
           style={contentStyle}
         >
           {/* Animated content based on current slide */}
@@ -85,7 +85,7 @@ const Hero = () => {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
             <Button
               onClick={() => scrollToSection("contact")}
               size="lg"
@@ -104,7 +104,7 @@ const Hero = () => {
           </div>
 
           {/* Slide indicators */}
-          <div className="flex gap-2 mt-12">
+          <div className="flex justify-center md:justify-start gap-2 mt-12">
             {slides.map((_, index) => (
               <button
                 key={index}
