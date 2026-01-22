@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import SectionNavigator from "@/components/SectionNavigator";
 import HomeTestimonials from "@/components/HomeTestimonials";
+import HomeProjects from "@/components/HomeProjects";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
@@ -481,6 +482,10 @@ const Index = () => {
       label: "שירותים",
     },
     {
+      id: "home-projects",
+      label: "פרויקטים",
+    },
+    {
       id: "testimonials",
       label: "המלצות",
     },
@@ -590,6 +595,9 @@ const Index = () => {
                   </div>
                 </div>
               </section>
+
+              {/* Featured Projects Section */}
+              <HomeProjects />
 
               {/* Testimonials Section */}
               <HomeTestimonials />
