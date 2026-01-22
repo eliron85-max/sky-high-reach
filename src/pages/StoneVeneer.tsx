@@ -465,14 +465,14 @@ const StoneVeneer = () => {
         </video>
 
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" />
 
         {/* Gold gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
 
         {/* Content - positioned to the right with parallax */}
-        <div className="container relative z-10 px-[20px] my-[136px] mx-[72px]">
-          <div ref={heroContentRef} className="max-w-xl mr-4 md:mr-8 lg:mr-16 text-right" style={heroContentStyle}>
+        <div className="container relative z-10 px-4 md:px-6 pt-24 md:pt-32 mx-auto">
+          <div ref={heroContentRef} className="max-w-xl mx-auto text-center md:mx-0 md:mr-8 lg:mr-16 md:text-right" style={heroContentStyle}>
             {/* Animated content */}
             <div className="animate-fade-in-up">
               <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight lg:text-6xl">
@@ -486,7 +486,7 @@ const StoneVeneer = () => {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
               <button
                 onClick={scrollToContact}
                 className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-4 rounded-button"
