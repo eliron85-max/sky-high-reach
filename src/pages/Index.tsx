@@ -732,7 +732,7 @@ const UnfoldingServiceCard = ({
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 border-secondary-foreground border-dotted border-0 rounded-2xl"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 my-[178px] mb-[28px] mr-0 ml-[46px] py-0 px-0 pb-[36px] opacity-100" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 transition-opacity duration-300" />
         <div className={`absolute bottom-0 left-0 right-0 ${isMobile ? "p-3" : "p-5 md:p-6"}`}>
           <h3
             className={`text-white ${isMobile ? "text-sm" : "text-lg md:text-xl lg:text-2xl"} font-bold drop-shadow-lg`}
