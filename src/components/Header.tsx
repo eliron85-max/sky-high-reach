@@ -213,64 +213,170 @@ export default function Header() {
       </div>
 
       {/* ================= MOBILE DRAWER ================= */}
-      {mobileOpen && <div className="fixed inset-0 z-[60] lg:hidden bg-[#0a0a0a]">
-          <button type="button" className="absolute left-0 top-0 w-[14%] h-full" onClick={() => setMobileOpen(false)} aria-label="סגור תפריט" />
-
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-[#0a0a0a] border-l border-[#c9a84c]/20 p-5">
-            <div className="flex items-center justify-between mb-6">
-              <div className={`font-bold ${goldText}`}>תפריט</div>
-              <button type="button" onClick={() => setMobileOpen(false)} className="text-[#c9a84c] hover:text-[#e8d5a3] transition">
-                ✕
+      {mobileOpen && (
+        <>
+          {/* Backdrop with blur */}
+          <div 
+            className="fixed inset-0 z-[59] lg:hidden bg-black/70 backdrop-blur-sm animate-fade-in"
+            onClick={() => setMobileOpen(false)}
+            aria-label="סגור תפריט"
+          />
+          
+          {/* Drawer Panel */}
+          <div className="fixed inset-y-0 right-0 z-[60] lg:hidden w-[85%] max-w-[360px] bg-gradient-to-bl from-[#0d0d0d] via-[#0a0a0a] to-[#080808] border-l border-[#c9a84c]/30 shadow-2xl shadow-black/50 animate-slide-in-right">
+            
+            {/* Header with close button */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[#c9a84c]/20">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-6 bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] rounded-full" />
+                <span className={`text-lg font-bold ${goldText}`}>תפריט</span>
+              </div>
+              <button 
+                type="button" 
+                onClick={() => setMobileOpen(false)} 
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-[#c9a84c]/20 text-[#c9a84c] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c]/40 transition-all duration-300"
+              >
+                <span className="sr-only">סגור</span>
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
 
-            <div className="space-y-4 text-[18px] font-semibold">
-              <Link to="/" onClick={() => setMobileOpen(false)} className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`} style={{
-            animationDelay: "0ms"
-          }}>
-                עמוד ראשי
-              </Link>
-              <Link to="/about" onClick={() => setMobileOpen(false)} className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`} style={{
-            animationDelay: "100ms"
-          }}>
-                אודות
-              </Link>
-
-              <button type="button" onClick={() => setServicesOpen(v => !v)} className={`w-full flex items-center justify-between ${goldText} hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`} style={{
-            animationDelay: "200ms"
-          }}>
-                שירותים <span className="text-[14px] text-[#c9a84c] opacity-80">▼</span>
-              </button>
-
-              {servicesOpen && <div className="pr-3 space-y-2 text-[16px] bg-[#0a0a0a]">
-                  {serviceLinks.map(item => <Link key={item.path} to={item.path} onClick={() => setMobileOpen(false)} className={`${goldText} flex items-center gap-2 hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right`}>
-                      {item.label}
-                    </Link>)}
-                </div>}
-
-              <Link to="/projects" onClick={() => setMobileOpen(false)} className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`} style={{
-            animationDelay: "300ms"
-          }}>
-                פרויקטים
-              </Link>
-              <Link to="/pricing" onClick={() => setMobileOpen(false)} className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`} style={{
-            animationDelay: "400ms"
-          }}>
-                מחירים
-              </Link>
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`} style={{
-            animationDelay: "500ms"
-          }}>
-                צור קשר
+            {/* Navigation Links */}
+            <nav className="px-6 py-6 space-y-1 overflow-y-auto max-h-[calc(100vh-180px)]">
+              {/* Main links with stagger animation */}
+              <Link 
+                to="/" 
+                onClick={() => setMobileOpen(false)} 
+                className="group flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-[#c9a84c]/10 transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: "50ms" }}
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 group-hover:border-[#c9a84c]/40 transition-colors">
+                  <svg className="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </span>
+                <span className={`text-[17px] font-semibold ${goldText} group-hover:translate-x-[-4px] transition-transform duration-300`}>עמוד ראשי</span>
               </Link>
 
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-[0.97] active:scale-95 animate-slide-in-stagger" style={{
-            animationDelay: "600ms"
-          }}>
+              <Link 
+                to="/about" 
+                onClick={() => setMobileOpen(false)} 
+                className="group flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-[#c9a84c]/10 transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: "100ms" }}
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 group-hover:border-[#c9a84c]/40 transition-colors">
+                  <svg className="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                <span className={`text-[17px] font-semibold ${goldText} group-hover:translate-x-[-4px] transition-transform duration-300`}>אודות</span>
+              </Link>
+
+              {/* Services Dropdown */}
+              <div className="animate-fade-in" style={{ animationDelay: "150ms" }}>
+                <button 
+                  type="button" 
+                  onClick={() => setServicesOpen(v => !v)} 
+                  className={`group w-full flex items-center justify-between py-3 px-4 rounded-xl hover:bg-[#c9a84c]/10 transition-all duration-300 ${servicesOpen ? 'bg-[#c9a84c]/10' : ''}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 group-hover:border-[#c9a84c]/40 transition-colors">
+                      <svg className="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </span>
+                    <span className={`text-[17px] font-semibold ${goldText} group-hover:translate-x-[-4px] transition-transform duration-300`}>שירותים</span>
+                  </div>
+                  <svg 
+                    className={`w-4 h-4 text-[#c9a84c] transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Services submenu with smooth animation */}
+                <div className={`overflow-hidden transition-all duration-300 ease-out ${servicesOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className="mr-6 pr-4 py-2 border-r-2 border-[#c9a84c]/30 space-y-1">
+                    {serviceLinks.map((item, index) => (
+                      <Link 
+                        key={item.path} 
+                        to={item.path} 
+                        onClick={() => setMobileOpen(false)} 
+                        className="group flex items-center gap-2 py-2.5 px-3 rounded-lg text-[15px] text-[#d6c38a] hover:text-[#e8d5a3] hover:bg-[#c9a84c]/10 transition-all duration-200"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c9a84c]/50 group-hover:bg-[#c9a84c] transition-colors" />
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <Link 
+                to="/projects" 
+                onClick={() => setMobileOpen(false)} 
+                className="group flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-[#c9a84c]/10 transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: "200ms" }}
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 group-hover:border-[#c9a84c]/40 transition-colors">
+                  <svg className="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </span>
+                <span className={`text-[17px] font-semibold ${goldText} group-hover:translate-x-[-4px] transition-transform duration-300`}>פרויקטים</span>
+              </Link>
+
+              <Link 
+                to="/pricing" 
+                onClick={() => setMobileOpen(false)} 
+                className="group flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-[#c9a84c]/10 transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: "250ms" }}
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 group-hover:border-[#c9a84c]/40 transition-colors">
+                  <svg className="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                <span className={`text-[17px] font-semibold ${goldText} group-hover:translate-x-[-4px] transition-transform duration-300`}>מחירים</span>
+              </Link>
+
+              <Link 
+                to="/contact" 
+                onClick={() => setMobileOpen(false)} 
+                className="group flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-[#c9a84c]/10 transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: "300ms" }}
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a84c]/20 to-transparent border border-[#c9a84c]/20 group-hover:border-[#c9a84c]/40 transition-colors">
+                  <svg className="w-4 h-4 text-[#c9a84c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </span>
+                <span className={`text-[17px] font-semibold ${goldText} group-hover:translate-x-[-4px] transition-transform duration-300`}>צור קשר</span>
+              </Link>
+            </nav>
+
+            {/* CTA Button at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-[#c9a84c]/20 bg-gradient-to-t from-[#0a0a0a] to-transparent">
+              <Link 
+                to="/contact" 
+                onClick={() => setMobileOpen(false)} 
+                className="quote-shimmer flex items-center justify-center gap-2 h-14 w-full rounded-2xl bg-gradient-to-r from-[#e8d5a3] via-[#c9a84c] to-[#b8943f] text-black font-bold text-lg shadow-lg shadow-[#c9a84c]/20 hover:shadow-xl hover:shadow-[#c9a84c]/30 hover:scale-[0.98] active:scale-95 transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: "400ms" }}
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
                 להצעת מחיר
               </Link>
             </div>
           </div>
-        </div>}
+        </>
+      )}
     </header>;
 }
