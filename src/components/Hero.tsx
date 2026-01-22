@@ -60,7 +60,7 @@ const Hero = () => {
       </video>
 
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent transition-opacity duration-300" />
 
       {/* Gold gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
