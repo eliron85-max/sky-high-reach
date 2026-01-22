@@ -78,7 +78,7 @@ export default function Header() {
   }, [mobileOpen]);
   const goldText = "text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]";
   const tealText = "text-[#0d9488] dark:text-[#21d4c5]";
-  return <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}`} dir="rtl">
+  return <header className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"} ${isVisible ? "lg:translate-y-0" : "lg:-translate-y-full"} lg:transition-all`} dir="rtl">
       {/* Animated gold border line */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
         <div className="h-full w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-gold-border-sweep" />
@@ -152,8 +152,12 @@ export default function Header() {
       </div>
 
       {/* ================= MOBILE FIXED BAR ================= */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-black/95 backdrop-blur-xl border-b border-[#c9a84c]/20" style={{ paddingTop: 'max(env(safe-area-inset-top), 12px)' }} dir="rtl">
-        <div className="relative h-[70px] px-4">
+      <div
+        className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-black/95 backdrop-blur-xl border-b border-[#c9a84c]/20"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 12px)" }}
+        dir="rtl"
+      >
+        <div className="relative h-[76px] px-4">
           {/* RIGHT: Hamburger menu - fixed position */}
           <button type="button" onClick={() => setMobileOpen(true)} className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/5 transition" aria-label="פתח תפריט">
             <span className="flex flex-col gap-1.5">
@@ -165,7 +169,7 @@ export default function Header() {
 
           {/* CENTER: Logo - absolutely centered */}
           <Link to="/" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-label="א.א פרויקטים וגובה">
-            <img src={logoImage} alt="א.א פרויקטים וגובה" className="h-[60px] w-auto object-contain" draggable={false} />
+            <img src={logoImage} alt="א.א פרויקטים וגובה" className="h-[64px] w-auto object-contain" draggable={false} />
           </Link>
 
           {/* LEFT: CTA button - fixed position */}
