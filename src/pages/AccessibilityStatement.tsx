@@ -24,7 +24,7 @@ const AccessibilityStatement = () => {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
       
-      <main className="pt-[100px] lg:pt-[200px] pb-16">
+      <main className="pt-header-offset lg:pt-header-offset-lg pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
           
           {/* Header */}

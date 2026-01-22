@@ -196,7 +196,7 @@ const DemolitionOrders = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-[80px] lg:pt-[170px]">
+      <main className="pt-header-offset lg:pt-header-offset-lg">
         {/* Hero Section */}
         <section className="relative min-h-[70vh] flex items-center bg-hero-dark overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-l from-hero-dark/95 via-hero-dark/90 to-hero-dark/95" />

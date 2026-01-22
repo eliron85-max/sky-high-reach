@@ -72,6 +72,9 @@ export default {
       spacing: {
         section: "3rem",
         "section-lg": "4rem",
+        /* Header offset utilities - use pt-header-offset and lg:pt-header-offset-lg */
+        "header-offset": "var(--header-offset-mobile)",
+        "header-offset-lg": "var(--header-offset-desktop)",
       },
       keyframes: {
         "accordion-down": {

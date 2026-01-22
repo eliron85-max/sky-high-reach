@@ -157,6 +157,7 @@ export default function Header() {
         style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 12px)" }}
         dir="rtl"
       >
+        {/* Height synced with --header-height-mobile (88px = 76px bar + 12px top padding) */}
         <div className="relative h-[76px] px-4">
           {/* RIGHT: Hamburger menu - fixed position */}
           <button type="button" onClick={() => setMobileOpen(true)} className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/5 transition" aria-label="פתח תפריט">

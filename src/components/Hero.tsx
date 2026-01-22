@@ -66,7 +66,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
 
       {/* Content - positioned to the right with parallax */}
-      <div className="container relative z-10 px-4 md:px-6 pt-24 md:pt-32 mx-auto">
+      <div className="container relative z-10 px-4 md:px-6 pt-header-offset lg:pt-header-offset-lg mx-auto">
         <div
           ref={contentRef}
           className={`max-w-xl mx-auto text-center md:mx-0 ${dir === "rtl" ? "md:mr-8 lg:mr-16 md:text-right" : "md:ml-8 lg:ml-16 md:text-left"}`}
