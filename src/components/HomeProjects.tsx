@@ -61,7 +61,7 @@ const LuxuryProjectCard = ({
             }}
           >
             <img 
-              src={project.images[0]} 
+              src={project.images[project.images.length - 1]}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
