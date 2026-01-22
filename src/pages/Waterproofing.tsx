@@ -104,7 +104,7 @@ const Waterproofing = () => {
       <Header />
       
       {/* Hero Section with Parallax */}
-      <section className="relative min-h-[70vh] flex items-center justify-center bg-hero text-foreground overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center justify-center bg-hero text-foreground overflow-hidden pt-header-offset lg:pt-header-offset-lg">
         <div ref={heroImageRef} className="absolute inset-0" style={heroImageStyle}>
           <img
             src={getOptimizedUnsplashUrl(HERO_IMAGE, 1920, "webp")}

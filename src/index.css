@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Header height variables for consistent layout */
+/* ========== HEADER HEIGHT TOKENS ========== */
 :root {
-  --header-height-mobile: 70px;
+  /* Mobile header: 76px bar + 12px internal padding = 88px visible */
+  --header-height-mobile: 88px;
+  /* Safe-area aware mobile header height */
+  --header-height-mobile-safe: calc(88px + env(safe-area-inset-top, 0px));
+  /* Desktop header: 120px (Row 1) + 44px (Row 2) = 164px */
   --header-height-desktop: 164px;
+  /* Offsets for page content (header + breathing room) */
+  --header-offset-mobile: calc(var(--header-height-mobile-safe) + 16px);
+  --header-offset-desktop: calc(var(--header-height-desktop) + 16px);
 }
 
 /* Custom Font - Ploni with Heebo fallback */
