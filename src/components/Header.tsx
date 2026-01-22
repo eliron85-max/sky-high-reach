@@ -152,7 +152,7 @@ export default function Header() {
       </div>
 
       {/* ================= MOBILE FIXED BAR ================= */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-black/90 backdrop-blur-xl border-b border-[#c9a84c]/20" dir="rtl">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-[55] bg-black/90 backdrop-blur-xl border-b border-[#c9a84c]/20 pt-[env(safe-area-inset-top)]" dir="rtl">
         <div className="relative h-[70px] px-4">
           {/* RIGHT: Hamburger menu - fixed position */}
           <button type="button" onClick={() => setMobileOpen(true)} className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/5 transition" aria-label="פתח תפריט">
