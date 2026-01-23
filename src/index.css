@@ -4,10 +4,10 @@
 
 /* ========== HEADER HEIGHT TOKENS ========== */
 :root {
-  /* Mobile header: 76px bar + 12px internal padding = 88px visible */
-  --header-height-mobile: 88px;
-  /* Safe-area aware mobile header height */
-  --header-height-mobile-safe: calc(88px + env(safe-area-inset-top, 0px));
+  /* Mobile header: 76px bar + 24px min padding = 100px visible */
+  --header-height-mobile: 100px;
+  /* Safe-area aware mobile header height (uses max to ensure minimum 24px padding) */
+  --header-height-mobile-safe: calc(76px + max(env(safe-area-inset-top, 0px) + 12px, 24px));
   /* Desktop header: 120px (Row 1) + 44px (Row 2) = 164px */
   --header-height-desktop: 164px;
   /* Offsets for page content (header + breathing room) */
