@@ -154,10 +154,10 @@ export default function Header() {
       {/* ================= MOBILE FIXED BAR ================= */}
       <div
         className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-black/95 backdrop-blur-xl border-b border-[#c9a84c]/20"
-        style={{ paddingTop: "max(calc(env(safe-area-inset-top, 0px) + 12px), 32px)" }}
+        style={{ paddingTop: "max(calc(env(safe-area-inset-top, 0px) + 12px), var(--header-mobile-top-padding-min))" }}
         dir="rtl"
       >
-        {/* Height synced with --header-height-mobile (108px = 76px bar + 32px min padding) */}
+        {/* Height synced with --header-height-mobile (76px bar + min top padding token) */}
         <div className="relative h-[76px] px-4">
           {/* RIGHT: Hamburger menu - fixed position */}
           <button type="button" onClick={() => setMobileOpen(true)} className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/5 transition" aria-label="פתח תפריט">
