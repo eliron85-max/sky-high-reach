@@ -5,7 +5,11 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 import logoImage from "@/assets/logo-new.webp";
 import { throttle } from "@/lib/throttle";
+import { useSafeAreaCSSVariable } from "@/hooks/useSafeArea";
+
 export default function Header() {
+  // Initialize dynamic safe area CSS variable for Android Chrome
+  useSafeAreaCSSVariable();
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -154,10 +158,10 @@ export default function Header() {
       {/* ================= MOBILE FIXED BAR ================= */}
       <div
         className="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-black/95 backdrop-blur-xl border-b border-[#c9a84c]/20"
-        style={{ paddingTop: "max(calc(env(safe-area-inset-top, 0px) + 12px), var(--header-mobile-top-padding-min))" }}
+        style={{ paddingTop: "var(--header-dynamic-padding, 44px)" }}
         dir="rtl"
       >
-        {/* Height synced with --header-height-mobile (76px bar + min top padding token) */}
+        {/* Height synced with dynamic padding from useSafeArea hook */}
         <div className="relative h-[76px] px-4">
           {/* RIGHT: Hamburger menu - fixed position */}
           <button type="button" onClick={() => setMobileOpen(true)} className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/5 transition" aria-label="פתח תפריט">

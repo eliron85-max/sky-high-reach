@@ -4,12 +4,14 @@
 
 /* ========== HEADER HEIGHT TOKENS ========== */
 :root {
-  /* Mobile header padding (minimum) - Android Chrome often reports safe-area as 0 */
-  --header-mobile-top-padding-min: 44px;
-  /* Mobile header: 76px bar + min padding */
-  --header-height-mobile: calc(76px + var(--header-mobile-top-padding-min));
-  /* Safe-area aware mobile header height (uses max to ensure minimum padding) */
-  --header-height-mobile-safe: calc(76px + max(env(safe-area-inset-top, 0px) + 12px, var(--header-mobile-top-padding-min)));
+  /* Dynamic safe area - set by useSafeArea hook, fallback to 0 */
+  --dynamic-safe-area-top: 0px;
+  /* Dynamic header padding - set by useSafeArea hook, fallback to 44px */
+  --header-dynamic-padding: 44px;
+  /* Mobile header: 76px bar + dynamic padding */
+  --header-height-mobile: calc(76px + var(--header-dynamic-padding));
+  /* Safe-area aware mobile header height (uses dynamic padding from JS) */
+  --header-height-mobile-safe: calc(76px + var(--header-dynamic-padding));
   /* Desktop header: 120px (Row 1) + 44px (Row 2) = 164px */
   --header-height-desktop: 164px;
   /* Offsets for page content (header + breathing room) */
