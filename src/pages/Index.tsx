@@ -591,64 +591,64 @@ const Index = () => {
                   </div>
                 </div>
               </section>
-
-              {/* Parallax Divider between Services and Testimonials */}
-              <ParallaxDivider height="60vh" />
-
-              {/* Testimonials Section - overlays the sticky parallax divider */}
-              <div className="relative z-30 bg-background">
-                <HomeTestimonials />
-              </div>
-
-              {/* CTA Section with Parallax */}
-              <section
-                id="cta"
-                ref={ctaRef}
-                className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
-              >
-                {/* Decorative elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
-                <div
-                  ref={ctaLine1Ref}
-                  className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
-                  style={ctaLine1Style}
-                />
-
-                <div
-                  ref={ctaContentRef}
-                  className="container mx-auto px-4 text-center relative z-10"
-                  style={ctaContentStyle}
-                >
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
-                    מוכנים להתחיל את הפרויקט הבא?
-                  </h2>
-                  <p className="text-lg text-[#e8d5a3]/70 max-w-2xl mx-auto mb-8">
-                    צרו קשר לקבלת ייעוץ חינם והצעת מחיר מותאמת
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button
-                      asChild
-                      size="lg"
-                      className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
-                    >
-                      <Link to="/contact">בקשת הצעת מחיר</Link>
-                    </Button>
-                    <Button
-                      asChild
-                      size="lg"
-                      variant="outline"
-                      className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
-                    >
-                      <Link to="/projects">צפו בפרויקטים שלנו</Link>
-                    </Button>
-                  </div>
-                </div>
-              </section>
             </>
           }
         >
           <HeroWithCards />
         </HeroStickyCollapse>
+
+        {/* Parallax Divider - OUTSIDE HeroStickyCollapse for proper sticky behavior */}
+        <ParallaxDivider height="60vh" />
+
+        {/* Testimonials Section - scrolls OVER the ParallaxDivider like a curtain */}
+        <div className="relative z-30 bg-background">
+          <HomeTestimonials />
+        </div>
+
+        {/* CTA Section with Parallax */}
+        <section
+          id="cta"
+          ref={ctaRef}
+          className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
+        >
+          {/* Decorative elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
+          <div
+            ref={ctaLine1Ref}
+            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
+            style={ctaLine1Style}
+          />
+
+          <div
+            ref={ctaContentRef}
+            className="container mx-auto px-4 text-center relative z-10"
+            style={ctaContentStyle}
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
+              מוכנים להתחיל את הפרויקט הבא?
+            </h2>
+            <p className="text-lg text-[#e8d5a3]/70 max-w-2xl mx-auto mb-8">
+              צרו קשר לקבלת ייעוץ חינם והצעת מחיר מותאמת
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
+              >
+                <Link to="/contact">בקשת הצעת מחיר</Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+              >
+                <Link to="/projects">צפו בפרויקטים שלנו</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
 
