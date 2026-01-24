@@ -79,7 +79,7 @@ const HomeTestimonials = () => {
     <section
       ref={ref}
       id="testimonials"
-      className={`py-20 md:py-28 bg-muted/30 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      className={`py-20 md:py-28 bg-background transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
     >
       <div className="container mx-auto px-4">
         {/* Client Avatars Row */}
