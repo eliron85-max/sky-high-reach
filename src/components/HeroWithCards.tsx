@@ -101,7 +101,7 @@ const HeroWithCards = () => {
 
         {/* Service Cards - 2 columns on mobile, 4 on desktop */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-6 max-w-6xl mx-auto px-4">
-          {heroServices.map((service, index) => <Link key={index} to={service.link} className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2" style={{
+        {heroServices.map((service, index) => <Link key={index} to={service.link} className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 opacity-0 animate-[fade-in_0.6s_ease-out_forwards]" style={{
           animationDelay: `${index * 0.15}s`
         }}>
               {/* Card Image */}
