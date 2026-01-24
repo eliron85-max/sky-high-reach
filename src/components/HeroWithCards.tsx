@@ -113,13 +113,13 @@ const HeroWithCards = () => {
         </div>
 
         {/* Main Title */}
-        <div className="text-center mt-8 mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4">
+        <div className="text-center mt-4 md:mt-8 mb-4 md:mb-12">
+          <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold mb-1 md:mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
               {t("hero.slide1Title")}
             </span>
           </h1>
-          <p className="text-lg md:text-2xl text-[#e8d5a3]/80 max-w-2xl mx-auto">
+          <p className="text-sm md:text-2xl text-[#e8d5a3]/80 max-w-2xl mx-auto px-2">
             {t("hero.slide1Subtitle")}
           </p>
         </div>
@@ -149,8 +149,8 @@ const HeroWithCards = () => {
               <div className="absolute inset-0 rounded-2xl md:rounded-3xl border-2 border-[#c9a84c]/30 group-hover:border-[#c9a84c]/60 transition-colors duration-300" />
 
               {/* Card Title */}
-              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                <h3 className="text-white text-sm md:text-base lg:text-lg font-bold text-center drop-shadow-lg">
+              <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4">
+                <h3 className="text-white text-xs md:text-base lg:text-lg font-bold text-center drop-shadow-lg leading-tight">
                   {service.title}
                 </h3>
               </div>
