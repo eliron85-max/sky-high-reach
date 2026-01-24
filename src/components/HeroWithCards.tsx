@@ -104,11 +104,14 @@ const HeroWithCards = () => {
         {heroServices.map((service, index) => <Link key={index} to={service.link} className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 opacity-0 animate-[fade-in_0.6s_ease-out_forwards]" style={{
           animationDelay: `${index * 0.15}s`
         }}>
+              {/* Solid dark background to prevent video bleed-through */}
+              <div className="absolute inset-0 bg-black" />
+
               {/* Card Image */}
               <ImageWithSkeleton src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 
-              {/* Glass overlay effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              {/* Glass overlay effect - full coverage */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
 
               {/* Decorative border */}
               <div className="absolute inset-0 rounded-2xl md:rounded-3xl border-2 border-[#c9a84c]/30 group-hover:border-[#c9a84c]/60 transition-colors duration-300" />
