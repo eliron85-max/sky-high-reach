@@ -595,14 +595,16 @@ const Index = () => {
               {/* Parallax Divider between Services and Testimonials */}
               <ParallaxDivider height="60vh" />
 
-              {/* Testimonials Section */}
-              <HomeTestimonials />
+              {/* Testimonials Section - overlays the sticky parallax divider */}
+              <div className="relative z-30 bg-background">
+                <HomeTestimonials />
+              </div>
 
               {/* CTA Section with Parallax */}
               <section
                 id="cta"
                 ref={ctaRef}
-                className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden"
+                className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
               >
                 {/* Decorative elements */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
