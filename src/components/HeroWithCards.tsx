@@ -14,82 +14,63 @@ import stoneVeneerImage from "@/assets/stone-cladding.jpg";
 import demolitionOrdersImage from "@/assets/demolition-orders.webp";
 import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
-
 interface ServiceCard {
   title: string;
   image: string;
   link: string;
 }
-
 const HeroWithCards = () => {
-  const { t, dir } = useTranslation();
+  const {
+    t,
+    dir
+  } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
 
   // All 8 services for hero cards
-  const heroServices: ServiceCard[] = [
-    {
-      title: t("services.items.facadeRestoration.title"),
-      image: facadeRestorationImage,
-      link: "/facade-restoration",
-    },
-    {
-      title: t("services.items.stoneVeneer.title"),
-      image: stoneVeneerImage,
-      link: "/stone-veneer",
-    },
-    {
-      title: t("services.items.waterproofing.title"),
-      image: waterproofingImage,
-      link: "/waterproofing",
-    },
-    {
-      title: t("services.items.birdControl.title"),
-      image: birdControlImage,
-      link: "/bird-control",
-    },
-    {
-      title: t("services.items.specialWorks.title"),
-      image: specialProjectsImage,
-      link: "/special-projects",
-    },
-    {
-      title: t("services.items.safetyInspections.title"),
-      image: demolitionOrdersImage,
-      link: "/demolition-orders",
-    },
-    {
-      title: t("services.items.anchoring.title"),
-      image: pipingGuttersImage,
-      link: "/special-projects",
-    },
-    {
-      title: t("services.items.generalRenovations.title"),
-      image: heightSolutionsImage,
-      link: "/special-projects",
-    },
-  ];
-
+  const heroServices: ServiceCard[] = [{
+    title: t("services.items.facadeRestoration.title"),
+    image: facadeRestorationImage,
+    link: "/facade-restoration"
+  }, {
+    title: t("services.items.stoneVeneer.title"),
+    image: stoneVeneerImage,
+    link: "/stone-veneer"
+  }, {
+    title: t("services.items.waterproofing.title"),
+    image: waterproofingImage,
+    link: "/waterproofing"
+  }, {
+    title: t("services.items.birdControl.title"),
+    image: birdControlImage,
+    link: "/bird-control"
+  }, {
+    title: t("services.items.specialWorks.title"),
+    image: specialProjectsImage,
+    link: "/special-projects"
+  }, {
+    title: t("services.items.safetyInspections.title"),
+    image: demolitionOrdersImage,
+    link: "/demolition-orders"
+  }, {
+    title: t("services.items.anchoring.title"),
+    image: pipingGuttersImage,
+    link: "/special-projects"
+  }, {
+    title: t("services.items.generalRenovations.title"),
+    image: heightSolutionsImage,
+    link: "/special-projects"
+  }];
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({
+        behavior: "smooth"
+      });
     }
   };
-
-  return (
-    <section
-      ref={heroRef}
-      dir={dir}
-      className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
-    >
+  return <section ref={heroRef} dir={dir} className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Video background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
+      <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
         <source src="/hero.webm" type="video/webm" />
       </video>
 
@@ -103,13 +84,7 @@ const HeroWithCards = () => {
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4">
         {/* Top Logo Section with Dark Rounded Background */}
         <div className="absolute top-20 md:top-24 left-1/2 -translate-x-1/2">
-          <div className="bg-black/70 backdrop-blur-md rounded-full px-8 py-4 md:px-12 md:py-6 border border-[#c9a84c]/20 shadow-2xl">
-            <img
-              src={logoImage}
-              alt="Sky High Reach"
-              className="h-12 md:h-16 lg:h-20 w-auto object-contain"
-            />
-          </div>
+          
         </div>
 
         {/* Main Title */}
@@ -126,21 +101,11 @@ const HeroWithCards = () => {
 
         {/* Service Cards - 2 columns on mobile, 4 on desktop */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-6 max-w-6xl mx-auto px-4">
-          {heroServices.map((service, index) => (
-            <Link
-              key={index}
-              to={service.link}
-              className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2"
-              style={{
-                animationDelay: `${index * 0.15}s`,
-              }}
-            >
+          {heroServices.map((service, index) => <Link key={index} to={service.link} className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2" style={{
+          animationDelay: `${index * 0.15}s`
+        }}>
               {/* Card Image */}
-              <ImageWithSkeleton
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <ImageWithSkeleton src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 
               {/* Glass overlay effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -154,32 +119,17 @@ const HeroWithCards = () => {
                   {service.title}
                 </h3>
               </div>
-            </Link>
-          ))}
+            </Link>)}
         </div>
 
         {/* Scroll Down Arrow */}
-        <button
-          onClick={() => scrollToSection("services")}
-          className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer group"
-          aria-label={t("hero.nextSlide")}
-        >
+        <button onClick={() => scrollToSection("services")} className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer group" aria-label={t("hero.nextSlide")}>
           <div className="flex flex-col items-center">
-            <ChevronDown
-              size={40}
-              className="text-[#c9a84c] group-hover:text-[#e8d5a3] transition-colors duration-300"
-              strokeWidth={3}
-            />
-            <ChevronDown
-              size={40}
-              className="text-[#c9a84c]/50 group-hover:text-[#e8d5a3]/50 transition-colors duration-300 -mt-6"
-              strokeWidth={3}
-            />
+            <ChevronDown size={40} className="text-[#c9a84c] group-hover:text-[#e8d5a3] transition-colors duration-300" strokeWidth={3} />
+            <ChevronDown size={40} className="text-[#c9a84c]/50 group-hover:text-[#e8d5a3]/50 transition-colors duration-300 -mt-6" strokeWidth={3} />
           </div>
         </button>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroWithCards;
