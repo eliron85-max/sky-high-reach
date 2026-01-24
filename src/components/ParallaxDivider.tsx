@@ -52,6 +52,9 @@ export function ParallaxDivider({
       className="relative overflow-hidden"
       style={{ height }}
     >
+      {/* SOLID black background - blocks everything behind */}
+      <div className="absolute inset-0 bg-black" />
+      
       {/* Background image with parallax */}
       <div
         className="absolute inset-0 w-full h-full transform-gpu will-change-transform"
