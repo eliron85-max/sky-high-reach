@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import HeroWithCards from "@/components/HeroWithCards";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import SectionNavigator from "@/components/SectionNavigator";
 import HomeTestimonials from "@/components/HomeTestimonials";
@@ -641,7 +641,7 @@ const Index = () => {
             </>
           }
         >
-          <Hero />
+          <HeroWithCards />
         </HeroStickyCollapse>
       </main>
       <Footer />
