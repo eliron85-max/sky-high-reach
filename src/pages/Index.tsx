@@ -5,6 +5,7 @@ import HeroWithCards from "@/components/HeroWithCards";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import SectionNavigator from "@/components/SectionNavigator";
 import HomeTestimonials from "@/components/HomeTestimonials";
+import { ParallaxDivider } from "@/components/ParallaxDivider";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
@@ -590,6 +591,9 @@ const Index = () => {
                   </div>
                 </div>
               </section>
+
+              {/* Parallax Divider between Services and Testimonials */}
+              <ParallaxDivider height="60vh" />
 
               {/* Testimonials Section */}
               <HomeTestimonials />
