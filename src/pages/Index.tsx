@@ -537,7 +537,7 @@ const Index = () => {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
       <SectionNavigator sections={sections} />
-      <main>
+      <main className="pt-[var(--header-height)]">
         <HeroStickyCollapse
           collapseDistance={650}
           mobileCollapseDistance={450}
