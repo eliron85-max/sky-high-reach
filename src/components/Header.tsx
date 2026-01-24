@@ -94,7 +94,7 @@ export default function Header() {
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 overflow-visible transition-all duration-1000 [padding-top:env(safe-area-inset-top)] ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none"
       }`}
       dir="rtl"
     >
