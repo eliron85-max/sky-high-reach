@@ -88,7 +88,7 @@ export default function Header() {
       </div>
       {/* ================= ROW 1 (Desktop only) - CSS Grid for bulletproof centering ================= */}
       <div className="hidden lg:block relative z-20 bg-black/60 backdrop-blur-2xl border-b border-[#c9a84c]/20">
-        <div className="max-w-7xl px-4 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8 mx-[214px] my-0 lg:px-0 py-[15px]">
+        <div className="max-w-7xl px-4 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8 mx-[214px] my-0 lg:px-0 py-[7px]">
           {/* RIGHT column: NAV (justify-self-end for RTL) */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} hover:brightness-125 transition whitespace-nowrap`} aria-current="page">
@@ -117,7 +117,7 @@ export default function Header() {
           </nav>
 
           {/* CENTER column: LOGO (justify-self-center) */}
-          <Link to="/" className="justify-self-center px-[27px] text-base text-justify border-0 border-none" aria-label="א.א פרויקטים וגובה">
+          <Link to="/" className="justify-self-center text-base border-0 border-none px-[35px] text-left" aria-label="א.א פרויקטים וגובה">
             <img src={logoImage} alt="א.א פרויקטים וגובה" className="h-[90px] lg:h-[110px] w-auto object-contain" draggable={false} />
           </Link>
 
