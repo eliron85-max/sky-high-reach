@@ -12,6 +12,8 @@ import birdControlImage from "@/assets/bird-control.webp";
 import specialProjectsImage from "@/assets/special-projects.webp";
 import stoneVeneerImage from "@/assets/stone-cladding.jpg";
 import demolitionOrdersImage from "@/assets/demolition-orders.webp";
+import pipingGuttersImage from "@/assets/piping-gutters.webp";
+import heightSolutionsImage from "@/assets/height-solutions.webp";
 
 interface ServiceCard {
   title: string;
@@ -23,7 +25,7 @@ const HeroWithCards = () => {
   const { t, dir } = useTranslation();
   const heroRef = useRef<HTMLElement>(null);
 
-  // Featured services for the hero cards - show 3-4 main services
+  // All 8 services for hero cards
   const heroServices: ServiceCard[] = [
     {
       title: t("services.items.facadeRestoration.title"),
@@ -39,6 +41,31 @@ const HeroWithCards = () => {
       title: t("services.items.waterproofing.title"),
       image: waterproofingImage,
       link: "/waterproofing",
+    },
+    {
+      title: t("services.items.birdControl.title"),
+      image: birdControlImage,
+      link: "/bird-control",
+    },
+    {
+      title: t("services.items.specialWorks.title"),
+      image: specialProjectsImage,
+      link: "/special-projects",
+    },
+    {
+      title: t("services.items.safetyInspections.title"),
+      image: demolitionOrdersImage,
+      link: "/demolition-orders",
+    },
+    {
+      title: t("services.items.anchoring.title"),
+      image: pipingGuttersImage,
+      link: "/special-projects",
+    },
+    {
+      title: t("services.items.generalRenovations.title"),
+      image: heightSolutionsImage,
+      link: "/special-projects",
     },
   ];
 
@@ -97,13 +124,13 @@ const HeroWithCards = () => {
           </p>
         </div>
 
-        {/* Service Cards */}
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto px-4">
+        {/* Service Cards - 2 rows of 4 */}
+        <div className="grid grid-cols-4 gap-3 md:gap-4 lg:gap-6 max-w-6xl mx-auto px-4">
           {heroServices.map((service, index) => (
             <Link
               key={index}
               to={service.link}
-              className="group relative overflow-hidden rounded-2xl md:rounded-3xl w-[140px] md:w-[200px] lg:w-[260px] aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2"
+              className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[4/3] shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2"
               style={{
                 animationDelay: `${index * 0.15}s`,
               }}
