@@ -124,8 +124,8 @@ const HeroWithCards = () => {
           </p>
         </div>
 
-        {/* Service Cards - 2 rows of 4 */}
-        <div className="grid grid-cols-4 gap-3 md:gap-4 lg:gap-6 max-w-6xl mx-auto px-4">
+        {/* Service Cards - 2 columns on mobile, 4 on desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-6 max-w-6xl mx-auto px-4">
           {heroServices.map((service, index) => (
             <Link
               key={index}
