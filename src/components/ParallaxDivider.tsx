@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { throttle } from "@/lib/throttle";
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
 
 interface Props {
@@ -14,12 +15,11 @@ export function ParallaxDivider({
   scrollDistance = 400,
 }: Props) {
   const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [isActive, setIsActive] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Convert height (vh/px/etc) to px for calculations.
+  // Convert height (vh/px/etc) to px for calculations
   const heightPx = useMemo(() => {
     if (typeof window === "undefined") return 0;
-    // Use a hidden temp element to resolve any CSS length reliably.
     const el = document.createElement("div");
     el.style.position = "absolute";
     el.style.visibility = "hidden";
@@ -31,18 +31,28 @@ export function ParallaxDivider({
   }, [height]);
 
   useEffect(() => {
-    const onScroll = () => {
+    const onScroll = throttle(() => {
       const anchor = anchorRef.current;
       if (!anchor) return;
 
       const rect = anchor.getBoundingClientRect();
-      // The section becomes active when the anchor reaches the top, and
-      // remains active for (heightPx + scrollDistance).
-      const start = rect.top;
-      const end = rect.top + heightPx + scrollDistance;
-
-      setIsActive(start <= 0 && end > 0);
-    };
+      const windowHeight = window.innerHeight;
+      
+      // Calculate the total scrollable area of this section
+      const totalHeight = heightPx + scrollDistance;
+      
+      // Section starts when top of anchor reaches bottom of viewport
+      // Section ends when bottom of anchor leaves top of viewport
+      const anchorTop = rect.top;
+      const anchorBottom = rect.bottom;
+      
+      // The image should be visible (fixed) when:
+      // - The anchor has entered the viewport from below (anchorTop < windowHeight)
+      // - AND the anchor hasn't fully scrolled past the top (anchorBottom > 0)
+      const shouldBeVisible = anchorTop < windowHeight && anchorBottom > 0;
+      
+      setIsVisible(shouldBeVisible);
+    }, 16);
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -55,13 +65,13 @@ export function ParallaxDivider({
 
   const Visual = (
     <div
-      className="overflow-hidden"
+      className="relative overflow-hidden"
       style={{ height }}
     >
       {/* SOLID black background */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* Background image - always visible, no fade */}
+      {/* Background image */}
       <img
         src={image}
         alt=""
@@ -80,20 +90,26 @@ export function ParallaxDivider({
   return (
     <div className="relative">
       {/* Anchor: defines the scroll range in the normal document flow */}
-      <div ref={anchorRef} style={{ height: heightPx ? heightPx + scrollDistance : `calc(${height} + ${scrollDistance}px)` }} />
+      <div 
+        ref={anchorRef} 
+        style={{ height: heightPx ? heightPx + scrollDistance : `calc(${height} + ${scrollDistance}px)` }} 
+      />
 
-      {/* When active, render as fixed via portal so no parent transforms/filters can break it */}
-      {typeof document !== "undefined" && isActive
+      {/* Fixed background image - rendered via portal to avoid parent transform issues */}
+      {typeof document !== "undefined" && isVisible
         ? createPortal(
-            <div className="fixed left-0 right-0 top-0 z-20 pointer-events-none">
-              <div className="relative pointer-events-none">{Visual}</div>
+            <div 
+              className="fixed left-0 right-0 top-0 z-10 pointer-events-none"
+              style={{ 
+                // Ensure it's behind the content that scrolls over it
+                zIndex: 10 
+              }}
+            >
+              {Visual}
             </div>,
             document.body
           )
         : null}
-
-      {/* When not active, render it once in-flow so it appears naturally in the timeline */}
-      {!isActive ? <div className="relative z-20">{Visual}</div> : null}
     </div>
   );
 }
