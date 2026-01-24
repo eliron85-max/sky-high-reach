@@ -204,8 +204,11 @@ export default function Header() {
       </div>
 
       {/* ================= MOBILE BAR (NOT fixed!) ================= */}
-      <div className="lg:hidden relative z-[55] bg-black/90 backdrop-blur-xl border-b border-[#c9a84c]/20" dir="rtl">
-        <div className="relative h-[70px] px-4">
+      <div
+        className="lg:hidden relative z-[55] overflow-visible bg-black/90 backdrop-blur-xl border-b border-[#c9a84c]/20"
+        dir="rtl"
+      >
+        <div className="relative h-[84px] px-4 overflow-visible">
           {/* RIGHT: Hamburger */}
           <button
             type="button"
