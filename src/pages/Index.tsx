@@ -5,7 +5,7 @@ import HeroWithCards from "@/components/HeroWithCards";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import SectionNavigator from "@/components/SectionNavigator";
 import HomeTestimonials from "@/components/HomeTestimonials";
-import { ParallaxDivider } from "@/components/ParallaxDivider";
+
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -526,7 +526,7 @@ const Index = () => {
           <HeroWithCards />
         </HeroStickyCollapse>
 
-        <ParallaxDivider height="60vh" />
+        
 
         {/* LOCK Testimonials to transparent so background image never disappears */}
         <style>{`
