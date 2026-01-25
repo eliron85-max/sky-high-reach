@@ -602,7 +602,15 @@ const Index = () => {
 
         {/* Testimonials Section - scrolls OVER the ParallaxDivider like a curtain */}
         <div className="relative z-30 bg-background">
-          <HomeTestimonials />
+          <BackgroundMan
+            imageUrl="/images/facade-bg.webp"
+            opacityClass="opacity-[0.07]"
+            blurClass="blur-[1px]"
+            positionClass="bg-right"
+            sizeClass="bg-contain"
+          >
+            <HomeTestimonials />
+          </BackgroundMan>
         </div>
 
         {/* CTA Section with Parallax */}
@@ -619,11 +627,7 @@ const Index = () => {
             style={ctaLine1Style}
           />
 
-          <div
-            ref={ctaContentRef}
-            className="container mx-auto px-4 text-center relative z-10"
-            style={ctaContentStyle}
-          >
+          <div ref={ctaContentRef} className="container mx-auto px-4 text-center relative z-10" style={ctaContentStyle}>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
               מוכנים להתחיל את הפרויקט הבא?
             </h2>
