@@ -167,12 +167,12 @@ export default function Header() {
 
               {servicesOpen && (
                 <div className="absolute right-0 top-full pt-3 z-[100]">
-                  <div className="min-w-[260px] rounded-xl border border-[#c9a84c]/30 bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a] shadow-xl shadow-[#c9a84c]/10 p-4">
+                  <div className="min-w-[260px] rounded-xl border border-border dark:border-[#c9a84c]/30 bg-white dark:bg-gradient-to-b dark:from-[#1a1a1a] dark:to-[#0a0a0a] shadow-xl dark:shadow-[#c9a84c]/10 p-4">
                     {serviceLinks.map((item) => (
                       <Link
                         key={item.path}
                         to={item.path}
-                        className={`block py-2 ${goldText} hover:brightness-125 transition`}
+                        className="block py-2 text-foreground hover:text-primary dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
                       >
                         {item.label}
                       </Link>
@@ -234,7 +234,7 @@ export default function Header() {
 
       {/* ================= MOBILE BAR (NOT fixed!) ================= */}
       <div
-        className="lg:hidden relative z-[55] overflow-visible bg-black/90 backdrop-blur-xl border-b border-[#c9a84c]/20"
+        className="lg:hidden relative z-[55] overflow-visible bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-border dark:border-[#c9a84c]/20"
         dir="rtl"
       >
         <div className="relative h-[84px] px-4 overflow-visible">
@@ -242,13 +242,13 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/5 transition"
+            className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition"
             aria-label="פתח תפריט"
           >
             <span className="flex flex-col gap-1.5">
-              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+              <span className="w-7 h-[2px] bg-foreground dark:bg-gradient-to-r dark:from-[#e8d5a3] dark:to-[#c9a84c]" />
+              <span className="w-7 h-[2px] bg-foreground dark:bg-gradient-to-r dark:from-[#e8d5a3] dark:to-[#c9a84c]" />
+              <span className="w-7 h-[2px] bg-foreground dark:bg-gradient-to-r dark:from-[#e8d5a3] dark:to-[#c9a84c]" />
             </span>
           </button>
 
@@ -301,7 +301,7 @@ export default function Header() {
 
       {/* ================= MOBILE DRAWER ================= */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden bg-black">
+        <div className="fixed inset-0 z-[60] lg:hidden bg-black/50 dark:bg-black">
           <button
             type="button"
             className="absolute left-0 top-0 w-[14%] h-full"
@@ -309,13 +309,13 @@ export default function Header() {
             aria-label="סגור תפריט"
           />
 
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-black border-l border-[#c9a84c]/20 p-5">
+          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-white dark:bg-black border-l border-border dark:border-[#c9a84c]/20 p-5">
             <div className="flex items-center justify-between mb-6">
               <div className={`font-bold ${goldText}`}>תפריט</div>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="text-[#c9a84c] hover:text-[#e8d5a3] transition"
+                className="text-foreground hover:text-primary dark:text-[#c9a84c] dark:hover:text-[#e8d5a3] transition"
               >
                 ✕
               </button>
@@ -325,7 +325,7 @@ export default function Header() {
               <Link
                 to="/"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
+                className={`${goldText} block hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
                 style={{ animationDelay: "0ms" }}
               >
                 עמוד ראשי
@@ -334,7 +334,7 @@ export default function Header() {
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
+                className={`${goldText} block hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
                 style={{ animationDelay: "100ms" }}
               >
                 אודות
@@ -343,20 +343,20 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setServicesOpen((v) => !v)}
-                className={`w-full flex items-center justify-between ${goldText} hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
+                className={`w-full flex items-center justify-between ${goldText} hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
                 style={{ animationDelay: "200ms" }}
               >
-                שירותים <span className="text-[14px] text-[#c9a84c] opacity-80">▼</span>
+                שירותים <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
               </button>
 
               {servicesOpen && (
-                <div className="pr-3 space-y-2 text-[16px] bg-[#0a0a0a]">
+                <div className="pr-3 space-y-2 text-[16px] bg-muted dark:bg-[#0a0a0a]">
                   {serviceLinks.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileOpen(false)}
-                      className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right`}
+                      className={`${goldText} block hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right`}
                     >
                       {item.label}
                     </Link>
@@ -367,7 +367,7 @@ export default function Header() {
               <Link
                 to="/projects"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
+                className={`${goldText} block hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
                 style={{ animationDelay: "300ms" }}
               >
                 פרויקטים
@@ -376,7 +376,7 @@ export default function Header() {
               <Link
                 to="/pricing"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
+                className={`${goldText} block hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
                 style={{ animationDelay: "400ms" }}
               >
                 מחירים
@@ -385,7 +385,7 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
+                className={`${goldText} block hover:text-primary dark:hover:brightness-125 hover:scale-[0.97] active:scale-95 transition-all duration-200 origin-right animate-slide-in-stagger`}
                 style={{ animationDelay: "500ms" }}
               >
                 צור קשר
