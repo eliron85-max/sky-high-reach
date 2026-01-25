@@ -20,7 +20,7 @@ export const LanguageSwitcher = () => {
           onClick={() => setLanguage(lang.code)}
           className={`h-9 w-9 p-0 rounded-full transition-all bg-transparent hover:bg-transparent ${
             language === lang.code
-              ? "ring-[1.5px] ring-[#c9a84c] ring-offset-[3px] ring-offset-black/80"
+              ? "ring-[1.5px] ring-primary ring-offset-[3px] ring-offset-background"
               : "opacity-60 hover:opacity-100"
           }`}
           aria-label={lang.label}

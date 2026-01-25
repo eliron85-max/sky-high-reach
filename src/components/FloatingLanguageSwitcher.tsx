@@ -22,25 +22,25 @@ export const FloatingLanguageSwitcher = () => {
           onClick={() => setIsOpen(!isOpen)}
           className={`
             w-11 h-11 rounded-full
-            bg-black/90 backdrop-blur-md 
-            border-2 border-[#c9a84c]/50
+            bg-background/90 dark:bg-black/90 backdrop-blur-md 
+            border-2 border-primary/50
             flex items-center justify-center
             transition-all duration-300
-            hover:border-[#c9a84c] hover:scale-105
-            ${isOpen ? "bg-[#c9a84c]/20" : ""}
+            hover:border-primary hover:scale-105
+            ${isOpen ? "bg-primary/20" : ""}
           `}
           aria-label={isOpen ? "הסתר שפות" : "הצג שפות"}
           aria-expanded={isOpen}
         >
-          <Globe className="w-5 h-5 text-[#c9a84c]" />
+          <Globe className="w-5 h-5 text-primary" />
         </button>
 
         {/* Language options - dropdown */}
         <div 
           className={`
             flex flex-col items-center gap-2
-            bg-black/90 backdrop-blur-md 
-            border border-[#c9a84c]/30 
+            bg-background/90 dark:bg-black/90 backdrop-blur-md 
+            border border-border 
             rounded-xl p-2
             transition-all duration-300 origin-top
             ${isOpen 
@@ -61,8 +61,8 @@ export const FloatingLanguageSwitcher = () => {
                 flex items-center justify-center 
                 transition-all duration-300
                 ${language === lang.code
-                  ? "border-[#c9a84c] ring-[1.5px] ring-[#c9a84c] ring-offset-[3px] ring-offset-black/80 scale-110"
-                  : "border-transparent hover:border-[#c9a84c]/40 hover:scale-105"
+                  ? "border-primary ring-[1.5px] ring-primary ring-offset-[3px] ring-offset-background scale-110"
+                  : "border-transparent hover:border-primary/40 hover:scale-105"
                 }
               `}
               aria-label={lang.label}
