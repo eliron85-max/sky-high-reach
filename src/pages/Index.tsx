@@ -170,14 +170,20 @@ const Index = () => {
                       >
                         <Link to="/contact">בקשת הצעת מחיר</Link>
                       </Button>
-
                       <Button
                         asChild
                         size="lg"
-                        variant="outline"
-                        className="border-[#c9a84c]/55 text-[#f3e7c7] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+                        className="
+    h-12 px-6 rounded-full font-semibold
+    bg-white/90 border border-white/40
+    !text-slate-900 hover:bg-white
+    dark:bg-white/10 dark:border-white/20 dark:!text-white dark:hover:bg-white/15
+    shadow-lg shadow-black/10 dark:shadow-black/30
+  "
                       >
-                        <Link to="/projects">צפו בפרויקטים</Link>
+                        <Link to="/projects" className="!text-inherit no-underline">
+                          צפו בפרויקטים
+                        </Link>
                       </Button>
                     </div>
                   </div>
@@ -192,18 +198,10 @@ const Index = () => {
 
         {/* LOCK Testimonials to transparent so background image never disappears */}
         <style>{`
-  #testimonials { 
-    background: transparent !important; 
-    background-color: transparent !important; 
-  }
-  #testimonials.bg-background { 
-    background: transparent !important; 
-    background-color: transparent !important; 
-  }
-  #testimonials [class*="bg-"] { 
-    background-color: transparent !important; 
-  }
-`}</style>
+          #testimonials { background: transparent !important; background-color: transparent !important; }
+          #testimonials.bg-background { background: transparent !important; background-color: transparent !important; }
+          #testimonials[class*="bg-"] { background-color: transparent !important; }
+        `}</style>
 
         {/* Testimonials with fixed background */}
         <div className="relative z-30 overflow-hidden" id="testimonials">
