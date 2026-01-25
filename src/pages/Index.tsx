@@ -526,26 +526,13 @@ const Index = () => {
                         השירותים שלנו
                       </h2>
                     </div>
-
-                    {featuredServices.map((service, index) => (
-                      {featuredServices.map((service, index) => (
-  <UnfoldingServiceCard
-    key={index}
-    service={service}
-    config={isMobile ? mobileScatterConfigs[index] : scatterConfigs[index]}
-    index={index}
-    isVisible={isVisible}
-    scrollProgress={scrollProgress}
-    isMobile={isMobile}
-  />
-))}
                   </div>
                 </div>
               </section>
             </>
           }
         >
-          <HeroWithCards />
+          {/* <HeroWithCards /> */}
         </HeroStickyCollapse>
 
         {/* LOCK Testimonials to transparent so background image never disappears */}
