@@ -649,8 +649,14 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
   const currentX =
     parsePercent(config.closedX) + (parsePercent(config.openX) - parsePercent(config.closedX)) * easedProgress;
   const baseY =
-    parsePercent(config.closedY) + (parsePercent(config.openY) - parsePercent(config.closedY)) * easedProgress;
-  const currentY = baseY + parallaxOffset;
+ const closedY = parsePercent(config.closedY);
+const openY = parsePercent(config.openY);
+
+// ✅ לא מאפשרים תזוזה למעלה: אם openY קטן מ-closedY → ננעלים על closedY
+const safeOpenY = Math.max(openY, closedY);
+
+const baseY = closedY + (safeOpenY - closedY) * easedProgress;
+const currentY = baseY + parallaxOffset;
   const currentRotate = config.closedRotate + (config.openRotate - config.closedRotate) * easedProgress;
 
   const shadowIntensity = config.zIndex * 3;
