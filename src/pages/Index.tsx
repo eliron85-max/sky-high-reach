@@ -39,39 +39,103 @@ interface ScatterConfig {
 
 // Desktop: 8 cards with CSS parallax depths
 // parallaxZ: negative values = moves slower (further back), 0 = normal speed
-interface ScatterConfig {
-  openX: string;
-  openY: string;
-  width: string;
-  zIndex: number;
-}
-
-/** Desktop: 8 cards - final open positions (RTL) */
 const scatterConfigs: ScatterConfig[] = [
-  { openX: "75%", openY: "0%", width: "22%", zIndex: 8 },
-  { openX: "51%", openY: "0%", width: "22%", zIndex: 7 },
-  { openX: "27%", openY: "0%", width: "22%", zIndex: 6 },
-  { openX: "3%", openY: "0%", width: "22%", zIndex: 5 },
-
-  { openX: "75%", openY: "58%", width: "22%", zIndex: 4 },
-  { openX: "51%", openY: "58%", width: "22%", zIndex: 3 },
-  { openX: "27%", openY: "58%", width: "22%", zIndex: 2 },
-  { openX: "3%", openY: "58%", width: "22%", zIndex: 1 },
-];
-
-/** Mobile: 8 cards - final open positions (2x4) */
-const mobileScatterConfigs: ScatterConfig[] = [
-  { openX: "2%", openY: "0%", width: "47%", zIndex: 8 },
-  { openX: "51%", openY: "0%", width: "47%", zIndex: 7 },
-
-  { openX: "2%", openY: "25%", width: "47%", zIndex: 6 },
-  { openX: "51%", openY: "25%", width: "47%", zIndex: 5 },
-
-  { openX: "2%", openY: "50%", width: "47%", zIndex: 4 },
-  { openX: "51%", openY: "50%", width: "47%", zIndex: 3 },
-
-  { openX: "2%", openY: "75%", width: "47%", zIndex: 2 },
-  { openX: "51%", openY: "75%", width: "47%", zIndex: 1 },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "75%",
+    openY: "0%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 8,
+    width: "22%",
+    parallaxZ: -2, // Front layer - moves faster
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "51%",
+    openY: "0%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 7,
+    width: "22%",
+    parallaxZ: -4, // Mid layer
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "27%",
+    openY: "0%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 6,
+    width: "22%",
+    parallaxZ: -6, // Back layer - moves slower
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "3%",
+    openY: "0%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 5,
+    width: "22%",
+    parallaxZ: -3,
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "75%",
+    openY: "58%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 4,
+    width: "22%",
+    parallaxZ: -5,
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "51%",
+    openY: "58%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 3,
+    width: "22%",
+    parallaxZ: -2,
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "27%",
+    openY: "58%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 2,
+    width: "22%",
+    parallaxZ: -7, // Deepest layer
+  },
+  {
+    closedX: "38%",
+    closedY: "30%",
+    closedRotate: 0,
+    openX: "3%",
+    openY: "58%",
+    openRotate: 0,
+    scale: 1,
+    zIndex: 1,
+    width: "22%",
+    parallaxZ: -4,
+  },
 ];
 
 // Mobile: 8 cards with parallax (subtle on mobile)
@@ -573,55 +637,70 @@ interface UnfoldingServiceCardProps {
   isMobile?: boolean;
 }
 
-const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMobile }: UnfoldingServiceCardProps) => {
-  const easedProgress = easeOutCubic(scrollProgress);
+const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
+
+const UnfoldingServiceCard = ({
+  service,
+  config,
+  index,
+  isVisible,
+  scrollProgress,
+  isMobile,
+}: UnfoldingServiceCardProps) => {
+  const total = 8;
+  const perCard = 1 / total;
+
+  const raw = (scrollProgress - index * perCard) / perCard;
+  const p = easeOutCubic(clamp01(raw));
 
   const parsePercent = (str: string) => parseFloat(str.replace("%", ""));
 
-  // JavaScript Parallax: כל כרטיס נע במהירות שונה לפי parallaxZ
-  // parallaxZ שלילי יותר = נע לאט יותר = נראה רחוק יותר
-  const parallaxOffset = isMobile ? 0 : config.parallaxZ * easedProgress * 25;
+  // נקודת סטאק (כולם באותו מקום)
+  const stackX = 50;
+  const stackY = isMobile ? 55 : 52;
 
-  const currentX =
-    parsePercent(config.closedX) + (parsePercent(config.openX) - parsePercent(config.closedX)) * easedProgress;
-  const baseY =
-    parsePercent(config.closedY) + (parsePercent(config.openY) - parsePercent(config.closedY)) * easedProgress;
-  const currentY = baseY + parallaxOffset;
-  const currentRotate = config.closedRotate + (config.openRotate - config.closedRotate) * easedProgress;
+  // יעד פתוח
+  const openX = parsePercent(config.openX);
+  const openY = parsePercent(config.openY);
 
-  const shadowIntensity = config.zIndex * 3;
+  const currentX = stackX + (openX - stackX) * p;
+  const currentY = stackY + (openY - stackY) * p;
+
+  const lift = (1 - p) * index * 6;
+  const scale = 1 - (1 - p) * index * 0.01;
 
   return (
     <Link
       to={service.link}
-      className="block absolute group"
+      className="block absolute"
       style={{
         left: `${currentX}%`,
         top: `${currentY}%`,
         width: config.width,
         zIndex: config.zIndex,
+        pointerEvents: p > 0.15 ? "auto" : "none",
       }}
     >
       <div
-        className="relative overflow-hidden rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:z-50 transform-gpu will-change-transform"
+        className="relative overflow-hidden rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:z-50 transform-gpu"
         style={{
           aspectRatio: "4/3",
-          transform: `rotate(${currentRotate}deg) scale(${config.scale})`,
-          boxShadow: `0 ${shadowIntensity}px ${shadowIntensity * 2}px rgba(0,0,0,0.25)`,
+          transform: `translateY(${-lift}px) scale(${scale})`,
+          boxShadow: `0 ${config.zIndex * 3}px ${config.zIndex * 6}px rgba(0,0,0,0.25)`,
           opacity: isVisible ? 1 : 0,
         }}
       >
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 border-secondary-foreground border-dotted border-0 rounded-2xl"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 rounded-2xl"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent transition-opacity duration-300" />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent" />
+
         <div className={`absolute bottom-0 left-0 right-0 ${isMobile ? "p-3" : "p-5 md:p-6"}`}>
-          <h3
-            className={`text-white ${isMobile ? "text-sm" : "text-lg md:text-xl lg:text-2xl"} font-bold drop-shadow-lg`}
-          >
+          <h3 className={`text-white ${isMobile ? "text-sm" : "text-lg md:text-xl lg:text-2xl"} font-bold`}>
             {service.title}
           </h3>
         </div>
