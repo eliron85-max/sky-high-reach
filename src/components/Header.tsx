@@ -117,7 +117,7 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  const goldText = "text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]";
+  const goldText = "text-foreground dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c]";
 
   return (
     <header
@@ -133,7 +133,7 @@ export default function Header() {
       </div>
 
       {/* ================= ROW 1 (Desktop only) ================= */}
-      <div className="hidden lg:block relative z-20 bg-black/20 backdrop-blur-2xl border-b border-[#c9a84c]/20">
+      <div className="hidden lg:block relative z-20 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
@@ -162,7 +162,7 @@ export default function Header() {
                 aria-expanded={servicesOpen}
               >
                 שירותים
-                <span className="text-[14px] text-[#c9a84c] opacity-80">▼</span>
+                <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
               </button>
 
               {servicesOpen && (
@@ -277,7 +277,7 @@ export default function Header() {
       </div>
 
       {/* ================= ROW 2 (Desktop Quick Links) ================= */}
-      <div className="hidden lg:block relative z-10 bg-black/20 backdrop-blur-2xl border-t border-[#c9a84c]/10">
+      <div className="hidden lg:block relative z-10 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-t border-border dark:border-[#c9a84c]/10">
         <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[44px] grid grid-cols-[auto_1fr_auto] items-center">
           <div className="flex items-center">
             <LanguageSwitcher />
@@ -288,7 +288,7 @@ export default function Header() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="relative text-[#e8d5a3] hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#e8d5a3] after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
+                className="relative text-foreground hover:text-primary dark:text-[#e8d5a3] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-primary dark:after:from-[#e8d5a3] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
               >
                 {item.label}
               </Link>
