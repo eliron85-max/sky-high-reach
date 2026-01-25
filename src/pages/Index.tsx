@@ -643,18 +643,19 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
   const easedProgress = easeOutCubic(scrollProgress);
 
   const parsePercent = (str: string) => parseFloat(str.replace("%", ""));
+  
+  // JavaScript Parallax: כל כרטיס נע במהירות שונה לפי parallaxZ
+  // parallaxZ שלילי יותר = נע לאט יותר = נראה רחוק יותר
+  const parallaxOffset = isMobile ? 0 : config.parallaxZ * easedProgress * 25;
+  
   const currentX =
     parsePercent(config.closedX) + (parsePercent(config.openX) - parsePercent(config.closedX)) * easedProgress;
-  const currentY =
+  const baseY =
     parsePercent(config.closedY) + (parsePercent(config.openY) - parsePercent(config.closedY)) * easedProgress;
+  const currentY = baseY + parallaxOffset;
   const currentRotate = config.closedRotate + (config.openRotate - config.closedRotate) * easedProgress;
 
   const shadowIntensity = config.zIndex * 3;
-  
-  // CSS Parallax: scale compensates for translateZ to maintain visual size
-  // Formula: scale = 1 + (Math.abs(z) / perspective)
-  // With perspective of 1000px, a translateZ of -100px needs scale of 1.1
-  const parallaxScale = isMobile ? 1 : 1 + (Math.abs(config.parallaxZ) * 10 / 1000);
 
   return (
     <Link
@@ -665,20 +666,15 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
         top: `${currentY}%`,
         width: config.width,
         zIndex: config.zIndex,
-        transformStyle: "preserve-3d",
       }}
     >
       <div
         className="relative overflow-hidden rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:z-50 transform-gpu will-change-transform"
         style={{
           aspectRatio: "4/3",
-          // CSS Parallax: translateZ creates depth, scale compensates for size
-          transform: isMobile 
-            ? `rotate(${currentRotate}deg) scale(${config.scale})`
-            : `rotate(${currentRotate}deg) scale(${config.scale * parallaxScale}) translateZ(${config.parallaxZ * 10}px)`,
+          transform: `rotate(${currentRotate}deg) scale(${config.scale})`,
           boxShadow: `0 ${shadowIntensity}px ${shadowIntensity * 2}px rgba(0,0,0,0.25)`,
           opacity: isVisible ? 1 : 0,
-          transformStyle: "preserve-3d",
         }}
       >
         <img
