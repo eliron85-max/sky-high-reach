@@ -170,36 +170,27 @@ const Index = () => {
                       >
                         <Link to="/contact">בקשת הצעת מחיר</Link>
                       </Button>
-                      <Button
-  asChild
-  size="lg"
-  className="
-    h-12 px-6 rounded-full font-semibold
-    bg-white/90 text-slate-900 border border-white/40
-    hover:bg-white hover:text-slate-900
-    dark:bg-white/10 dark:text-white dark:border-white/20
-    dark:hover:bg-white/15
-    shadow-lg shadow-black/10 dark:shadow-black/30
-  "
->
-  <Link to="/projects">צפו בפרויקטים</Link>
-</Button>
 
+                      <Button
+                        asChild
+                        size="lg"
+                        variant="outline"
+                        className="border-[#c9a84c]/55 text-[#f3e7c7] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+                      >
+                        <Link to="/projects">צפו בפרויקטים</Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
               </div>
 
-           {/* Bottom fade */}
-<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 z-20 bg-gradient-to-t from-black/45 via-black/20 to-transparent" />
+              {/* Bottom fade */}
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+            </div>
           </section>
         </HeroStickyCollapse>
 
-        {/* LOCK Testimonials to transparent so background image never disappears */}
-        <style>{`
-          #testimonials { background: transparent !important; background-color: transparent !important; }
-          #testimonials.bg-background { background: transparent !important; background-color: transparent !important; }
-          #testimonials[class*="bg-"] { background-color: transparent !important; }
+       #testimonials[class*="bg-"] { background-color: transparent !important; }
         `}</style>
 
         {/* Testimonials with fixed background */}
