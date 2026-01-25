@@ -85,17 +85,6 @@ export function ParallaxDivider({
       {/* Gold accent overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/15 via-transparent to-[#c9a84c]/10 pointer-events-none" />
 
-      {/* Cinematic Letterbox - Top bar */}
-      <div 
-        className="absolute top-0 left-0 right-0 bg-black pointer-events-none"
-        style={{ height: "12%" }}
-      />
-
-      {/* Cinematic Letterbox - Bottom bar */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 bg-black pointer-events-none"
-        style={{ height: "12%" }}
-      />
 
       {/* Soft Vignette overlay */}
       <div 
