@@ -4,7 +4,6 @@ import { useTranslation } from "@/lib/i18n";
 import { ImageWithSkeleton } from "@/components/ui/image-with-skeleton";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useSharedParallax } from "@/hooks/useSharedParallax";
 
 // Import service images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -26,33 +25,48 @@ interface ServiceCardProps {
   index: number;
   isVisible: boolean;
   isMobile?: boolean;
+  parallaxDepth: number; // translateZ value for CSS parallax
 }
 
 // Desktop grid layout configuration (4x2 grid, RTL order)
 const scatterConfigs = [
   // Top row (right to left in RTL)
-  { openX: "42%", openY: "-44%", openRotate: 0, scale: 1, zIndex: 8, width: "24%" },
-  { openX: "14%", openY: "-44%", openRotate: 0, scale: 1, zIndex: 7, width: "24%" },
-  { openX: "-14%", openY: "-44%", openRotate: 0, scale: 1, zIndex: 6, width: "24%" },
-  { openX: "-42%", openY: "-44%", openRotate: 0, scale: 1, zIndex: 5, width: "24%" },
+  { openX: "42%", openY: "-44%", zIndex: 8, width: "24%" },
+  { openX: "14%", openY: "-44%", zIndex: 7, width: "24%" },
+  { openX: "-14%", openY: "-44%", zIndex: 6, width: "24%" },
+  { openX: "-42%", openY: "-44%", zIndex: 5, width: "24%" },
   // Bottom row (right to left in RTL)
-  { openX: "42%", openY: "44%", openRotate: 0, scale: 1, zIndex: 4, width: "24%" },
-  { openX: "14%", openY: "44%", openRotate: 0, scale: 1, zIndex: 3, width: "24%" },
-  { openX: "-14%", openY: "44%", openRotate: 0, scale: 1, zIndex: 2, width: "24%" },
-  { openX: "-42%", openY: "44%", openRotate: 0, scale: 1, zIndex: 1, width: "24%" },
+  { openX: "42%", openY: "44%", zIndex: 4, width: "24%" },
+  { openX: "14%", openY: "44%", zIndex: 3, width: "24%" },
+  { openX: "-14%", openY: "44%", zIndex: 2, width: "24%" },
+  { openX: "-42%", openY: "44%", zIndex: 1, width: "24%" },
 ];
 
-const ServiceCard = ({ service, index, isVisible, isMobile }: ServiceCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { offset } = useSharedParallax(cardRef, { speed: 0.03 });
+// Parallax depth layers - different Z values create different scroll speeds
+// More negative = moves slower (appears further back)
+const parallaxDepths = [-8, -4, -2, -6, -3, -7, -5, -1];
+
+// Calculate scale to compensate for translateZ (maintains visual size)
+const getScaleForDepth = (depth: number, perspective: number): number => {
+  // scale = 1 + (Math.abs(depth) / perspective)
+  return 1 + (Math.abs(depth) / perspective);
+};
+
+const PERSPECTIVE = 10; // perspective value in px
+
+const ServiceCard = ({ service, index, isVisible, isMobile, parallaxDepth }: ServiceCardProps) => {
   const config = scatterConfigs[index] || scatterConfigs[0];
+  const scale = getScaleForDepth(parallaxDepth, PERSPECTIVE);
   
   if (isMobile) {
     return (
       <Link
         to={service.link}
         className={`group block scroll-reveal ${isVisible ? 'visible' : ''}`}
-        style={{ animationDelay: `${index * 0.1}s` }}
+        style={{ 
+          animationDelay: `${index * 0.1}s`,
+          transformStyle: "preserve-3d",
+        }}
       >
         <div className="overflow-hidden rounded-xl bg-card border border-card-border shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="aspect-[4/3] overflow-hidden">
@@ -75,21 +89,23 @@ const ServiceCard = ({ service, index, isVisible, isMobile }: ServiceCardProps) 
     );
   }
 
-  // Desktop: Scattered parallax layout - overlay title on image
+  // Desktop: CSS Parallax with translateZ - no JavaScript scroll listeners!
   return (
     <Link
       to={service.link}
-      className="absolute group cursor-pointer transform-gpu will-change-transform"
+      className="absolute group cursor-pointer"
       style={{
         left: "50%",
         top: "50%",
         width: config.width,
         zIndex: config.zIndex,
-        transform: `translate(${config.openX}, ${config.openY}) rotate(${config.openRotate}deg) scale(${config.scale}) translateY(${offset * (index % 2 === 0 ? 1 : -1) * 0.5}px)`,
-        transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+        // CSS Parallax: translateZ creates depth, scale compensates for size
+        transform: `translate(${config.openX}, ${config.openY}) translateZ(${parallaxDepth}px) scale(${scale})`,
+        transformStyle: "preserve-3d",
+        transition: "box-shadow 0.4s ease, filter 0.4s ease",
       }}
     >
-      <div ref={cardRef} className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500">
+      <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500">
         <div className="aspect-[4/3] overflow-hidden">
           <ImageWithSkeleton
             src={service.image}
@@ -110,6 +126,7 @@ const ServiceCard = ({ service, index, isVisible, isMobile }: ServiceCardProps) 
 
 const Services = () => {
   const { t } = useTranslation();
+  const sectionRef = useRef<HTMLElement>(null);
   const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
 
@@ -164,7 +181,7 @@ const Services = () => {
     },
   ];
 
-  // Mobile layout
+  // Mobile layout - simple grid
   if (isMobile) {
     return (
       <section
@@ -189,6 +206,7 @@ const Services = () => {
                 index={index}
                 isVisible={isVisible}
                 isMobile={true}
+                parallaxDepth={0}
               />
             ))}
           </div>
@@ -197,33 +215,72 @@ const Services = () => {
     );
   }
 
-  // Desktop: Scattered parallax layout
+  // Desktop: Pure CSS Parallax with perspective container
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       id="services"
-      className={`relative bg-background scroll-reveal ${isVisible ? 'visible' : ''}`}
-      style={{ height: "120vh" }}
+      className={`relative scroll-reveal ${isVisible ? 'visible' : ''}`}
+      style={{ 
+        height: "200vh", // Extra height for scroll distance
+      }}
     >
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        <div className="relative w-full max-w-6xl mx-auto" style={{ height: "85vh" }}>
-          {/* Section Title */}
-          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground drop-shadow-lg">
-              {t("services.title")}
-            </h2>
+      {/* Parallax Container with perspective */}
+      <div 
+        ref={ref as React.RefObject<HTMLDivElement>}
+        className="sticky top-0 h-screen overflow-hidden"
+        style={{
+          perspective: `${PERSPECTIVE}px`,
+          perspectiveOrigin: "center center",
+        }}
+      >
+        {/* Background Layer - moves slowest */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"
+          style={{
+            transform: "translateZ(-15px) scale(2.5)",
+            transformStyle: "preserve-3d",
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Cards Container */}
+        <div 
+          className="relative w-full h-full flex items-center justify-center"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <div 
+            className="relative w-full max-w-6xl mx-auto" 
+            style={{ 
+              height: "85vh",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {/* Section Title - front layer */}
+            <div 
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              style={{
+                transform: "translateZ(2px) scale(0.8)",
+                zIndex: 20,
+              }}
+            >
+              <h2 className="text-4xl lg:text-5xl font-bold text-foreground drop-shadow-lg">
+                {t("services.title")}
+              </h2>
+            </div>
+            
+            {/* Service Cards with varying depths */}
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                service={service}
+                index={index}
+                isVisible={isVisible}
+                isMobile={false}
+                parallaxDepth={parallaxDepths[index]}
+              />
+            ))}
           </div>
-          
-          {/* Service Cards */}
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              service={service}
-              index={index}
-              isVisible={isVisible}
-              isMobile={false}
-            />
-          ))}
         </div>
       </div>
     </section>
