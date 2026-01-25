@@ -41,100 +41,104 @@ interface ScatterConfig {
 // parallaxZ: negative values = moves slower (further back), 0 = normal speed
 const scatterConfigs: ScatterConfig[] = [
   {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "75%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 8,
-    width: "22%",
-    parallaxZ: -2, // Front layer - moves faster
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "51%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 7,
-    width: "22%",
-    parallaxZ: -4, // Mid layer
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "27%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 6,
-    width: "22%",
-    parallaxZ: -6, // Back layer - moves slower
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "3%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 5,
-    width: "22%",
-    parallaxZ: -3,
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "75%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 4,
-    width: "22%",
-    parallaxZ: -5,
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "51%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 3,
-    width: "22%",
-    parallaxZ: -2,
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "27%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 2,
-    width: "22%",
-    parallaxZ: -7, // Deepest layer
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "3%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 1,
-    width: "22%",
-    parallaxZ: -4,
+  closedX: "75%",
+  closedY: "0%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 8,
+  width: "22%",
+  parallaxZ: -2, // Front layer - moves faster
+},
+{
+  closedX: "51%",
+  closedY: "0%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 7,
+  width: "22%",
+  parallaxZ: -4, // Mid layer
+},
+{
+  closedX: "27%",
+  closedY: "0%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 6,
+  width: "22%",
+  parallaxZ: -6, // Back layer - moves slower
+},
+{
+  closedX: "3%",
+  closedY: "0%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 5,
+  width: "22%",
+  parallaxZ: -3,
+},
+{
+  closedX: "75%",
+  closedY: "58%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 4,
+  width: "22%",
+  parallaxZ: -5,
+},
+{
+  closedX: "51%",
+  closedY: "58%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 3,
+  width: "22%",
+  parallaxZ: -2,
+},
+{
+  closedX: "27%",
+  closedY: "58%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  openRotate: 0,
+  scale: 1,
+  zIndex: 2,
+  width: "22%",
+  parallaxZ: -7, // Deepest layer
+},
+{
+  closedX: "3%",
+  closedY: "58%",
+  closedRotate: 0,
+  openX: "38%",
+  openY: "30%",
+  —
+
+  openRotate: 0,
+  scale: 1,
+  zIndex: 1,
+  width: "22%",
+  parallaxZ: -4,
+},
+
   },
 ];
 
@@ -528,15 +532,15 @@ const Index = () => {
                     </div>
 
                     {featuredServices.map((service, index) => (
-                    <UnfoldingServiceCard
-  key={index}
-  service={service}
-  config={...}
-  index={index}
-  isVisible={isVisible}
-  scrollProgress={scrollProgress}
-  isMobile={isMobile}
-/>
+                      <UnfoldingServiceCard
+                        key={index}
+                        service={service}
+                        config={isMobile ? mobileScatterConfigs[index] : scatterConfigs[index]}
+                        index={index}
+                        isVisible={isVisible}
+                        scrollProgress={scrollProgress}
+                        isMobile={isMobile}
+                      />
                     ))}
                   </div>
                 </div>
