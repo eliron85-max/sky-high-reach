@@ -190,8 +190,20 @@ const Index = () => {
           </section>
         </HeroStickyCollapse>
 
-       #testimonials[class*="bg-"] { background-color: transparent !important; }
-        `}</style>
+        {/* LOCK Testimonials to transparent so background image never disappears */}
+        <style>{`
+  #testimonials { 
+    background: transparent !important; 
+    background-color: transparent !important; 
+  }
+  #testimonials.bg-background { 
+    background: transparent !important; 
+    background-color: transparent !important; 
+  }
+  #testimonials [class*="bg-"] { 
+    background-color: transparent !important; 
+  }
+`}</style>
 
         {/* Testimonials with fixed background */}
         <div className="relative z-30 overflow-hidden" id="testimonials">
