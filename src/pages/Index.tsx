@@ -34,9 +34,11 @@ interface ScatterConfig {
   scale: number;
   zIndex: number;
   width: string;
+  parallaxZ: number; // translateZ for CSS parallax depth
 }
 
-// Desktop: 8 cards
+// Desktop: 8 cards with CSS parallax depths
+// parallaxZ: negative values = moves slower (further back), 0 = normal speed
 const scatterConfigs: ScatterConfig[] = [
   {
     closedX: "38%",
@@ -48,6 +50,7 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 8,
     width: "22%",
+    parallaxZ: -2, // Front layer - moves faster
   },
   {
     closedX: "38%",
@@ -59,6 +62,7 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 7,
     width: "22%",
+    parallaxZ: -4, // Mid layer
   },
   {
     closedX: "38%",
@@ -70,6 +74,7 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 6,
     width: "22%",
+    parallaxZ: -6, // Back layer - moves slower
   },
   {
     closedX: "38%",
@@ -81,8 +86,8 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 5,
     width: "22%",
+    parallaxZ: -3,
   },
-
   {
     closedX: "38%",
     closedY: "30%",
@@ -93,6 +98,7 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 4,
     width: "22%",
+    parallaxZ: -5,
   },
   {
     closedX: "38%",
@@ -104,6 +110,7 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 3,
     width: "22%",
+    parallaxZ: -2,
   },
   {
     closedX: "38%",
@@ -115,6 +122,7 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 2,
     width: "22%",
+    parallaxZ: -7, // Deepest layer
   },
   {
     closedX: "38%",
@@ -126,10 +134,11 @@ const scatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 1,
     width: "22%",
+    parallaxZ: -4,
   },
 ];
 
-// Mobile: 8 cards
+// Mobile: 8 cards with parallax (subtle on mobile)
 const mobileScatterConfigs: ScatterConfig[] = [
   {
     closedX: "25%",
@@ -141,6 +150,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 8,
     width: "47%",
+    parallaxZ: -1,
   },
   {
     closedX: "25%",
@@ -152,6 +162,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 7,
     width: "47%",
+    parallaxZ: -2,
   },
   {
     closedX: "25%",
@@ -163,6 +174,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 6,
     width: "47%",
+    parallaxZ: -1,
   },
   {
     closedX: "25%",
@@ -174,6 +186,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 5,
     width: "47%",
+    parallaxZ: -2,
   },
   {
     closedX: "25%",
@@ -185,6 +198,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 4,
     width: "47%",
+    parallaxZ: -1,
   },
   {
     closedX: "25%",
@@ -196,6 +210,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 3,
     width: "47%",
+    parallaxZ: -2,
   },
   {
     closedX: "25%",
@@ -207,6 +222,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 2,
     width: "47%",
+    parallaxZ: -1,
   },
   {
     closedX: "25%",
@@ -218,6 +234,7 @@ const mobileScatterConfigs: ScatterConfig[] = [
     scale: 1,
     zIndex: 1,
     width: "47%",
+    parallaxZ: -2,
   },
 ];
 
@@ -483,10 +500,14 @@ const Index = () => {
                 className={`scroll-reveal ${isVisible ? "visible" : ""} py-12 lg:py-20 bg-background`}
               >
                 <div className={`${isMobile ? "px-2" : "container mx-auto px-4"}`}>
+                  {/* CSS Parallax Container with perspective */}
                   <div
                     className="relative w-full max-w-6xl mx-auto"
                     style={{
                       height: isMobile ? "clamp(600px, 150vh, 900px)" : "clamp(800px, 120vh, 1000px)",
+                      perspective: isMobile ? "none" : "1000px",
+                      perspectiveOrigin: "center center",
+                      transformStyle: "preserve-3d",
                     }}
                   >
                     <div
@@ -629,6 +650,11 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
   const currentRotate = config.closedRotate + (config.openRotate - config.closedRotate) * easedProgress;
 
   const shadowIntensity = config.zIndex * 3;
+  
+  // CSS Parallax: scale compensates for translateZ to maintain visual size
+  // Formula: scale = 1 + (Math.abs(z) / perspective)
+  // With perspective of 1000px, a translateZ of -100px needs scale of 1.1
+  const parallaxScale = isMobile ? 1 : 1 + (Math.abs(config.parallaxZ) * 10 / 1000);
 
   return (
     <Link
@@ -639,15 +665,20 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
         top: `${currentY}%`,
         width: config.width,
         zIndex: config.zIndex,
+        transformStyle: "preserve-3d",
       }}
     >
       <div
-        className="relative overflow-hidden rounded-xl transition-shadow duration-300 ease-out hover:scale-105 hover:z-50 transform-gpu will-change-transform"
+        className="relative overflow-hidden rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:z-50 transform-gpu will-change-transform"
         style={{
-          aspectRatio: isMobile ? "4/3" : "4/3",
-          transform: `rotate(${currentRotate}deg) scale(${config.scale})`,
+          aspectRatio: "4/3",
+          // CSS Parallax: translateZ creates depth, scale compensates for size
+          transform: isMobile 
+            ? `rotate(${currentRotate}deg) scale(${config.scale})`
+            : `rotate(${currentRotate}deg) scale(${config.scale * parallaxScale}) translateZ(${config.parallaxZ * 10}px)`,
           boxShadow: `0 ${shadowIntensity}px ${shadowIntensity * 2}px rgba(0,0,0,0.25)`,
           opacity: isVisible ? 1 : 0,
+          transformStyle: "preserve-3d",
         }}
       >
         <img
