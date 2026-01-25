@@ -112,7 +112,7 @@ export default function Header() {
       document.body.style.paddingRight = "";
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "";return (
       document.body.style.paddingRight = "";
     };
   }, [mobileOpen]);
@@ -122,9 +122,10 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 overflow-visible transition-all duration-1000 [padding-top:env(safe-area-inset-top)] ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none"
-      }`}
+    className={`fixed top-0 left-0 right-0 z-50 overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
+  isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none"
+}`}
+
       dir="rtl"
     >
       {/* Animated gold border line */}
