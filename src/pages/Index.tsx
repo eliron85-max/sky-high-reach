@@ -170,20 +170,14 @@ const Index = () => {
                       >
                         <Link to="/contact">בקשת הצעת מחיר</Link>
                       </Button>
+
                       <Button
                         asChild
                         size="lg"
-                        className="
-    h-12 px-6 rounded-full font-semibold
-    bg-white/90 border border-white/40
-    !text-slate-900 hover:bg-white
-    dark:bg-white/10 dark:border-white/20 dark:!text-white dark:hover:bg-white/15
-    shadow-lg shadow-black/10 dark:shadow-black/30
-  "
+                        variant="outline"
+                        className="border-[#c9a84c]/55 text-[#f3e7c7] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
                       >
-                        <Link to="/projects" className="!text-inherit no-underline">
-                          צפו בפרויקטים
-                        </Link>
+                        <Link to="/projects">צפו בפרויקטים</Link>
                       </Button>
                     </div>
                   </div>
@@ -191,7 +185,7 @@ const Index = () => {
               </div>
 
               {/* Bottom fade */}
-              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 z-20 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
             </div>
           </section>
         </HeroStickyCollapse>
