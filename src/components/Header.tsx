@@ -65,6 +65,7 @@ export default function Header() {
   );
 
   // Header shows ONLY at the very top of the page (on entry). Any scroll hides it.
+  const lastScrollYRef = useRef(0);
   const downAccumRef = useRef(0);
 
   useEffect(() => {
