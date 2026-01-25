@@ -527,26 +527,17 @@ const Index = () => {
                       </h2>
                     </div>
 
-                    {featuredServices.map((service, index) => {
-                      // STACK PULL-OUT: כל כרטיס מקבל "חלון" קטן מתוך scrollProgress
-                      const total = featuredServices.length; // 8
-                      const step = 1 / total; // 0.125
-                      const start = index * step; // מתי הכרטיס מתחיל להיפתח
-                      const end = start + step; // מתי הכרטיס מסיים להיפתח
-                      const cardProgress = Math.min(1, Math.max(0, (scrollProgress - start) / (end - start)));
-
-                      return (
-                        <UnfoldingServiceCard
-                          key={index}
-                          service={service}
-                          config={isMobile ? mobileScatterConfigs[index] : scatterConfigs[index]}
-                          index={index}
-                          isVisible={isVisible}
-                          cardProgress={cardProgress}
-                          isMobile={isMobile}
-                        />
-                      );
-                    })}
+                    {featuredServices.map((service, index) => (
+                      <UnfoldingServiceCard
+                        key={index}
+                        service={service}
+                        config={isMobile ? mobileScatterConfigs[index] : scatterConfigs[index]}
+                        index={index}
+                        isVisible={isVisible}
+                        scrollProgress={scrollProgress}
+                        isMobile={isMobile}
+                      />
+                    ))}
                   </div>
                 </div>
               </section>
