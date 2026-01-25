@@ -1,9 +1,8 @@
-import { Phone, FileCheck, Calendar, Wrench, CheckCircle2, Star } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+ import { Phone, FileCheck, Calendar, Wrench, CheckCircle2, Star } from "lucide-react";
+ import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
+ import { cn } from "@/lib/utils";
 
 const Process = () => {
-  const { ref, isVisible } = useScrollReveal();
-  
   const steps = [
     {
       number: 1,
@@ -44,74 +43,113 @@ const Process = () => {
   ];
 
   return (
-    <section ref={ref} id="process" className={`py-16 lg:py-24 bg-background scroll-reveal ${isVisible ? 'visible' : ''}`}>
+     <section id="process" className="py-16 lg:py-24 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             תהליך העבודה שלנו
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            תהליך מובנה ומקצועי שמבטיח ביצוע מושלם של כל פרויקט
+             מהרעיון ועד להשקה - צעד אחר צעד
           </p>
         </div>
 
-        {/* Desktop: Horizontal */}
-        <div className="hidden lg:grid lg:grid-cols-6 gap-8">
+         {/* Zigzag Timeline Layout */}
+         <div className="max-w-5xl mx-auto relative">
+           {/* Center Line */}
+           <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-primary/20 hidden md:block" 
+                style={{ transform: 'translateX(-50%)' }} />
+           
           {steps.map((step, index) => {
             const Icon = step.icon;
+             const isLeft = index % 2 === 0;
+             const { ref, isVisible, style } = useStaggeredReveal({ 
+               index, 
+               baseDelay: 150,
+               threshold: 0.2 
+             });
+             
             return (
-              <div key={step.number} className="relative animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                {/* Connecting Line */}
-                {index < steps.length - 1 && (
-                  <div className="absolute top-10 left-1/2 w-full h-0.5 bg-primary/30" />
-                )}
-
-                {/* Circle with Number */}
-                <div className="relative z-10 w-20 h-20 mx-auto mb-4 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-2xl font-bold text-primary-foreground">{step.number}</span>
+               <div 
+                 key={step.number} 
+                 ref={ref as React.RefObject<HTMLDivElement>}
+                 className={cn(
+                   "relative mb-16 last:mb-0 transition-all duration-700",
+                   "md:grid md:grid-cols-2 md:gap-8 md:items-center",
+                   !isVisible && "opacity-0 translate-y-8"
+                 )}
+                 style={style}
+               >
+                 {/* Mobile/Tablet: Simple Layout */}
+                 <div className="md:hidden flex gap-4">
+                   {/* Icon Circle */}
+                   <div className="flex-shrink-0">
+                     <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                       <Icon className="w-6 h-6 text-primary-foreground" />
+                     </div>
                 </div>
-
-                {/* Icon */}
-                <div className="flex justify-center mb-3">
-                  <Icon className="text-primary" size={32} />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-lg font-semibold text-foreground text-center mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground text-center leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Mobile/Tablet: Vertical */}
-        <div className="lg:hidden space-y-8">
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div key={step.number} className="relative flex gap-6 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                {/* Left Side: Circle and Line */}
-                <div className="flex flex-col items-center">
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
-                    <span className="text-xl font-bold text-primary-foreground">{step.number}</span>
+                   
+                   {/* Content */}
+                   <div className="flex-1">
+                     <div className="text-sm font-semibold text-primary mb-1">שלב {step.number}</div>
+                     <h3 className="text-lg font-bold text-foreground mb-2">{step.title}</h3>
+                     <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
                   </div>
-                  {index < steps.length - 1 && (
-                    <div className="w-0.5 h-full bg-primary/30 mt-4" />
-                  )}
                 </div>
-
-                {/* Right Side: Content */}
-                <div className="flex-1 pb-8">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Icon className="text-primary" size={28} />
-                    <h3 className="text-xl font-semibold text-foreground">{step.title}</h3>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                </div>
+                 
+                 {/* Desktop: Alternating Layout */}
+                 <div className="hidden md:block">
+                   {/* Left Side Content */}
+                   {isLeft && (
+                     <>
+                       <div className="text-right pr-12">
+                         <div className="inline-block">
+                           <div className="text-sm font-semibold text-primary mb-2">שלב {step.number}</div>
+                           <div className="bg-card rounded-xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow">
+                             <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
+                             <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                           </div>
+                         </div>
+                       </div>
+                       
+                       {/* Center Icon */}
+                       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                         <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-xl border-4 border-background">
+                           <Icon className="w-7 h-7 text-primary-foreground" />
+                         </div>
+                       </div>
+                       
+                       {/* Right Side Empty */}
+                       <div />
+                     </>
+                   )}
+                   
+                   {/* Right Side Content */}
+                   {!isLeft && (
+                     <>
+                       {/* Left Side Empty */}
+                       <div />
+                       
+                       {/* Center Icon */}
+                       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                         <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-xl border-4 border-background">
+                           <Icon className="w-7 h-7 text-primary-foreground" />
+                         </div>
+                       </div>
+                       
+                       {/* Right Side Content */}
+                       <div className="text-left pl-12">
+                         <div className="inline-block">
+                           <div className="text-sm font-semibold text-primary mb-2">שלב {step.number}</div>
+                           <div className="bg-card rounded-xl p-6 shadow-lg border border-border hover:shadow-xl transition-shadow">
+                             <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
+                             <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                           </div>
+                         </div>
+                       </div>
+                     </>
+                   )}
+                 </div>
               </div>
             );
           })}
