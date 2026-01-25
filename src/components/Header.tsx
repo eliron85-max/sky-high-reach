@@ -65,10 +65,38 @@ export default function Header() {
   );
 
   // Header shows ONLY at the very top of the page (on entry). Any scroll hides it.
+  const downAccumRef = useRef(0);
+
   useEffect(() => {
-    const onScroll = () => setIsVisible(window.scrollY === 0);
-    onScroll();
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const lastY = lastScrollYRef.current;
+      const delta = currentY - lastY;
+
+      if (currentY <= 10) {
+        downAccumRef.current = 0;
+        setIsVisible(true);
+        lastScrollYRef.current = currentY;
+        return;
+      }
+
+      if (delta > 0) {
+        downAccumRef.current += delta;
+        if (downAccumRef.current >= 140) {
+          setIsVisible(false);
+        }
+      }
+
+      if (delta < 0) {
+        downAccumRef.current = 0;
+        setIsVisible(true);
+      }
+
+      lastScrollYRef.current = currentY;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
