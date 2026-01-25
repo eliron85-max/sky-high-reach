@@ -66,8 +66,8 @@ const SectionNavigator = ({ sections }: SectionNavigatorProps) => {
         /* Container */
         flex flex-col items-center gap-3
         p-2 rounded-full
-        bg-black/40 backdrop-blur-sm
-        border border-white/10
+        bg-background/40 dark:bg-black/40 backdrop-blur-sm
+        border border-border
       "
     >
       {sections.map((section) => {
@@ -85,8 +85,8 @@ const SectionNavigator = ({ sections }: SectionNavigatorProps) => {
               transition-all duration-300
               
               ${isActive 
-                ? "w-3 h-3 bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] shadow-[0_0_8px_rgba(201,168,76,0.5)]" 
-                : "w-2 h-2 bg-white/50 hover:bg-white/80 hover:scale-125"
+                ? "w-3 h-3 bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.5)]" 
+                : "w-2 h-2 bg-muted-foreground/50 hover:bg-muted-foreground/80 hover:scale-125"
               }
             `}
           >
@@ -102,8 +102,8 @@ const SectionNavigator = ({ sections }: SectionNavigatorProps) => {
                 lg:left-auto lg:right-full lg:ml-0 lg:mr-3
                 
                 px-2 py-1
-                text-xs text-white whitespace-nowrap
-                bg-black/80 rounded
+                text-xs text-foreground whitespace-nowrap
+                bg-popover rounded border border-border
                 opacity-0 group-hover:opacity-100
                 pointer-events-none
                 transition-opacity duration-200

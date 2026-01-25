@@ -43,7 +43,7 @@ export const ScrollToTopButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black flex items-center justify-center shadow-lg hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-110 active:scale-95"
+      className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95"
       aria-label={isAtBottom ? "גלול למעלה" : "גלול למטה"}
     >
       {isAtBottom ? (

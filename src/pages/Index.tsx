@@ -81,7 +81,7 @@ const Index = () => {
                       <h2
                         className={`${
                           isMobile ? "text-2xl" : "text-4xl lg:text-6xl xl:text-7xl"
-                        } font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]`}
+                        } font-bold text-foreground dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8c777] dark:via-[#d8b15a] dark:to-[#8a6b2e] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]`}
                       >
                         השירותים שלנו
                       </h2>
@@ -153,7 +153,7 @@ const Index = () => {
                     <h1
                       className={`${
                         isMobile ? "text-3xl" : "text-5xl lg:text-6xl"
-                      } font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-b from-[#f2e0b6] via-[#e8c777] to-[#8a6b2e] drop-shadow-[0_3px_14px_rgba(0,0,0,0.55)]`}
+                      } font-extrabold leading-tight text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.55)]`}
                     >
                       מומחים בעבודות גובה ברמת גימור פרימיום
                     </h1>
@@ -166,7 +166,7 @@ const Index = () => {
                       <Button
                         asChild
                         size="lg"
-                        className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
+                        className="bg-primary hover:bg-primary-hover text-primary-foreground font-bold transition-all duration-300"
                       >
                         <Link to="/contact">בקשת הצעת מחיר</Link>
                       </Button>
@@ -175,7 +175,7 @@ const Index = () => {
                         asChild
                         size="lg"
                         variant="outline"
-                        className="border-[#c9a84c]/55 text-[#f3e7c7] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+                        className="border-white/50 text-white hover:bg-white/10 hover:border-white transition-all"
                       >
                         <Link to="/projects">צפו בפרויקטים</Link>
                       </Button>
@@ -212,20 +212,20 @@ const Index = () => {
         <section
           id="cta"
           ref={ctaRef}
-          className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
+          className="py-16 lg:py-24 bg-muted dark:bg-gradient-to-b dark:from-[#1a1a1a] dark:via-[#0f0f0f] dark:to-[#0a0a0a] relative overflow-hidden z-30"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
           <div
             ref={ctaLine1Ref}
-            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
+            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"
             style={ctaLine1Style}
           />
 
           <div ref={ctaContentRef} className="container mx-auto px-4 text-center relative z-10" style={ctaContentStyle}>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-foreground">
               מוכנים להתחיל את הפרויקט הבא?
             </h2>
-            <p className="text-lg text-[#e8d5a3]/70 max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               צרו קשר לקבלת ייעוץ חינם והצעת מחיר מותאמת
             </p>
 
@@ -233,7 +233,7 @@ const Index = () => {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
+                className="bg-primary hover:bg-primary-hover text-primary-foreground font-bold transition-all duration-300"
               >
                 <Link to="/contact">בקשת הצעת מחיר</Link>
               </Button>
@@ -242,7 +242,7 @@ const Index = () => {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+                className="border-border text-foreground hover:bg-accent hover:text-accent-foreground transition-all"
               >
                 <Link to="/projects">צפו בפרויקטים שלנו</Link>
               </Button>
