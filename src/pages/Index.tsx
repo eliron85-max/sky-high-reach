@@ -14,6 +14,7 @@ import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
 import { useIsMobile } from "@/hooks/use-mobile";
+import BackgroundMan from "@/components/BackgroundMan";
 
 // Service Images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
