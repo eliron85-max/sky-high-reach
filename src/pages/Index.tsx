@@ -528,15 +528,15 @@ const Index = () => {
                     </div>
 
                     {featuredServices.map((service, index) => (
-                      <UnfoldingServiceCard
-                        key={index}
-                        service={service}
-                        config={isMobile ? mobileScatterConfigs[index] : scatterConfigs[index]}
-                        index={index}
-                        isVisible={isVisible}
-                        scrollProgress={scrollProgress}
-                        isMobile={isMobile}
-                      />
+                    <UnfoldingServiceCard
+  key={index}
+  service={service}
+  config={...}
+  index={index}
+  isVisible={isVisible}
+  scrollProgress={scrollProgress}
+  isMobile={isMobile}
+/>
                     ))}
                   </div>
                 </div>
@@ -637,97 +637,51 @@ interface UnfoldingServiceCardProps {
   isMobile?: boolean;
 }
 
-// ==== STICKY STACK (Deck) ====
-// כל הכרטיסים באותו מקום, והעליון מתחלף בגלילה
+const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMobile }: UnfoldingServiceCardProps) => {
+  const easedProgress = easeOutCubic(scrollProgress);
 
-const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
+  const parsePercent = (str: string) => parseFloat(str.replace("%", ""));
 
-const UnfoldingServiceCard = ({
-  service,
-  config,
-  index,
-  isVisible,
-  scrollProgress,
-  isMobile,
-}: UnfoldingServiceCardProps) => {
-  const TOTAL = 8; // יש לך 8 שירותים
-  const step = 1 / TOTAL;
+  // JavaScript Parallax: כל כרטיס נע במהירות שונה לפי parallaxZ
+  // parallaxZ שלילי יותר = נע לאט יותר = נראה רחוק יותר
+  const parallaxOffset = isMobile ? 0 : config.parallaxZ * easedProgress * 25;
 
-  // איזה כרטיס אמור להיות "העליון" כרגע
-  const activeIndex = Math.min(TOTAL - 1, Math.floor(scrollProgress / step));
+  const currentX =
+    parsePercent(config.closedX) + (parsePercent(config.openX) - parsePercent(config.closedX)) * easedProgress;
+  const baseY =
+    parsePercent(config.closedY) + (parsePercent(config.openY) - parsePercent(config.closedY)) * easedProgress;
+  const currentY = baseY + parallaxOffset;
+  const currentRotate = config.closedRotate + (config.openRotate - config.closedRotate) * easedProgress;
 
-  // התקדמות בתוך הכרטיס הפעיל (0..1)
-  const local = clamp01((scrollProgress - activeIndex * step) / step);
-
-  // כל הכרטיסים יושבים באותו מקום (מרכז)
-  const stackX = 50;
-  const stackY = isMobile ? 62 : 58;
-
-  // מדרגות קטנות כדי לראות "עומק" מאחורה (אבל לא פיזור)
-  const behindOffsetY = isMobile ? 6 : 8;
-  const behindScaleStep = isMobile ? 0.018 : 0.02;
-
-  const isActive = index === activeIndex;
-  const isAbove = index < activeIndex; // כרטיסים שכבר "עברנו" אותם
-  const isBehind = index > activeIndex; // כרטיסים שעדיין לא הגיעו
-
-  // כרטיס פעיל: נשאר במקום, ובסוף הסגמנט "עף" החוצה (למטה) ומפנה מקום לבא
-  // (אם את רוצה שיעוף למעלה במקום למטה תגידי)
-  const activeExitY = isMobile ? 110 : 120; // כמה "נעלם" למטה
-  const activeY = stackY + local * (activeExitY - stackY);
-
-  // כרטיסים מאחורה: נשארים דבוקים בסטאק, עם מדרגות עדינות
-  const behindRank = index - activeIndex; // 1,2,3...
-  const behindY = stackY + behindRank * (behindOffsetY * 0.35);
-  const behindScale = 1 - behindRank * behindScaleStep;
-
-  // כרטיסים שכבר עברו: לא מוצגים (כדי שלא יפריעו)
-  const opacity = isAbove ? 0 : 1;
-
-  // סידור Z: הפעיל תמיד למעלה, אחריו מי שמאחורה
-  const zIndex = isActive ? 999 : 999 - behindRank;
-
-  // רק הכרטיס הפעיל קליקביל
-  const pointerEvents = isActive ? "auto" : "none";
-
-  const shadow = `0 ${10 + (isBehind ? behindRank * 2 : 0)}px ${
-    28 + (isBehind ? behindRank * 6 : 0)
-  }px rgba(0,0,0,0.32)`;
-
-  const topPercent = isActive ? activeY : behindY;
-  const scaleFinal = isActive ? 1 : behindScale;
+  const shadowIntensity = config.zIndex * 3;
 
   return (
     <Link
       to={service.link}
       className="block absolute group"
       style={{
-        left: `${stackX}%`,
-        top: `${topPercent}%`,
-        width: config.width, // נשאר כמו אצלך (22% בדסקטופ / 47% במובייל)
-        zIndex,
-        transform: "translate(-50%, -50%)",
-        pointerEvents,
-        opacity,
-        transition: "opacity 200ms ease",
+        left: `${currentX}%`,
+        top: `${currentY}%`,
+        width: config.width,
+        zIndex: config.zIndex,
       }}
     >
       <div
-        className="relative overflow-hidden rounded-2xl transform-gpu will-change-transform"
+        className="relative overflow-hidden rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:z-50 transform-gpu will-change-transform"
         style={{
           aspectRatio: "4/3",
-          transform: `scale(${scaleFinal})`,
-          boxShadow: shadow,
-          transition: "transform 250ms ease, box-shadow 250ms ease",
+          transform: `rotate(${currentRotate}deg) scale(${config.scale})`,
+          boxShadow: `0 ${shadowIntensity}px ${shadowIntensity * 2}px rgba(0,0,0,0.25)`,
+          opacity: isVisible ? 1 : 0,
         }}
       >
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 rounded-2xl"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 border-secondary-foreground border-dotted border-0 rounded-2xl"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-transparent transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent transition-opacity duration-300" />
         <div className={`absolute bottom-0 left-0 right-0 ${isMobile ? "p-3" : "p-5 md:p-6"}`}>
           <h3
             className={`text-white ${isMobile ? "text-sm" : "text-lg md:text-xl lg:text-2xl"} font-bold drop-shadow-lg`}
