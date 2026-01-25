@@ -39,103 +39,39 @@ interface ScatterConfig {
 
 // Desktop: 8 cards with CSS parallax depths
 // parallaxZ: negative values = moves slower (further back), 0 = normal speed
+interface ScatterConfig {
+  openX: string;
+  openY: string;
+  width: string;
+  zIndex: number;
+}
+
+/** Desktop: 8 cards - final open positions (RTL) */
 const scatterConfigs: ScatterConfig[] = [
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "75%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 8,
-    width: "22%",
-    parallaxZ: -2, // Front layer - moves faster
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "51%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 7,
-    width: "22%",
-    parallaxZ: -4, // Mid layer
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "27%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 6,
-    width: "22%",
-    parallaxZ: -6, // Back layer - moves slower
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "3%",
-    openY: "0%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 5,
-    width: "22%",
-    parallaxZ: -3,
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "75%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 4,
-    width: "22%",
-    parallaxZ: -5,
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "51%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 3,
-    width: "22%",
-    parallaxZ: -2,
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "27%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 2,
-    width: "22%",
-    parallaxZ: -7, // Deepest layer
-  },
-  {
-    closedX: "38%",
-    closedY: "30%",
-    closedRotate: 0,
-    openX: "3%",
-    openY: "58%",
-    openRotate: 0,
-    scale: 1,
-    zIndex: 1,
-    width: "22%",
-    parallaxZ: -4,
-  },
+  { openX: "75%", openY: "0%", width: "22%", zIndex: 8 },
+  { openX: "51%", openY: "0%", width: "22%", zIndex: 7 },
+  { openX: "27%", openY: "0%", width: "22%", zIndex: 6 },
+  { openX: "3%", openY: "0%", width: "22%", zIndex: 5 },
+
+  { openX: "75%", openY: "58%", width: "22%", zIndex: 4 },
+  { openX: "51%", openY: "58%", width: "22%", zIndex: 3 },
+  { openX: "27%", openY: "58%", width: "22%", zIndex: 2 },
+  { openX: "3%", openY: "58%", width: "22%", zIndex: 1 },
+];
+
+/** Mobile: 8 cards - final open positions (2x4) */
+const mobileScatterConfigs: ScatterConfig[] = [
+  { openX: "2%", openY: "0%", width: "47%", zIndex: 8 },
+  { openX: "51%", openY: "0%", width: "47%", zIndex: 7 },
+
+  { openX: "2%", openY: "25%", width: "47%", zIndex: 6 },
+  { openX: "51%", openY: "25%", width: "47%", zIndex: 5 },
+
+  { openX: "2%", openY: "50%", width: "47%", zIndex: 4 },
+  { openX: "51%", openY: "50%", width: "47%", zIndex: 3 },
+
+  { openX: "2%", openY: "75%", width: "47%", zIndex: 2 },
+  { openX: "51%", openY: "75%", width: "47%", zIndex: 1 },
 ];
 
 // Mobile: 8 cards with parallax (subtle on mobile)
@@ -644,7 +580,7 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
 
   // JavaScript Parallax: כל כרטיס נע במהירות שונה לפי parallaxZ
   // parallaxZ שלילי יותר = נע לאט יותר = נראה רחוק יותר
-  const parallaxOffset = 0;
+  const parallaxOffset = isMobile ? 0 : config.parallaxZ * easedProgress * 25;
 
   const currentX =
     parsePercent(config.closedX) + (parsePercent(config.openX) - parsePercent(config.closedX)) * easedProgress;
