@@ -602,18 +602,16 @@ const Index = () => {
         <ParallaxDivider height="60vh" />
 
         {/* Testimonials Section - scrolls OVER the ParallaxDivider like a curtain */}
-        <div className="relative z-30 bg-background">
-          <BackgroundMan
-            imageUrl="/images/facade-bg.webp"
-            opacityClass="opacity-[0.07]"
-            blurClass="blur-[1px]"
-            positionClass="bg-right"
-            sizeClass="bg-contain"
-          >
-            <HomeTestimonials />
-          </BackgroundMan>
-        </div>
+        {/* Testimonials Section - scrolls OVER the ParallaxDivider like a curtain */}
+        <div className="relative z-30 bg-background overflow-hidden">
+          {/* Background image */}
+          <div
+            className="absolute inset-0 pointer-events-none bg-no-repeat bg-right bg-contain opacity-[0.15] blur-[1px]"
+            style={{ backgroundImage: "url(/images/facade-bg.webp)" }}
+          ></div>
 
+          <HomeTestimonials />
+        </div>
         {/* CTA Section with Parallax */}
         <section
           id="cta"
