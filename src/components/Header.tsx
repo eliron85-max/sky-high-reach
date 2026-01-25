@@ -112,7 +112,7 @@ export default function Header() {
       document.body.style.paddingRight = "";
     }
     return () => {
-      document.body.style.overflow = "";return (
+      document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     };
   }, [mobileOpen]);
