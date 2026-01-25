@@ -644,19 +644,13 @@ const UnfoldingServiceCard = ({ service, config, isVisible, scrollProgress, isMo
 
   // JavaScript Parallax: כל כרטיס נע במהירות שונה לפי parallaxZ
   // parallaxZ שלילי יותר = נע לאט יותר = נראה רחוק יותר
-  const parallaxOffset = isMobile ? 0 : config.parallaxZ * easedProgress * 25;
+  const parallaxOffset = 0;
 
   const currentX =
     parsePercent(config.closedX) + (parsePercent(config.openX) - parsePercent(config.closedX)) * easedProgress;
   const baseY =
- const closedY = parsePercent(config.closedY);
-const openY = parsePercent(config.openY);
-
-// ✅ לא מאפשרים תזוזה למעלה: אם openY קטן מ-closedY → ננעלים על closedY
-const safeOpenY = Math.max(openY, closedY);
-
-const baseY = closedY + (safeOpenY - closedY) * easedProgress;
-const currentY = baseY + parallaxOffset;
+    parsePercent(config.closedY) + (parsePercent(config.openY) - parsePercent(config.closedY)) * easedProgress;
+  const currentY = baseY + parallaxOffset;
   const currentRotate = config.closedRotate + (config.openRotate - config.closedRotate) * easedProgress;
 
   const shadowIntensity = config.zIndex * 3;
