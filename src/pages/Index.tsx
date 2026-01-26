@@ -90,7 +90,7 @@ const Index = () => {
                       </p>
                     </div>
 
-                    {/* GRID במקום הכרטיסים "המתפזרים" */}
+                    {/* GRID */}
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
                       {featuredServices.map((s) => (
                         <Link
@@ -119,7 +119,7 @@ const Index = () => {
             </>
           }
         >
-          {/* HERO (וידאו עובד) - בלי כרטיסים */}
+          {/* HERO */}
           <section id="hero" className="relative w-full overflow-hidden">
             <div
               className="relative w-full"
@@ -136,7 +136,6 @@ const Index = () => {
                 playsInline
                 preload="metadata"
               >
-                {/* נסה קודם את hero.webm, ואם לא קיים/לא נטען, החלף ל hero-stone-veneer.webm */}
                 <source src="/hero.webm" type="video/webm" />
                 <source src="/hero-stone-veneer.webm" type="video/webm" />
               </video>
@@ -168,23 +167,37 @@ const Index = () => {
                         size="lg"
                         className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
                       >
-                        <Link to="/contact">בקשת הצעת מחיר</Link>
+                        <Link to="/contact" className="text-inherit no-underline">
+                          בקשת הצעת מחיר
+                        </Link>
                       </Button>
 
+                      {/* ✅ FIX: visible text in LIGHT + keeps gold in DARK */}
                       <Button
                         asChild
                         size="lg"
                         variant="outline"
-                        className="border-[#c9a84c]/55 text-[#f3e7c7] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+                        className="
+                          border-[#c9a84c]/55
+                          bg-white/85 hover:bg-white
+                          text-slate-900 hover:text-slate-900
+                          dark:bg-transparent dark:hover:bg-[#c9a84c]/10
+                          dark:text-[#f3e7c7]
+                          hover:border-[#c9a84c]
+                          transition-all
+                          [&>a]:!text-inherit
+                        "
                       >
-                        <Link to="/projects">צפו בפרויקטים</Link>
+                        <Link to="/projects" className="no-underline">
+                          צפו בפרויקטים
+                        </Link>
                       </Button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Bottom fade */}
+              {/* ✅ FIX: remove white haze (NO from-background) */}
               <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 z-20 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
             </div>
           </section>
@@ -194,7 +207,7 @@ const Index = () => {
         <style>{`
           #testimonials { background: transparent !important; background-color: transparent !important; }
           #testimonials.bg-background { background: transparent !important; background-color: transparent !important; }
-          #testimonials[class*="bg-"] { background-color: transparent !important; }
+          #testimonials [class*="bg-"] { background-color: transparent !important; }
         `}</style>
 
         {/* Testimonials with fixed background */}
@@ -235,7 +248,9 @@ const Index = () => {
                 size="lg"
                 className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
               >
-                <Link to="/contact">בקשת הצעת מחיר</Link>
+                <Link to="/contact" className="text-inherit no-underline">
+                  בקשת הצעת מחיר
+                </Link>
               </Button>
 
               <Button
@@ -244,7 +259,9 @@ const Index = () => {
                 variant="outline"
                 className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
               >
-                <Link to="/projects">צפו בפרויקטים שלנו</Link>
+                <Link to="/projects" className="text-inherit no-underline">
+                  צפו בפרויקטים שלנו
+                </Link>
               </Button>
             </div>
           </div>
