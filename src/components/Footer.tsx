@@ -5,7 +5,10 @@ import logoImage from "@/assets/logo-new.webp";
 const Footer = () => {
   const { t, dir } = useTranslation();
   return (
-    <footer className="bg-hero-dark text-white" dir={dir}>
+    <footer
+      className="bg-[#d2d4d6] dark:bg-hero-dark text-black dark:text-white transition-colors duration-300"
+      dir={dir}
+    >
       {/* Top Contact Strip */}
       <div className="border-b border-primary/10 py-6">
         <div className="container mx-auto px-4">
@@ -17,8 +20,8 @@ const Footer = () => {
             >
               <Phone className="text-primary" size={20} />
               <div>
-                <p className="text-sm text-white/60">{t("footer.phone")}</p>
-                <a href="tel:055-6616326" className="text-white hover:text-primary transition-colors">
+                <p className="text-sm text-black/60 dark:text-white/60">{t("footer.phone")}</p>
+                <a href="tel:055-6616326" className="text-black dark:text-white hover:text-primary transition-colors">
                   055-6616326
                 </a>
               </div>
@@ -28,7 +31,7 @@ const Footer = () => {
             >
               <Mail className="text-primary" size={20} />
               <div>
-                <p className="text-sm text-white/60">{t("footer.email")}</p>
+                <p className="text-sm text-black/60 dark:text-white/60">{t("footer.email")}</p>
                 <a
                   href="mailto:info@ropeaccess.co.il"
                   className="text-black dark:text-white hover:text-primary transition-colors"
