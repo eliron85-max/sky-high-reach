@@ -117,12 +117,13 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  const goldText = "text-foreground hover:text-primary dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition";
+  const goldText =
+    "text-foreground hover:text-primary dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition";
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#d2d4d6] dark:bg-black overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
         isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none"
       }`}
       dir="rtl"
@@ -133,15 +134,11 @@ export default function Header() {
       </div>
 
       {/* ================= ROW 1 (Desktop only) ================= */}
-      <div className="hidden lg:block relative z-20 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
+      <div className="hidden lg:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
-            <Link
-              to="/"
-              className={`${goldText} whitespace-nowrap`}
-              aria-current="page"
-            >
+            <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
               עמוד ראשי
             </Link>
 
