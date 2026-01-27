@@ -31,7 +31,8 @@ const ServiceTile = ({ service, index, isVisible }: ServiceCardProps) => {
       className={`group block scroll-reveal ${isVisible ? "visible" : ""} hover:opacity-95 transition-opacity`}
       style={{ animationDelay: `${index * 0.06}s` }}
     >
-      <div className="relative w-full aspect-[16/9] overflow-hidden rounded-none">
+      {/* יותר גבוה = נראה "גדול" */}
+      <div className="relative w-full aspect-[4/5] overflow-hidden rounded-none">
         <ImageWithSkeleton
           src={service.image}
           alt={service.title}
@@ -41,7 +42,7 @@ const ServiceTile = ({ service, index, isVisible }: ServiceCardProps) => {
         {/* dark overlay */}
         <div className="absolute inset-0 bg-black/35" />
 
-        {/* title bottom (like reference) */}
+        {/* title bottom */}
         <div className="absolute inset-x-0 bottom-0 p-4">
           <h3 className="text-white text-lg md:text-xl font-semibold drop-shadow text-right">{service.title}</h3>
         </div>
@@ -107,15 +108,15 @@ const Services = () => {
 
   return (
     <section ref={ref} id="services" className={`bg-background scroll-reveal ${isVisible ? "visible" : ""}`}>
-      {/* FULL BLEED: יוצא מכל container של העמוד ומגיע עד הקצה */}
+      {/* FULL BLEED */}
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
         <div className="text-center mb-6 px-4 pt-10">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{t("services.title")}</h2>
           <p className="text-muted-foreground">{t("services.subtitle")}</p>
         </div>
 
-        {/* Tiles grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2px] bg-black/10">
+        {/* יותר גדול בדסקטופ = 3 עמודות במקום 4 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px] bg-black/10">
           {services.map((service, index) => (
             <ServiceTile key={service.link} service={service} index={index} isVisible={isVisible} />
           ))}
