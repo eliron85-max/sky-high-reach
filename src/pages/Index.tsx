@@ -1,3 +1,5 @@
+// Index.tsx
+
 import React, { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -66,57 +68,38 @@ const Index = () => {
           collapseDistance={650}
           mobileCollapseDistance={450}
           after={
-            <>
-              {/* SERVICES */}
-              <section
-                id="services"
-                ref={(el) => {
-                  (ref as React.MutableRefObject<HTMLElement | null>).current = el;
-                }}
-                className={`scroll-reveal ${isVisible ? "visible" : ""} py-12 lg:py-20 bg-background`}
-              >
-                <div className={`${isMobile ? "px-3" : "container mx-auto px-4"}`}>
-                  <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-8 lg:mb-12">
-                      <h2
-                        className={`${
-                          isMobile ? "text-2xl" : "text-4xl lg:text-6xl xl:text-7xl"
-                        } font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]`}
-                      >
-                        השירותים שלנו
-                      </h2>
-                      <p className="mt-3 text-sm lg:text-base text-muted-foreground">
-                        שיקום מעטפת, חיפוי אבן, איטום, מרזבים וצנרת, פתרונות מיוחדים – ברמת גימור פרימיום.
-                      </p>
-                    </div>
-
-                    {/* GRID */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
-                      {featuredServices.map((s) => (
-                        <Link
-                          key={s.title}
-                          to={s.link}
-                          className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/20 hover:bg-black/30 transition-colors"
-                        >
-                          <div className="aspect-[4/3] w-full">
-                            <img
-                              src={s.image}
-                              alt={s.title}
-                              className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
-                              loading="lazy"
-                            />
-                          </div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-                          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                            <div className="text-white font-bold text-sm md:text-base drop-shadow-lg">{s.title}</div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+            /* SERVICES */
+            <section
+              id="services"
+              ref={(el) => {
+                (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+              }}
+              className={`scroll-reveal ${isVisible ? "visible" : ""} bg-background overflow-x-hidden`}
+            >
+              <div className="w-screen">
+                <div className="text-center py-10">
+                  <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
+                    השירותים שלנו
+                  </h2>
                 </div>
-              </section>
-            </>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
+                  {featuredServices.map((s) => (
+                    <Link key={s.title} to={s.link} className="block">
+                      <div className="relative w-full aspect-[4/5] overflow-hidden">
+                        <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover" />
+
+                        <div className="absolute inset-0 bg-black/35" />
+
+                        <div className="absolute bottom-0 right-0 left-0 p-4">
+                          <div className="text-white text-lg font-bold text-right">{s.title}</div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </section>
           }
         >
           {/* HERO */}
@@ -124,147 +107,28 @@ const Index = () => {
             <div
               className="relative w-full"
               style={{
-                height: isMobile ? "clamp(420px, 72vh, 560px)" : "clamp(520px, 78vh, 720px)",
+                height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)",
               }}
             >
-              {/* Background Video */}
-              <video
-                className="absolute inset-0 w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-              >
+              <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
                 <source src="/hero.webm" type="video/webm" />
-                <source src="/hero-stone-veneer.webm" type="video/webm" />
               </video>
 
-              {/* Overlays */}
-              <div className="absolute inset-0 bg-black/35" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/20 to-black/65" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/35" />
+              <div className="absolute inset-0 bg-black/40" />
 
-              {/* Content */}
               <div className="relative z-10 h-full flex items-center">
                 <div className={`${isMobile ? "px-4" : "container mx-auto px-4"}`}>
-                  <div className="max-w-3xl">
-                    <h1
-                      className={`${
-                        isMobile ? "text-3xl" : "text-5xl lg:text-6xl"
-                      } font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-b from-[#f2e0b6] via-[#e8c777] to-[#8a6b2e] drop-shadow-[0_3px_14px_rgba(0,0,0,0.55)]`}
-                    >
-                      מומחים בעבודות גובה ברמת גימור פרימיום
-                    </h1>
-
-                    <p className="mt-4 text-base lg:text-lg text-white/80 max-w-2xl">
-                      שיקום מעטפת • חיפוי אבן • איטום בגובה • מרזבים וצנרת • פתרונות מיוחדים
-                    </p>
-
-                    <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                      <Button
-                        asChild
-                        size="lg"
-                        className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
-                      >
-                        <Link to="/contact" className="text-inherit no-underline">
-                          בקשת הצעת מחיר
-                        </Link>
-                      </Button>
-
-                      {/* ✅ FIX: visible text in LIGHT + keeps gold in DARK */}
-                      <Button
-                        asChild
-                        size="lg"
-                        variant="outline"
-                        className="
-                          border-[#c9a84c]/55
-                          bg-white/85 hover:bg-white
-                          text-slate-900 hover:text-slate-900
-                          dark:bg-transparent dark:hover:bg-[#c9a84c]/10
-                          dark:text-[#f3e7c7]
-                          hover:border-[#c9a84c]
-                          transition-all
-                          [&>a]:!text-inherit
-                        "
-                      >
-                        <Link to="/projects" className="no-underline">
-                          צפו בפרויקטים
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
+                  <h1 className="text-3xl lg:text-6xl font-bold text-white">מומחים בעבודות גובה ברמת גימור פרימיום</h1>
                 </div>
               </div>
-
-              {/* ✅ FIX: remove white haze (NO from-background) */}
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-28 z-20 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
             </div>
           </section>
         </HeroStickyCollapse>
 
-        {/* LOCK Testimonials to transparent so background image never disappears */}
-        <style>{`
-          #testimonials { background: transparent !important; background-color: transparent !important; }
-          #testimonials.bg-background { background: transparent !important; background-color: transparent !important; }
-          #testimonials [class*="bg-"] { background-color: transparent !important; }
-        `}</style>
+        <HomeTestimonials />
 
-        {/* Testimonials with fixed background */}
-        <div className="relative z-30 overflow-hidden" id="testimonials">
-          <div
-            className="absolute inset-0 -z-10 pointer-events-none bg-no-repeat bg-right bg-contain opacity-[0.22] blur-0"
-            style={{ backgroundImage: "url(/images/facade-bg.webp)" }}
-          />
-          <div className="relative z-10 bg-transparent">
-            <HomeTestimonials />
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <section
-          id="cta"
-          ref={ctaRef}
-          className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
-          <div
-            ref={ctaLine1Ref}
-            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
-            style={ctaLine1Style}
-          />
-
-          <div ref={ctaContentRef} className="container mx-auto px-4 text-center relative z-10" style={ctaContentStyle}>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
-              מוכנים להתחיל את הפרויקט הבא?
-            </h2>
-            <p className="text-lg text-[#e8d5a3]/70 max-w-2xl mx-auto mb-8">
-              צרו קשר לקבלת ייעוץ חינם והצעת מחיר מותאמת
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
-              >
-                <Link to="/contact" className="text-inherit no-underline">
-                  בקשת הצעת מחיר
-                </Link>
-              </Button>
-
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
-              >
-                <Link to="/projects" className="text-inherit no-underline">
-                  צפו בפרויקטים שלנו
-                </Link>
-              </Button>
-            </div>
-          </div>
+        <section id="cta" ref={ctaRef} className="py-20 text-center">
+          CTA
         </section>
       </main>
 
