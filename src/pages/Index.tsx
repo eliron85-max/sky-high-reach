@@ -99,9 +99,9 @@ const Index = () => {
                         {/* overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
 
-                        {/* טקסט למטה */}
-                        <div className="absolute inset-x-0 bottom-0 p-4">
-                          <div className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)] text-right">
+                        {/* ✅ טקסט למטה + ממורכז באמצע */}
+                        <div className="absolute inset-x-0 bottom-0 p-4 flex justify-center">
+                          <div className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)] text-center">
                             {s.title}
                           </div>
                         </div>
