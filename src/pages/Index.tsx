@@ -7,7 +7,6 @@ import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import SectionNavigator from "@/components/SectionNavigator";
 import HomeTestimonials from "@/components/HomeTestimonials";
 
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
@@ -52,8 +51,8 @@ const Index = () => {
     { title: "עבודות מיוחדות", image: specialProjectsImage, link: "/special-projects" },
     { title: "חיפוי אבן", image: stoneVeneerImage, link: "/stone-veneer" },
     { title: "ביטול צווי הריסה", image: demolitionOrdersImage, link: "/demolition-orders" },
-    { title: "התקנת צנרת ומרזבים", image: pipingGuttersImage, link: "/special-projects" },
-    { title: "פתרונות בגובה", image: heightSolutionsImage, link: "/special-projects" },
+    { title: "התקנת צנרת ומרזבים", image: pipingGuttersImage, link: "/piping-gutters" },
+    { title: "פתרונות בגובה", image: heightSolutionsImage, link: "/height-solutions" },
   ];
 
   return (
@@ -84,12 +83,11 @@ const Index = () => {
                   </h2>
                 </div>
 
-                {/* כמו בדוגמה: 4 בעמודה + צמודים + טקסט באמצע */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+                {/* כמו בדוגמה: קווים לבנים (grid) */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] bg-white p-[3px]">
                   {featuredServices.map((s) => (
-                    <Link key={s.title} to={s.link} className="group relative block overflow-hidden">
-                      {/* גובה נשלט (לא aspect שמתנפח) */}
-                      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[260px] lg:h-[300px] xl:h-[340px]">
+                    <Link key={s.title} to={s.link} className="group block bg-black">
+                      <div className="relative w-full h-[210px] sm:h-[250px] md:h-[240px] lg:h-[280px] xl:h-[320px] overflow-hidden">
                         <img
                           src={s.image}
                           alt={s.title}
@@ -98,11 +96,11 @@ const Index = () => {
                         />
 
                         {/* overlay עדין */}
-                        <div className="absolute inset-0 bg-black/25" />
+                        <div className="absolute inset-0 bg-black/10" />
 
-                        {/* טקסט במרכז */}
-                        <div className="absolute inset-0 flex items-center justify-center px-4">
-                          <div className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)] text-center">
+                        {/* טקסט באמצע עם פס כהה כמו בדוגמה */}
+                        <div className="absolute inset-0 flex items-center justify-center px-3">
+                          <div className="bg-black/45 px-4 py-2 text-white font-extrabold text-sm sm:text-base md:text-lg lg:text-xl text-center drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)]">
                             {s.title}
                           </div>
                         </div>
@@ -137,10 +135,8 @@ const Index = () => {
           </section>
         </HeroStickyCollapse>
 
-        {/* Testimonials */}
         <HomeTestimonials />
 
-        {/* CTA Section */}
         <section
           id="cta"
           ref={ctaRef}
@@ -152,7 +148,6 @@ const Index = () => {
             className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
             style={ctaLine1Style}
           />
-
           <div ref={ctaContentRef} className="container mx-auto px-4 text-center relative z-10" style={ctaContentStyle}>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
               מוכנים להתחיל את הפרויקט הבא?
@@ -162,26 +157,19 @@ const Index = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
               >
-                <Link to="/contact" className="text-inherit no-underline">
-                  בקשת הצעת מחיר
-                </Link>
-              </Button>
+                בקשת הצעת מחיר
+              </Link>
 
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+              <Link
+                to="/projects"
+                className="inline-flex items-center justify-center h-11 px-6 rounded-md border border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
               >
-                <Link to="/projects" className="text-inherit no-underline">
-                  צפו בפרויקטים שלנו
-                </Link>
-              </Button>
+                צפו בפרויקטים שלנו
+              </Link>
             </div>
           </div>
         </section>
