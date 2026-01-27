@@ -74,25 +74,37 @@ const Index = () => {
               ref={(el) => {
                 (ref as React.MutableRefObject<HTMLElement | null>).current = el;
               }}
-              className={`scroll-reveal ${isVisible ? "visible" : ""} bg-background overflow-x-hidden`}
+              className={`scroll-reveal ${isVisible ? "visible" : ""} bg-background overflow-x-hidden py-10 lg:py-16`}
             >
-              <div className="w-screen">
-                <div className="text-center py-10">
+              {/* FULL BLEED */}
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
+                <div className="text-center mb-6 px-4">
                   <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
                     השירותים שלנו
                   </h2>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
+                {/* כמו בדוגמה: 4 בעמודה + צמודים + טקסט באמצע */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
                   {featuredServices.map((s) => (
-                    <Link key={s.title} to={s.link} className="block">
-                      <div className="relative w-full aspect-[4/5] overflow-hidden">
-                        <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover" />
+                    <Link key={s.title} to={s.link} className="group relative block overflow-hidden">
+                      {/* גובה נשלט (לא aspect שמתנפח) */}
+                      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[260px] lg:h-[300px] xl:h-[340px]">
+                        <img
+                          src={s.image}
+                          alt={s.title}
+                          loading="lazy"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
 
-                        <div className="absolute inset-0 bg-black/35" />
+                        {/* overlay עדין */}
+                        <div className="absolute inset-0 bg-black/25" />
 
-                        <div className="absolute bottom-0 right-0 left-0 p-4">
-                          <div className="text-white text-lg font-bold text-right">{s.title}</div>
+                        {/* טקסט במרכז */}
+                        <div className="absolute inset-0 flex items-center justify-center px-4">
+                          <div className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)] text-center">
+                            {s.title}
+                          </div>
                         </div>
                       </div>
                     </Link>
@@ -125,10 +137,53 @@ const Index = () => {
           </section>
         </HeroStickyCollapse>
 
+        {/* Testimonials */}
         <HomeTestimonials />
 
-        <section id="cta" ref={ctaRef} className="py-20 text-center">
-          CTA
+        {/* CTA Section */}
+        <section
+          id="cta"
+          ref={ctaRef}
+          className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
+          <div
+            ref={ctaLine1Ref}
+            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
+            style={ctaLine1Style}
+          />
+
+          <div ref={ctaContentRef} className="container mx-auto px-4 text-center relative z-10" style={ctaContentStyle}>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
+              מוכנים להתחיל את הפרויקט הבא?
+            </h2>
+            <p className="text-lg text-[#e8d5a3]/70 max-w-2xl mx-auto mb-8">
+              צרו קשר לקבלת ייעוץ חינם והצעת מחיר מותאמת
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
+              >
+                <Link to="/contact" className="text-inherit no-underline">
+                  בקשת הצעת מחיר
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+              >
+                <Link to="/projects" className="text-inherit no-underline">
+                  צפו בפרויקטים שלנו
+                </Link>
+              </Button>
+            </div>
+          </div>
         </section>
       </main>
 
