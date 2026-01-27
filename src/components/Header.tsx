@@ -1,3 +1,5 @@
+// src/components/Header.tsx
+
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Accessibility } from "lucide-react";
@@ -64,36 +66,12 @@ export default function Header() {
     [],
   );
 
-  // Header shows ONLY at the very top of the page (on entry). Any scroll hides it.
-  const lastScrollYRef = useRef(0);
-  const downAccumRef = useRef(0);
-
+  // ✅ Header appears ONLY when reaching the very top (scrollY ~ 0)
   useEffect(() => {
     const onScroll = () => {
-      const currentY = window.scrollY;
-      const lastY = lastScrollYRef.current;
-      const delta = currentY - lastY;
-
-      if (currentY <= 10) {
-        downAccumRef.current = 0;
-        setIsVisible(true);
-        lastScrollYRef.current = currentY;
-        return;
-      }
-
-      if (delta > 0) {
-        downAccumRef.current += delta;
-        if (downAccumRef.current >= 140) {
-          setIsVisible(false);
-        }
-      }
-
-      if (delta < 0) {
-        downAccumRef.current = 0;
-        setIsVisible(true);
-      }
-
-      lastScrollYRef.current = currentY;
+      const y = window.scrollY || 0;
+      // small threshold for smoothness on mobile/OS bounce
+      setIsVisible(y <= 2);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -229,7 +207,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR (NOT fixed!) ================= */}
+      {/* ================= MOBILE BAR ================= */}
       <div
         className="lg:hidden relative z-[55] overflow-visible bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-border dark:border-[#c9a84c]/20"
         dir="rtl"
