@@ -93,7 +93,7 @@ const Index = () => {
                           src={s.image}
                           alt={s.title}
                           loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-115"
                         />
 
                         {/* overlay */}
