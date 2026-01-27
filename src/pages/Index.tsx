@@ -84,12 +84,11 @@ const Index = () => {
                   </h2>
                 </div>
 
-                {/* גריד 4 בעמודה + צמודים */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+                {/* ✅ גריד לבן (קווים לבנים בין הכרטיסים) */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] bg-white p-[3px]">
                   {featuredServices.map((s) => (
-                    <Link key={s.title} to={s.link} className="group relative block overflow-hidden">
-                      {/* גובה נשלט */}
-                      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[260px] lg:h-[300px] xl:h-[340px]">
+                    <Link key={s.title} to={s.link} className="group relative block overflow-hidden bg-black">
+                      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[260px] lg:h-[300px] xl:h-[340px] overflow-hidden">
                         <img
                           src={s.image}
                           alt={s.title}
@@ -97,10 +96,10 @@ const Index = () => {
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
 
-                        {/* overlay עדין */}
+                        {/* overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
 
-                        {/* ✅ טקסט למטה */}
+                        {/* טקסט למטה */}
                         <div className="absolute inset-x-0 bottom-0 p-4">
                           <div className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)] text-right">
                             {s.title}
