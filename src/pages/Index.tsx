@@ -59,13 +59,17 @@ export default function Index() {
                 className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 pt-3 pb-6 md:pt-4 md:pb-8`}
               >
                 {/* SERVICES TITLE */}
-                <div className="flex flex-col items-center mb-10">
-                  {/* Black strip */}
-                  <div className="w-full max-w-[420px] h-[42px] bg-black mb-6 rounded-sm" />
+                {/* SERVICES TITLE */}
+                <div className="mb-12">
+                  {/* FULL WIDTH BLACK STRIP */}
+                  <div className="w-full h-[70px] bg-black" />
 
-                  <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2a] text-center">
-                    השירותים שלנו
-                  </h2>
+                  {/* TITLE */}
+                  <div className="flex justify-center mt-6">
+                    <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2a] text-center">
+                      השירותים שלנו
+                    </h2>
+                  </div>
                 </div>
 
                 {/* OUTER BORDER */}
