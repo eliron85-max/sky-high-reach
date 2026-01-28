@@ -46,7 +46,77 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO */}
-        <HeroStickyCollapse collapseDistance={650} mobileCollapseDistance={450}>
+        <HeroStickyCollapse 
+          collapseDistance={650} 
+          mobileCollapseDistance={450}
+          after={
+            <>
+              {/* SERVICES */}
+              <section
+                ref={(el) => {
+                  (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+                }}
+                className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 pt-3 pb-6 md:pt-4 md:pb-8`}
+              >
+                {/* SERVICES TITLE */}
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
+                    השירותים שלנו
+                  </h2>
+                </div>
+
+                {/* OUTER BORDER */}
+                <div className="bg-[#dfc798] p-[1px]">
+                  {/* GRID */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
+                    {services.map((s) => (
+                      <div key={s.title} className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]">
+                        {/* IMAGE */}
+                        <img
+                          src={s.image}
+                          alt={s.title}
+                          className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.22]"
+                        />
+
+                        {/* OVERLAY */}
+                        <div className="absolute inset-0 bg-black/65" />
+
+                        {/* INNER BORDER */}
+                        <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
+
+                        {/* TEXT */}
+                        <div className="absolute bottom-6 w-full text-center px-3">
+                          <span
+                            style={{
+                              fontFamily: "Montserrat, sans-serif",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              fontSize: "36px",
+                              lineHeight: "44px",
+                              color: "rgb(255,228,174)",
+                              textShadow: "0 10px 18px rgba(0,0,0,0.85)",
+                            }}
+                          >
+                            {s.title}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+              <TrustStrip />
+              <HomeTestimonials />
+
+              {/* CTA */}
+              <section className="py-16 text-center">
+                <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
+                  צור קשר
+                </Button>
+              </section>
+            </>
+          }
+        >
           <section className="relative w-full overflow-hidden">
             <div
               className="relative w-full"
@@ -61,70 +131,6 @@ export default function Index() {
             </div>
           </section>
         </HeroStickyCollapse>
-
-        {/* SERVICES */}
-        <section
-          ref={(el) => {
-            (ref as React.MutableRefObject<HTMLElement | null>).current = el;
-          }}
-          className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 pt-3 pb-6 md:pt-4 md:pb-8`}
-        >
-          {/* SERVICES TITLE */}
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
-              השירותים שלנו
-            </h2>
-          </div>
-
-          {/* OUTER BORDER */}
-          <div className="bg-[#dfc798] p-[1px]">
-            {/* GRID */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
-              {services.map((s) => (
-                <div key={s.title} className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]">
-                  {/* IMAGE */}
-                  <img
-                    src={s.image}
-                    alt={s.title}
-                    className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.22]"
-                  />
-
-                  {/* OVERLAY */}
-                  <div className="absolute inset-0 bg-black/65" />
-
-                  {/* INNER BORDER */}
-                  <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
-
-                  {/* TEXT */}
-                  <div className="absolute bottom-6 w-full text-center px-3">
-                    <span
-                      style={{
-                        fontFamily: "Montserrat, sans-serif",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        fontSize: "36px",
-                        lineHeight: "44px",
-                        color: "rgb(255,228,174)",
-                        textShadow: "0 10px 18px rgba(0,0,0,0.85)",
-                      }}
-                    >
-                      {s.title}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <TrustStrip />
-        <HomeTestimonials />
-
-        {/* CTA */}
-        <section className="py-16 text-center">
-          <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
-            צור קשר
-          </Button>
-        </section>
       </main>
 
       <Footer />
