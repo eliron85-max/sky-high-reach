@@ -67,7 +67,7 @@ export default function Index() {
           ref={(el) => {
             (ref as React.MutableRefObject<HTMLElement | null>).current = el;
           }}
-          className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 py-8 md:py-10`}
+          className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 pt-3 pb-6 md:pt-4 md:pb-8`}
         >
           {/* SERVICES TITLE */}
           <div className="text-center mb-8">
