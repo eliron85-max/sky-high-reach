@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  BadgeCheck,
-  ThumbsUp,
-  Users,
-  HardHat,
-  Sparkles,
-} from "lucide-react";
+import { BadgeCheck, ThumbsUp, Users, HardHat, Sparkles } from "lucide-react";
 
-import bgImage from "@/assets/trust-bg.jpg";
+import bgImage from "@/assets/stone-veneer-after-2.jpg";
 
 type Item = {
   kicker: string;
@@ -26,12 +20,8 @@ const items: Item[] = [
 export default function TrustStrip() {
   return (
     <section dir="rtl" className="relative w-full overflow-hidden">
-
       {/* Background image */}
-      <img
-        src={bgImage}
-        className="absolute inset-0 w-full h-full object-cover scale-110 blur-sm"
-      />
+      <img src={bgImage} className="absolute inset-0 w-full h-full object-cover scale-110 blur-sm" />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/75" />
@@ -44,21 +34,16 @@ export default function TrustStrip() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-[#dfc798]/35" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-
           {items.map(({ kicker, title, Icon }) => (
             <div key={title} className="text-center">
-
               {/* Icon box */}
               <div className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-xl border border-[#a79471] bg-black/40">
                 <Icon className="w-8 h-8 text-[#dfc798]" strokeWidth={1.6} />
               </div>
 
               {/* Small text */}
-              <div className="text-[13px] text-[#dfc798]">
-                {kicker}
-              </div>
+              <div className="text-[13px] text-[#dfc798]">{kicker}</div>
 
               {/* Main text */}
               <div
@@ -73,10 +58,8 @@ export default function TrustStrip() {
 
               {/* underline */}
               <div className="mx-auto mt-3 h-[2px] w-12 bg-gradient-to-r from-transparent via-[#dfc798] to-transparent" />
-
             </div>
           ))}
-
         </div>
       </div>
     </section>
