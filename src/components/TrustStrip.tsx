@@ -9,12 +9,12 @@ type Item = {
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-const items: Item[] = [
-  { kicker: "אנשי מקצוע", title: "מומחיות וניהול נכון", Icon: HardHat },
-  { kicker: "למעלה מ־1,000", title: "יחידות דיור בשנה", Icon: Users },
+const items = [
+  { kicker: "אנשי מקצוע מוסמכים", title: "צוות סנפלינג מקצועי", Icon: HardHat },
+  { kicker: "מעל 15 שנות ניסיון", title: "עבודות גובה ומעטפת", Icon: Sparkles },
   { kicker: "חברה משפחתית", title: "אמינות ובטיחות", Icon: ThumbsUp },
-  { kicker: "בעלת סיווג", title: "קבלני (ג׳-5)", Icon: BadgeCheck },
-  { kicker: "מעל 30 שנות", title: "בניה ומצוינות", Icon: Sparkles },
+  { kicker: "מאות פרויקטים", title: "ביצוע מוצלח בשטח", Icon: Users },
+  { kicker: "תקן וביטוח מלא", title: "עבודה לפי תקן ישראלי", Icon: BadgeCheck },
 ];
 
 export default function TrustStrip() {
