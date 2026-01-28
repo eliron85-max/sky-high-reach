@@ -55,41 +55,39 @@ export default function Index() {
                 ref={(el) => {
                   (ref as React.MutableRefObject<HTMLElement | null>).current = el;
                 }}
-                className={`relative z-20 bg-black ${
-                  isVisible ? "opacity-100" : "opacity-0"
-                } transition-opacity duration-700`}
+                className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
               >
-                {/* FULL BLACK WRAPPER (prevents hero bleed) */}
-                <div className="relative w-full bg-black overflow-hidden">
-                  {/* TOP STRIP (full width) */}
+                {/* FULL BLACK WRAPPER (covers hero, prevents bleed) */}
+                <div className="relative z-[50] w-full bg-black overflow-hidden">
+                  {/* TOP STRIP */}
                   <div className="w-full h-[70px] bg-black" />
 
-                  {/* TITLE BAR (opaque, no bleed) */}
+                  {/* TITLE BAR */}
                   <div className="w-full h-[90px] bg-black flex items-center justify-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
                   </div>
 
-                  {/* BOTTOM STRIP (full width) */}
+                  {/* BOTTOM STRIP */}
                   <div className="w-full h-[70px] bg-black" />
 
                   {/* OUTER BORDER */}
                   <div className="bg-[#dfc798] p-[1px]">
-                    {/* GRID (inner grid lines) */}
+                    {/* GRID */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
                       {services.map((s) => (
                         <div
                           key={s.title}
                           className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]"
                         >
-                          {/* IMAGE (zoom on hover) */}
+                          {/* IMAGE (slower zoom on hover) */}
                           <img
                             src={s.image}
                             alt={s.title}
-                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
+                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1800ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
                           />
 
-                          {/* OVERLAY (fade like you wanted) */}
-                          <div className="absolute inset-0 bg-black/65 transition-opacity duration-500 ease-out group-hover:opacity-40" />
+                          {/* OVERLAY (fade on hover) */}
+                          <div className="absolute inset-0 bg-black/65 transition-opacity duration-[900ms] ease-out group-hover:opacity-40" />
 
                           {/* INNER BORDER */}
                           <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
@@ -115,7 +113,7 @@ export default function Index() {
                     </div>
                   </div>
 
-                  {/* SPACE BEFORE TRUST STRIP (not too tight) */}
+                  {/* SPACE BEFORE TRUST STRIP */}
                   <div className="h-10 bg-black" />
                 </div>
               </section>
@@ -133,9 +131,9 @@ export default function Index() {
           }
         >
           {/* HERO */}
-          <section className="relative w-full overflow-hidden">
+          <section className="relative z-0 w-full overflow-hidden">
             <div
-              className="relative w-full"
+              className="relative z-0 w-full"
               style={{
                 height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)",
               }}
