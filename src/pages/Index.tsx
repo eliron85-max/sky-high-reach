@@ -45,16 +45,17 @@ const Index = () => {
     { id: "cta", label: "צור קשר" },
   ];
 
+  // ✅ ORDER כמו גריד "רפרנס"
   const featuredServices: FeaturedService[] = [
-    { title: "עבודות מיוחדות", image: specialProjectsImage, link: "/special-projects" },
-    { title: "הרחקת מעופפים", image: birdControlImage, link: "/bird-control" },
-    { title: "איטום בגובה", image: waterproofingImage, link: "/waterproofing" },
     { title: "שיקום מעטפת", image: facadeRestorationImage, link: "/facade-restoration" },
+    { title: "איטום בגובה", image: waterproofingImage, link: "/waterproofing" },
+    { title: "הרחקת מעופפים", image: birdControlImage, link: "/bird-control" },
+    { title: "עבודות מיוחדות", image: specialProjectsImage, link: "/special-projects" },
 
-    { title: "פתרונות בגובה", image: heightSolutionsImage, link: "/height-solutions" },
-    { title: "צנרת ומרזבים", image: pipingGuttersImage, link: "/piping-gutters" },
-    { title: "ביטול צווי הריסה", image: demolitionOrdersImage, link: "/demolition-orders" },
     { title: "חיפוי אבן", image: stoneVeneerImage, link: "/stone-veneer" },
+    { title: "ביטול צווי הריסה", image: demolitionOrdersImage, link: "/demolition-orders" },
+    { title: "צנרת ומרזבים", image: pipingGuttersImage, link: "/piping-gutters" },
+    { title: "פתרונות בגובה", image: heightSolutionsImage, link: "/height-solutions" },
   ];
 
   return (
@@ -85,13 +86,13 @@ const Index = () => {
                   </h2>
                 </div>
 
-                {/* ✅ EXACT GRID FRAME (GOLD LINES) */}
-                <div className="bg-[#c9a84c] p-[2px]">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] bg-black">
+                {/* ✅ EXACT GRID כמו הרפרנס */}
+                <div className="bg-[#c9a84c] p-[1px]">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
                     {featuredServices.map((s) => (
                       <Link key={s.title} to={s.link} className="group relative block overflow-hidden bg-black">
-                        {/* CARD SIZE */}
-                        <div className="relative w-full h-[260px] sm:h-[300px] md:h-[320px] lg:h-[340px] xl:h-[360px] overflow-hidden">
+                        <div className="relative w-full h-[280px] md:h-[320px] xl:h-[360px] overflow-hidden">
+                          {/* IMAGE */}
                           <img
                             src={s.image}
                             alt={s.title}
@@ -99,26 +100,28 @@ const Index = () => {
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           />
 
-                          {/* Strong cinematic overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/10" />
+                          {/* ✅ DARK OVERLAY (יותר קרוב לרפרנס) */}
+                          <div className="absolute inset-0 bg-black/55" />
 
-                          {/* ✅ GOLD TEXT INSIDE IMAGE - SAME STYLE */}
-                          <div className="absolute inset-x-0 bottom-4 flex justify-center px-3">
+                          {/* ✅ INNER GOLD BORDER לכל כרטיס */}
+                          <div className="absolute inset-0 border border-[#c9a84c]/70 pointer-events-none" />
+
+                          {/* ✅ GOLD TEXT INSIDE IMAGE */}
+                          <div className="absolute inset-x-0 bottom-5 flex justify-center px-3">
                             <div
                               className="
                                 text-center
                                 font-extrabold
-                                text-[20px]
-                                sm:text-[22px]
-                                md:text-[24px]
-                                lg:text-[26px]
+                                tracking-wide
+                                text-[22px]
+                                md:text-[26px]
                                 leading-none
                                 text-transparent
                                 bg-clip-text
                                 bg-gradient-to-b
-                                from-[#f6e7b2]
+                                from-[#fff2c6]
                                 to-[#c9a84c]
-                                drop-shadow-[0_6px_14px_rgba(0,0,0,0.85)]
+                                drop-shadow-[0_6px_12px_rgba(0,0,0,0.9)]
                               "
                             >
                               {s.title}
