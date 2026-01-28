@@ -69,6 +69,13 @@ export default function Index() {
           }}
           className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 py-8 md:py-10`}
         >
+          {/* SERVICES TITLE */}
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
+              השירותים שלנו
+            </h2>
+          </div>
+
           {/* OUTER BORDER */}
           <div className="bg-[#dfc798] p-[1px]">
             {/* GRID */}
