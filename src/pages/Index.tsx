@@ -69,27 +69,26 @@ export default function Index() {
           }}
           className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 py-8 md:py-10`}
         >
-          {/* OUTER GRID BORDER: 1px #dfc798 */}
+          {/* OUTER BORDER */}
           <div className="bg-[#dfc798] p-[1px]">
-            {/* GRID LINES: 1px via gap */}
+            {/* GRID */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
               {services.map((s) => (
-                <div key={s.title} className="relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]">
+                <div key={s.title} className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]">
                   {/* IMAGE */}
                   <img
                     src={s.image}
                     alt={s.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.22]"
                   />
 
-                  {/* DARK OVERLAY (קרוב לרפרנס) */}
+                  {/* OVERLAY */}
                   <div className="absolute inset-0 bg-black/65" />
 
-                  {/* INNER BORDER: 1px #a79471 */}
+                  {/* INNER BORDER */}
                   <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
 
-                  {/* TEXT (Sans-Serif, 36/44, 400, rgb(255,228,174)) */}
+                  {/* TEXT */}
                   <div className="absolute bottom-6 w-full text-center px-3">
                     <span
                       style={{
@@ -98,7 +97,7 @@ export default function Index() {
                         fontWeight: 400,
                         fontSize: "36px",
                         lineHeight: "44px",
-                        color: "rgb(255, 228, 174)",
+                        color: "rgb(255,228,174)",
                         textShadow: "0 10px 18px rgba(0,0,0,0.85)",
                       }}
                     >
