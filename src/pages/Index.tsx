@@ -46,8 +46,8 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO */}
-        <HeroStickyCollapse 
-          collapseDistance={650} 
+        <HeroStickyCollapse
+          collapseDistance={650}
           mobileCollapseDistance={450}
           after={
             <>
@@ -59,8 +59,11 @@ export default function Index() {
                 className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 pt-3 pb-6 md:pt-4 md:pb-8`}
               >
                 {/* SERVICES TITLE */}
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
+                <div className="flex flex-col items-center mb-10">
+                  {/* Gold separator line */}
+                  <div className="w-[120px] h-[2px] bg-[#dfc798] shadow-[0_0_12px_rgba(223,199,152,0.7)] mb-6" />
+
+                  <h2 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2a] text-center">
                     השירותים שלנו
                   </h2>
                 </div>
