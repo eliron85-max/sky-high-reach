@@ -60,13 +60,16 @@ export default function Index() {
               >
                 {/* SERVICES TITLE */}
                 <div className="relative mb-12">
-                  {/* FULL WIDTH BLACK STRIP */}
-                  <div className="absolute inset-0 bg-black" />
+                  {/* TOP BLACK STRIP */}
+                  <div className="w-full h-[70px] bg-black" />
 
                   {/* TITLE */}
-                  <div className="relative flex justify-center items-center h-[90px]">
+                  <div className="w-full h-[90px] bg-black flex items-center justify-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
                   </div>
+
+                  {/* BOTTOM BLACK STRIP */}
+                  <div className="w-full h-[70px] bg-black" />
                 </div>
 
                 {/* OUTER BORDER */}
