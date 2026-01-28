@@ -19,7 +19,7 @@ const items = [
 
 export default function TrustStrip() {
   return (
-    <section dir="rtl" className="relative w-full overflow-hidden mt-12">
+    <section dir="rtl" className="relative w-full overflow-hidden mt-16">
       {/* Background image */}
       <img src={bgImage} className="absolute inset-0 w-full h-full object-cover scale-110 blur-sm" />
 
