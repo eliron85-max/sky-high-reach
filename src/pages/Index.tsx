@@ -79,32 +79,51 @@ const Index = () => {
               {/* FULL BLEED */}
               <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
                 <div className="text-center mb-6 px-4">
-                  <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
+                  <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold text-foreground dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8c777] dark:via-[#d8b15a] dark:to-[#8a6b2e]">
                     השירותים שלנו
                   </h2>
                 </div>
 
-                {/* ✅ גריד לבן (קווים לבנים בין הכרטיסים) */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] bg-white p-[3px]">
-                  {featuredServices.map((s) => (
-                    <Link key={s.title} to={s.link} className="group relative block overflow-hidden bg-black">
-                      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[260px] lg:h-[300px] xl:h-[340px] overflow-hidden">
+                {/* Services Grid - 4 columns with minimal gap */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px]">
+                  {featuredServices.slice(0, 4).map((s) => (
+                    <Link key={s.title} to={s.link} className="group relative block overflow-hidden">
+                      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[280px] lg:h-[320px] xl:h-[360px] overflow-hidden">
                         <img
                           src={s.image}
                           alt={s.title}
                           loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-125"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
 
-                        {/* overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
+                        {/* Gradient overlay - subtle */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                        {/* ✅ טקסט למטה + ממורכז באמצע */}
+                        {/* Service title - bottom center */}
                         <div className="absolute inset-x-0 bottom-0 p-4 flex justify-center">
-                          <div className="text-white font-extrabold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_8px_18px_rgba(0,0,0,0.65)] text-center">
+                          <span className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                             {s.title}
-                          </div>
+                          </span>
                         </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Second row - action photos without labels */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] mt-[2px]">
+                  {featuredServices.slice(4, 8).map((s, index) => (
+                    <Link key={s.title + index} to={s.link} className="group relative block overflow-hidden">
+                      <div className="relative w-full h-[180px] sm:h-[200px] md:h-[220px] lg:h-[260px] overflow-hidden">
+                        <img
+                          src={s.image}
+                          alt={s.title}
+                          loading="lazy"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        
+                        {/* Subtle hover overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                       </div>
                     </Link>
                   ))}
