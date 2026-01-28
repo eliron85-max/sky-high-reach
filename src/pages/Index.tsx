@@ -1,5 +1,5 @@
+import TrustStrip from "@/components/TrustStrip";
 // src/pages/Index.tsx
-
 import React, { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -109,7 +109,7 @@ export default function Index() {
             </div>
           </div>
         </section>
-
+        <TrustStrip />
         <HomeTestimonials />
 
         {/* CTA */}
