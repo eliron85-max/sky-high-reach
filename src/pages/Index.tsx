@@ -23,10 +23,11 @@ import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
 
 const services = [
-  { title: "שיקום מעטפת", image: facadeRestorationImage },
-  { title: "איטום בגובה", image: waterproofingImage },
-  { title: "הרחקת מעופפים", image: birdControlImage },
   { title: "עבודות מיוחדות", image: specialProjectsImage },
+  { title: "הרחקת מעופפים", image: birdControlImage },
+  { title: "איטום בגובה", image: waterproofingImage },
+  { title: "שיקום מעטפת", image: facadeRestorationImage },
+
   { title: "חיפוי אבן", image: stoneVeneerImage },
   { title: "ביטול צווי הריסה", image: demolitionOrdersImage },
   { title: "צנרת ומרזבים", image: pipingGuttersImage },
@@ -46,11 +47,18 @@ export default function Index() {
       <main className="pt-[var(--header-height)]">
         {/* HERO */}
         <HeroStickyCollapse collapseDistance={650} mobileCollapseDistance={450}>
-          <section className="relative w-full h-[75vh] overflow-hidden">
-            <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
-              <source src="/hero.webm" type="video/webm" />
-            </video>
-            <div className="absolute inset-0 bg-black/45" />
+          <section className="relative w-full overflow-hidden">
+            <div
+              className="relative w-full"
+              style={{
+                height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)",
+              }}
+            >
+              <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
+                <source src="/hero.webm" type="video/webm" />
+              </video>
+              <div className="absolute inset-0 bg-black/45" />
+            </div>
           </section>
         </HeroStickyCollapse>
 
@@ -59,36 +67,39 @@ export default function Index() {
           ref={(el) => {
             (ref as React.MutableRefObject<HTMLElement | null>).current = el;
           }}
-          className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 py-12`}
+          className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 py-8 md:py-10`}
         >
-          {/* OUTER GRID BORDER */}
+          {/* OUTER GRID BORDER: 1px #dfc798 */}
           <div className="bg-[#dfc798] p-[1px]">
-            {/* GRID */}
+            {/* GRID LINES: 1px via gap */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
               {services.map((s) => (
-                <div key={s.title} className="relative h-[280px] md:h-[330px] xl:h-[360px] overflow-hidden">
+                <div key={s.title} className="relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]">
                   {/* IMAGE */}
                   <img
                     src={s.image}
+                    alt={s.title}
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
 
-                  {/* OVERLAY */}
-                  <div className="absolute inset-0 bg-black/55" />
+                  {/* DARK OVERLAY (קרוב לרפרנס) */}
+                  <div className="absolute inset-0 bg-black/65" />
 
-                  {/* INNER BORDER */}
+                  {/* INNER BORDER: 1px #a79471 */}
                   <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
 
-                  {/* TEXT */}
-                  <div className="absolute bottom-4 w-full text-center">
+                  {/* TEXT (Sans-Serif, 36/44, 400, rgb(255,228,174)) */}
+                  <div className="absolute bottom-6 w-full text-center px-3">
                     <span
                       style={{
                         fontFamily: "Montserrat, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "45px",
-                        lineHeight: "54px",
-                        color: "rgb(255,228,174)",
-                        textShadow: "0 6px 12px rgba(0,0,0,0.9)",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        fontSize: "36px",
+                        lineHeight: "44px",
+                        color: "rgb(255, 228, 174)",
+                        textShadow: "0 10px 18px rgba(0,0,0,0.85)",
                       }}
                     >
                       {s.title}
@@ -103,7 +114,7 @@ export default function Index() {
         <HomeTestimonials />
 
         {/* CTA */}
-        <section className="py-20 text-center">
+        <section className="py-16 text-center">
           <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
             צור קשר
           </Button>
