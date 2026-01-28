@@ -15,7 +15,7 @@ import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher"
 import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Service Images
+// images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
 import waterproofingImage from "@/assets/waterproofing.webp";
 import birdControlImage from "@/assets/bird-control.webp";
@@ -25,193 +25,96 @@ import demolitionOrdersImage from "@/assets/demolition-orders.webp";
 import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
 
-type FeaturedService = { title: string; image: string; link: string };
+const services = [
+  { title: "שיקום מעטפת", image: facadeRestorationImage },
+  { title: "איטום בגובה", image: waterproofingImage },
+  { title: "הרחקת מעופפים", image: birdControlImage },
+  { title: "עבודות מיוחדות", image: specialProjectsImage },
+  { title: "חיפוי אבן", image: stoneVeneerImage },
+  { title: "ביטול צווי הריסה", image: demolitionOrdersImage },
+  { title: "צנרת ומרזבים", image: pipingGuttersImage },
+  { title: "פתרונות בגובה", image: heightSolutionsImage },
+];
 
-const Index = () => {
+export default function Index() {
   const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
 
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const ctaLine1Ref = useRef<HTMLDivElement>(null);
-  const ctaContentRef = useRef<HTMLDivElement>(null);
-
-  const { style: ctaLine1Style } = useParallax(ctaLine1Ref, { speed: 0.3 });
-  const { style: ctaContentStyle } = useParallax(ctaContentRef, { speed: 0.15 });
-
-  const sections = [
-    { id: "hero", label: "ראשי" },
-    { id: "services", label: "שירותים" },
-    { id: "testimonials", label: "המלצות" },
-    { id: "cta", label: "צור קשר" },
-  ];
-
-  // ✅ ORDER כמו גריד "רפרנס"
-  const featuredServices: FeaturedService[] = [
-    { title: "שיקום מעטפת", image: facadeRestorationImage, link: "/facade-restoration" },
-    { title: "איטום בגובה", image: waterproofingImage, link: "/waterproofing" },
-    { title: "הרחקת מעופפים", image: birdControlImage, link: "/bird-control" },
-    { title: "עבודות מיוחדות", image: specialProjectsImage, link: "/special-projects" },
-
-    { title: "חיפוי אבן", image: stoneVeneerImage, link: "/stone-veneer" },
-    { title: "ביטול צווי הריסה", image: demolitionOrdersImage, link: "/demolition-orders" },
-    { title: "צנרת ומרזבים", image: pipingGuttersImage, link: "/piping-gutters" },
-    { title: "פתרונות בגובה", image: heightSolutionsImage, link: "/height-solutions" },
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       <Header />
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
-      <SectionNavigator sections={sections} />
 
       <main className="pt-[var(--header-height)]">
-        <HeroStickyCollapse
-          collapseDistance={650}
-          mobileCollapseDistance={450}
-          after={
-            /* SERVICES */
-            <section
-              id="services"
-              ref={(el) => {
-                (ref as React.MutableRefObject<HTMLElement | null>).current = el;
-              }}
-              className={`scroll-reveal ${isVisible ? "visible" : ""} bg-background overflow-x-hidden py-10 lg:py-16`}
-            >
-              {/* FULL BLEED */}
-              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-                <div className="text-center mb-6 px-4">
-                  <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8c777] via-[#d8b15a] to-[#8a6b2e]">
-                    השירותים שלנו
-                  </h2>
-                </div>
-
-                {/* ✅ EXACT GRID כמו הרפרנס */}
-                <div className="bg-[#c9a84c] p-[1px]">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
-                    {featuredServices.map((s) => (
-                      <Link key={s.title} to={s.link} className="group relative block overflow-hidden bg-black">
-                        <div className="relative w-full h-[280px] md:h-[320px] xl:h-[360px] overflow-hidden">
-                          {/* IMAGE */}
-                          <img
-                            src={s.image}
-                            alt={s.title}
-                            loading="lazy"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-
-                          {/* ✅ DARK OVERLAY (יותר קרוב לרפרנס) */}
-                          <div className="absolute inset-0 bg-black/55" />
-
-                          {/* ✅ INNER GOLD BORDER לכל כרטיס */}
-                          <div className="absolute inset-0 border border-[#c9a84c]/70 pointer-events-none" />
-
-                          {/* ✅ GOLD TEXT INSIDE IMAGE */}
-                          <div className="absolute inset-x-0 bottom-5 flex justify-center px-3">
-                            <div
-                              className="
-                                text-center
-                                font-extrabold
-                                tracking-wide
-                                text-[22px]
-                                md:text-[26px]
-                                leading-none
-                                text-transparent
-                                bg-clip-text
-                                bg-gradient-to-b
-                                from-[#fff2c6]
-                                to-[#c9a84c]
-                                drop-shadow-[0_6px_12px_rgba(0,0,0,0.9)]
-                              "
-                            >
-                              {s.title}
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </section>
-          }
-        >
-          {/* HERO */}
-          <section id="hero" className="relative w-full overflow-hidden">
-            <div
-              className="relative w-full"
-              style={{
-                height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)",
-              }}
-            >
-              <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
-                <source src="/hero.webm" type="video/webm" />
-              </video>
-
-              <div className="absolute inset-0 bg-black/40" />
-
-              <div className="relative z-10 h-full flex items-center">
-                <div className={`${isMobile ? "px-4" : "container mx-auto px-4"}`}>
-                  <h1 className="text-3xl lg:text-6xl font-bold text-white">מומחים בעבודות גובה ברמת גימור פרימיום</h1>
-                </div>
-              </div>
-            </div>
+        {/* HERO */}
+        <HeroStickyCollapse collapseDistance={650} mobileCollapseDistance={450}>
+          <section id="hero" className="relative w-full h-[75vh] overflow-hidden">
+            <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
+              <source src="/hero.webm" type="video/webm" />
+            </video>
+            <div className="absolute inset-0 bg-black/45" />
           </section>
         </HeroStickyCollapse>
 
-        {/* Testimonials */}
-        <HomeTestimonials />
-
-        {/* CTA Section */}
+        {/* SERVICES */}
         <section
-          id="cta"
-          ref={ctaRef}
-          className="py-16 lg:py-24 bg-gradient-to-b from-[#1a1a1a] via-[#0f0f0f] to-[#0a0a0a] relative overflow-hidden z-30"
+          id="services"
+          ref={(el) => {
+            (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+          }}
+          className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700 py-12`}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
-          <div
-            ref={ctaLine1Ref}
-            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/30 to-transparent"
-            style={ctaLine1Style}
-          />
+          {/* OUTER GRID BORDER */}
+          <div className="bg-[#dfc798] p-[1px]">
+            {/* GRID */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
+              {services.map((s) => (
+                <div key={s.title} className="relative h-[280px] md:h-[330px] xl:h-[360px] overflow-hidden">
+                  {/* IMAGE */}
+                  <img
+                    src={s.image}
+                    className="absolute inset-0 w-full h-full object-cover scale-100 hover:scale-110 transition-transform duration-700"
+                  />
 
-          <div ref={ctaContentRef} className="container mx-auto px-4 text-center relative z-10" style={ctaContentStyle}>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
-              מוכנים להתחיל את הפרויקט הבא?
-            </h2>
-            <p className="text-lg text-[#e8d5a3]/70 max-w-2xl mx-auto mb-8">
-              צרו קשר לקבלת ייעוץ חינם והצעת מחיר מותאמת
-            </p>
+                  {/* OVERLAY */}
+                  <div className="absolute inset-0 bg-black/55" />
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300"
-              >
-                <Link to="/contact" className="text-inherit no-underline">
-                  בקשת הצעת מחיר
-                </Link>
-              </Button>
+                  {/* INNER CARD BORDER */}
+                  <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
 
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
-              >
-                <Link to="/projects" className="text-inherit no-underline">
-                  צפו בפרויקטים שלנו
-                </Link>
-              </Button>
+                  {/* TEXT */}
+                  <div className="absolute bottom-4 w-full text-center">
+                    <span
+                      style={{
+                        fontFamily: "Matador, sans-serif",
+                        fontWeight: 500,
+                        fontSize: "45px",
+                        lineHeight: "54px",
+                        color: "rgb(255,228,174)",
+                        textShadow: "0 6px 12px rgba(0,0,0,0.9)",
+                      }}
+                    >
+                      {s.title}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+        </section>
+
+        <HomeTestimonials />
+
+        {/* CTA */}
+        <section className="py-20 text-center">
+          <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
+            צור קשר
+          </Button>
         </section>
       </main>
 
       <Footer />
     </div>
   );
-};
-
-export default Index;
+}
