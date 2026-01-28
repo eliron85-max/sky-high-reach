@@ -4,18 +4,15 @@ import React, { useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
-import SectionNavigator from "@/components/SectionNavigator";
 import HomeTestimonials from "@/components/HomeTestimonials";
 
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
-import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// images
+// Images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
 import waterproofingImage from "@/assets/waterproofing.webp";
 import birdControlImage from "@/assets/bird-control.webp";
@@ -48,12 +45,8 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO */}
-        <HeroStickyCollapse 
-          collapseDistance={650} 
-          mobileCollapseDistance={450}
-          after={<></>}
-        >
-          <section id="hero" className="relative w-full h-[75vh] overflow-hidden">
+        <HeroStickyCollapse collapseDistance={650} mobileCollapseDistance={450}>
+          <section className="relative w-full h-[75vh] overflow-hidden">
             <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
               <source src="/hero.webm" type="video/webm" />
             </video>
@@ -63,7 +56,6 @@ export default function Index() {
 
         {/* SERVICES */}
         <section
-          id="services"
           ref={(el) => {
             (ref as React.MutableRefObject<HTMLElement | null>).current = el;
           }}
@@ -78,20 +70,20 @@ export default function Index() {
                   {/* IMAGE */}
                   <img
                     src={s.image}
-                    className="absolute inset-0 w-full h-full object-cover scale-100 hover:scale-110 transition-transform duration-700"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
 
                   {/* OVERLAY */}
                   <div className="absolute inset-0 bg-black/55" />
 
-                  {/* INNER CARD BORDER */}
+                  {/* INNER BORDER */}
                   <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
 
                   {/* TEXT */}
                   <div className="absolute bottom-4 w-full text-center">
                     <span
                       style={{
-                        fontFamily: "Matador, sans-serif",
+                        fontFamily: "Montserrat, sans-serif",
                         fontWeight: 500,
                         fontSize: "45px",
                         lineHeight: "54px",
