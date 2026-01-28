@@ -48,7 +48,11 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO */}
-        <HeroStickyCollapse collapseDistance={650} mobileCollapseDistance={450}>
+        <HeroStickyCollapse 
+          collapseDistance={650} 
+          mobileCollapseDistance={450}
+          after={<></>}
+        >
           <section id="hero" className="relative w-full h-[75vh] overflow-hidden">
             <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
               <source src="/hero.webm" type="video/webm" />
