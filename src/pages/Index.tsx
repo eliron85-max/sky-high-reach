@@ -55,39 +55,41 @@ export default function Index() {
                 ref={(el) => {
                   (ref as React.MutableRefObject<HTMLElement | null>).current = el;
                 }}
-                className={`${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}
+                className={`relative z-20 bg-black ${
+                  isVisible ? "opacity-100" : "opacity-0"
+                } transition-opacity duration-700`}
               >
                 {/* FULL BLACK WRAPPER (prevents hero bleed) */}
-                <div className="w-full bg-black">
-                  {/* TOP STRIP */}
+                <div className="relative w-full bg-black overflow-hidden">
+                  {/* TOP STRIP (full width) */}
                   <div className="w-full h-[70px] bg-black" />
 
-                  {/* TITLE BAR */}
+                  {/* TITLE BAR (opaque, no bleed) */}
                   <div className="w-full h-[90px] bg-black flex items-center justify-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
                   </div>
 
-                  {/* BOTTOM STRIP */}
+                  {/* BOTTOM STRIP (full width) */}
                   <div className="w-full h-[70px] bg-black" />
 
                   {/* OUTER BORDER */}
                   <div className="bg-[#dfc798] p-[1px]">
-                    {/* GRID */}
+                    {/* GRID (inner grid lines) */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
                       {services.map((s) => (
                         <div
                           key={s.title}
                           className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]"
                         >
-                          {/* IMAGE */}
+                          {/* IMAGE (zoom on hover) */}
                           <img
                             src={s.image}
                             alt={s.title}
-                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.22]"
+                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
                           />
 
-                          {/* OVERLAY */}
-                          <div className="absolute inset-0 bg-black/65" />
+                          {/* OVERLAY (fade like you wanted) */}
+                          <div className="absolute inset-0 bg-black/65 transition-opacity duration-500 ease-out group-hover:opacity-40" />
 
                           {/* INNER BORDER */}
                           <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
@@ -98,10 +100,10 @@ export default function Index() {
                               style={{
                                 fontFamily: "Montserrat, sans-serif",
                                 fontStyle: "normal",
-                                fontWeight: 400,
-                                fontSize: "36px",
-                                lineHeight: "44px",
-                                color: "rgb(255,228,174)",
+                                fontWeight: 500,
+                                fontSize: "45px",
+                                lineHeight: "54px",
+                                color: "rgb(255, 228, 174)",
                                 textShadow: "0 10px 18px rgba(0,0,0,0.85)",
                               }}
                             >
@@ -113,7 +115,7 @@ export default function Index() {
                     </div>
                   </div>
 
-                  {/* SPACER BEFORE TRUST STRIP */}
+                  {/* SPACE BEFORE TRUST STRIP (not too tight) */}
                   <div className="h-10 bg-black" />
                 </div>
               </section>
