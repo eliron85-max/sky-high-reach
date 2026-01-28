@@ -64,9 +64,7 @@ export default function Index() {
 
                   {/* TITLE BAR */}
                   <div className="w-full h-[90px] bg-black flex items-center justify-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">
-                      השירותים שלנו
-                    </h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
                   </div>
 
                   {/* BOTTOM STRIP */}
@@ -92,3 +90,64 @@ export default function Index() {
                           <div className="absolute inset-0 bg-black/65" />
 
                           {/* INNER BORDER */}
+                          <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
+
+                          {/* TEXT */}
+                          <div className="absolute bottom-6 w-full text-center px-3">
+                            <span
+                              style={{
+                                fontFamily: "Montserrat, sans-serif",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                fontSize: "36px",
+                                lineHeight: "44px",
+                                color: "rgb(255,228,174)",
+                                textShadow: "0 10px 18px rgba(0,0,0,0.85)",
+                              }}
+                            >
+                              {s.title}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* SPACER BEFORE TRUST STRIP */}
+                  <div className="h-10 bg-black" />
+                </div>
+              </section>
+
+              <TrustStrip />
+              <HomeTestimonials />
+
+              {/* CTA */}
+              <section className="py-16 text-center">
+                <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
+                  צור קשר
+                </Button>
+              </section>
+            </>
+          }
+        >
+          {/* HERO */}
+          <section className="relative w-full overflow-hidden">
+            <div
+              className="relative w-full"
+              style={{
+                height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)",
+              }}
+            >
+              <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
+                <source src="/hero.webm" type="video/webm" />
+              </video>
+              <div className="absolute inset-0 bg-black/45" />
+            </div>
+          </section>
+        </HeroStickyCollapse>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
