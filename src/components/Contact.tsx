@@ -115,7 +115,7 @@ export default function Contact() {
   };
 
   return (
-    <section dir={dir} className="bg-[#f3f3f3] text-black py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
+    <section id="contact" dir={dir} className="bg-[#f3f3f3] text-black py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="relative bg-white border border-black/30 px-5 sm:px-10 py-10 sm:py-14">
           <div className="pointer-events-none absolute -top-[1px] left-10 h-[1px] w-44 bg-black/30" />
