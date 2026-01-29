@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
+import Contact from "@/components/Contact";
 
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -37,6 +38,11 @@ const services = [
 export default function Index() {
   const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
+
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -124,11 +130,17 @@ export default function Index() {
               <HomeTestimonials />
 
               {/* CTA */}
-              <section className="py-16 text-center">
-                <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
+              <section className="py-16 text-center bg-black">
+                <Button
+                  onClick={scrollToContact}
+                  className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg"
+                >
                   צור קשר
                 </Button>
               </section>
+
+              {/* CONTACT (the actual box) */}
+              <Contact />
             </>
           }
         >
@@ -148,9 +160,7 @@ export default function Index() {
           </section>
         </HeroStickyCollapse>
       </main>
-      <section id="contact" className="bg-white">
-        {/** כאן תיבת צור קשר תחזור */}
-      </section>
+
       <Footer />
     </div>
   );
