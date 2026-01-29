@@ -387,7 +387,7 @@ const Contact = () => {
 
               {/* CALENDAR BOARD */}
               <div className={card}>
-                <h4 className="text-center font-bold mb-4 text-black dark:text-white">לוח זמינות</h4>
+                <h4 className="text-center font-bold mb-4 text-black dark:text-white">לוח זמינות לעבודה</h4>
                 <div className="flex justify-center">
                   <div dir={dir}>
                     <Calendar
