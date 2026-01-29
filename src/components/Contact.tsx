@@ -1,325 +1,260 @@
-import { useState } from "react";
-import { format } from "date-fns";
-import { he, enUS, fr } from "date-fns/locale";
+// src/components/Contact.tsx  (או src/pages/Contact.tsx)
+import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useToast } from "@/hooks/use-toast";
-import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useTranslation } from "@/lib/i18n";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
-import { contactSchema, type ContactFormData } from "@/lib/contactSchema";
-import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/lib/i18n";
+
+type MiniForm = {
+  fullName: string;
+  phone: string;
+  whatsapp: string;
+  message: string;
+  consent: boolean;
+};
+
 const Contact = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollReveal();
-  const {
-    toast
-  } = useToast();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const {
-    t,
-    dir,
-    language
-  } = useTranslation();
+  const { toast } = useToast();
+  const { t, dir } = useTranslation();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
-
-  // Get date-fns locale based on current language
-  const getDateLocale = () => {
-    switch (language) {
-      case 'he':
-        return he;
-      case 'fr':
-        return fr;
-      default:
-        return enUS;
-    }
-  };
-
-  // Form state
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [form, setForm] = useState<MiniForm>({
     fullName: "",
-    company: "",
     phone: "",
-    email: "",
-    projectType: "",
+    whatsapp: "",
     message: "",
-    preferredDate: undefined
+    consent: true,
   });
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      id,
-      value
-    } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [id]: value
-    }));
-  };
-  const handleProjectTypeChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      projectType: value
-    }));
-  };
-  const handleDateChange = (date: Date | undefined) => {
-    setFormData(prev => ({
-      ...prev,
-      preferredDate: date
-    }));
-  };
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setValidationErrors({});
 
-    // Validate with Zod
-    const result = contactSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: Record<string, string> = {};
-      result.error.errors.forEach(err => {
-        if (err.path[0]) {
-          fieldErrors[err.path[0] as string] = err.message;
-        }
-      });
-      setValidationErrors(fieldErrors);
-      return;
-    }
+  const errors = useMemo(() => {
+    const e: Record<string, string> = {};
+    if (!form.fullName.trim()) e.fullName = "חובה למלא שם";
+    if (!form.phone.trim()) e.phone = "חובה למלא טלפון";
+    if (!form.whatsapp.trim()) e.whatsapp = "חובה למלא וואטסאפ";
+    if (!form.message.trim()) e.message = "חובה למלא הודעה";
+    if (!form.consent) e.consent = "נדרש אישור";
+    return e;
+  }, [form]);
+
+  const isValid = Object.keys(errors).length === 0;
+
+  const setField = (key: keyof MiniForm, value: any) => {
+    setForm((p) => ({ ...p, [key]: value }));
+  };
+
+  const markTouched = (key: keyof MiniForm) => {
+    setTouched((p) => ({ ...p, [key]: true }));
+  };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setTouched({
+      fullName: true,
+      phone: true,
+      whatsapp: true,
+      message: true,
+      consent: true,
+    });
+
+    if (!isValid) return;
+
     setIsSubmitting(true);
     try {
-      const {
-        error
-      } = await supabaseUntyped.from("inquiries").insert({
-        full_name: result.data.fullName,
-        company: result.data.company || null,
-        phone: result.data.phone,
-        email: result.data.email,
-        project_type: result.data.projectType,
-        message: result.data.message,
-        preferred_date: result.data.preferredDate ? format(result.data.preferredDate, 'yyyy-MM-dd') : null
+      // DB: inquiries
+      const { error } = await supabaseUntyped.from("inquiries").insert({
+        full_name: form.fullName.trim(),
+        phone: form.phone.trim(),
+        email: null, // בתמונה אין אימייל
+        message: form.message.trim(),
+        company: null,
+        project_type: "other",
+        preferred_date: null,
+        // אם יש לך עמודה whatsapp בטבלה — תגיד לי ואוסיף אותה כאן
       });
-      if (error) {
-        throw error;
-      }
 
-      // Send email notifications
+      if (error) throw error;
+
+      // Email notification (Edge Function)
       try {
         await supabase.functions.invoke("send-inquiry-notification", {
           body: {
-            fullName: formData.fullName.trim(),
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            company: formData.company?.trim() || undefined,
-            projectType: formData.projectType,
-            message: formData.message.trim(),
-            preferredDate: formData.preferredDate ? format(formData.preferredDate, 'dd/MM/yyyy') : undefined
-          }
+            fullName: form.fullName.trim(),
+            phone: form.phone.trim(),
+            email: "", // אין אימייל בטופס הזה
+            company: undefined,
+            projectType: "other",
+            message: form.message.trim(),
+            preferredDate: undefined,
+            whatsapp: form.whatsapp.trim(), // אם הפונקציה לא מצפה לזה — זה לא יפיל בדרך כלל
+          },
         });
       } catch (emailError) {
-        console.error("Error sending email notification:", emailError);
-        // Don't fail the form submission if email fails
+        console.error("Email notify failed:", emailError);
       }
+
       toast({
-        title: t("contact.form.successTitle"),
-        description: t("contact.form.successMessage")
+        title: t?.("contact.form.successTitle") ?? "נשלח ✅",
+        description: t?.("contact.form.successMessage") ?? "קיבלנו את הפנייה ונחזור בהקדם.",
       });
 
-      // Reset form
-      setFormData({
+      setForm({
         fullName: "",
-        company: "",
         phone: "",
-        email: "",
-        projectType: "",
+        whatsapp: "",
         message: "",
-        preferredDate: undefined
+        consent: true,
       });
-      setSelectedFile(null);
-    } catch (error) {
-      console.error("Error submitting inquiry:", error);
+      setTouched({});
+    } catch (err) {
+      console.error("Error submitting inquiry:", err);
       toast({
         title: "שגיאה",
         description: "אירעה שגיאה בשליחת הפנייה. נסה שנית.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-  return <section ref={ref} id="contact" dir={dir} className={`py-16 lg:py-24 bg-secondary scroll-reveal ${isVisible ? "visible" : ""}`}>
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{t("contact.title")}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">{t("contact.subtitle")}</p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-card border border-card-border rounded-card p-8 space-y-6">
-              {/* Row 1: Name and Company */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="fullName">{t("contact.form.fullName")}</Label>
-                  <Input id="fullName" placeholder={t("contact.form.fullNamePlaceholder")} required dir={dir} value={formData.fullName} onChange={handleInputChange} disabled={isSubmitting} className={validationErrors.fullName ? "border-destructive" : ""} />
-                  {validationErrors.fullName && <p className="text-sm text-destructive">{validationErrors.fullName}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="company">{t("contact.form.company")}</Label>
-                  <Input id="company" placeholder={t("contact.form.companyPlaceholder")} dir={dir} value={formData.company} onChange={handleInputChange} disabled={isSubmitting} />
-                </div>
+  return (
+    <section dir={dir} className="bg-[#f3f3f3] text-black py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="relative bg-white border border-black/30 px-5 sm:px-10 py-10 sm:py-14">
+          {/* פינות כמו בתמונה */}
+          <div className="pointer-events-none absolute -top-[1px] left-10 h-[1px] w-44 bg-black/30" />
+          <div className="pointer-events-none absolute -top-[1px] right-10 h-[1px] w-44 bg-black/30" />
+          <div className="pointer-events-none absolute top-10 -left-[1px] h-40 w-[1px] bg-black/30" />
+          <div className="pointer-events-none absolute top-10 -right-[1px] h-40 w-[1px] bg-black/30" />
+
+          <h1 className="text-center font-extrabold tracking-tight leading-[0.95] text-[44px] sm:text-[76px] lg:text-[96px]">
+            ע.אחרון בונים עתיד <span className="inline-block">למשפחה שלכם</span>
+          </h1>
+
+          <p className="mt-4 text-center text-base sm:text-lg text-black/70">
+            מלאו את הפרטים כדי ליצור איתנו קשר ונחזור אליכם בהקדם
+          </p>
+
+          <form onSubmit={onSubmit} className="mt-10 sm:mt-12">
+            {/* 3 שדות בשורה */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* שם (ימין) */}
+              <div>
+                <input
+                  className={[
+                    "w-full h-[58px] rounded-3xl bg-black/[0.03] px-5 text-base outline-none",
+                    "placeholder:text-black/45 ring-1 ring-black/10 focus:ring-black/25",
+                    touched.fullName && errors.fullName ? "ring-red-500/60 focus:ring-red-500/70" : "",
+                  ].join(" ")}
+                  placeholder="שם"
+                  value={form.fullName}
+                  onChange={(e) => setField("fullName", e.target.value)}
+                  onBlur={() => markTouched("fullName")}
+                  disabled={isSubmitting}
+                />
+                {touched.fullName && errors.fullName ? (
+                  <p className="mt-2 text-sm text-red-600">{errors.fullName}</p>
+                ) : null}
               </div>
 
-              {/* Row 2: Phone and Email */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">{t("contact.form.phone")}</Label>
-                  <Input id="phone" type="tel" placeholder={t("contact.form.phonePlaceholder")} required dir={dir} value={formData.phone} onChange={handleInputChange} disabled={isSubmitting} className={validationErrors.phone ? "border-destructive" : ""} />
-                  {validationErrors.phone && <p className="text-sm text-destructive">{validationErrors.phone}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">{t("contact.form.email")}</Label>
-                  <Input id="email" type="email" placeholder={t("contact.form.emailPlaceholder")} required dir="ltr" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} className={validationErrors.email ? "border-destructive" : ""} />
-                  {validationErrors.email && <p className="text-sm text-destructive">{validationErrors.email}</p>}
-                </div>
+              {/* טלפון (אמצע) */}
+              <div>
+                <input
+                  className={[
+                    "w-full h-[58px] rounded-3xl bg-black/[0.03] px-5 text-base outline-none",
+                    "placeholder:text-black/45 ring-1 ring-black/10 focus:ring-black/25",
+                    touched.phone && errors.phone ? "ring-red-500/60 focus:ring-red-500/70" : "",
+                  ].join(" ")}
+                  placeholder="טלפון"
+                  inputMode="tel"
+                  value={form.phone}
+                  onChange={(e) => setField("phone", e.target.value)}
+                  onBlur={() => markTouched("phone")}
+                  disabled={isSubmitting}
+                />
+                {touched.phone && errors.phone ? <p className="mt-2 text-sm text-red-600">{errors.phone}</p> : null}
               </div>
 
-              {/* Row 3: Project Type and Preferred Date */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="projectType">{t("contact.form.projectType")}</Label>
-                  <Select required value={formData.projectType} onValueChange={handleProjectTypeChange} disabled={isSubmitting}>
-                    <SelectTrigger id="projectType" dir={dir} className={validationErrors.projectType ? "border-destructive" : ""}>
-                      <SelectValue placeholder={t("contact.form.projectTypePlaceholder")} />
-                    </SelectTrigger>
-                    <SelectContent dir={dir}>
-                      <SelectItem value="restoration">{t("contact.form.projectTypes.restoration")}</SelectItem>
-                      <SelectItem value="stone">{t("contact.form.projectTypes.stone")}</SelectItem>
-                      <SelectItem value="sealing">{t("contact.form.projectTypes.sealing")}</SelectItem>
-                      <SelectItem value="birds">{t("contact.form.projectTypes.birds")}</SelectItem>
-                      <SelectItem value="special">{t("contact.form.projectTypes.special")}</SelectItem>
-                      <SelectItem value="other">{t("contact.form.projectTypes.other")}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {validationErrors.projectType && <p className="text-sm text-destructive">{validationErrors.projectType}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label>{t("contact.form.preferredDate")}</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" disabled={isSubmitting} className={cn("w-full justify-start text-right font-normal", !formData.preferredDate && "text-muted-foreground")}>
-                        <CalendarIcon className={cn("h-4 w-4", dir === "rtl" ? "ml-2" : "mr-2")} />
-                        {formData.preferredDate ? format(formData.preferredDate, "dd/MM/yyyy", {
-                        locale: getDateLocale()
-                      }) : <span>{t("contact.form.preferredDatePlaceholder")}</span>}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar mode="single" selected={formData.preferredDate} onSelect={handleDateChange} disabled={date => date < new Date()} initialFocus dir={dir} locale={getDateLocale()} />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              </div>
-
-              {/* Row 4: Message */}
-              <div className="space-y-2">
-                <Label htmlFor="message">{t("contact.form.message")}</Label>
-                <Textarea id="message" placeholder={t("contact.form.messagePlaceholder")} rows={6} required dir={dir} value={formData.message} onChange={handleInputChange} disabled={isSubmitting} className={validationErrors.message ? "border-destructive" : ""} />
-                {validationErrors.message && <p className="text-sm text-destructive">{validationErrors.message}</p>}
-              </div>
-
-              {/* Row 5: File Upload */}
-              <div className="space-y-2">
-                <Label htmlFor="file">{t("contact.form.fileUpload")}</Label>
-                <div className="flex items-center gap-4">
-                  <label htmlFor="file" className="flex items-center gap-2 px-4 py-2 bg-muted text-foreground rounded-button border border-card-border cursor-pointer hover:bg-muted/80 transition-colors">
-                    <Upload size={20} />
-                    <span className="text-sm">{t("contact.form.chooseFile")}</span>
-                  </label>
-                  <input id="file" type="file" className="hidden" onChange={handleFileChange} accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx" disabled={isSubmitting} />
-                  {selectedFile && <span className="text-sm text-muted-foreground">{selectedFile.name}</span>}
-                </div>
-                <p className="text-xs text-muted-foreground">{t("contact.form.supportedFormats")}</p>
-              </div>
-
-              {/* Submit Button */}
-              <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary-hover text-primary-foreground font-semibold" disabled={isSubmitting}>
-                {isSubmitting ? <Loader2 className={`${dir === "rtl" ? "ml-2" : "mr-2"} animate-spin`} size={20} /> : <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={20} />}
-                {isSubmitting ? "שולח..." : t("contact.form.submit")}
-              </Button>
-            </form>
-          </div>
-
-          {/* Contact Info Card */}
-          <div className="space-y-6">
-            <div className="bg-card border border-card-border rounded-card p-6">
-              <h3 className="text-xl font-semibold text-foreground mb-6">{t("contact.info.title")}</h3>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Phone className="text-primary flex-shrink-0 mt-1" size={20} />
-                  <div>
-                    <p className="font-medium text-foreground">{t("contact.info.phone")}</p>
-                    <a href="tel:055-6616326" className="text-muted-foreground hover:text-primary transition-colors">
-                      055-6616326
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="text-primary flex-shrink-0 mt-1" size={20} />
-                  <div>
-                    <p className="font-medium text-foreground">{t("contact.info.email")}</p>
-                    <a href="mailto:info@ropeaccess.co.il" className="text-muted-foreground hover:text-primary transition-colors">
-                      onboarding@resend.dev
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <MapPin className="text-primary flex-shrink-0 mt-1" size={20} />
-                  <div>
-                    <p className="font-medium text-foreground">{t("contact.info.address")}</p>
-                    <p className="text-muted-foreground whitespace-pre-line">{t("contact.info.addressValue")}</p>
-                  </div>
-                </div>
+              {/* וואטסאפ (שמאל) */}
+              <div>
+                <input
+                  className={[
+                    "w-full h-[58px] rounded-3xl bg-black/[0.03] px-5 text-base outline-none",
+                    "placeholder:text-black/45 ring-1 ring-black/10 focus:ring-black/25",
+                    touched.whatsapp && errors.whatsapp ? "ring-red-500/60 focus:ring-red-500/70" : "",
+                  ].join(" ")}
+                  placeholder="וואטסאפ"
+                  inputMode="tel"
+                  value={form.whatsapp}
+                  onChange={(e) => setField("whatsapp", e.target.value)}
+                  onBlur={() => markTouched("whatsapp")}
+                  disabled={isSubmitting}
+                />
+                {touched.whatsapp && errors.whatsapp ? (
+                  <p className="mt-2 text-sm text-red-600">{errors.whatsapp}</p>
+                ) : null}
               </div>
             </div>
 
-            <div className="bg-primary/10 border border-primary/20 rounded-card p-6">
-              <h4 className="font-semibold text-foreground mb-2">{t("contact.hours.title")}</h4>
-              <p className="text-sm text-foreground/80">
-                {t("contact.hours.weekdays")}
-                <br />
-                {t("contact.hours.friday")}
-                <br />
-                {t("contact.hours.saturday")}
-              </p>
-              <p className="text-xs text-muted-foreground mt-3">{t("contact.hours.urgent")}</p>
+            {/* הודעה גדולה + כותרת קטנה בפינה */}
+            <div className="mt-6 relative">
+              <span className="absolute right-6 top-4 text-black/45 font-semibold pointer-events-none">הודעה</span>
+
+              <textarea
+                className={[
+                  "w-full min-h-[210px] sm:min-h-[260px] resize-y rounded-3xl",
+                  "bg-black/[0.03] px-5 pt-12 pb-5 text-base outline-none",
+                  "placeholder:text-black/35 ring-1 ring-black/10 focus:ring-black/25",
+                  touched.message && errors.message ? "ring-red-500/60 focus:ring-red-500/70" : "",
+                ].join(" ")}
+                placeholder=""
+                value={form.message}
+                onChange={(e) => setField("message", e.target.value)}
+                onBlur={() => markTouched("message")}
+                disabled={isSubmitting}
+              />
+              {touched.message && errors.message ? <p className="mt-2 text-sm text-red-600">{errors.message}</p> : null}
             </div>
 
-            {/* Interactive Map */}
-            <div className="bg-card border border-card-border rounded-card overflow-hidden">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.5!2d34.8667!3d32.0667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4a0c7b8b8b8b%3A0x0!2z15TXoteo15HXlCA1LCDXkteg15kg16rXp9eV15Q!5e0!3m2!1siw!2sil!4v1700000000000" width="100%" height="200" style={{
-              border: 0
-            }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="מיקום המשרד - הערבה 5, גני תקווה" className="w-full" />
+            {/* צ'קבוקס + כפתור זהב */}
+            <div className="mt-6 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={[
+                  "w-full sm:w-[640px] rounded-full py-4 text-lg font-bold",
+                  "transition-transform active:scale-[0.99]",
+                  "text-white",
+                  "shadow-[0_18px_45px_-25px_rgba(0,0,0,0.35)]",
+                  "bg-gradient-to-r from-[#d6b061] via-[#e4c27a] to-[#cfa55a]",
+                  "hover:brightness-[1.02]",
+                  "disabled:opacity-60 disabled:cursor-not-allowed",
+                ].join(" ")}
+              >
+                {isSubmitting ? "שולח..." : "שליחה  »"}
+              </button>
+
+              <label className="flex items-center gap-3 select-none">
+                <input
+                  type="checkbox"
+                  checked={form.consent}
+                  onChange={(e) => setField("consent", e.target.checked)}
+                  onBlur={() => markTouched("consent")}
+                  className="h-5 w-5 accent-red-600"
+                  disabled={isSubmitting}
+                />
+                <span className="text-sm sm:text-base font-semibold text-black/80">מאשר קבלת מידע פרסומי שיווקי</span>
+              </label>
             </div>
-          </div>
+
+            {touched.consent && errors.consent ? <p className="mt-2 text-sm text-red-600">{errors.consent}</p> : null}
+          </form>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Contact;
