@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
+import Contact from "@/components/Contact";
 
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -37,6 +38,13 @@ const services = [
 export default function Index() {
   const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
+
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -111,11 +119,18 @@ export default function Index() {
               <TrustStrip />
               <HomeTestimonials />
 
+              {/* CTA */}
               <section className="py-16 text-center">
-                <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
+                <Button
+                  onClick={scrollToContact}
+                  className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg"
+                >
                   צור קשר
                 </Button>
               </section>
+
+              {/* CONTACT FORM */}
+              <Contact />
             </>
           }
         >
