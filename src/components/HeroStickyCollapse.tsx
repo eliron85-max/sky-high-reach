@@ -42,23 +42,20 @@ export default function HeroStickyCollapse({
   const translateY = -30 * p;
 
   return (
-    <div className="relative bg-black">
+    <div className="relative">
       {/* Spacer to allow scrolling */}
       <div style={{ height: `calc(100vh + ${distance}px)` }} />
 
       {/* Sticky Hero Container */}
       <section
         id="hero"
-        className="sticky top-0 h-screen w-full overflow-hidden bg-black z-20"
-        style={{
+        className="sticky top-0 h-screen w-full overflow-hidden"
+        style={{ 
           marginTop: `-${100 + (distance / window.innerHeight) * 100}vh`,
         }}
       >
-        {/* TOP BLACK BAR (opaque, prevents reflection/bleed) */}
-        <div className="absolute top-0 left-0 w-full h-32 bg-black z-40 pointer-events-none" />
-
         <div
-          className="relative h-full w-full will-change-transform transform-gpu z-10 bg-black"
+          className="h-full w-full will-change-transform transform-gpu"
           style={{
             transform: `translateY(${translateY}px)`,
             transition: "transform 0.1s ease-out",
@@ -68,8 +65,8 @@ export default function HeroStickyCollapse({
         </div>
       </section>
 
-      {/* Content after hero */}
-      <div className="relative z-10 bg-white">{after}</div>
+      {/* Content after hero - positioned to overlap */}
+      <div className="relative z-10">{after}</div>
     </div>
   );
 }

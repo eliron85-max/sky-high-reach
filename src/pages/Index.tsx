@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
-import Contact from "@/components/Contact";
 
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -39,13 +38,6 @@ export default function Index() {
   const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
 
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -67,31 +59,42 @@ export default function Index() {
                   isVisible ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
               >
+                {/* FULL BLACK WRAPPER (prevents hero bleed) */}
                 <div className="relative w-full bg-black overflow-hidden">
+                  {/* TOP STRIP (full width) */}
                   <div className="w-full h-[70px] bg-black" />
 
+                  {/* TITLE BAR (opaque, no bleed) */}
                   <div className="w-full h-[90px] bg-black flex items-center justify-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
                   </div>
 
+                  {/* BOTTOM STRIP (full width) */}
                   <div className="w-full h-[70px] bg-black" />
 
+                  {/* OUTER BORDER */}
                   <div className="bg-[#dfc798] p-[1px]">
+                    {/* GRID (inner grid lines) */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
                       {services.map((s) => (
                         <div
                           key={s.title}
                           className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]"
                         >
+                          {/* IMAGE (zoom on hover) */}
                           <img
                             src={s.image}
                             alt={s.title}
                             className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
                           />
 
+                          {/* OVERLAY (fade like you wanted) */}
                           <div className="absolute inset-0 bg-black/65 transition-opacity duration-500 ease-out group-hover:opacity-40" />
+
+                          {/* INNER BORDER */}
                           <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
 
+                          {/* TEXT */}
                           <div className="absolute bottom-6 w-full text-center px-3">
                             <span
                               style={{
@@ -112,6 +115,7 @@ export default function Index() {
                     </div>
                   </div>
 
+                  {/* SPACE BEFORE TRUST STRIP (not too tight) */}
                   <div className="h-10 bg-black" />
                 </div>
               </section>
@@ -121,17 +125,9 @@ export default function Index() {
 
               {/* CTA */}
               <section className="py-16 text-center">
-                <Button
-                  onClick={scrollToContact}
-                  className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg"
-                >
+                <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
                   צור קשר
                 </Button>
-              </section>
-
-              {/* CONTACT FORM (כאן ה-ID שחיפשת) */}
-              <section id="contact" className="scroll-mt-[var(--header-height)]">
-                <Contact />
               </section>
             </>
           }
