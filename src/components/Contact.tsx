@@ -1,6 +1,5 @@
 // src/components/Contact.tsx
 import { useMemo, useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/lib/i18n";
