@@ -148,7 +148,9 @@ export default function Index() {
           </section>
         </HeroStickyCollapse>
       </main>
-
+      <section id="contact" className="bg-white">
+        {/** כאן תיבת צור קשר תחזור */}
+      </section>
       <Footer />
     </div>
   );
