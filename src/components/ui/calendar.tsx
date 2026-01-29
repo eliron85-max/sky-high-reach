@@ -1,4 +1,3 @@
-// src/components/ui/calendar.tsx
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
@@ -9,6 +8,8 @@ import { buttonVariants } from "@/components/ui/button";
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
+  const isRTL = props.dir === "rtl";
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -16,34 +17,27 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
-
-        // כותרת חודש
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
 
-        // ניווט
-        nav: "space-x-1 flex items-center",
+        // IMPORTANT: keep nav layout stable, we control buttons positions below
+        nav: "flex items-center",
+
+        // Hide disabled nav button (prevents “going back” visually when fromMonth blocks it)
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 disabled:opacity-0 disabled:pointer-events-none",
         ),
 
-        // ⚠️ השארנו את המיקומים כמו שיש לך
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
+        // ✅ RTL: LEFT button should be NEXT, RIGHT button should be PREVIOUS
+        nav_button_previous: isRTL ? "absolute right-1" : "absolute left-1",
+        nav_button_next: isRTL ? "absolute left-1" : "absolute right-1",
 
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell: "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
         row: "flex w-full mt-2",
-        cell:
-          "h-9 w-9 text-center text-sm p-0 relative " +
-          "[&:has([aria-selected].day-range-end)]:rounded-r-md " +
-          "[&:has([aria-selected].day-outside)]:bg-accent/50 " +
-          "[&:has([aria-selected])]:bg-accent " +
-          "first:[&:has([aria-selected])]:rounded-l-md " +
-          "last:[&:has([aria-selected])]:rounded-r-md " +
-          "focus-within:relative focus-within:z-20",
+        cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
         day: cn(buttonVariants({ variant: "ghost" }), "h-9 w-9 p-0 font-normal aria-selected:opacity-100"),
         day_range_end: "day-range-end",
         day_selected:
@@ -57,12 +51,10 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         ...classNames,
       }}
       components={{
-        // ✅ החלפה בין האייקונים:
-        // שמאל (IconLeft) יראה חץ ימינה
-        // ימין (IconRight) יראה חץ שמאלה
-        // כדי ש: ⬅️ (מבחינת המשתמש) = קדימה בחודשים
-        IconLeft: () => <ChevronRight className="h-4 w-4" />,
-        IconRight: () => <ChevronLeft className="h-4 w-4" />,
+        // ✅ Flip the icon meanings ONLY in RTL so:
+        // Left arrow (ChevronLeft) becomes NEXT in RTL (because next button is on the left)
+        IconLeft: () => (isRTL ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />),
+        IconRight: () => (isRTL ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />),
       }}
       {...props}
     />
