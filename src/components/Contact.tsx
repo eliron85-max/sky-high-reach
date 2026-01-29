@@ -1,5 +1,6 @@
 // src/components/Contact.tsx
 import { useMemo, useState, type FormEvent } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/lib/i18n";
@@ -12,7 +13,7 @@ type MiniForm = {
   consent: boolean;
 };
 
-const Contact = () => {
+export default function Contact() {
   const { toast } = useToast();
   const { t, dir } = useTranslation();
 
@@ -61,10 +62,10 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      // אם אצלך email הוא NOT NULL בטבלה -> אסור לשלוח null
+      // 1) שמירה ל-DB (אם email אצלך NOT NULL -> אנחנו שמים pseudoEmail)
       const pseudoEmail = `${form.whatsapp.trim()}@whatsapp.local`;
 
-      const { error } = await supabaseUntyped.from("inquiries").insert({
+      const { error: dbError } = await supabaseUntyped.from("inquiries").insert({
         full_name: form.fullName.trim(),
         phone: form.phone.trim(),
         email: pseudoEmail,
@@ -74,7 +75,19 @@ const Contact = () => {
         preferred_date: null,
       });
 
-      if (error) throw error;
+      if (dbError) throw dbError;
+
+      // 2) שליחת מייל דרך Edge Function (חובה body)
+      const { error: fnError } = await supabase.functions.invoke("resend-email", {
+        body: {
+          fullName: form.fullName.trim(),
+          phone: form.phone.trim(),
+          whatsapp: form.whatsapp.trim(),
+          message: form.message.trim(),
+        },
+      });
+
+      if (fnError) throw fnError;
 
       toast({
         title: t?.("contact.form.successTitle") ?? "נשלח ✅",
@@ -110,7 +123,6 @@ const Contact = () => {
           <div className="pointer-events-none absolute top-10 -left-[1px] h-40 w-[1px] bg-black/30" />
           <div className="pointer-events-none absolute top-10 -right-[1px] h-40 w-[1px] bg-black/30" />
 
-          {/* כותרת – שם העסק */}
           <h1 className="text-center font-extrabold tracking-tight leading-[0.95] text-[44px] sm:text-[76px] lg:text-[96px]">
             א.א פרויקטים וגובה
           </h1>
@@ -230,6 +242,4 @@ const Contact = () => {
       </div>
     </section>
   );
-};
-
-export default Contact;
+}
