@@ -1,5 +1,5 @@
 // Contact.tsx
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { format } from "date-fns";
 import { he, enUS, fr } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
@@ -72,19 +72,16 @@ const Contact = () => {
     }
   };
 
-  // ===== Helpers =====
-  const isDateBlocked = (date: Date) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  // ===== Calendar restrictions (חסימה: עבר + שישי/שבת + אין ניווט אחורה חודשים) =====
+  const todayStart = useMemo(() => {
+    const t = new Date();
+    return new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  }, []);
 
-    // ימים שעברו חסומים
-    if (date < today) return true;
-
-    // שישי (5) + שבת (6) חסומים
-    const d = date.getDay();
-    if (d === 5 || d === 6) return true;
-
-    return false;
+  const disablePastAndWeekend = (date: Date) => {
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const day = d.getDay(); // 0=Sun ... 5=Fri ... 6=Sat
+    return d < todayStart || day === 5 || day === 6;
   };
 
   // ===== State =====
@@ -105,9 +102,7 @@ const Contact = () => {
   };
 
   const handleProjectTypeChange = (value: string) => setFormData((p) => ({ ...p, projectType: value }));
-
   const handleDateChange = (date: Date | undefined) => setFormData((p) => ({ ...p, preferredDate: date }));
-
   const handleTimeChange = (value: string) => setFormData((p) => ({ ...p, preferredTime: value }));
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,6 +114,7 @@ const Contact = () => {
     e.preventDefault();
     setValidationErrors({});
 
+    // אם הסכמה שלך לא מכירה preferredTime – זה בסדר, היא תתעלם מזה.
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const errs: Record<string, string> = {};
@@ -133,7 +129,6 @@ const Contact = () => {
     try {
       const preferredDateIso = result.data.preferredDate ? format(result.data.preferredDate, "yyyy-MM-dd") : null;
 
-      // אם תרצה לשמור גם שעה בטבלה: תוסיף עמודה preferred_time
       const { error } = await supabaseUntyped.from("inquiries").insert({
         full_name: result.data.fullName,
         company: result.data.company || null,
@@ -142,7 +137,7 @@ const Contact = () => {
         project_type: result.data.projectType,
         message: result.data.message,
         preferred_date: preferredDateIso,
-        // preferred_time: formData.preferredTime || null,
+        // preferred_time: formData.preferredTime || null, // אם יש לך עמודה כזאת בטבלה – תפתח את השורה
       });
 
       if (error) throw error;
@@ -193,6 +188,9 @@ const Contact = () => {
                       disabled={isSubmitting}
                       required
                     />
+                    {validationErrors.fullName && (
+                      <p className="text-sm text-red-600 mt-1">{validationErrors.fullName}</p>
+                    )}
                   </div>
 
                   <div>
@@ -218,6 +216,7 @@ const Contact = () => {
                       disabled={isSubmitting}
                       required
                     />
+                    {validationErrors.phone && <p className="text-sm text-red-600 mt-1">{validationErrors.phone}</p>}
                   </div>
 
                   <div>
@@ -232,6 +231,7 @@ const Contact = () => {
                       required
                       dir="ltr"
                     />
+                    {validationErrors.email && <p className="text-sm text-red-600 mt-1">{validationErrors.email}</p>}
                   </div>
                 </div>
 
@@ -244,7 +244,7 @@ const Contact = () => {
                       onValueChange={handleProjectTypeChange}
                       disabled={isSubmitting}
                     >
-                      <SelectTrigger className={field}>
+                      <SelectTrigger className={cn(field, validationErrors.projectType && "border-red-500")}>
                         <SelectValue placeholder="בחר סוג" />
                       </SelectTrigger>
                       <SelectContent dir={dir}>
@@ -277,14 +277,20 @@ const Contact = () => {
                             : "בחר תאריך"}
                         </Button>
                       </PopoverTrigger>
+
                       <PopoverContent className="p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={formData.preferredDate}
-                          onSelect={handleDateChange}
-                          locale={getDateLocale()}
-                          disabled={isDateBlocked}
-                        />
+                        <div dir={dir}>
+                          <Calendar
+                            mode="single"
+                            selected={formData.preferredDate}
+                            onSelect={handleDateChange}
+                            locale={getDateLocale()}
+                            dir={dir}
+                            fromMonth={todayStart}
+                            disabled={disablePastAndWeekend}
+                            fixedWeeks
+                          />
+                        </div>
                       </PopoverContent>
                     </Popover>
                   </div>
@@ -322,6 +328,7 @@ const Contact = () => {
                     rows={6}
                     required
                   />
+                  {validationErrors.message && <p className="text-sm text-red-600 mt-1">{validationErrors.message}</p>}
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -343,9 +350,9 @@ const Contact = () => {
 
                 <Button type="submit" className={submitBtn} disabled={isSubmitting}>
                   {isSubmitting ? (
-                    <Loader2 className="animate-spin ml-2" size={18} />
+                    <Loader2 className={dir === "rtl" ? "ml-2 animate-spin" : "mr-2 animate-spin"} size={18} />
                   ) : (
-                    <Send className="ml-2" size={18} />
+                    <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />
                   )}
                   שליחה
                 </Button>
@@ -373,23 +380,41 @@ const Contact = () => {
               <div className={card}>
                 <h4 className="text-center font-bold mb-4 text-black dark:text-white">לוח זמינות</h4>
                 <div className="flex justify-center">
-                  <Calendar
-                    mode="single"
-                    selected={formData.preferredDate}
-                    onSelect={handleDateChange}
-                    locale={getDateLocale()}
-                    disabled={isDateBlocked}
-                  />
+                  <div dir={dir}>
+                    <Calendar
+                      mode="single"
+                      selected={formData.preferredDate}
+                      onSelect={handleDateChange}
+                      locale={getDateLocale()}
+                      dir={dir}
+                      fromMonth={todayStart}
+                      disabled={disablePastAndWeekend}
+                      fixedWeeks
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-4 text-center text-xs text-black/50 dark:text-white/50">
-                  שישי ושבת חסומים • ימים שעברו חסומים
+                  שישי ושבת חסומים • ימים שעברו חסומים • אין ניווט לחודשים קודמים
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* RTL arrows fix for Calendar (Radix DayPicker buttons) */}
+      <style>{`
+        [dir="rtl"] .rdp-nav {
+          direction: rtl;
+        }
+        [dir="rtl"] .rdp-nav_button_previous {
+          transform: rotate(180deg);
+        }
+        [dir="rtl"] .rdp-nav_button_next {
+          transform: rotate(180deg);
+        }
+      `}</style>
     </section>
   );
 };
