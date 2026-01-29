@@ -561,7 +561,12 @@ All colors MUST be HSL.
   font-weight: 900 !important;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.75) !important;
 }
-/* Fix calendar navigation arrows for RTL */
+/* RTL: make LEFT arrow go forward (swap prev/next positions visually) */
+[dir="rtl"] .rdp-nav {
+  transform: scaleX(-1);
+}
+
+/* Keep icons readable after mirroring the nav */
 [dir="rtl"] .rdp-nav_button svg {
-  transform: rotate(180deg);
+  transform: scaleX(-1);
 }
