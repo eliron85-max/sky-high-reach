@@ -1,5 +1,5 @@
 // src/components/Contact.tsx  (או src/pages/Contact.tsx)
-import { useMemo, useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { useToast } from "@/hooks/use-toast";
@@ -47,7 +47,7 @@ const Contact = () => {
     setTouched((p) => ({ ...p, [key]: true }));
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setTouched({
@@ -62,32 +62,29 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      // DB: inquiries
       const { error } = await supabaseUntyped.from("inquiries").insert({
         full_name: form.fullName.trim(),
         phone: form.phone.trim(),
-        email: null, // בתמונה אין אימייל
+        email: null,
         message: form.message.trim(),
         company: null,
         project_type: "other",
         preferred_date: null,
-        // אם יש לך עמודה whatsapp בטבלה — תגיד לי ואוסיף אותה כאן
       });
 
       if (error) throw error;
 
-      // Email notification (Edge Function)
       try {
         await supabase.functions.invoke("send-inquiry-notification", {
           body: {
             fullName: form.fullName.trim(),
             phone: form.phone.trim(),
-            email: "", // אין אימייל בטופס הזה
+            email: "",
             company: undefined,
             projectType: "other",
             message: form.message.trim(),
             preferredDate: undefined,
-            whatsapp: form.whatsapp.trim(), // אם הפונקציה לא מצפה לזה — זה לא יפיל בדרך כלל
+            whatsapp: form.whatsapp.trim(),
           },
         });
       } catch (emailError) {
@@ -123,7 +120,6 @@ const Contact = () => {
     <section dir={dir} className="bg-[#f3f3f3] text-black py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="relative bg-white border border-black/30 px-5 sm:px-10 py-10 sm:py-14">
-          {/* פינות כמו בתמונה */}
           <div className="pointer-events-none absolute -top-[1px] left-10 h-[1px] w-44 bg-black/30" />
           <div className="pointer-events-none absolute -top-[1px] right-10 h-[1px] w-44 bg-black/30" />
           <div className="pointer-events-none absolute top-10 -left-[1px] h-40 w-[1px] bg-black/30" />
@@ -138,9 +134,7 @@ const Contact = () => {
           </p>
 
           <form onSubmit={onSubmit} className="mt-10 sm:mt-12">
-            {/* 3 שדות בשורה */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {/* שם (ימין) */}
               <div>
                 <input
                   className={[
@@ -159,7 +153,6 @@ const Contact = () => {
                 ) : null}
               </div>
 
-              {/* טלפון (אמצע) */}
               <div>
                 <input
                   className={[
@@ -177,7 +170,6 @@ const Contact = () => {
                 {touched.phone && errors.phone ? <p className="mt-2 text-sm text-red-600">{errors.phone}</p> : null}
               </div>
 
-              {/* וואטסאפ (שמאל) */}
               <div>
                 <input
                   className={[
@@ -198,7 +190,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* הודעה גדולה + כותרת קטנה בפינה */}
             <div className="mt-6 relative">
               <span className="absolute right-6 top-4 text-black/45 font-semibold pointer-events-none">הודעה</span>
 
@@ -209,7 +200,6 @@ const Contact = () => {
                   "placeholder:text-black/35 ring-1 ring-black/10 focus:ring-black/25",
                   touched.message && errors.message ? "ring-red-500/60 focus:ring-red-500/70" : "",
                 ].join(" ")}
-                placeholder=""
                 value={form.message}
                 onChange={(e) => setField("message", e.target.value)}
                 onBlur={() => markTouched("message")}
@@ -218,7 +208,6 @@ const Contact = () => {
               {touched.message && errors.message ? <p className="mt-2 text-sm text-red-600">{errors.message}</p> : null}
             </div>
 
-            {/* צ'קבוקס + כפתור זהב */}
             <div className="mt-6 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="submit"
