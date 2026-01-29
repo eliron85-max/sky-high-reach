@@ -78,7 +78,7 @@ export default function Contact() {
       if (dbError) throw dbError;
 
       // 2) שליחת מייל דרך Edge Function (חובה body)
-      const { error: fnError } = await supabase.functions.invoke("resend-email", {
+      const { error: fnError } = await supabaseUntyped.functions.invoke("resend-email", {
         body: {
           fullName: form.fullName.trim(),
           phone: form.phone.trim(),
