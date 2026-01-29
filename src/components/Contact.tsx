@@ -72,7 +72,7 @@ const Contact = () => {
     }
   };
 
-  // ===== Calendar restrictions (חסימה: עבר + שישי/שבת + אין ניווט אחורה חודשים) =====
+  // ===== Calendar restrictions (עבר + שישי/שבת + אין ניווט לחודשים קודמים) =====
   const todayStart = useMemo(() => {
     const t = new Date();
     return new Date(t.getFullYear(), t.getMonth(), t.getDate());
@@ -114,7 +114,6 @@ const Contact = () => {
     e.preventDefault();
     setValidationErrors({});
 
-    // אם הסכמה שלך לא מכירה preferredTime – זה בסדר, היא תתעלם מזה.
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const errs: Record<string, string> = {};
@@ -137,7 +136,7 @@ const Contact = () => {
         project_type: result.data.projectType,
         message: result.data.message,
         preferred_date: preferredDateIso,
-        // preferred_time: formData.preferredTime || null, // אם יש לך עמודה כזאת בטבלה – תפתח את השורה
+        // preferred_time: formData.preferredTime || null, // אם יש עמודה בטבלה
       });
 
       if (error) throw error;
@@ -403,25 +402,20 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* RTL arrows behavior fix (WITHOUT changing icons) */}
+      {/* RTL calendar nav: left button = next month, right button = previous month (no icon changes) */}
       <style>{`
-  /* DayPicker nav is a flex row: we only swap the ORDER in RTL */
-  [dir="rtl"] .rdp-nav {
-    direction: rtl;
-  }
-
-  /* "previous" (month back) should appear on the RIGHT in RTL */
-  [dir="rtl"] .rdp-nav_button_previous {
-    order: 2;
-    transform: none !important;
-  }
-
-  /* "next" (month forward) should appear on the LEFT in RTL */
-  [dir="rtl"] .rdp-nav_button_next {
-    order: 1;
-    transform: none !important;
-  }
-`}</style>
+        .rdp-nav {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        [dir="rtl"] .rdp-nav_button_next {
+          order: 1; /* left */
+        }
+        [dir="rtl"] .rdp-nav_button_previous {
+          order: 2; /* right */
+        }
+      `}</style>
     </section>
   );
 };
