@@ -1,6 +1,5 @@
-// src/components/Contact.tsx  (או src/pages/Contact.tsx)
+// src/components/Contact.tsx
 import { useMemo, useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/lib/i18n";
@@ -62,10 +61,13 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
+      // אם אצלך email הוא NOT NULL בטבלה -> אסור לשלוח null
+      const pseudoEmail = `${form.whatsapp.trim()}@whatsapp.local`;
+
       const { error } = await supabaseUntyped.from("inquiries").insert({
         full_name: form.fullName.trim(),
         phone: form.phone.trim(),
-        email: null,
+        email: pseudoEmail,
         message: form.message.trim(),
         company: null,
         project_type: "other",
@@ -73,23 +75,6 @@ const Contact = () => {
       });
 
       if (error) throw error;
-
-      try {
-        await supabase.functions.invoke("send-inquiry-notification", {
-          body: {
-            fullName: form.fullName.trim(),
-            phone: form.phone.trim(),
-            email: "",
-            company: undefined,
-            projectType: "other",
-            message: form.message.trim(),
-            preferredDate: undefined,
-            whatsapp: form.whatsapp.trim(),
-          },
-        });
-      } catch (emailError) {
-        console.error("Email notify failed:", emailError);
-      }
 
       toast({
         title: t?.("contact.form.successTitle") ?? "נשלח ✅",
@@ -125,8 +110,9 @@ const Contact = () => {
           <div className="pointer-events-none absolute top-10 -left-[1px] h-40 w-[1px] bg-black/30" />
           <div className="pointer-events-none absolute top-10 -right-[1px] h-40 w-[1px] bg-black/30" />
 
+          {/* כותרת – שם העסק */}
           <h1 className="text-center font-extrabold tracking-tight leading-[0.95] text-[44px] sm:text-[76px] lg:text-[96px]">
-            ע.אחרון בונים עתיד <span className="inline-block">למשפחה שלכם</span>
+            א.א פרויקטים וגובה
           </h1>
 
           <p className="mt-4 text-center text-base sm:text-lg text-black/70">
