@@ -129,8 +129,10 @@ export default function Index() {
                 </Button>
               </section>
 
-              {/* CONTACT FORM */}
-              <Contact />
+              {/* CONTACT FORM (כאן ה-ID שחיפשת) */}
+              <section id="contact" className="scroll-mt-[var(--header-height)]">
+                <Contact />
+              </section>
             </>
           }
         >
