@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, type NavProps } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -49,14 +49,66 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         ...classNames,
       }}
       components={{
-        // זה רק האייקון שמצויר (לא הלוגיקה של מעבר חודשים)
-        IconLeft: () => <ChevronLeft className="h-4 w-4" />,
-        IconRight: () => <ChevronRight className="h-4 w-4" />,
+        // ✅ כאן מתקנים את ה"התנהגות" של החצים ב-RTL:
+        // הכפתור השמאלי -> חודש הבא
+        // הכפתור הימני -> חודש קודם
+        Nav: (navProps: NavProps) => {
+          const isRTL = navProps.dir === "rtl";
+
+          const leftIsNext = isRTL;
+          const rightIsPrev = isRTL;
+
+          const leftDisabled = leftIsNext ? !navProps.nextMonth : !navProps.previousMonth;
+          const rightDisabled = rightIsPrev ? !navProps.previousMonth : !navProps.nextMonth;
+
+          const onLeftClick = (e: React.MouseEvent) => {
+            if (leftIsNext) navProps.onNextClick?.(e);
+            else navProps.onPreviousClick?.(e);
+          };
+
+          const onRightClick = (e: React.MouseEvent) => {
+            if (rightIsPrev) navProps.onPreviousClick?.(e);
+            else navProps.onNextClick?.(e);
+          };
+
+          return (
+            <div className="rdp-nav">
+              {/* שמאל */}
+              <button
+                type="button"
+                aria-label={leftIsNext ? "Go to next month" : "Go to previous month"}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "rdp-nav_button rdp-nav_button_previous h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute left-1",
+                )}
+                disabled={leftDisabled}
+                onClick={onLeftClick}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+
+              {/* ימין */}
+              <button
+                type="button"
+                aria-label={rightIsPrev ? "Go to previous month" : "Go to next month"}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "rdp-nav_button rdp-nav_button_next h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute right-1",
+                )}
+                disabled={rightDisabled}
+                onClick={onRightClick}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          );
+        },
       }}
       {...props}
     />
   );
 }
+
 Calendar.displayName = "Calendar";
 
 export { Calendar };
