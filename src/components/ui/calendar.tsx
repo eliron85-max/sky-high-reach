@@ -8,8 +8,6 @@ import { buttonVariants } from "@/components/ui/button";
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
-  const isRTL = props.dir === "rtl";
-
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -19,20 +17,13 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
-
-        // IMPORTANT: keep nav layout stable, we control buttons positions below
-        nav: "flex items-center",
-
-        // Hide disabled nav button (prevents “going back” visually when fromMonth blocks it)
+        nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 disabled:opacity-0 disabled:pointer-events-none",
+          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
         ),
-
-        // ✅ RTL: LEFT button should be NEXT, RIGHT button should be PREVIOUS
-        nav_button_previous: isRTL ? "absolute right-1" : "absolute left-1",
-        nav_button_next: isRTL ? "absolute left-1" : "absolute right-1",
-
+        nav_button_previous: "absolute left-1",
+        nav_button_next: "absolute right-1",
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell: "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
@@ -50,11 +41,11 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         day_hidden: "invisible",
         ...classNames,
       }}
-      components={{
-        // ✅ Flip the icon meanings ONLY in RTL so:
-        // Left arrow (ChevronLeft) becomes NEXT in RTL (because next button is on the left)
-        IconLeft: () => (isRTL ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />),
-        IconRight: () => (isRTL ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />),
+     components={{
+  // מציירים חצים הפוכים ויזואלית בלבד
+  IconLeft: () => <ChevronRight className="h-4 w-4" />,
+  IconRight: () => <ChevronLeft className="h-4 w-4" />,
+}}
       }}
       {...props}
     />
