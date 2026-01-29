@@ -76,8 +76,8 @@ export default function Contact() {
 
       if (dbError) throw dbError;
 
-      // 2) שליחת מייל דרך Edge Function (חובה body)
-      const { error: fnError } = await supabaseUntyped.functions.invoke("resend-email", {
+      // 2) שליחת מייל לאדמין דרך Edge Function
+      const { error: fnError } = await supabaseUntyped.functions.invoke("send-inquiry-notification", {
         body: {
           fullName: form.fullName.trim(),
           phone: form.phone.trim(),
@@ -92,6 +92,13 @@ export default function Contact() {
         title: t?.("contact.form.successTitle") ?? "נשלח ✅",
         description: t?.("contact.form.successMessage") ?? "קיבלנו את הפנייה ונחזור בהקדם.",
       });
+
+      // 3) פתיחת WhatsApp אוטומטית אחרי שליחה מוצלחת
+      const whatsappMessage = encodeURIComponent(
+        `שלום, אני ${form.fullName.trim()}.\n` +
+        `שלחתי פנייה דרך האתר: ${form.message.trim().substring(0, 50)}${form.message.trim().length > 50 ? '...' : ''}`
+      );
+      window.open(`https://wa.me/972556616326?text=${whatsappMessage}`, '_blank');
 
       setForm({
         fullName: "",
