@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon } from "lucide-react";
+import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useTranslation } from "@/lib/i18n";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
@@ -84,6 +84,34 @@ const Contact = () => {
     return d < todayStart || day === 5 || day === 6;
   };
 
+  // ===== RTL nav behavior FIX =====
+  // מטרה:
+  // 1) ב-RTL: החץ שמאלה = חודש הבא (קדימה)
+  // 2) ב-RTL: החץ ימינה = חודש קודם (אחורה)
+  // 3) חסימת חודשים קודמים לגמרי
+  const calendarNavFix = useMemo(() => {
+    const isRTL = dir === "rtl";
+
+    return {
+      fromMonth: todayStart, // חוסם ניווט לחודשים קודמים
+
+      // מחליף מיקומים: ב-RTL הכפתור "next" יהיה בצד שמאל
+      classNames: {
+        nav: cn("flex items-center gap-1", isRTL && "flex-row-reverse"),
+      },
+
+      // מחליף את אייקוני החיצים כך שייראו נכון ב-RTL
+      components: isRTL
+        ? {
+            // IconLeft = כפתור previous (אחורה) -> צריך להצביע ימינה ב-RTL
+            IconLeft: () => <ChevronRight className="h-4 w-4" />,
+            // IconRight = כפתור next (קדימה) -> צריך להצביע שמאלה ב-RTL
+            IconRight: () => <ChevronLeft className="h-4 w-4" />,
+          }
+        : undefined,
+    } as const;
+  }, [dir, todayStart]);
+
   // ===== State =====
   const [formData, setFormData] = useState<FormState>({
     fullName: "",
@@ -114,7 +142,6 @@ const Contact = () => {
     e.preventDefault();
     setValidationErrors({});
 
-    // אם הסכמה שלך לא מכירה preferredTime – זה בסדר, היא תתעלם מזה.
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const errs: Record<string, string> = {};
@@ -137,7 +164,7 @@ const Contact = () => {
         project_type: result.data.projectType,
         message: result.data.message,
         preferred_date: preferredDateIso,
-        // preferred_time: formData.preferredTime || null, // אם יש לך עמודה כזאת בטבלה – תפתח את השורה
+        // preferred_time: formData.preferredTime || null, // אם יש לך עמודה כזו בטבלה – תפתח
       });
 
       if (error) throw error;
@@ -286,8 +313,10 @@ const Contact = () => {
                             onSelect={handleDateChange}
                             locale={getDateLocale()}
                             dir={dir}
-                            fromMonth={todayStart}
                             disabled={disablePastAndWeekend}
+                            fromMonth={calendarNavFix.fromMonth}
+                            classNames={calendarNavFix.classNames}
+                            components={calendarNavFix.components}
                             fixedWeeks
                           />
                         </div>
@@ -387,8 +416,10 @@ const Contact = () => {
                       onSelect={handleDateChange}
                       locale={getDateLocale()}
                       dir={dir}
-                      fromMonth={todayStart}
                       disabled={disablePastAndWeekend}
+                      fromMonth={calendarNavFix.fromMonth}
+                      classNames={calendarNavFix.classNames}
+                      components={calendarNavFix.components}
                       fixedWeeks
                     />
                   </div>
@@ -402,19 +433,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
-      {/* RTL arrows fix for Calendar (Radix DayPicker buttons) */}
-      <style>{`
-        [dir="rtl"] .rdp-nav {
-          direction: rtl;
-        }
-        [dir="rtl"] .rdp-nav_button_previous {
-          transform: rotate(180deg);
-        }
-        [dir="rtl"] .rdp-nav_button_next {
-          transform: rotate(180deg);
-        }
-      `}</style>
     </section>
   );
 };
