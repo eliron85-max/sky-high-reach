@@ -1,11 +1,11 @@
 // src/pages/Index.tsx
 import React from "react";
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
+import Contact from "@/components/Contact";
 
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -38,6 +38,11 @@ export default function Index() {
   const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
 
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -59,64 +64,55 @@ export default function Index() {
                   isVisible ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
               >
-                {/* FULL BLACK WRAPPER (prevents hero bleed) */}
-                <div className="relative w-full bg-black overflow-hidden">
-                  {/* TOP STRIP (full width) */}
-                  <div className="w-full h-[70px] bg-black" />
-
-                  {/* TITLE BAR (opaque, no bleed) */}
-                  <div className="w-full h-[90px] bg-black flex items-center justify-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
+                <div className="relative w-full bg-black">
+                  <div className="py-10 sm:py-12">
+                    <h2 className="text-center text-3xl md:text-5xl font-bold text-[#f5d58a]">השירותים שלנו</h2>
                   </div>
 
-                  {/* BOTTOM STRIP (full width) */}
-                  <div className="w-full h-[70px] bg-black" />
-
-                  {/* OUTER BORDER */}
-                  <div className="bg-[#dfc798] p-[1px]">
-                    {/* GRID (inner grid lines) */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
+                  {/* GRID – נקי, בלי “קווי טבלה” */}
+                  <div className="container mx-auto px-4 pb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {services.map((s) => (
                         <div
                           key={s.title}
-                          className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]"
+                          className="group relative overflow-hidden rounded-2xl bg-black/20 ring-1 ring-[#a79471]/35 hover:ring-[#dfc798]/60 transition"
                         >
-                          {/* IMAGE (zoom on hover) */}
-                          <img
-                            src={s.image}
-                            alt={s.title}
-                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
-                          />
+                          <div className="relative aspect-[16/11]">
+                            <img
+                              src={s.image}
+                              alt={s.title}
+                              className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.12]"
+                              loading="lazy"
+                            />
 
-                          {/* OVERLAY (fade like you wanted) */}
-                          <div className="absolute inset-0 bg-black/65 transition-opacity duration-500 ease-out group-hover:opacity-40" />
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/10 transition-opacity duration-500 ease-out group-hover:opacity-90" />
 
-                          {/* INNER BORDER */}
-                          <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
-
-                          {/* TEXT */}
-                          <div className="absolute bottom-6 w-full text-center px-3">
-                            <span
-                              style={{
-                                fontFamily: "Montserrat, sans-serif",
-                                fontStyle: "normal",
-                                fontWeight: 500,
-                                fontSize: "45px",
-                                lineHeight: "54px",
-                                color: "rgb(255, 228, 174)",
-                                textShadow: "0 10px 18px rgba(0,0,0,0.85)",
-                              }}
-                            >
-                              {s.title}
-                            </span>
+                            {/* Text */}
+                            <div className="absolute bottom-5 right-4 left-4">
+                              <div className="text-center">
+                                <span
+                                  style={{
+                                    fontFamily: "Montserrat, sans-serif",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    fontSize: "34px",
+                                    lineHeight: "40px",
+                                    color: "rgb(255, 228, 174)",
+                                    textShadow: "0 10px 18px rgba(0,0,0,0.85)",
+                                  }}
+                                >
+                                  {s.title}
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* SPACE BEFORE TRUST STRIP (not too tight) */}
-                  <div className="h-10 bg-black" />
+                  <div className="h-6 bg-black" />
                 </div>
               </section>
 
@@ -124,11 +120,19 @@ export default function Index() {
               <HomeTestimonials />
 
               {/* CTA */}
-              <section className="py-16 text-center">
-                <Button className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg">
+              <section className="py-14 text-center bg-black">
+                <Button
+                  onClick={scrollToContact}
+                  className="bg-gradient-to-b from-[#f6e7b2] to-[#c9a84c] text-black font-bold px-10 py-6 text-lg"
+                >
                   צור קשר
                 </Button>
               </section>
+
+              {/* CONTACT (עכשיו באמת מוצג) */}
+              <div id="contact">
+                <Contact />
+              </div>
             </>
           }
         >
