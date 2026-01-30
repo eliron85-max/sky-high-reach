@@ -570,27 +570,3 @@ All colors MUST be HSL.
 [dir="rtl"] .rdp-nav_button svg {
   transform: scaleX(-1);
 }
-/* ===== FORCE WHITE TEXT INSIDE TABLES ===== */
-
-table,
-table th,
-table td,
-table thead,
-table tbody,
-table tfoot,
-table tr {
-  color: #ffffff !important;
-}
-
-table input,
-table textarea,
-table select,
-table option {
-  color: #ffffff !important;
-}
-
-/* placeholders */
-table input::placeholder,
-table textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
