@@ -1,8 +1,7 @@
-// Contact.tsx
-import React, { useMemo, useState } from "react";
+// src/components/Contact.tsx
+import { useMemo, useState } from "react";
 import { format } from "date-fns";
 import { he, enUS, fr } from "date-fns/locale";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,7 +9,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-
 import { useToast } from "@/hooks/use-toast";
 import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -384,10 +382,8 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* CALENDAR BOARD */}
               <div className={card}>
                 <h4 className="text-center font-bold mb-4 text-black dark:text-white">לוח זמינות</h4>
-
                 <div className="calendar-lux p-4">
                   <div className="flex justify-center">
                     <div dir={dir}>
@@ -414,27 +410,44 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* ✅ CSS ONLY HERE. NO CSS AFTER export default */}
+      {/* ✅ הכל CSS חייב להיות פה בפנים. אסור שום CSS אחרי export default */}
       <style>{`
         /* ===== Luxury Calendar (scoped wrapper) ===== */
-
-        /* Light defaults */
         .calendar-lux{
           --lux-bg: #ffffff;
           --lux-text: rgba(0,0,0,0.92);
           --lux-muted: rgba(0,0,0,0.52);
-          --lux-border: rgba(0,0,0,0.10);
           --lux-gold: rgba(201,168,76,0.90);
           --lux-hover: rgba(0,0,0,0.05);
 
+          position: relative;
           background: var(--lux-bg);
-          border: 1px solid var(--lux-border);
           border-radius: 22px;
           box-shadow: 0 14px 40px rgba(0,0,0,0.10);
-          overflow: hidden;
+          overflow: hidden; /* חשוב כדי שהמסגרת תישאר נקייה */
         }
 
-        /* Dark mode */
+        /* Premium gold gradient frame (עובי 1px נשמר) */
+        .calendar-lux::before{
+          content: "";
+          position: absolute;
+          inset: 0;
+          padding: 1px; /* 👈 עובי המסגרת */
+          border-radius: 22px;
+          background: linear-gradient(180deg, #f3e7b2, #d4af37, #b9932f);
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* כל התוכן מעל המסגרת */
+        .calendar-lux > *{
+          position: relative;
+          z-index: 1;
+        }
+
         .dark .calendar-lux{
           --lux-bg: radial-gradient(140% 120% at 50% 0%,
             rgba(255,255,255,0.06),
@@ -442,88 +455,62 @@ const Contact = () => {
           );
           --lux-text: rgba(255,255,255,0.92);
           --lux-muted: rgba(255,255,255,0.58);
-          --lux-border: rgba(201,168,76,0.45);
           --lux-hover: rgba(255,255,255,0.06);
 
           background: var(--lux-bg);
-          border: 1px solid var(--lux-border);
           box-shadow:
             0 18px 55px rgba(0,0,0,0.55),
             0 0 0 1px rgba(201,168,76,0.14) inset;
         }
 
-        .calendar-lux .lux-muted{
-          color: var(--lux-muted) !important;
-        }
+        .calendar-lux .lux-muted{ color: var(--lux-muted) !important; }
 
-        /* Force calendar text colors */
+        /* Force calendar text */
         .calendar-lux .rdp,
-        .calendar-lux .rdp *{
-          color: var(--lux-text) !important;
-        }
+        .calendar-lux .rdp *{ color: var(--lux-text) !important; }
 
-        /* Month title */
         .calendar-lux .rdp-caption_label{
           font-weight: 900 !important;
-          letter-spacing: 0.2px;
           text-shadow: 0 2px 18px rgba(201,168,76,0.18);
         }
 
-        /* Weekdays */
         .calendar-lux .rdp-head_cell{
           color: var(--lux-muted) !important;
           font-weight: 800 !important;
         }
 
-        /* Day base */
-        .calendar-lux .rdp-day{
-          border-radius: 999px !important;
-          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
-        }
+        /* יום */
+        .calendar-lux .rdp-day{ border-radius: 999px !important; }
 
-        /* Hover */
-        .calendar-lux .rdp-day:not(.rdp-day_disabled):not([aria-selected="true"]):hover{
+        /* ✅ ביטול ה"תכלת" שמגיע מה-cell (bg-accent) */
+        .calendar-lux .rdp-cell{ background: transparent !important; }
+        .calendar-lux .rdp-cell:has([aria-selected]){ background: transparent !important; }
+
+        /* Hover (כללי) — בלי תכלת */
+        .calendar-lux .rdp-button:hover{
           background: var(--lux-hover) !important;
-          box-shadow: 0 0 0 1px rgba(201,168,76,0.12) inset !important;
-          transform: translateY(-1px);
         }
 
-        /* Disabled */
-        .calendar-lux .rdp-day_disabled{
-          opacity: 0.45 !important;
-        }
-
-        /* Today (not selected) */
-        .calendar-lux .rdp-day_today:not([aria-selected="true"]){
-          box-shadow: 0 0 0 1px rgba(201,168,76,0.14) inset !important;
-        }
-
-        /* ✅ SELECTED: transparent circle + thin gold border (kills teal) */
+        /* ✅ SELECTED: שקוף + טבעת זהב */
         .calendar-lux button[aria-selected="true"],
-        .calendar-lux .rdp-button[aria-selected="true"],
         .calendar-lux .rdp-day[aria-selected="true"],
-        .calendar-lux .day_selected,
         .calendar-lux .rdp-day_selected,
-        .calendar-lux .rdp-day_selected > button{
+        .calendar-lux .day_selected{
           background: transparent !important;
           background-color: transparent !important;
           color: var(--lux-text) !important;
-
           border: 1px solid var(--lux-gold) !important;
-          border-color: var(--lux-gold) !important;
-
-          box-shadow:
-            0 0 0 3px rgba(201,168,76,0.14),
-            0 10px 26px rgba(0,0,0,0.22) !important;
+          box-shadow: 0 0 0 3px rgba(201,168,76,0.14) !important;
         }
 
+        /* Selected hover/focus — להישאר שקוף */
         .calendar-lux button[aria-selected="true"]:hover,
-        .calendar-lux .rdp-button[aria-selected="true"]:hover{
+        .calendar-lux button[aria-selected="true"]:focus{
           background: transparent !important;
           background-color: transparent !important;
         }
 
-        /* ✅ KILL Tailwind teal (primary) INSIDE calendar only */
+        /* ✅ KILL TAILWIND teal inside calendar */
         .calendar-lux .bg-primary,
         .calendar-lux .hover\\:bg-primary:hover,
         .calendar-lux .focus\\:bg-primary:focus,
@@ -556,21 +543,13 @@ const Contact = () => {
           border-radius: 999px !important;
           background: rgba(255,255,255,0.03) !important;
           border: 1px solid rgba(201,168,76,0.18) !important;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
         }
-
-        .calendar-lux .rdp-nav_button:hover{
-          background: rgba(201,168,76,0.10) !important;
-        }
+        .calendar-lux .rdp-nav_button:hover{ background: rgba(201,168,76,0.10) !important; }
 
         /* RTL nav order */
-        .rdp-nav{
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        [dir="rtl"] .rdp-nav_button_next{ order: 1; }
-        [dir="rtl"] .rdp-nav_button_previous{ order: 2; }
+        .rdp-nav{ display:flex; align-items:center; gap:12px; }
+        [dir="rtl"] .rdp-nav_button_next{ order:1; }
+        [dir="rtl"] .rdp-nav_button_previous{ order:2; }
       `}</style>
     </section>
   );
