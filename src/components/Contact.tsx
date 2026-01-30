@@ -12,7 +12,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import { useToast } from "@/hooks/use-toast";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useTranslation } from "@/lib/i18n";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { contactSchema, type ContactFormData } from "@/lib/contactSchema";
@@ -21,7 +20,6 @@ import { cn } from "@/lib/utils";
 import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon } from "lucide-react";
 
 const Contact = () => {
-  const { ref, isVisible } = useScrollReveal();
   const { toast } = useToast();
   const { dir, language } = useTranslation();
 
@@ -30,12 +28,13 @@ const Contact = () => {
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   // ===== STYLES =====
-  const sectionClass = `py-16 lg:py-24 scroll-reveal bg-[#f6f6f6] dark:bg-[#0f1115] ${isVisible ? "visible" : ""}`;
+  // ✅ IMPORTANT: no scroll-reveal opacity-0 on this section (prevents black gaps)
+  // ✅ Keep page background consistent with the site (black), frame provides the light surface
+  const sectionClass = "py-16 lg:py-24 bg-black";
 
   const frame =
     "max-w-6xl mx-auto rounded-[28px] border p-6 md:p-10 bg-white border-black/10 dark:bg-[#1b1f26] dark:border-white/10";
 
-  // ✅ White text + white placeholder in DARK (and readable in light)
   const field =
     "h-14 rounded-full px-6 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/70 " +
     "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/85 " +
@@ -165,7 +164,7 @@ const Contact = () => {
   };
 
   return (
-    <section ref={ref} id="contact" dir={dir} className={sectionClass}>
+    <section id="contact" dir={dir} className={sectionClass}>
       <div className="container mx-auto px-4">
         <div className={frame}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -282,7 +281,9 @@ const Contact = () => {
                         >
                           <span className="truncate">
                             {formData.preferredDate
-                              ? format(formData.preferredDate, "dd/MM/yyyy", { locale: getDateLocale() })
+                              ? format(formData.preferredDate, "dd/MM/yyyy", {
+                                  locale: getDateLocale(),
+                                })
                               : "בחר תאריך"}
                           </span>
                           <CalendarIcon className="h-5 w-5 opacity-80" />
