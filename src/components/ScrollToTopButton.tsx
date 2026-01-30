@@ -10,10 +10,10 @@ export const ScrollToTopButton = () => {
       const scrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
-      
+
       // Show button after scrolling 200px
       setIsVisible(scrollTop > 200);
-      
+
       // Check if near bottom (within 100px)
       const isNearBottom = scrollTop + windowHeight >= docHeight - 100;
       setIsAtBottom(isNearBottom);
@@ -31,9 +31,9 @@ export const ScrollToTopButton = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       // Scroll to bottom
-      window.scrollTo({ 
-        top: document.documentElement.scrollHeight, 
-        behavior: "smooth" 
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
       });
     }
   };
@@ -43,14 +43,16 @@ export const ScrollToTopButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95"
+      className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full 
+bg-transparent 
+border border-[#c9a84c] 
+text-[#c9a84c] 
+hover:bg-[#c9a84c]/10 
+flex items-center justify-center 
+shadow-lg transition"
       aria-label={isAtBottom ? "גלול למעלה" : "גלול למטה"}
     >
-      {isAtBottom ? (
-        <ChevronUp size={24} strokeWidth={2.5} />
-      ) : (
-        <ChevronDown size={24} strokeWidth={2.5} />
-      )}
+      {isAtBottom ? <ChevronUp size={24} strokeWidth={2.5} /> : <ChevronDown size={24} strokeWidth={2.5} />}
     </button>
   );
 };
