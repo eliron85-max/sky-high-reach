@@ -294,9 +294,9 @@ export default function Header() {
 
       {/* ================= MOBILE DRAWER (ARCCA 1:1 STYLE) ================= */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[99999] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="ltr">
+        <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="ltr">
           {/* Fullscreen panel - MUST be fixed to avoid iOS/viewport gaps */}
-          <div className="fixed inset-0 grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
+          <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
             {/* ===== LEFT COLUMN (MENU LIGHT) ===== */}
             <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden">
               {/* top spacer */}
@@ -376,6 +376,7 @@ export default function Header() {
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden">
               {/* CLOSE */}
               <button
+                type="button"
                 onClick={closeMobile}
                 className="absolute top-4 right-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
                 aria-label="Close"
