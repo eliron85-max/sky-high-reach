@@ -294,11 +294,11 @@ export default function Header() {
 
       {/* ================= MOBILE DRAWER (ARCCA 1:1 STYLE) ================= */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[99999] lg:hidden bg-black" dir="ltr">
-          {/* Fullscreen panel */}
-          <div className="absolute inset-0 grid grid-cols-[1.15fr_0.85fr]">
+        <div className="fixed inset-0 z-[99999] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="ltr">
+          {/* Fullscreen panel - MUST be fixed to avoid iOS/viewport gaps */}
+          <div className="fixed inset-0 grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
             {/* ===== LEFT COLUMN (MENU LIGHT) ===== */}
-            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full">
+            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden">
               {/* top spacer */}
               <div className="h-[64px] border-b border-black/20" />
 
@@ -373,39 +373,40 @@ export default function Header() {
             </nav>
 
             {/* ===== RIGHT COLUMN (DARK INFO) ===== */}
-            <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full">
+            <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden">
               {/* CLOSE */}
               <button
                 onClick={closeMobile}
                 className="absolute top-4 right-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
+                aria-label="Close"
               >
                 ✕
               </button>
 
               <div className="h-full flex flex-col px-6 pt-10 pb-6">
-                <img src={logoImage} className="h-[60px] w-auto object-contain" />
+                <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
 
                 <div className="mt-8 h-px bg-white/10" />
 
                 <div className="mt-6 grid grid-cols-2 gap-6 text-[12px]">
                   <div>
                     <div className="opacity-60 uppercase tracking-widest">Email</div>
-                    <div className="mt-2">contact@heights-projects.com</div>
+                    <div className="mt-2 break-words">contact@heights-projects.com</div>
                   </div>
 
                   <div>
                     <div className="opacity-60 uppercase tracking-widest">Phone</div>
-                    <div className="mt-2">055-661-6326</div>
+                    <div className="mt-2 break-words">055-661-6326</div>
                   </div>
 
                   <div>
                     <div className="opacity-60 uppercase tracking-widest">Location</div>
-                    <div className="mt-2">Israel</div>
+                    <div className="mt-2 break-words">Israel</div>
                   </div>
 
                   <div>
                     <div className="opacity-60 uppercase tracking-widest">Social</div>
-                    <div className="mt-2">Instagram / Facebook</div>
+                    <div className="mt-2 break-words">Instagram / Facebook</div>
                   </div>
                 </div>
 
