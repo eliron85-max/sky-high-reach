@@ -60,35 +60,31 @@ export default function Index() {
                 <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  {/* 2 mobile / 3 tablet / 4 desktop */}
-                  <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
+                  {/* 2 mobile / 3 tablet / 4 desktop — compact spacing */}
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6">
                     {services.map((s) => (
-                      <article key={s.title} className="group">
+                      <article key={s.title} className="group cursor-pointer">
                         {/* 16:9 thumbnail */}
-                        <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black">
+                        <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black">
                           <img
                             src={s.image}
                             alt={s.title}
                             loading="lazy"
-                            className="absolute inset-0 h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.08]"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                           />
-
-                          {/* overlay */}
-                          <div className="absolute inset-0 bg-black/35 transition-opacity duration-500 group-hover:opacity-15" />
-
-                          {/* subtle border */}
+                          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors" />
                           <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
                         </div>
 
-                        {/* Title under thumbnail */}
-                        <div className="mt-3">
+                        {/* title under image */}
+                        <div className="mt-2">
                           <h3
-                            className="text-[18px] md:text-[20px] font-semibold text-[#ffe4ae] leading-tight"
+                            className="text-[16px] md:text-[17px] font-semibold text-[#ffe4ae] leading-snug line-clamp-1"
                             style={{ fontFamily: "Montserrat, sans-serif" }}
                           >
                             {s.title}
                           </h3>
-                          <p className="mt-1 text-sm text-white/55">עבודות גובה | סנפלינג | מעטפת</p>
+                          <p className="text-sm text-white/55">עבודות גובה וסנפלינג</p>
                         </div>
                       </article>
                     ))}
@@ -99,7 +95,6 @@ export default function Index() {
               <TrustStrip />
               <HomeTestimonials />
 
-              {/* Small spacing (no empty huge black sections) */}
               <section className="py-6 bg-black" />
 
               <Contact />
