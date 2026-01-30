@@ -48,7 +48,7 @@ export default function Index() {
           mobileCollapseDistance={450}
           after={
             <>
-              {/* SERVICES — YouTube-style grid */}
+              {/* SERVICES — YouTube-style grid (Ultrawide friendly) */}
               <section
                 ref={(el) => {
                   (ref as React.MutableRefObject<HTMLElement | null>).current = el;
@@ -57,27 +57,37 @@ export default function Index() {
                   isVisible ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
               >
-                <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
+                {/* ✅ Wider container for 3440px screens */}
+                <div className="mx-auto max-w-[2200px] px-6 py-12 md:py-16">
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  {/* 2 mobile / 3 tablet / 4 desktop — tighter like YouTube */}
-                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4">
+                  {/* ✅ 4 columns like YouTube on desktop + ultrawide */}
+                  <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-x-4 gap-y-8">
                     {services.map((s) => (
                       <article key={s.title} className="group cursor-pointer">
                         {/* 16:9 thumbnail */}
-                        <div className="relative w-full aspect-[16/8] overflow-hidden rounded-xl bg-black">
+                        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-black">
                           <img
                             src={s.image}
                             alt={s.title}
                             loading="lazy"
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                           />
-                          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors" />
+
+                          {/* subtle overlay */}
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+
+                          {/* hairline border like YouTube dark */}
                           <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
+
+                          {/* optional "duration" badge (comment out if not needed) */}
+                          {/* <div className="absolute bottom-2 left-2 rounded-md bg-black/80 px-2 py-1 text-[12px] text-white">
+                            0:30
+                          </div> */}
                         </div>
 
                         {/* text under image */}
-                        <div className="mt-2">
+                        <div className="mt-3">
                           <h3
                             className="text-[15px] md:text-[16px] font-semibold text-[#ffe4ae] leading-snug line-clamp-1"
                             style={{ fontFamily: "Montserrat, sans-serif" }}
@@ -96,7 +106,6 @@ export default function Index() {
               <HomeTestimonials />
 
               <section className="py-6 bg-black" />
-
               <Contact />
             </>
           }
