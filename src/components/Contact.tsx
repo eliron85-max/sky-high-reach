@@ -547,3 +547,29 @@ const Contact = () => {
 };
 
 export default Contact;
+/* === KILL TAILWIND "primary" (teal) INSIDE calendar only === */
+.calendar-lux .bg-primary,
+.calendar-lux .hover\:bg-primary:hover,
+.calendar-lux .focus\:bg-primary:focus,
+.calendar-lux .focus-visible\:bg-primary:focus-visible{
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.calendar-lux .text-primary-foreground,
+.calendar-lux .hover\:text-primary-foreground:hover,
+.calendar-lux .focus\:text-primary-foreground:focus,
+.calendar-lux .focus-visible\:text-primary-foreground:focus-visible{
+  color: var(--lux-text) !important;
+}
+
+/* kill rings that sometimes look teal */
+.calendar-lux .ring-primary,
+.calendar-lux .focus\:ring-primary:focus,
+.calendar-lux .focus-visible\:ring-primary:focus-visible{
+  --tw-ring-color: rgba(201,168,76,0.45) !important;
+}
+
+.calendar-lux .ring-offset-background{
+  --tw-ring-offset-color: transparent !important;
+}
