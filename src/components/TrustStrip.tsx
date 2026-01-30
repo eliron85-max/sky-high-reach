@@ -1,15 +1,13 @@
 import React from "react";
 import { BadgeCheck, ThumbsUp, Users, HardHat, Sparkles } from "lucide-react";
 
-import bgImage from "@/assets/stone-veneer-after-2.jpg";
-
 type Item = {
   kicker: string;
   title: string;
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-const items = [
+const items: Item[] = [
   { kicker: "אנשי מקצוע מוסמכים", title: "צוות סנפלינג מקצועי", Icon: HardHat },
   { kicker: "מעל 15 שנות ניסיון", title: "עבודות גובה ומעטפת", Icon: Sparkles },
   { kicker: "חברה משפחתית", title: "אמינות ובטיחות", Icon: ThumbsUp },
@@ -19,15 +17,11 @@ const items = [
 
 export default function TrustStrip() {
   return (
-    <section dir="rtl" className="relative w-full overflow-hidden mt-16">
-      {/* Background image */}
-      <img src={bgImage} className="absolute inset-0 w-full h-full object-cover scale-110 blur-sm" />
+    <section dir="rtl" className="relative w-full overflow-hidden mt-16 bg-black [isolation:isolate]">
+      {/* ✅ Solid black background (no image, no blur) */}
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/75" />
-
-      {/* Gold glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_0%,rgba(223,199,152,0.18),transparent_60%)]" />
+      {/* Subtle gold glow (optional, does NOT reveal anything behind) */}
+      <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_0%,rgba(223,199,152,0.14),transparent_60%)]" />
 
       {/* Gold top/bottom lines */}
       <div className="absolute top-0 left-0 right-0 h-px bg-[#dfc798]/50" />
@@ -38,7 +32,7 @@ export default function TrustStrip() {
           {items.map(({ kicker, title, Icon }) => (
             <div key={title} className="text-center">
               {/* Icon box */}
-              <div className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-xl border border-[#a79471] bg-black/40">
+              <div className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-xl border border-[#a79471] bg-black">
                 <Icon className="w-8 h-8 text-[#dfc798]" strokeWidth={1.6} />
               </div>
 
