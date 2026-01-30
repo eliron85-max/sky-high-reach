@@ -121,9 +121,11 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      // ✅ White text + gold hover/focus
+      // ✅ Strong hover/focus so customer understands selection
       "relative flex w-full cursor-pointer select-none items-center rounded-xl py-2 pl-8 pr-3 text-sm text-white outline-none " +
-        "hover:bg-[#c9a84c]/12 focus:bg-[#c9a84c]/18 " +
+        "hover:bg-white/10 hover:ring-1 hover:ring-[#c9a84c]/30 " +
+        "focus:bg-white/12 focus:ring-1 focus:ring-[#c9a84c]/40 " +
+        "data-[state=checked]:bg-white/8 data-[state=checked]:ring-1 data-[state=checked]:ring-[#c9a84c]/35 " +
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       className,
     )}
