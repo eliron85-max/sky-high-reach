@@ -1,4 +1,4 @@
-// src/components/Contact.tsx
+// Contact.tsx
 import { useMemo, useState } from "react";
 import { format } from "date-fns";
 import { he, enUS, fr } from "date-fns/locale";
@@ -16,49 +16,34 @@ import { useTranslation } from "@/lib/i18n";
 import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { contactSchema, type ContactFormData } from "@/lib/contactSchema";
 import { cn } from "@/lib/utils";
-
 type FormState = ContactFormData & {
   preferredTime: string;
 };
-
 const Contact = () => {
-  const { ref, isVisible } = useScrollReveal();
-  const { toast } = useToast();
-  const { dir, language } = useTranslation();
-
+  const {
+    ref,
+    isVisible
+  } = useScrollReveal();
+  const {
+    toast
+  } = useToast();
+  const {
+    dir,
+    language
+  } = useTranslation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   // ===== STYLES =====
   const sectionClass = `py-16 lg:py-24 scroll-reveal bg-[#f6f6f6] dark:bg-[#0f1115] ${isVisible ? "visible" : ""}`;
-
-  const frame =
-    "max-w-6xl mx-auto rounded-[28px] border p-6 md:p-10 bg-white border-black/10 dark:bg-[#1b1f26] dark:border-white/10";
-
-  const field =
-    "h-14 rounded-full px-6 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/40 " +
-    "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/40 " +
-    "focus-visible:ring-0 focus-visible:ring-offset-0";
-
-  const textarea =
-    "rounded-[26px] px-6 py-5 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/40 " +
-    "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/40 " +
-    "focus-visible:ring-0 focus-visible:ring-offset-0";
-
+  const frame = "max-w-6xl mx-auto rounded-[28px] border p-6 md:p-10 bg-white border-black/10 dark:bg-[#1b1f26] dark:border-white/10";
+  const field = "h-14 rounded-full px-6 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/40 " + "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/40 " + "focus-visible:ring-0 focus-visible:ring-offset-0";
+  const textarea = "rounded-[26px] px-6 py-5 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/40 " + "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/40 " + "focus-visible:ring-0 focus-visible:ring-offset-0";
   const labelCls = "font-semibold text-black dark:text-white";
-
   const card = "rounded-[24px] border p-6 bg-white border-black/10 dark:bg-[#1b1f26] dark:border-white/10";
-
-  const uploadBtn =
-    "flex items-center gap-2 px-5 py-3 rounded-full border cursor-pointer select-none " +
-    "bg-[#f4f4f4] border-black/10 text-black hover:bg-[#ededed] " +
-    "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:hover:bg-[#151a22]";
-
-  const submitBtn =
-    "w-full h-14 rounded-full font-extrabold text-lg text-black " +
-    "bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] " +
-    "hover:from-[#f0ddb0] hover:to-[#d4af37]";
+  const uploadBtn = "flex items-center gap-2 px-5 py-3 rounded-full border cursor-pointer select-none " + "bg-[#f4f4f4] border-black/10 text-black hover:bg-[#ededed] " + "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:hover:bg-[#151a22]";
+  const submitBtn = "w-full h-14 rounded-full font-extrabold text-lg text-black " + "bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] " + "hover:from-[#f0ddb0] hover:to-[#d4af37]";
 
   // ===== Locale =====
   const getDateLocale = () => {
@@ -77,7 +62,6 @@ const Contact = () => {
     const t = new Date();
     return new Date(t.getFullYear(), t.getMonth(), t.getDate());
   }, []);
-
   const disablePastAndWeekend = (date: Date) => {
     const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const day = d.getDay(); // 0=Sun ... 5=Fri ... 6=Sat
@@ -93,18 +77,30 @@ const Contact = () => {
     projectType: "",
     message: "",
     preferredDate: undefined,
-    preferredTime: "",
+    preferredTime: ""
   });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData((p) => ({ ...p, [id]: value }));
+    const {
+      id,
+      value
+    } = e.target;
+    setFormData(p => ({
+      ...p,
+      [id]: value
+    }));
   };
-
-  const handleProjectTypeChange = (value: string) => setFormData((p) => ({ ...p, projectType: value }));
-  const handleDateChange = (date: Date | undefined) => setFormData((p) => ({ ...p, preferredDate: date }));
-  const handleTimeChange = (value: string) => setFormData((p) => ({ ...p, preferredTime: value }));
-
+  const handleProjectTypeChange = (value: string) => setFormData(p => ({
+    ...p,
+    projectType: value
+  }));
+  const handleDateChange = (date: Date | undefined) => setFormData(p => ({
+    ...p,
+    preferredDate: date
+  }));
+  const handleTimeChange = (value: string) => setFormData(p => ({
+    ...p,
+    preferredTime: value
+  }));
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) setSelectedFile(e.target.files[0]);
   };
@@ -113,39 +109,35 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setValidationErrors({});
-
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const errs: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
+      result.error.errors.forEach(err => {
         if (err.path[0]) errs[err.path[0] as string] = err.message;
       });
       setValidationErrors(errs);
       return;
     }
-
     setIsSubmitting(true);
     try {
       const preferredDateIso = result.data.preferredDate ? format(result.data.preferredDate, "yyyy-MM-dd") : null;
-
-      const { error } = await supabaseUntyped.from("inquiries").insert({
+      const {
+        error
+      } = await supabaseUntyped.from("inquiries").insert({
         full_name: result.data.fullName,
         company: result.data.company || null,
         phone: result.data.phone,
         email: result.data.email,
         project_type: result.data.projectType,
         message: result.data.message,
-        preferred_date: preferredDateIso,
+        preferred_date: preferredDateIso
         // preferred_time: formData.preferredTime || null,
       });
-
       if (error) throw error;
-
       toast({
         title: "נשלח בהצלחה",
-        description: "קיבלנו את הפנייה שלך ונחזור אליך בהקדם.",
+        description: "קיבלנו את הפנייה שלך ונחזור אליך בהקדם."
       });
-
       setFormData({
         fullName: "",
         company: "",
@@ -154,22 +146,20 @@ const Contact = () => {
         projectType: "",
         message: "",
         preferredDate: undefined,
-        preferredTime: "",
+        preferredTime: ""
       });
       setSelectedFile(null);
     } catch {
       toast({
         title: "שגיאה",
         description: "אירעה שגיאה בשליחת הפנייה",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section ref={ref} id="contact" dir={dir} className={sectionClass}>
+  return <section ref={ref} id="contact" dir={dir} className={sectionClass}>
       <div className="container mx-auto px-4">
         <div className={frame}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -179,63 +169,26 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label className={labelCls}>שם מלא</Label>
-                    <Input
-                      id="fullName"
-                      placeholder="שם מלא"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      className={cn(field, validationErrors.fullName && "border-red-500")}
-                      disabled={isSubmitting}
-                      required
-                    />
-                    {validationErrors.fullName && (
-                      <p className="text-sm text-red-600 mt-1">{validationErrors.fullName}</p>
-                    )}
+                    <Input id="fullName" placeholder="שם מלא" value={formData.fullName} onChange={handleInputChange} className={cn(field, validationErrors.fullName && "border-red-500")} disabled={isSubmitting} required />
+                    {validationErrors.fullName && <p className="text-sm text-red-600 mt-1">{validationErrors.fullName}</p>}
                   </div>
 
                   <div>
                     <Label className={labelCls}>שם חברה</Label>
-                    <Input
-                      id="company"
-                      placeholder="שם חברה (לא חובה)"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      className={field}
-                      disabled={isSubmitting}
-                    />
+                    <Input id="company" placeholder="שם חברה (לא חובה)" value={formData.company} onChange={handleInputChange} className={field} disabled={isSubmitting} />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label className={labelCls}>טלפון</Label>
-                    <Input
-                      id="phone"
-                      placeholder="טלפון"
-                      type="tel"
-                      inputMode="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className={cn(field, validationErrors.phone && "border-red-500")}
-                      disabled={isSubmitting}
-                      required
-                    />
+                    <Input id="phone" placeholder="טלפון" type="tel" inputMode="tel" value={formData.phone} onChange={handleInputChange} className={cn(field, validationErrors.phone && "border-red-500")} disabled={isSubmitting} required />
                     {validationErrors.phone && <p className="text-sm text-red-600 mt-1">{validationErrors.phone}</p>}
                   </div>
 
                   <div>
                     <Label className={labelCls}>אימייל</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="אימייל"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className={cn(field, validationErrors.email && "border-red-500")}
-                      disabled={isSubmitting}
-                      required
-                      dir="ltr"
-                    />
+                    <Input id="email" type="email" placeholder="אימייל" value={formData.email} onChange={handleInputChange} className={cn(field, validationErrors.email && "border-red-500")} disabled={isSubmitting} required dir="ltr" />
                     {validationErrors.email && <p className="text-sm text-red-600 mt-1">{validationErrors.email}</p>}
                   </div>
                 </div>
@@ -244,11 +197,7 @@ const Contact = () => {
                 <div className="grid md:grid-cols-3 gap-6">
                   <div>
                     <Label className={labelCls}>סוג פרויקט</Label>
-                    <Select
-                      value={formData.projectType}
-                      onValueChange={handleProjectTypeChange}
-                      disabled={isSubmitting}
-                    >
+                    <Select value={formData.projectType} onValueChange={handleProjectTypeChange} disabled={isSubmitting}>
                       <SelectTrigger className={cn(field, validationErrors.projectType && "border-red-500")}>
                         <SelectValue placeholder="בחר סוג" />
                       </SelectTrigger>
@@ -261,40 +210,19 @@ const Contact = () => {
                         <SelectItem value="other">אחר</SelectItem>
                       </SelectContent>
                     </Select>
-                    {validationErrors.projectType && (
-                      <p className="text-sm text-red-600 mt-1">{validationErrors.projectType}</p>
-                    )}
+                    {validationErrors.projectType && <p className="text-sm text-red-600 mt-1">{validationErrors.projectType}</p>}
                   </div>
 
                   <div>
                     <Label className={labelCls}>תאריך מועדף</Label>
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          className={cn(field, "justify-start")}
-                          disabled={isSubmitting}
-                        >
-                          <CalendarIcon className={dir === "rtl" ? "ml-2" : "mr-2"} />
-                          {formData.preferredDate
-                            ? format(formData.preferredDate, "dd/MM/yyyy", { locale: getDateLocale() })
-                            : "בחר תאריך"}
-                        </Button>
+                        
                       </PopoverTrigger>
 
                       <PopoverContent className="p-0" align="start">
                         <div className="calendar-lux p-4" dir={dir}>
-                          <Calendar
-                            mode="single"
-                            selected={formData.preferredDate}
-                            onSelect={handleDateChange}
-                            locale={getDateLocale()}
-                            dir={dir}
-                            fromMonth={todayStart}
-                            disabled={disablePastAndWeekend}
-                            fixedWeeks
-                          />
+                          <Calendar mode="single" selected={formData.preferredDate} onSelect={handleDateChange} locale={getDateLocale()} dir={dir} fromMonth={todayStart} disabled={disablePastAndWeekend} fixedWeeks />
                         </div>
                       </PopoverContent>
                     </Popover>
@@ -324,16 +252,7 @@ const Contact = () => {
 
                 <div>
                   <Label className={labelCls}>הודעה</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="כתוב כאן את פרטי הפנייה…"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className={cn(textarea, validationErrors.message && "border-red-500")}
-                    disabled={isSubmitting}
-                    rows={6}
-                    required
-                  />
+                  <Textarea id="message" placeholder="כתוב כאן את פרטי הפנייה…" value={formData.message} onChange={handleInputChange} className={cn(textarea, validationErrors.message && "border-red-500")} disabled={isSubmitting} rows={6} required />
                   {validationErrors.message && <p className="text-sm text-red-600 mt-1">{validationErrors.message}</p>}
                 </div>
 
@@ -341,25 +260,13 @@ const Contact = () => {
                   <label className={uploadBtn}>
                     <Upload size={18} />
                     בחר קובץ
-                    <input
-                      type="file"
-                      hidden
-                      onChange={handleFileChange}
-                      disabled={isSubmitting}
-                      accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx"
-                    />
+                    <input type="file" hidden onChange={handleFileChange} disabled={isSubmitting} accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx" />
                   </label>
-                  {selectedFile && (
-                    <span className="text-sm text-black/60 dark:text-white/60">{selectedFile.name}</span>
-                  )}
+                  {selectedFile && <span className="text-sm text-black/60 dark:text-white/60">{selectedFile.name}</span>}
                 </div>
 
                 <Button type="submit" className={submitBtn} disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <Loader2 className={dir === "rtl" ? "ml-2 animate-spin" : "mr-2 animate-spin"} size={18} />
-                  ) : (
-                    <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />
-                  )}
+                  {isSubmitting ? <Loader2 className={dir === "rtl" ? "ml-2 animate-spin" : "mr-2 animate-spin"} size={18} /> : <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />}
                   שליחה
                 </Button>
               </form>
@@ -387,16 +294,7 @@ const Contact = () => {
                 <div className="calendar-lux p-4">
                   <div className="flex justify-center">
                     <div dir={dir}>
-                      <Calendar
-                        mode="single"
-                        selected={formData.preferredDate}
-                        onSelect={handleDateChange}
-                        locale={getDateLocale()}
-                        dir={dir}
-                        fromMonth={todayStart}
-                        disabled={disablePastAndWeekend}
-                        fixedWeeks
-                      />
+                      <Calendar mode="single" selected={formData.preferredDate} onSelect={handleDateChange} locale={getDateLocale()} dir={dir} fromMonth={todayStart} disabled={disablePastAndWeekend} fixedWeeks />
                     </div>
                   </div>
 
@@ -417,35 +315,15 @@ const Contact = () => {
           --lux-bg: #ffffff;
           --lux-text: rgba(0,0,0,0.92);
           --lux-muted: rgba(0,0,0,0.52);
+          --lux-border: rgba(0,0,0,0.10);
           --lux-gold: rgba(201,168,76,0.90);
           --lux-hover: rgba(0,0,0,0.05);
 
-          position: relative;
           background: var(--lux-bg);
+          border: 1px solid var(--lux-border);
           border-radius: 22px;
           box-shadow: 0 14px 40px rgba(0,0,0,0.10);
-          overflow: hidden; /* חשוב כדי שהמסגרת תישאר נקייה */
-        }
-
-        /* Premium gold gradient frame (עובי 1px נשמר) */
-        .calendar-lux::before{
-          content: "";
-          position: absolute;
-          inset: 0;
-          padding: 1px; /* 👈 עובי המסגרת */
-          border-radius: 22px;
-          background: linear-gradient(180deg, #f3e7b2, #d4af37, #b9932f);
-          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        /* כל התוכן מעל המסגרת */
-        .calendar-lux > *{
-          position: relative;
-          z-index: 1;
+          overflow: hidden;
         }
 
         .dark .calendar-lux{
@@ -455,9 +333,11 @@ const Contact = () => {
           );
           --lux-text: rgba(255,255,255,0.92);
           --lux-muted: rgba(255,255,255,0.58);
+          --lux-border: rgba(201,168,76,0.45);
           --lux-hover: rgba(255,255,255,0.06);
 
           background: var(--lux-bg);
+          border: 1px solid var(--lux-border);
           box-shadow:
             0 18px 55px rgba(0,0,0,0.55),
             0 0 0 1px rgba(201,168,76,0.14) inset;
@@ -479,19 +359,16 @@ const Contact = () => {
           font-weight: 800 !important;
         }
 
-        /* יום */
+        /* Day base */
         .calendar-lux .rdp-day{ border-radius: 999px !important; }
 
-        /* ✅ ביטול ה"תכלת" שמגיע מה-cell (bg-accent) */
-        .calendar-lux .rdp-cell{ background: transparent !important; }
-        .calendar-lux .rdp-cell:has([aria-selected]){ background: transparent !important; }
-
-        /* Hover (כללי) — בלי תכלת */
-        .calendar-lux .rdp-button:hover{
+        /* Hover */
+        .calendar-lux .rdp-day:not(.rdp-day_disabled):not([aria-selected="true"]):hover{
           background: var(--lux-hover) !important;
+          box-shadow: 0 0 0 1px rgba(201,168,76,0.12) inset !important;
         }
 
-        /* ✅ SELECTED: שקוף + טבעת זהב */
+        /* ✅ SELECTED: transparent circle + thin gold border */
         .calendar-lux button[aria-selected="true"],
         .calendar-lux .rdp-day[aria-selected="true"],
         .calendar-lux .rdp-day_selected,
@@ -501,13 +378,6 @@ const Contact = () => {
           color: var(--lux-text) !important;
           border: 1px solid var(--lux-gold) !important;
           box-shadow: 0 0 0 3px rgba(201,168,76,0.14) !important;
-        }
-
-        /* Selected hover/focus — להישאר שקוף */
-        .calendar-lux button[aria-selected="true"]:hover,
-        .calendar-lux button[aria-selected="true"]:focus{
-          background: transparent !important;
-          background-color: transparent !important;
         }
 
         /* ✅ KILL TAILWIND teal inside calendar */
@@ -551,8 +421,6 @@ const Contact = () => {
         [dir="rtl"] .rdp-nav_button_next{ order:1; }
         [dir="rtl"] .rdp-nav_button_previous{ order:2; }
       `}</style>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
