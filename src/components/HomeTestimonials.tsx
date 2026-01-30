@@ -1,11 +1,6 @@
 import { Quote } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -62,9 +57,7 @@ const HomeTestimonials = () => {
     { initials: "יכ", bg: "bg-rose-500" },
   ];
 
-  const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
-  );
+  const autoplayPlugin = React.useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 
   React.useEffect(() => {
     if (!api) return;
@@ -79,7 +72,12 @@ const HomeTestimonials = () => {
     <section
       ref={ref}
       id="testimonials"
-      className={`py-20 md:py-28 bg-background transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      dir="rtl"
+      className={cn(
+        "bg-black py-20 md:py-28",
+        "transition-opacity duration-700",
+        isVisible ? "opacity-100" : "opacity-0",
+      )}
     >
       <div className="container mx-auto px-4">
         {/* Client Avatars Row */}
@@ -88,7 +86,12 @@ const HomeTestimonials = () => {
             {clientAvatars.map((avatar, index) => (
               <div
                 key={index}
-                className={`w-10 h-10 rounded-full ${avatar.bg} flex items-center justify-center text-white text-sm font-medium border-2 border-background shadow-md`}
+                className={cn(
+                  "w-10 h-10 rounded-full",
+                  avatar.bg,
+                  "flex items-center justify-center text-white text-sm font-medium",
+                  "border-2 border-black shadow-md",
+                )}
                 style={{ zIndex: clientAvatars.length - index }}
               >
                 {avatar.initials}
@@ -97,10 +100,8 @@ const HomeTestimonials = () => {
           </div>
         </div>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-          מה הלקוחות שלנו אומרים
-        </h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-white">מה הלקוחות שלנו אומרים</h2>
+        <p className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
           לקוחות מרוצים משתפים את החוויה שלהם מעבודה איתנו
         </p>
 
@@ -121,9 +122,7 @@ const HomeTestimonials = () => {
               <CarouselItem key={testimonial.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                 <div className="bg-card rounded-2xl p-6 shadow-lg border border-border h-full flex flex-col">
                   <Quote className="w-8 h-8 text-primary/20 mb-4" />
-                  <p className="text-foreground/80 leading-relaxed flex-grow mb-4">
-                    {testimonial.text}
-                  </p>
+                  <p className="text-foreground/80 leading-relaxed flex-grow mb-4">{testimonial.text}</p>
                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-border/50">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
                       {testimonial.initials}
@@ -146,9 +145,7 @@ const HomeTestimonials = () => {
               key={index}
               className={cn(
                 "h-2.5 rounded-full transition-all duration-300",
-                current === index 
-                  ? "bg-primary w-6" 
-                  : "bg-muted-foreground/30 w-2.5 hover:bg-muted-foreground/50"
+                current === index ? "bg-primary w-6" : "bg-white/25 w-2.5 hover:bg-white/40",
               )}
               onClick={() => api?.scrollTo(index)}
               aria-label={`עבור להמלצה ${index + 1}`}
