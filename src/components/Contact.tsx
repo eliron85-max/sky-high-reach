@@ -411,132 +411,137 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
       <style>{`
-        /* ===== Luxury Calendar (scoped wrapper) ===== */
+  /* ===== Luxury Calendar (scoped wrapper) ===== */
 
-        /* Light defaults */
-        .calendar-lux{
-          --lux-bg: #ffffff;
-          --lux-text: rgba(0,0,0,0.92);
-          --lux-muted: rgba(0,0,0,0.52);
-          --lux-border: rgba(0,0,0,0.10);
-          --lux-gold: rgba(201,168,76,0.85);
-          --lux-hover: rgba(0,0,0,0.05);
+  /* Light defaults */
+  .calendar-lux{
+    --lux-bg: #ffffff;
+    --lux-text: rgba(0,0,0,0.92);
+    --lux-muted: rgba(0,0,0,0.52);
+    --lux-border: rgba(0,0,0,0.10);
+    --lux-gold: rgba(201,168,76,0.90);
+    --lux-hover: rgba(0,0,0,0.05);
 
-          background: var(--lux-bg);
-          border: 1px solid var(--lux-border);
-          border-radius: 22px;
-          box-shadow: 0 14px 40px rgba(0,0,0,0.10);
-          overflow: hidden;
-        }
+    background: var(--lux-bg);
+    border: 1px solid var(--lux-border);
+    border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
 
-        /* Dark mode: black luxury + thin gold frame */
-        .dark .calendar-lux{
-          --lux-bg: radial-gradient(140% 120% at 50% 0%,
-            rgba(255,255,255,0.06),
-            rgba(0,0,0,0.94)
-          );
-          --lux-text: rgba(255,255,255,0.92);
-          --lux-muted: rgba(255,255,255,0.58);
-          --lux-border: rgba(201,168,76,0.45);
-          --lux-hover: rgba(255,255,255,0.06);
+  /* Dark mode: black luxury + thin gold frame */
+  .dark .calendar-lux{
+    --lux-bg: radial-gradient(140% 120% at 50% 0%,
+      rgba(255,255,255,0.06),
+      rgba(0,0,0,0.94)
+    );
+    --lux-text: rgba(255,255,255,0.92);
+    --lux-muted: rgba(255,255,255,0.58);
+    --lux-border: rgba(201,168,76,0.45);
+    --lux-hover: rgba(255,255,255,0.06);
 
-          background: var(--lux-bg);
-          border: 1px solid var(--lux-border);
-          box-shadow:
-            0 18px 55px rgba(0,0,0,0.55),
-            0 0 0 1px rgba(201,168,76,0.14) inset;
-        }
+    background: var(--lux-bg);
+    border: 1px solid var(--lux-border);
+    box-shadow:
+      0 18px 55px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(201,168,76,0.14) inset;
+  }
 
-        .calendar-lux .lux-muted{
-          color: var(--lux-muted) !important;
-        }
+  .calendar-lux .lux-muted{
+    color: var(--lux-muted) !important;
+  }
 
-        /* Force calendar text colors */
-        .calendar-lux .rdp,
-        .calendar-lux .rdp *{
-          color: var(--lux-text) !important;
-        }
+  /* Force calendar text colors */
+  .calendar-lux .rdp,
+  .calendar-lux .rdp *{
+    color: var(--lux-text) !important;
+  }
 
-        /* Month title */
-        .calendar-lux .rdp-caption_label{
-          font-weight: 900 !important;
-          letter-spacing: 0.2px;
-          text-shadow: 0 2px 18px rgba(201,168,76,0.18);
-        }
+  /* Month title */
+  .calendar-lux .rdp-caption_label{
+    font-weight: 900 !important;
+    letter-spacing: 0.2px;
+    text-shadow: 0 2px 18px rgba(201,168,76,0.18);
+  }
 
-        /* Weekdays */
-        .calendar-lux .rdp-head_cell{
-          color: var(--lux-muted) !important;
-          font-weight: 800 !important;
-        }
+  /* Weekdays */
+  .calendar-lux .rdp-head_cell{
+    color: var(--lux-muted) !important;
+    font-weight: 800 !important;
+  }
 
-        /* Day button base */
-        .calendar-lux .rdp-day{
-          border-radius: 999px !important;
-          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
-        }
+  /* Day button base */
+  .calendar-lux .rdp-day{
+    border-radius: 999px !important;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+  }
 
-        /* Hover */
-        .calendar-lux .rdp-day:not(.rdp-day_selected):not(.rdp-day_disabled):hover{
-          background: var(--lux-hover) !important;
-          box-shadow: 0 0 0 1px rgba(201,168,76,0.12) inset !important;
-          transform: translateY(-1px);
-        }
+  /* Hover */
+  .calendar-lux .rdp-day:not(.rdp-day_selected):not(.rdp-day_disabled):hover{
+    background: var(--lux-hover) !important;
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.12) inset !important;
+    transform: translateY(-1px);
+  }
 
-        /* Disabled */
-        .calendar-lux .rdp-day_disabled{
-          opacity: 0.45 !important;
-        }
+  /* Disabled */
+  .calendar-lux .rdp-day_disabled{
+    opacity: 0.45 !important;
+  }
 
-        /* Today (not selected) */
-        .calendar-lux .rdp-day_today:not(.rdp-day_selected){
-          box-shadow: 0 0 0 1px rgba(201,168,76,0.14) inset !important;
-        }
+  /* Today (not selected) */
+  .calendar-lux .rdp-day_today:not(.rdp-day_selected){
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.14) inset !important;
+  }
 
-        /* ✅ Selected day = transparent circle with thin gold border (NO teal) */
-        .calendar-lux .rdp-day_selected,
-        .calendar-lux .rdp-day_selected:hover{
-          background: transparent !important;
-          color: var(--lux-text) !important;
-          border: 1px solid var(--lux-gold) !important;
-          box-shadow:
-            0 0 0 4px rgba(201,168,76,0.10),
-            0 10px 26px rgba(0,0,0,0.22) !important;
-          transform: translateY(-1px);
-        }
+  /* === FORCE GOLD SELECTED DAY (kills teal bg-primary) === */
+  .calendar-lux button[aria-selected="true"],
+  .calendar-lux .rdp-button[aria-selected="true"],
+  .calendar-lux .rdp-day[aria-selected="true"],
+  .calendar-lux .day_selected,
+  .calendar-lux .rdp-day_selected,
+  .calendar-lux .rdp-day_selected > button{
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--lux-text) !important;
 
-        /* Fallback: if selection is applied via aria-selected */
-        .calendar-lux .rdp-day[aria-selected="true"]{
-          background: transparent !important;
-          border: 1px solid var(--lux-gold) !important;
-          box-shadow: 0 0 0 4px rgba(201,168,76,0.10) !important;
-        }
+    border: 1px solid var(--lux-gold) !important;
+    border-color: var(--lux-gold) !important;
 
-        /* Nav buttons */
-        .calendar-lux .rdp-nav_button{
-          width: 40px !important;
-          height: 40px !important;
-          border-radius: 999px !important;
-          background: rgba(255,255,255,0.03) !important;
-          border: 1px solid rgba(201,168,76,0.18) !important;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
-        }
+    box-shadow:
+      0 0 0 3px rgba(201,168,76,0.14),
+      0 10px 26px rgba(0,0,0,0.22) !important;
+  }
 
-        .calendar-lux .rdp-nav_button:hover{
-          background: rgba(201,168,76,0.10) !important;
-        }
+  .calendar-lux button[aria-selected="true"]:hover,
+  .calendar-lux .rdp-button[aria-selected="true"]:hover{
+    background: transparent !important;
+    background-color: transparent !important;
+  }
 
-        /* RTL nav order */
-        .rdp-nav{
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-        [dir="rtl"] .rdp-nav_button_next{ order: 1; }
-        [dir="rtl"] .rdp-nav_button_previous{ order: 2; }
-      `}</style>
+  /* Nav buttons */
+  .calendar-lux .rdp-nav_button{
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(201,168,76,0.18) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+  }
+
+  .calendar-lux .rdp-nav_button:hover{
+    background: rgba(201,168,76,0.10) !important;
+  }
+
+  /* RTL nav order */
+  .rdp-nav{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  [dir="rtl"] .rdp-nav_button_next{ order: 1; }
+  [dir="rtl"] .rdp-nav_button_previous{ order: 2; }
+`}</style>
     </section>
   );
 };
