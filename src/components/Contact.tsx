@@ -176,11 +176,15 @@ const Contact = () => {
             {/* FORM */}
             <div className="lg:col-span-2">
               <form onSubmit={handleSubmit} className={cn(card, "space-y-6")}>
+                {/* כותרת (אופציונלי) */}
+                <h3 className="text-xl font-extrabold text-black dark:text-white">מילוי פרטים</h3>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <Label className={labelCls}>שם מלא</Label>
                     <Input
                       id="fullName"
+                      placeholder="שם מלא"
                       value={formData.fullName}
                       onChange={handleInputChange}
                       className={cn(field, validationErrors.fullName && "border-red-500")}
@@ -196,6 +200,7 @@ const Contact = () => {
                     <Label className={labelCls}>שם חברה</Label>
                     <Input
                       id="company"
+                      placeholder="שם חברה (לא חובה)"
                       value={formData.company}
                       onChange={handleInputChange}
                       className={field}
@@ -209,6 +214,9 @@ const Contact = () => {
                     <Label className={labelCls}>טלפון</Label>
                     <Input
                       id="phone"
+                      placeholder="טלפון"
+                      type="tel"
+                      inputMode="tel"
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={cn(field, validationErrors.phone && "border-red-500")}
@@ -223,6 +231,7 @@ const Contact = () => {
                     <Input
                       id="email"
                       type="email"
+                      placeholder="אימייל"
                       value={formData.email}
                       onChange={handleInputChange}
                       className={cn(field, validationErrors.email && "border-red-500")}
@@ -278,7 +287,7 @@ const Contact = () => {
                       </PopoverTrigger>
 
                       <PopoverContent className="p-0" align="start">
-                        <div dir={dir}>
+                        <div className="calendar-lux p-4" dir={dir}>
                           <Calendar
                             mode="single"
                             selected={formData.preferredDate}
@@ -320,6 +329,7 @@ const Contact = () => {
                   <Label className={labelCls}>הודעה</Label>
                   <Textarea
                     id="message"
+                    placeholder="כתוב כאן את פרטי הפנייה…"
                     value={formData.message}
                     onChange={handleInputChange}
                     className={cn(textarea, validationErrors.message && "border-red-500")}
@@ -377,24 +387,27 @@ const Contact = () => {
 
               {/* CALENDAR BOARD */}
               <div className={card}>
-                <h4 className="text-center font-bold mb-4 text-black dark:text-white"> לוח זמינות לעבודה </h4>
-                <div className="flex justify-center">
-                  <div dir={dir}>
-                    <Calendar
-                      mode="single"
-                      selected={formData.preferredDate}
-                      onSelect={handleDateChange}
-                      locale={getDateLocale()}
-                      dir={dir}
-                      fromMonth={todayStart}
-                      disabled={disablePastAndWeekend}
-                      fixedWeeks
-                    />
-                  </div>
-                </div>
+                <h4 className="text-center font-bold mb-4 text-black dark:text-white">לוח זמינות</h4>
 
-                <div className="mt-4 text-center text-xs text-black/50 dark:text-white/50">
-                  שישי ושבת חסומים • ימים שעברו חסומים • אין ניווט לחודשים קודמים
+                <div className="calendar-lux p-4">
+                  <div className="flex justify-center">
+                    <div dir={dir}>
+                      <Calendar
+                        mode="single"
+                        selected={formData.preferredDate}
+                        onSelect={handleDateChange}
+                        locale={getDateLocale()}
+                        dir={dir}
+                        fromMonth={todayStart}
+                        disabled={disablePastAndWeekend}
+                        fixedWeeks
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-4 text-center text-xs lux-muted">
+                    שישי ושבת חסומים • ימים שעברו חסומים • אין ניווט לחודשים קודמים
+                  </div>
                 </div>
               </div>
             </div>
@@ -402,19 +415,117 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* RTL calendar nav: left button = next month, right button = previous month (no icon changes) */}
       <style>{`
-        .rdp-nav {
+        /* ===== Luxury Calendar (scoped wrapper) ===== */
+
+        /* Light defaults */
+        .calendar-lux{
+          --lux-bg: #ffffff;
+          --lux-text: rgba(0,0,0,0.92);
+          --lux-muted: rgba(0,0,0,0.50);
+          --lux-border: rgba(0,0,0,0.10);
+          --lux-gold-1: #f0ddb0;
+          --lux-gold-2: #c9a84c;
+          --lux-hover: rgba(0,0,0,0.05);
+          background: var(--lux-bg);
+          border: 1px solid var(--lux-border);
+          border-radius: 22px;
+          box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+          overflow: hidden;
+        }
+
+        /* Dark mode: black luxury + thin gold frame */
+        .dark .calendar-lux{
+          --lux-bg: radial-gradient(140% 120% at 50% 0%,
+            rgba(255,255,255,0.06),
+            rgba(0,0,0,0.92)
+          );
+          --lux-text: rgba(255,255,255,0.92);
+          --lux-muted: rgba(255,255,255,0.55);
+          --lux-border: rgba(201,168,76,0.55);
+          --lux-hover: rgba(255,255,255,0.06);
+          background: var(--lux-bg);
+          border: 1px solid var(--lux-border); /* דק ויוקרתי */
+          box-shadow:
+            0 18px 55px rgba(0,0,0,0.55),
+            0 0 0 1px rgba(201,168,76,0.20) inset;
+        }
+
+        .calendar-lux .lux-muted{
+          color: var(--lux-muted) !important;
+        }
+
+        .calendar-lux .rdp,
+        .calendar-lux .rdp *{
+          color: var(--lux-text) !important;
+        }
+
+        .calendar-lux .rdp-caption_label{
+          font-weight: 900 !important;
+          letter-spacing: 0.2px;
+          text-shadow: 0 2px 18px rgba(201,168,76,0.22);
+        }
+
+        .calendar-lux .rdp-head_cell{
+          color: var(--lux-muted) !important;
+          font-weight: 800 !important;
+        }
+
+        .calendar-lux .rdp-day{
+          border-radius: 999px !important;
+          transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+        }
+
+        .calendar-lux .rdp-day:not(.rdp-day_selected):not(.rdp-day_disabled):hover{
+          background: var(--lux-hover) !important;
+          box-shadow: 0 0 0 1px rgba(201,168,76,0.15) inset !important;
+          transform: translateY(-1px);
+        }
+
+        .calendar-lux .rdp-day_disabled{
+          opacity: 0.45 !important;
+        }
+
+        .calendar-lux .rdp-day_today:not(.rdp-day_selected){
+          box-shadow: 0 0 0 1px rgba(201,168,76,0.18) inset !important;
+        }
+
+        /* Selected day = GOLD orb */
+        .calendar-lux .rdp-day_selected,
+        .calendar-lux .rdp-day_selected:hover{
+          background: radial-gradient(circle at 35% 30%,
+            var(--lux-gold-1),
+            var(--lux-gold-2)
+          ) !important;
+          color: rgba(0,0,0,0.92) !important;
+          box-shadow:
+            0 0 0 7px rgba(201,168,76,0.18),
+            0 12px 30px rgba(201,168,76,0.22),
+            0 0 60px rgba(201,168,76,0.38) !important;
+          transform: translateY(-1px);
+        }
+
+        .calendar-lux .rdp-nav_button{
+          width: 40px !important;
+          height: 40px !important;
+          border-radius: 999px !important;
+          background: rgba(255,255,255,0.03) !important;
+          border: 1px solid rgba(201,168,76,0.22) !important;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+        }
+
+        .calendar-lux .rdp-nav_button:hover{
+          background: rgba(201,168,76,0.10) !important;
+        }
+
+        /* RTL nav order */
+        .rdp-nav{
           display: flex;
           align-items: center;
           gap: 12px;
         }
-        [dir="rtl"] .rdp-nav_button_next {
-          order: 1; /* left */
-        }
-        [dir="rtl"] .rdp-nav_button_previous {
-          order: 2; /* right */
-        }
+        [dir="rtl"] .rdp-nav_button_next{ order: 1; }
+        [dir="rtl"] .rdp-nav_button_previous{ order: 2; }
       `}</style>
     </section>
   );
