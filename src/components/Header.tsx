@@ -102,6 +102,11 @@ export default function Header() {
   const goldText =
     "text-foreground hover:text-primary dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition";
 
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  };
+
   return (
     <header
       ref={headerRef}
@@ -211,46 +216,53 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR (SOLID) ================= */}
+      {/* ================= MOBILE BAR (SOLID + TOGGLE ICON) ================= */}
       <div
         className="lg:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
       >
         <div className="relative h-[84px] px-4 overflow-visible">
-          {/* RIGHT: Hamburger */}
+          {/* RIGHT: Toggle button (Hamburger <-> Close) */}
           <button
             type="button"
-            onClick={() => setMobileOpen(true)}
+            onClick={() => setMobileOpen((v) => !v)}
             className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/10 transition"
-            aria-label="פתח תפריט"
+            aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
           >
-            <span className="flex flex-col gap-1.5">
-              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-            </span>
+            {!mobileOpen ? (
+              <span className="flex flex-col gap-1.5">
+                <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+                <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+                <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+              </span>
+            ) : (
+              <span className="relative w-7 h-7">
+                <span className="absolute left-1/2 top-1/2 w-7 h-[2px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+                <span className="absolute left-1/2 top-1/2 w-7 h-[2px] -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+              </span>
+            )}
           </button>
 
-          {/* CENTER: Logo */}
+          {/* CENTER: Logo (with safe width so it won't collide) */}
           <Link
             to="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             aria-label="א.א פרויקטים וגובה"
-            onClick={() => setMobileOpen(false)}
+            onClick={closeMobile}
           >
             <img
               src={logoImage}
               alt="א.א פרויקטים וגובה"
-              className="h-[60px] w-auto object-contain"
+              className="h-[56px] w-auto max-w-[140px] object-contain"
               draggable={false}
             />
           </Link>
 
-          {/* LEFT: CTA */}
+          {/* LEFT: CTA (smaller + not touching logo) */}
           <Link
             to="/contact"
-            className="absolute left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-10 px-5 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap"
-            onClick={() => setMobileOpen(false)}
+            onClick={closeMobile}
+            className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
           >
             להצעת מחיר
           </Link>
@@ -280,43 +292,40 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER (SOLID, READABLE) ================= */}
+      {/* ================= MOBILE DRAWER (FULLY OPAQUE) ================= */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="rtl">
-          {/* Solid overlay */}
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/85"
-            onClick={() => setMobileOpen(false)}
-            aria-label="סגור תפריט"
-          />
+          {/* ✅ Opaque overlay (no bleed) */}
+          <button type="button" className="absolute inset-0 bg-black" onClick={closeMobile} aria-label="סגור תפריט" />
 
-          {/* Panel */}
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/20 p-5 shadow-2xl">
+          {/* ✅ Panel: solid black */}
+          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/25 p-5 shadow-2xl">
             <div className="flex items-center justify-between mb-6">
               <div className="font-bold text-[#dfc798]">תפריט</div>
               <button
                 type="button"
-                onClick={() => setMobileOpen(false)}
-                className="px-3 py-2 rounded-lg border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
+                onClick={closeMobile}
+                className="inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
+                aria-label="סגור"
               >
-                סגור
+                ✕
               </button>
             </div>
 
+            {/* ✅ ALL menu items are opaque (no /5) */}
             <div className="space-y-3 text-[18px] font-semibold">
               <Link
                 to="/"
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
               >
                 עמוד ראשי
               </Link>
 
               <Link
                 to="/about"
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
               >
                 אודות
               </Link>
@@ -324,19 +333,19 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setServicesOpen((v) => !v)}
-                className="w-full flex items-center justify-between rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
+                className="w-full flex items-center justify-between rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
               >
                 שירותים <span className="text-[14px] text-[#dfc798] opacity-90">{servicesOpen ? "▲" : "▼"}</span>
               </button>
 
               {servicesOpen && (
-                <div className="pr-2 space-y-2 text-[16px] rounded-xl bg-white/5 p-3 border border-white/10">
+                <div className="pr-2 space-y-2 text-[16px] rounded-xl bg-[#0b0b0b] p-3 border border-white/10">
                   {serviceLinks.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
-                      onClick={() => setMobileOpen(false)}
-                      className="block rounded-lg px-3 py-2 bg-black/40 hover:bg-white/10 transition"
+                      onClick={closeMobile}
+                      className="block rounded-lg px-3 py-2 bg-black hover:bg-[#141414] transition border border-white/5"
                     >
                       {item.label}
                     </Link>
@@ -346,31 +355,31 @@ export default function Header() {
 
               <Link
                 to="/projects"
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
               >
                 פרויקטים
               </Link>
 
               <Link
                 to="/pricing"
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
               >
                 מחירים
               </Link>
 
               <Link
                 to="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
               >
                 צור קשר
               </Link>
 
               <Link
                 to="/contact"
-                onClick={() => setMobileOpen(false)}
+                onClick={closeMobile}
                 className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold transition-all duration-300"
               >
                 להצעת מחיר
