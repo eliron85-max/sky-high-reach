@@ -9,15 +9,28 @@
   --dynamic-safe-area-top: 0px;
   /* Dynamic header padding - set by useSafeArea hook, fallback to 44px */
   --header-dynamic-padding: 44px;
+
   /* Mobile header: 76px bar + dynamic padding */
   --header-height-mobile: calc(76px + var(--header-dynamic-padding));
   /* Safe-area aware mobile header height (uses dynamic padding from JS) */
   --header-height-mobile-safe: calc(76px + var(--header-dynamic-padding));
+
   /* Desktop header: 120px (Row 1) + 44px (Row 2) = 164px */
   --header-height-desktop: 164px;
+
+  /* ✅ IMPORTANT: default header-height to prevent first-load black gap */
+  --header-height: var(--header-height-desktop);
+
   /* Offsets for page content (header + breathing room) */
   --header-offset-mobile: calc(var(--header-height-mobile-safe) + 16px);
   --header-offset-desktop: calc(var(--header-height-desktop) + 16px);
+}
+
+/* ✅ IMPORTANT: set default header-height for mobile too */
+@media (max-width: 1023px) {
+  :root {
+    --header-height: var(--header-height-mobile-safe);
+  }
 }
 
 /* Custom Font - Ploni with Heebo fallback */
@@ -29,10 +42,9 @@
   font-display: swap;
 }
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -324,6 +336,7 @@ All colors MUST be HSL.
     transform: translateZ(0) scale(1);
   }
 }
+
 @keyframes quoteShimmer {
   0% {
     transform: translateX(-150%) skewX(-20deg);
@@ -401,13 +414,13 @@ All colors MUST be HSL.
 .animate-gold-border-sweep {
   animation: goldBorderSweep 4s ease-in-out infinite;
 }
+
 /* ===== Lovable: Mobile header edge glow pulse + CTA hover boost ===== */
 @media (max-width: 1024px) {
   /* Mobile header - הסרת padding-top כפול, ה-Mobile Bar ב-Header.tsx מטפל בזה */
   header.fixed.top-0 {
     background: transparent !important; /* שקוף - ה-Mobile Bar עושה את העבודה */
     transform: translateY(0);
-    /* padding-top מוסר - מוגדר ב-Mobile Fixed Bar עצמו */
     transition:
       transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 800ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -450,7 +463,7 @@ All colors MUST be HSL.
     }
     100% {
       opacity: 0.22;
-    } /* נשאר עדין */
+    }
   }
 
   /* מפעיל pulse רק ברגע הפתיחה/מצב פתוח */
@@ -549,6 +562,7 @@ All colors MUST be HSL.
   word-spacing: inherit !important;
   line-height: inherit !important;
 }
+
 #enable-toolbar i,
 .enable-toolbar i,
 #enable-toolbar span,
@@ -561,6 +575,7 @@ All colors MUST be HSL.
   font-weight: 900 !important;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.75) !important;
 }
+
 /* RTL: make LEFT arrow go forward (swap prev/next positions visually) */
 [dir="rtl"] .rdp-nav {
   transform: scaleX(-1);
