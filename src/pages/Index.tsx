@@ -61,7 +61,7 @@ export default function Index() {
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
                   {/* 2 mobile / 3 tablet / 4 desktop — tighter like YouTube */}
-                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-5">
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4">
                     {services.map((s) => (
                       <article key={s.title} className="group cursor-pointer">
                         {/* 16:9 thumbnail */}
