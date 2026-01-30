@@ -6,7 +6,6 @@ import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
-import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
@@ -21,123 +20,116 @@ import stoneVeneerImage from "@/assets/stone-cladding.jpg";
 import demolitionOrdersImage from "@/assets/demolition-orders.webp";
 import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
-const services = [{
-  title: "עבודות מיוחדות",
-  image: specialProjectsImage
-}, {
-  title: "הרחקת מעופפים",
-  image: birdControlImage
-}, {
-  title: "איטום בגובה",
-  image: waterproofingImage
-}, {
-  title: "שיקום מעטפת",
-  image: facadeRestorationImage
-}, {
-  title: "חיפוי אבן",
-  image: stoneVeneerImage
-}, {
-  title: "ביטול צווי הריסה",
-  image: demolitionOrdersImage
-}, {
-  title: "צנרת ומרזבים",
-  image: pipingGuttersImage
-}, {
-  title: "פתרונות בגובה",
-  image: heightSolutionsImage
-}];
+
+const services = [
+  { title: "עבודות מיוחדות", image: specialProjectsImage },
+  { title: "הרחקת מעופפים", image: birdControlImage },
+  { title: "איטום בגובה", image: waterproofingImage },
+  { title: "שיקום מעטפת", image: facadeRestorationImage },
+  { title: "חיפוי אבן", image: stoneVeneerImage },
+  { title: "ביטול צווי הריסה", image: demolitionOrdersImage },
+  { title: "צנרת ומרזבים", image: pipingGuttersImage },
+  { title: "פתרונות בגובה", image: heightSolutionsImage },
+];
+
 export default function Index() {
-  const {
-    ref,
-    isVisible
-  } = useScrollReveal();
+  const { ref, isVisible } = useScrollReveal();
   const isMobile = useIsMobile();
-  const scrollToContact = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({
-      behavior: "smooth"
-    });
-  };
-  return <div className="min-h-screen bg-black">
+
+  return (
+    <div className="min-h-screen bg-black">
       <Header />
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
 
       <main className="pt-[var(--header-height)]">
-        <HeroStickyCollapse collapseDistance={650} mobileCollapseDistance={450} after={<>
+        <HeroStickyCollapse
+          collapseDistance={650}
+          mobileCollapseDistance={450}
+          after={
+            <>
               {/* SERVICES */}
-              <section ref={el => {
-          (ref as React.MutableRefObject<HTMLElement | null>).current = el;
-        }} className={`relative z-20 bg-black ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-700`}>
-                {/* FULL BLACK WRAPPER (prevents hero bleed) */}
-                <div className="relative w-full bg-black overflow-hidden">
-                  {/* TOP STRIP (full width) */}
-                  <div className="w-full h-[70px] bg-black" />
+              <section
+                ref={(el) => {
+                  (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+                }}
+                className={`relative z-20 bg-black ${
+                  isVisible ? "opacity-100" : "opacity-0"
+                } transition-opacity duration-700`}
+              >
+                {/* ✅ remove tall black strips; use normal padding instead */}
+                <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
+                  <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  {/* TITLE BAR (opaque, no bleed) */}
-                  <div className="w-full h-[90px] bg-black flex items-center justify-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
-                  </div>
-
-                  {/* BOTTOM STRIP (full width) */}
-                  <div className="w-full h-[70px] bg-black" />
-
-                  {/* OUTER BORDER */}
-                  <div className="bg-[#dfc798] p-[1px]">
-                    {/* GRID (inner grid lines) */}
+                  <div className="mt-10 bg-[#dfc798] p-[1px]">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
-                      {services.map(s => <div key={s.title} className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]">
-                          {/* IMAGE (zoom on hover) */}
-                          <img src={s.image} alt={s.title} className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]" />
+                      {services.map((s) => (
+                        <div
+                          key={s.title}
+                          className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]"
+                        >
+                          <img
+                            src={s.image}
+                            alt={s.title}
+                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
+                          />
 
-                          {/* OVERLAY (fade like you wanted) */}
                           <div className="absolute inset-0 bg-black/65 transition-opacity duration-500 ease-out group-hover:opacity-40" />
 
-                          {/* INNER BORDER */}
                           <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
 
-                          {/* TEXT */}
                           <div className="absolute bottom-6 w-full text-center px-3">
-                            <span style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      fontSize: "45px",
-                      lineHeight: "54px",
-                      color: "rgb(255, 228, 174)",
-                      textShadow: "0 10px 18px rgba(0,0,0,0.85)"
-                    }}>
+                            <span
+                              style={{
+                                fontFamily: "Montserrat, sans-serif",
+                                fontStyle: "normal",
+                                fontWeight: 500,
+                                fontSize: "45px",
+                                lineHeight: "54px",
+                                color: "rgb(255, 228, 174)",
+                                textShadow: "0 10px 18px rgba(0,0,0,0.85)",
+                              }}
+                            >
                               {s.title}
                             </span>
                           </div>
-                        </div>)}
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                  {/* SPACE BEFORE TRUST STRIP (not too tight) */}
-                  <div className="h-10 bg-black" />
                 </div>
               </section>
 
               <TrustStrip />
               <HomeTestimonials />
 
-              {/* CTA */}
-              <section className="py-16 text-center bg-black">
-                
-              </section>
+              {/* CTA (keep if you want, but remove empty tall black sections) */}
+              <section className="py-6 bg-black" />
 
-              {/* CONTACT (the actual box) */}
               <Contact />
-            </>}>
+            </>
+          }
+        >
           {/* HERO */}
           <section className="relative w-full overflow-hidden">
-            <div className="relative w-full" style={{
-            height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)"
-          }}>
-              <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
+            <div
+              className="relative w-full bg-black"
+              style={{
+                height: isMobile ? "clamp(420px,72vh,560px)" : "clamp(520px,78vh,720px)",
+              }}
+            >
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/hero-poster.jpg"
+              >
                 <source src="/hero.webm" type="video/webm" />
               </video>
+
               <div className="absolute inset-0 bg-black/45" />
             </div>
           </section>
@@ -145,5 +137,6 @@ export default function Index() {
       </main>
 
       <Footer />
-    </div>;
+    </div>
+  );
 }
