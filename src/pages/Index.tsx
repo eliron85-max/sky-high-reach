@@ -48,7 +48,7 @@ export default function Index() {
           mobileCollapseDistance={450}
           after={
             <>
-              {/* SERVICES */}
+              {/* SERVICES — YouTube-style grid */}
               <section
                 ref={(el) => {
                   (ref as React.MutableRefObject<HTMLElement | null>).current = el;
@@ -57,45 +57,41 @@ export default function Index() {
                   isVisible ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
               >
-                {/* ✅ remove tall black strips; use normal padding instead */}
                 <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  <div className="mt-10 bg-[#dfc798] p-[1px]">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-black">
-                      {services.map((s) => (
-                        <div
-                          key={s.title}
-                          className="group relative overflow-hidden h-[270px] md:h-[320px] xl:h-[360px]"
-                        >
+                  {/* 2 mobile / 3 tablet / 4 desktop */}
+                  <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
+                    {services.map((s) => (
+                      <article key={s.title} className="group">
+                        {/* 16:9 thumbnail */}
+                        <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black">
                           <img
                             src={s.image}
                             alt={s.title}
-                            className="absolute inset-0 w-full h-full object-cover transform-gpu will-change-transform transition-transform duration-[1100ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.18]"
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-[900ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.08]"
                           />
 
-                          <div className="absolute inset-0 bg-black/65 transition-opacity duration-500 ease-out group-hover:opacity-40" />
+                          {/* overlay */}
+                          <div className="absolute inset-0 bg-black/35 transition-opacity duration-500 group-hover:opacity-15" />
 
-                          <div className="absolute inset-0 border border-[#a79471] pointer-events-none" />
-
-                          <div className="absolute bottom-6 w-full text-center px-3">
-                            <span
-                              style={{
-                                fontFamily: "Montserrat, sans-serif",
-                                fontStyle: "normal",
-                                fontWeight: 500,
-                                fontSize: "45px",
-                                lineHeight: "54px",
-                                color: "rgb(255, 228, 174)",
-                                textShadow: "0 10px 18px rgba(0,0,0,0.85)",
-                              }}
-                            >
-                              {s.title}
-                            </span>
-                          </div>
+                          {/* subtle border */}
+                          <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
                         </div>
-                      ))}
-                    </div>
+
+                        {/* Title under thumbnail */}
+                        <div className="mt-3">
+                          <h3
+                            className="text-[18px] md:text-[20px] font-semibold text-[#ffe4ae] leading-tight"
+                            style={{ fontFamily: "Montserrat, sans-serif" }}
+                          >
+                            {s.title}
+                          </h3>
+                          <p className="mt-1 text-sm text-white/55">עבודות גובה | סנפלינג | מעטפת</p>
+                        </div>
+                      </article>
+                    ))}
                   </div>
                 </div>
               </section>
@@ -103,7 +99,7 @@ export default function Index() {
               <TrustStrip />
               <HomeTestimonials />
 
-              {/* CTA (keep if you want, but remove empty tall black sections) */}
+              {/* Small spacing (no empty huge black sections) */}
               <section className="py-6 bg-black" />
 
               <Contact />
