@@ -70,7 +70,6 @@ export default function Header() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
-      // small threshold for smoothness on mobile/OS bounce
       setIsVisible(y <= 2);
     };
 
@@ -93,6 +92,11 @@ export default function Header() {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     };
+  }, [mobileOpen]);
+
+  // Close services accordion when closing drawer
+  useEffect(() => {
+    if (!mobileOpen) setServicesOpen(false);
   }, [mobileOpen]);
 
   const goldText =
@@ -207,9 +211,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR ================= */}
+      {/* ================= MOBILE BAR (SOLID) ================= */}
       <div
-        className="lg:hidden relative z-[55] overflow-visible bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-border dark:border-[#c9a84c]/20"
+        className="lg:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
       >
         <div className="relative h-[84px] px-4 overflow-visible">
@@ -217,13 +221,13 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition"
+            className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/10 transition"
             aria-label="פתח תפריט"
           >
             <span className="flex flex-col gap-1.5">
-              <span className="w-7 h-[2px] bg-foreground dark:bg-gradient-to-r dark:from-[#e8d5a3] dark:to-[#c9a84c]" />
-              <span className="w-7 h-[2px] bg-foreground dark:bg-gradient-to-r dark:from-[#e8d5a3] dark:to-[#c9a84c]" />
-              <span className="w-7 h-[2px] bg-foreground dark:bg-gradient-to-r dark:from-[#e8d5a3] dark:to-[#c9a84c]" />
+              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+              <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
             </span>
           </button>
 
@@ -232,6 +236,7 @@ export default function Header() {
             to="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             aria-label="א.א פרויקטים וגובה"
+            onClick={() => setMobileOpen(false)}
           >
             <img
               src={logoImage}
@@ -245,6 +250,7 @@ export default function Header() {
           <Link
             to="/contact"
             className="absolute left-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-10 px-5 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap"
+            onClick={() => setMobileOpen(false)}
           >
             להצעת מחיר
           </Link>
@@ -274,34 +280,35 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER ================= */}
+      {/* ================= MOBILE DRAWER (SOLID, READABLE) ================= */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden bg-black/50 dark:bg-black">
+        <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="rtl">
+          {/* Solid overlay */}
           <button
             type="button"
-            className="absolute left-0 top-0 w-[14%] h-full"
+            className="absolute inset-0 bg-black/85"
             onClick={() => setMobileOpen(false)}
             aria-label="סגור תפריט"
           />
 
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-white dark:bg-black border-l border-border dark:border-[#c9a84c]/20 p-5">
+          {/* Panel */}
+          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/20 p-5 shadow-2xl">
             <div className="flex items-center justify-between mb-6">
-              <div className={`font-bold ${goldText}`}>תפריט</div>
+              <div className="font-bold text-[#dfc798]">תפריט</div>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="text-foreground hover:text-primary dark:text-[#c9a84c] dark:hover:text-[#e8d5a3] transition"
+                className="px-3 py-2 rounded-lg border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
               >
-                ✕
+                סגור
               </button>
             </div>
 
-            <div className="space-y-4 text-[18px] font-semibold">
+            <div className="space-y-3 text-[18px] font-semibold">
               <Link
                 to="/"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:scale-[0.97] active:scale-95 duration-200 origin-right animate-slide-in-stagger`}
-                style={{ animationDelay: "0ms" }}
+                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
               >
                 עמוד ראשי
               </Link>
@@ -309,8 +316,7 @@ export default function Header() {
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:scale-[0.97] active:scale-95 duration-200 origin-right animate-slide-in-stagger`}
-                style={{ animationDelay: "100ms" }}
+                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
               >
                 אודות
               </Link>
@@ -318,20 +324,19 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setServicesOpen((v) => !v)}
-                className={`w-full flex items-center justify-between ${goldText} hover:scale-[0.97] active:scale-95 duration-200 origin-right animate-slide-in-stagger`}
-                style={{ animationDelay: "200ms" }}
+                className="w-full flex items-center justify-between rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
               >
-                שירותים <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
+                שירותים <span className="text-[14px] text-[#dfc798] opacity-90">{servicesOpen ? "▲" : "▼"}</span>
               </button>
 
               {servicesOpen && (
-                <div className="pr-3 space-y-2 text-[16px] bg-muted dark:bg-[#0a0a0a] rounded-lg p-2">
+                <div className="pr-2 space-y-2 text-[16px] rounded-xl bg-white/5 p-3 border border-white/10">
                   {serviceLinks.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileOpen(false)}
-                      className={`${goldText} block hover:scale-[0.97] active:scale-95 duration-200 origin-right`}
+                      className="block rounded-lg px-3 py-2 bg-black/40 hover:bg-white/10 transition"
                     >
                       {item.label}
                     </Link>
@@ -342,8 +347,7 @@ export default function Header() {
               <Link
                 to="/projects"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:scale-[0.97] active:scale-95 duration-200 origin-right animate-slide-in-stagger`}
-                style={{ animationDelay: "300ms" }}
+                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
               >
                 פרויקטים
               </Link>
@@ -351,8 +355,7 @@ export default function Header() {
               <Link
                 to="/pricing"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:scale-[0.97] active:scale-95 duration-200 origin-right animate-slide-in-stagger`}
-                style={{ animationDelay: "400ms" }}
+                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
               >
                 מחירים
               </Link>
@@ -360,8 +363,7 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className={`${goldText} block hover:scale-[0.97] active:scale-95 duration-200 origin-right animate-slide-in-stagger`}
-                style={{ animationDelay: "500ms" }}
+                className="block rounded-xl px-3 py-3 bg-white/5 hover:bg-white/10 transition"
               >
                 צור קשר
               </Link>
@@ -369,12 +371,13 @@ export default function Header() {
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-[0.97] active:scale-95 animate-slide-in-stagger"
-                style={{ animationDelay: "600ms" }}
+                className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold transition-all duration-300"
               >
                 להצעת מחיר
               </Link>
             </div>
+
+            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
           </div>
         </div>
       )}
