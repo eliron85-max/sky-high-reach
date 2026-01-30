@@ -48,7 +48,7 @@ export default function Index() {
           mobileCollapseDistance={450}
           after={
             <>
-              {/* SERVICES — YouTube-style grid (WIDER) */}
+              {/* SERVICES — YouTube-style grid */}
               <section
                 ref={(el) => {
                   (ref as React.MutableRefObject<HTMLElement | null>).current = el;
@@ -57,28 +57,29 @@ export default function Index() {
                   isVisible ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
               >
-                {/* ✅ Wider container (fixes “still small”) */}
-                <div className="mx-auto max-w-[1750px] px-4 py-12 md:py-16">
+                <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  {/* 2 mobile / 3 tablet / 4 desktop */}
-                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-5">
+                  {/* 2 mobile / 3 tablet / 4 desktop — tighter like YouTube */}
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-5">
                     {services.map((s) => (
                       <article key={s.title} className="group cursor-pointer">
+                        {/* 16:9 thumbnail */}
                         <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg bg-black">
                           <img
                             src={s.image}
                             alt={s.title}
                             loading="lazy"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.08]"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                           />
                           <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors" />
                           <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
                         </div>
 
+                        {/* text under image */}
                         <div className="mt-2">
                           <h3
-                            className="text-[16px] md:text-[17px] font-semibold text-[#ffe4ae] leading-snug line-clamp-1"
+                            className="text-[15px] md:text-[16px] font-semibold text-[#ffe4ae] leading-snug line-clamp-1"
                             style={{ fontFamily: "Montserrat, sans-serif" }}
                           >
                             {s.title}
