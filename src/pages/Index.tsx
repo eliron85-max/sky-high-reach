@@ -48,7 +48,7 @@ export default function Index() {
           mobileCollapseDistance={450}
           after={
             <>
-              {/* SERVICES — YouTube-style grid (BIGGER) */}
+              {/* SERVICES — YouTube-style grid (WIDER) */}
               <section
                 ref={(el) => {
                   (ref as React.MutableRefObject<HTMLElement | null>).current = el;
@@ -57,12 +57,12 @@ export default function Index() {
                   isVisible ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-700`}
               >
-                {/* ✅ Wider container */}
-                <div className="mx-auto max-w-[1600px] px-4 py-12 md:py-16">
+                {/* ✅ Wider container (fixes “still small”) */}
+                <div className="mx-auto max-w-[1750px] px-4 py-12 md:py-16">
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  {/* ✅ Bigger cards: 2 mobile / 3 tablet / 3 desktop */}
-                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-3 gap-y-5">
+                  {/* 2 mobile / 3 tablet / 4 desktop */}
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-5">
                     {services.map((s) => (
                       <article key={s.title} className="group cursor-pointer">
                         <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg bg-black">
