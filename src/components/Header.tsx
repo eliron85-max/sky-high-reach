@@ -243,7 +243,7 @@ export default function Header() {
             )}
           </button>
 
-          {/* CENTER: Logo (with safe width so it won't collide) */}
+          {/* CENTER: Logo (safe size so it won't collide) */}
           <Link
             to="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -258,7 +258,7 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT: CTA (smaller + not touching logo) */}
+          {/* LEFT: CTA (smaller, not touching logo) */}
           <Link
             to="/contact"
             onClick={closeMobile}
@@ -292,27 +292,31 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER (FULLY OPAQUE) ================= */}
+      {/* ================= MOBILE DRAWER (FULLY OPAQUE + CLOSE RIGHT) ================= */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="rtl">
-          {/* ✅ Opaque overlay (no bleed) */}
+          {/* Opaque overlay */}
           <button type="button" className="absolute inset-0 bg-black" onClick={closeMobile} aria-label="סגור תפריט" />
 
-          {/* ✅ Panel: solid black */}
+          {/* Panel */}
           <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/25 p-5 shadow-2xl">
-            <div className="flex items-center justify-between mb-6">
-              <div className="font-bold text-[#dfc798]">תפריט</div>
+            {/* Header row: title centered, X on the RIGHT */}
+            <div className="relative mb-6 h-11">
+              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 font-bold text-[#dfc798]">
+                תפריט
+              </div>
+
               <button
                 type="button"
                 onClick={closeMobile}
-                className="inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
+                className="absolute right-0 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
                 aria-label="סגור"
               >
                 ✕
               </button>
             </div>
 
-            {/* ✅ ALL menu items are opaque (no /5) */}
+            {/* Menu items - opaque */}
             <div className="space-y-3 text-[18px] font-semibold">
               <Link
                 to="/"
