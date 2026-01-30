@@ -1,5 +1,4 @@
 // src/components/Header.tsx
-
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Accessibility } from "lucide-react";
@@ -228,6 +227,7 @@ export default function Header() {
             onClick={() => setMobileOpen((v) => !v)}
             className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/10 transition"
             aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
+            aria-expanded={mobileOpen}
           >
             {!mobileOpen ? (
               <span className="flex flex-col gap-1.5">
@@ -292,138 +292,135 @@ export default function Header() {
         </div>
       </div>
 
-{/* ================= MOBILE DRAWER (ARCCA 1:1 STYLE - RTL FLIPPED) ================= */}
-{mobileOpen && (
-  <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
-    {/* Fullscreen panel - MUST be fixed to avoid iOS/viewport gaps */}
-    <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
-      {/* ===== RIGHT COLUMN (MENU LIGHT) ===== */}
-      <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right">
-        {/* top spacer */}
-        <div className="h-[64px] border-b border-black/20" />
+      {/* ================= MOBILE DRAWER (ARCCA 1:1 - MENU RIGHT, INFO LEFT) ================= */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
+          {/* Fullscreen panel */}
+          <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
+            {/* ===== RIGHT COLUMN (MENU LIGHT) ===== */}
+            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right">
+              <div className="h-[64px] border-b border-black/20" />
 
-        <div className="divide-y divide-black/20">
-          <Link
-            to="/"
-            onClick={closeMobile}
-            className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
-          >
-            HOME
-          </Link>
+              <div className="divide-y divide-black/20">
+                <Link
+                  to="/"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  HOME
+                </Link>
 
-          <Link
-            to="/about"
-            onClick={closeMobile}
-            className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
-          >
-            ABOUT US
-          </Link>
+                <Link
+                  to="/about"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  ABOUT US
+                </Link>
 
-          {/* SERVICES */}
-          <div>
-            <button
-              type="button"
-              onClick={() => setServicesOpen((v) => !v)}
-              className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] uppercase hover:bg-black/5"
-            >
-              <span>{servicesOpen ? "▲" : "▼"}</span>
-              SERVICES
-            </button>
-
-            {servicesOpen && (
-              <div className="border-t border-black/20">
-                {serviceLinks.map((s) => (
-                  <Link
-                    key={s.path}
-                    to={s.path}
-                    onClick={closeMobile}
-                    className="block px-6 py-3 text-[14px] hover:bg-black/5 text-right"
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setServicesOpen((v) => !v)}
+                    className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] uppercase hover:bg-black/5"
                   >
-                    {s.label}
-                  </Link>
-                ))}
+                    <span>{servicesOpen ? "▲" : "▼"}</span>
+                    SERVICES
+                  </button>
+
+                  {servicesOpen && (
+                    <div className="border-t border-black/20">
+                      {serviceLinks.map((s) => (
+                        <Link
+                          key={s.path}
+                          to={s.path}
+                          onClick={closeMobile}
+                          className="block px-6 py-3 text-[14px] hover:bg-black/5 text-right"
+                        >
+                          {s.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  to="/projects"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  PROJECTS
+                </Link>
+
+                <Link
+                  to="/pricing"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  PRICING
+                </Link>
+
+                <Link
+                  to="/contact"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  CONTACT
+                </Link>
               </div>
-            )}
-          </div>
+            </nav>
 
-          <Link
-            to="/projects"
-            onClick={closeMobile}
-            className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
-          >
-            PROJECTS
-          </Link>
+            {/* ===== LEFT COLUMN (DARK INFO) ===== */}
+            <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
+              {/* CLOSE */}
+              <button
+                type="button"
+                onClick={closeMobile}
+                className="absolute top-4 left-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
+                aria-label="Close"
+              >
+                ✕
+              </button>
 
-          <Link
-            to="/pricing"
-            onClick={closeMobile}
-            className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
-          >
-            PRICING
-          </Link>
+              <div className="h-full flex flex-col px-6 pt-10 pb-6">
+                <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
 
-          <Link
-            to="/contact"
-            onClick={closeMobile}
-            className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] uppercase hover:bg-black/5"
-          >
-            CONTACT
-          </Link>
-        </div>
-      </nav>
+                <div className="mt-8 h-px bg-white/10" />
 
-      {/* ===== LEFT COLUMN (DARK INFO) ===== */}
-      <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden text-left" dir="ltr">
-        {/* CLOSE (TOP LEFT) */}
-        <button
-          type="button"
-          onClick={closeMobile}
-          className="absolute top-4 left-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
-          aria-label="Close"
-        >
-          ✕
-        </button>
+                <div className="mt-6 grid grid-cols-2 gap-6 text-[12px]">
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Email</div>
+                    <div className="mt-2 break-words">contact@heights-projects.com</div>
+                  </div>
 
-        <div className="h-full flex flex-col px-6 pt-10 pb-6">
-          <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Phone</div>
+                    <div className="mt-2 break-words">055-661-6326</div>
+                  </div>
 
-          <div className="mt-8 h-px bg-white/10" />
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Location</div>
+                    <div className="mt-2 break-words">Israel</div>
+                  </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-6 text-[12px]">
-            <div>
-              <div className="opacity-60 uppercase tracking-widest">Email</div>
-              <div className="mt-2 break-words">contact@heights-projects.com</div>
-            </div>
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Social</div>
+                    <div className="mt-2 break-words">Instagram / Facebook</div>
+                  </div>
+                </div>
 
-            <div>
-              <div className="opacity-60 uppercase tracking-widest">Phone</div>
-              <div className="mt-2 break-words">055-661-6326</div>
-            </div>
-
-            <div>
-              <div className="opacity-60 uppercase tracking-widest">Location</div>
-              <div className="mt-2 break-words">Israel</div>
-            </div>
-
-            <div>
-              <div className="opacity-60 uppercase tracking-widest">Social</div>
-              <div className="mt-2 break-words">Instagram / Facebook</div>
-            </div>
-          </div>
-
-          <div className="mt-auto">
-            <div className="h-px bg-white/10 mb-4" />
-            <div className="flex justify-between text-[10px] opacity-60 tracking-widest">
-              <span>Privacy Policy</span>
-              <span>© A.A</span>
-            </div>
+                <div className="mt-auto">
+                  <div className="h-px bg-white/10 mb-4" />
+                  <div className="flex justify-between text-[10px] opacity-60 tracking-widest">
+                    <span>Privacy Policy</span>
+                    <span>© A.A</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
-      </aside>
-    </div>
-  </div>
-)}
-   )}
+      )}
     </header>
   );
 }
