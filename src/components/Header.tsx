@@ -12,13 +12,10 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // ====== Dynamic header height -> writes --header-height to :root ======
   const headerRef = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  useLayoutEffect(() => {
-    setMounted(true);
-  }, []);
+  useLayoutEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!mounted || !headerRef.current) return;
@@ -34,7 +31,6 @@ export default function Header() {
 
     const ro = new ResizeObserver(setVar);
     ro.observe(el);
-
     window.addEventListener("resize", setVar, { passive: true });
 
     return () => {
@@ -66,19 +62,18 @@ export default function Header() {
     [],
   );
 
-  // ✅ Header appears ONLY when reaching the very top (scrollY ~ 0)
+  // Header visible only at very top
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
       setIsVisible(y <= 2);
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile drawer is open
+  // Lock body scroll when drawer open
   useEffect(() => {
     if (mobileOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -115,7 +110,7 @@ export default function Header() {
       }`}
       dir="rtl"
     >
-      {/* Animated gold border line */}
+      {/* gold border line */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
         <div className="h-full w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-gold-border-sweep" />
       </div>
@@ -123,17 +118,14 @@ export default function Header() {
       {/* ================= ROW 1 (Desktop only) ================= */}
       <div className="hidden lg:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
-          {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
               עמוד ראשי
             </Link>
-
             <Link to="/about" className={`${goldText} whitespace-nowrap`}>
               אודות
             </Link>
 
-            {/* Services dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setServicesOpen(true)}
@@ -167,7 +159,6 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* CENTER column: LOGO */}
           <Link to="/" className="justify-self-center" aria-label="א.א פרויקטים וגובה">
             <img
               src={logoImage}
@@ -177,17 +168,14 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT column: NAV + BUTTONS */}
           <div className="flex items-center justify-self-start gap-4 xl:gap-6 min-w-0">
             <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold">
               <Link to="/projects" className={`${goldText} whitespace-nowrap`}>
                 פרויקטים
               </Link>
-
               <Link to="/pricing" className={`${goldText} whitespace-nowrap`}>
                 מחירים
               </Link>
-
               <Link to="/contact" className={`${goldText} whitespace-nowrap`}>
                 צור קשר
               </Link>
@@ -216,15 +204,16 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR (SOLID + TOGGLE ICON) ================= */}
+      {/* ================= MOBILE BAR ================= */}
       <div
         className="lg:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
       >
         <div className="relative h-[84px] px-4 overflow-visible">
-          {/* RIGHT: Toggle button (Hamburger <-> Close) */}
+          {/* RIGHT: Toggle button */}
           <button
             type="button"
+            aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
             className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/10 transition"
             aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
@@ -258,7 +247,7 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT: CTA (smaller) */}
+          {/* LEFT: CTA smaller */}
           <Link
             to="/contact"
             onClick={closeMobile}
@@ -292,110 +281,144 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER (100% OPAQUE) ================= */}
+      {/* ================= MOBILE DRAWER (ARCCA 1:1 STYLE) ================= */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="rtl">
-          {/* ✅ REAL overlay as DIV (always opaque) */}
-          <div className="absolute inset-0 bg-black z-0" />
-          {/* ✅ Click layer */}
-          <button type="button" className="absolute inset-0 z-10" onClick={closeMobile} aria-label="סגור תפריט" />
+        <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="ltr">
+          {/* FULL OPAQUE overlay */}
+          <div className="absolute inset-0 bg-black" />
+          <button type="button" className="absolute inset-0" onClick={closeMobile} aria-label="סגור תפריט" />
 
-          {/* ✅ Panel (top) */}
-          <div className="absolute right-0 top-0 z-20 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/25 p-5 shadow-2xl overflow-hidden">
-            {/* ✅ Extra inner black layer (kills any global blur/opacity) */}
-            <div className="absolute inset-0 bg-black z-0" />
-            <div className="relative z-10">
-              {/* Header row: title centered, X on the RIGHT */}
-              <div className="relative mb-6 h-11">
-                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 font-bold text-[#dfc798]">
-                  תפריט
+          {/* FULLSCREEN panel (two columns) */}
+          <div className="absolute inset-0 z-20 overflow-hidden">
+            <div className="grid h-full w-full grid-cols-[1.15fr_0.85fr]">
+              {/* LEFT column: MENU (light) */}
+              <nav className="bg-[#d7cfbf] text-[#1b1b1b]">
+                <div className="h-full w-full">
+                  {/* Top spacer (like the video) */}
+                  <div className="h-[56px] border-b border-black/20" />
+
+                  <div className="divide-y divide-black/20">
+                    {[
+                      { label: "עמוד ראשי", path: "/" },
+                      { label: "אודות", path: "/about" },
+                      // services item behaves like dropdown
+                      { label: "שירותים", path: "#services" as any },
+                      { label: "פרויקטים", path: "/projects" },
+                      { label: "מחירים", path: "/pricing" },
+                      { label: "צור קשר", path: "/contact" },
+                    ].map((item) => {
+                      const isServices = item.label === "שירותים";
+                      if (isServices) {
+                        return (
+                          <div key="services">
+                            <button
+                              type="button"
+                              onClick={() => setServicesOpen((v) => !v)}
+                              className="w-full h-[56px] px-5 flex items-center justify-between text-[16px] tracking-[0.12em] uppercase"
+                            >
+                              <span>SERVICES</span>
+                              <span className="text-[14px] opacity-70">{servicesOpen ? "▲" : "▼"}</span>
+                            </button>
+
+                            {servicesOpen && (
+                              <div className="border-t border-black/20 bg-[#d7cfbf]">
+                                {serviceLinks.map((s) => (
+                                  <Link
+                                    key={s.path}
+                                    to={s.path}
+                                    onClick={closeMobile}
+                                    className="block px-6 py-3 text-[14px] tracking-[0.06em] hover:bg-black/5"
+                                  >
+                                    {s.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      }
+
+                      // regular links – show as EN labels like the video style (but routes stay yours)
+                      const mapToVideoLabel: Record<string, string> = {
+                        "עמוד ראשי": "HOME",
+                        אודות: "ABOUT US",
+                        פרויקטים: "PROJECTS",
+                        מחירים: "PRICING",
+                        "צור קשר": "CONTACT",
+                      };
+
+                      return (
+                        <Link
+                          key={item.label}
+                          to={item.path}
+                          onClick={closeMobile}
+                          className="h-[56px] px-5 flex items-center text-[16px] tracking-[0.12em] uppercase hover:bg-black/5"
+                        >
+                          {mapToVideoLabel[item.label] ?? item.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
+              </nav>
 
+              {/* RIGHT column: INFO (dark) */}
+              <aside className="bg-[#1c1714] text-[#e6dccb] relative">
+                {/* top right close */}
                 <button
                   type="button"
                   onClick={closeMobile}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
-                  aria-label="סגור"
+                  className="absolute top-4 right-4 inline-flex items-center justify-center w-11 h-11 rounded-xl border border-white/10 hover:bg-white/5 transition"
+                  aria-label="Close"
                 >
                   ✕
                 </button>
-              </div>
 
-              {/* Menu items - opaque */}
-              <div className="space-y-3 text-[18px] font-semibold">
-                <Link
-                  to="/"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  עמוד ראשי
-                </Link>
-
-                <Link
-                  to="/about"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  אודות
-                </Link>
-
-                <button
-                  type="button"
-                  onClick={() => setServicesOpen((v) => !v)}
-                  className="w-full flex items-center justify-between rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  שירותים <span className="text-[14px] text-[#dfc798] opacity-90">{servicesOpen ? "▲" : "▼"}</span>
-                </button>
-
-                {servicesOpen && (
-                  <div className="pr-2 space-y-2 text-[16px] rounded-xl bg-[#0b0b0b] p-3 border border-white/10">
-                    {serviceLinks.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        onClick={closeMobile}
-                        className="block rounded-lg px-3 py-2 bg-black hover:bg-[#141414] transition border border-white/5"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
+                <div className="h-full w-full px-5 pt-8 pb-6 flex flex-col">
+                  {/* Brand / logo area */}
+                  <div className="mt-2">
+                    <img
+                      src={logoImage}
+                      alt="א.א פרויקטים וגובה"
+                      className="h-[54px] w-auto object-contain opacity-95"
+                      draggable={false}
+                    />
                   </div>
-                )}
 
-                <Link
-                  to="/projects"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  פרויקטים
-                </Link>
+                  {/* divider */}
+                  <div className="mt-6 h-px w-full bg-white/10" />
 
-                <Link
-                  to="/pricing"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  מחירים
-                </Link>
+                  {/* Contact blocks (like the video) */}
+                  <div className="mt-6 grid grid-cols-2 gap-6 text-[12px]">
+                    <div>
+                      <div className="opacity-60 tracking-[0.18em] uppercase">Email</div>
+                      <div className="mt-2 opacity-90">contact@heights-projects.com</div>
+                    </div>
+                    <div>
+                      <div className="opacity-60 tracking-[0.18em] uppercase">Address</div>
+                      <div className="mt-2 opacity-90">Israel</div>
+                    </div>
 
-                <Link
-                  to="/contact"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  צור קשר
-                </Link>
+                    <div>
+                      <div className="opacity-60 tracking-[0.18em] uppercase">Phone</div>
+                      <div className="mt-2 opacity-90">055-661-6326</div>
+                    </div>
+                    <div>
+                      <div className="opacity-60 tracking-[0.18em] uppercase">Social</div>
+                      <div className="mt-2 opacity-90">Instagram / Facebook</div>
+                    </div>
+                  </div>
 
-                <Link
-                  to="/contact"
-                  onClick={closeMobile}
-                  className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold transition-all duration-300"
-                >
-                  להצעת מחיר
-                </Link>
-              </div>
-
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
+                  {/* bottom line + small footer */}
+                  <div className="mt-auto">
+                    <div className="h-px w-full bg-white/10" />
+                    <div className="mt-4 flex items-center justify-between text-[10px] opacity-60 tracking-[0.12em] uppercase">
+                      <span>Privacy Policy</span>
+                      <span>© A.A</span>
+                    </div>
+                  </div>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
