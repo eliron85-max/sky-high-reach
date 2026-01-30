@@ -243,7 +243,7 @@ export default function Header() {
             )}
           </button>
 
-          {/* CENTER: Logo */}
+          {/* CENTER: Logo (safe size so it won't collide) */}
           <Link
             to="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -258,7 +258,7 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT: CTA (smaller) */}
+          {/* LEFT: CTA (smaller, not touching logo) */}
           <Link
             to="/contact"
             onClick={closeMobile}
@@ -292,111 +292,105 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER (100% OPAQUE) ================= */}
+      {/* ================= MOBILE DRAWER (FULLY OPAQUE + CLOSE RIGHT) ================= */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="rtl">
-          {/* ✅ REAL overlay as DIV (always opaque) */}
-          <div className="absolute inset-0 bg-black z-0" />
-          {/* ✅ Click layer */}
-          <button type="button" className="absolute inset-0 z-10" onClick={closeMobile} aria-label="סגור תפריט" />
+          {/* Opaque overlay */}
+          <button type="button" className="absolute inset-0 bg-black" onClick={closeMobile} aria-label="סגור תפריט" />
 
-          {/* ✅ Panel (top) */}
-          <div className="absolute right-0 top-0 z-20 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/25 p-5 shadow-2xl overflow-hidden">
-            {/* ✅ Extra inner black layer (kills any global blur/opacity) */}
-            <div className="absolute inset-0 bg-black z-0" />
-            <div className="relative z-10">
-              {/* Header row: title centered, X on the RIGHT */}
-              <div className="relative mb-6 h-11">
-                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 font-bold text-[#dfc798]">
-                  תפריט
-                </div>
-
-                <button
-                  type="button"
-                  onClick={closeMobile}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
-                  aria-label="סגור"
-                >
-                  ✕
-                </button>
+          {/* Panel */}
+          <div className="absolute right-0 top-0 h-full w-[86%] max-w-[360px] bg-black text-white border-l border-[#c9a84c]/25 p-5 shadow-2xl">
+            {/* Header row: title centered, X on the RIGHT */}
+            <div className="relative mb-6 h-11">
+              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 font-bold text-[#dfc798]">
+                תפריט
               </div>
 
-              {/* Menu items - opaque */}
-              <div className="space-y-3 text-[18px] font-semibold">
-                <Link
-                  to="/"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  עמוד ראשי
-                </Link>
-
-                <Link
-                  to="/about"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  אודות
-                </Link>
-
-                <button
-                  type="button"
-                  onClick={() => setServicesOpen((v) => !v)}
-                  className="w-full flex items-center justify-between rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  שירותים <span className="text-[14px] text-[#dfc798] opacity-90">{servicesOpen ? "▲" : "▼"}</span>
-                </button>
-
-                {servicesOpen && (
-                  <div className="pr-2 space-y-2 text-[16px] rounded-xl bg-[#0b0b0b] p-3 border border-white/10">
-                    {serviceLinks.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        onClick={closeMobile}
-                        className="block rounded-lg px-3 py-2 bg-black hover:bg-[#141414] transition border border-white/5"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-
-                <Link
-                  to="/projects"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  פרויקטים
-                </Link>
-
-                <Link
-                  to="/pricing"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  מחירים
-                </Link>
-
-                <Link
-                  to="/contact"
-                  onClick={closeMobile}
-                  className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
-                >
-                  צור קשר
-                </Link>
-
-                <Link
-                  to="/contact"
-                  onClick={closeMobile}
-                  className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold transition-all duration-300"
-                >
-                  להצעת מחיר
-                </Link>
-              </div>
-
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
+              <button
+                type="button"
+                onClick={closeMobile}
+                className="absolute right-0 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-xl border border-[#c9a84c]/25 text-[#dfc798] hover:bg-white/5 transition"
+                aria-label="סגור"
+              >
+                ✕
+              </button>
             </div>
+
+            {/* Menu items - opaque */}
+            <div className="space-y-3 text-[18px] font-semibold">
+              <Link
+                to="/"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
+              >
+                עמוד ראשי
+              </Link>
+
+              <Link
+                to="/about"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
+              >
+                אודות
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => setServicesOpen((v) => !v)}
+                className="w-full flex items-center justify-between rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
+              >
+                שירותים <span className="text-[14px] text-[#dfc798] opacity-90">{servicesOpen ? "▲" : "▼"}</span>
+              </button>
+
+              {servicesOpen && (
+                <div className="pr-2 space-y-2 text-[16px] rounded-xl bg-[#0b0b0b] p-3 border border-white/10">
+                  {serviceLinks.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={closeMobile}
+                      className="block rounded-lg px-3 py-2 bg-black hover:bg-[#141414] transition border border-white/5"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              <Link
+                to="/projects"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
+              >
+                פרויקטים
+              </Link>
+
+              <Link
+                to="/pricing"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
+              >
+                מחירים
+              </Link>
+
+              <Link
+                to="/contact"
+                onClick={closeMobile}
+                className="block rounded-xl px-3 py-3 bg-[#0b0b0b] hover:bg-[#141414] transition"
+              >
+                צור קשר
+              </Link>
+
+              <Link
+                to="/contact"
+                onClick={closeMobile}
+                className="quote-shimmer mt-3 inline-flex items-center justify-center h-11 w-full rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold transition-all duration-300"
+              >
+                להצעת מחיר
+              </Link>
+            </div>
+
+            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
           </div>
         </div>
       )}
