@@ -12,10 +12,13 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
+  // ====== Dynamic header height -> writes --header-height to :root ======
   const headerRef = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  useLayoutEffect(() => setMounted(true), []);
+  useLayoutEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!mounted || !headerRef.current) return;
@@ -31,6 +34,7 @@ export default function Header() {
 
     const ro = new ResizeObserver(setVar);
     ro.observe(el);
+
     window.addEventListener("resize", setVar, { passive: true });
 
     return () => {
@@ -62,18 +66,19 @@ export default function Header() {
     [],
   );
 
-  // Header visible only at very top
+  // ✅ Header appears ONLY when reaching the very top (scrollY ~ 0)
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
       setIsVisible(y <= 2);
     };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when drawer open
+  // Lock body scroll when mobile drawer is open
   useEffect(() => {
     if (mobileOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -110,7 +115,7 @@ export default function Header() {
       }`}
       dir="rtl"
     >
-      {/* gold border line */}
+      {/* Animated gold border line */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
         <div className="h-full w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-gold-border-sweep" />
       </div>
@@ -118,14 +123,17 @@ export default function Header() {
       {/* ================= ROW 1 (Desktop only) ================= */}
       <div className="hidden lg:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
+          {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
               עמוד ראשי
             </Link>
+
             <Link to="/about" className={`${goldText} whitespace-nowrap`}>
               אודות
             </Link>
 
+            {/* Services dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setServicesOpen(true)}
@@ -159,6 +167,7 @@ export default function Header() {
             </div>
           </nav>
 
+          {/* CENTER column: LOGO */}
           <Link to="/" className="justify-self-center" aria-label="א.א פרויקטים וגובה">
             <img
               src={logoImage}
@@ -168,14 +177,17 @@ export default function Header() {
             />
           </Link>
 
+          {/* LEFT column: NAV + BUTTONS */}
           <div className="flex items-center justify-self-start gap-4 xl:gap-6 min-w-0">
             <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold">
               <Link to="/projects" className={`${goldText} whitespace-nowrap`}>
                 פרויקטים
               </Link>
+
               <Link to="/pricing" className={`${goldText} whitespace-nowrap`}>
                 מחירים
               </Link>
+
               <Link to="/contact" className={`${goldText} whitespace-nowrap`}>
                 צור קשר
               </Link>
@@ -204,16 +216,15 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR ================= */}
+      {/* ================= MOBILE BAR (SOLID + TOGGLE ICON) ================= */}
       <div
         className="lg:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
       >
         <div className="relative h-[84px] px-4 overflow-visible">
-          {/* RIGHT: Toggle button */}
+          {/* RIGHT: Toggle button (Hamburger <-> Close) */}
           <button
             type="button"
-            aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
             className="absolute right-4 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-12 h-12 rounded-xl hover:bg-white/10 transition"
             aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
@@ -247,7 +258,7 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT: CTA smaller */}
+          {/* LEFT: CTA (smaller) */}
           <Link
             to="/contact"
             onClick={closeMobile}
@@ -283,143 +294,130 @@ export default function Header() {
 
       {/* ================= MOBILE DRAWER (ARCCA 1:1 STYLE) ================= */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[9999] lg:hidden [isolation:isolate]" dir="ltr">
-          {/* FULL OPAQUE overlay */}
-          <div className="absolute inset-0 bg-black" />
-          <button type="button" className="absolute inset-0" onClick={closeMobile} aria-label="סגור תפריט" />
+        <div className="fixed inset-0 z-[99999] lg:hidden bg-black" dir="ltr">
+          {/* Fullscreen panel */}
+          <div className="absolute inset-0 grid grid-cols-[1.15fr_0.85fr]">
+            {/* ===== LEFT COLUMN (MENU LIGHT) ===== */}
+            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full">
+              {/* top spacer */}
+              <div className="h-[64px] border-b border-black/20" />
 
-          {/* FULLSCREEN panel (two columns) */}
-          <div className="absolute inset-0 z-20 overflow-hidden">
-            <div className="grid h-full w-full grid-cols-[1.15fr_0.85fr]">
-              {/* LEFT column: MENU (light) */}
-              <nav className="bg-[#d7cfbf] text-[#1b1b1b]">
-                <div className="h-full w-full">
-                  {/* Top spacer (like the video) */}
-                  <div className="h-[56px] border-b border-black/20" />
-
-                  <div className="divide-y divide-black/20">
-                    {[
-                      { label: "עמוד ראשי", path: "/" },
-                      { label: "אודות", path: "/about" },
-                      // services item behaves like dropdown
-                      { label: "שירותים", path: "#services" as any },
-                      { label: "פרויקטים", path: "/projects" },
-                      { label: "מחירים", path: "/pricing" },
-                      { label: "צור קשר", path: "/contact" },
-                    ].map((item) => {
-                      const isServices = item.label === "שירותים";
-                      if (isServices) {
-                        return (
-                          <div key="services">
-                            <button
-                              type="button"
-                              onClick={() => setServicesOpen((v) => !v)}
-                              className="w-full h-[56px] px-5 flex items-center justify-between text-[16px] tracking-[0.12em] uppercase"
-                            >
-                              <span>SERVICES</span>
-                              <span className="text-[14px] opacity-70">{servicesOpen ? "▲" : "▼"}</span>
-                            </button>
-
-                            {servicesOpen && (
-                              <div className="border-t border-black/20 bg-[#d7cfbf]">
-                                {serviceLinks.map((s) => (
-                                  <Link
-                                    key={s.path}
-                                    to={s.path}
-                                    onClick={closeMobile}
-                                    className="block px-6 py-3 text-[14px] tracking-[0.06em] hover:bg-black/5"
-                                  >
-                                    {s.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      }
-
-                      // regular links – show as EN labels like the video style (but routes stay yours)
-                      const mapToVideoLabel: Record<string, string> = {
-                        "עמוד ראשי": "HOME",
-                        אודות: "ABOUT US",
-                        פרויקטים: "PROJECTS",
-                        מחירים: "PRICING",
-                        "צור קשר": "CONTACT",
-                      };
-
-                      return (
-                        <Link
-                          key={item.label}
-                          to={item.path}
-                          onClick={closeMobile}
-                          className="h-[56px] px-5 flex items-center text-[16px] tracking-[0.12em] uppercase hover:bg-black/5"
-                        >
-                          {mapToVideoLabel[item.label] ?? item.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              </nav>
-
-              {/* RIGHT column: INFO (dark) */}
-              <aside className="bg-[#1c1714] text-[#e6dccb] relative">
-                {/* top right close */}
-                <button
-                  type="button"
+              <div className="divide-y divide-black/20">
+                <Link
+                  to="/"
                   onClick={closeMobile}
-                  className="absolute top-4 right-4 inline-flex items-center justify-center w-11 h-11 rounded-xl border border-white/10 hover:bg-white/5 transition"
-                  aria-label="Close"
+                  className="h-[56px] px-5 flex items-center tracking-[0.12em] uppercase hover:bg-black/5"
                 >
-                  ✕
-                </button>
+                  HOME
+                </Link>
 
-                <div className="h-full w-full px-5 pt-8 pb-6 flex flex-col">
-                  {/* Brand / logo area */}
-                  <div className="mt-2">
-                    <img
-                      src={logoImage}
-                      alt="א.א פרויקטים וגובה"
-                      className="h-[54px] w-auto object-contain opacity-95"
-                      draggable={false}
-                    />
+                <Link
+                  to="/about"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  ABOUT US
+                </Link>
+
+                {/* SERVICES */}
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setServicesOpen((v) => !v)}
+                    className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] uppercase hover:bg-black/5"
+                  >
+                    SERVICES
+                    <span>{servicesOpen ? "▲" : "▼"}</span>
+                  </button>
+
+                  {servicesOpen && (
+                    <div className="border-t border-black/20">
+                      {serviceLinks.map((s) => (
+                        <Link
+                          key={s.path}
+                          to={s.path}
+                          onClick={closeMobile}
+                          className="block px-6 py-3 text-[14px] hover:bg-black/5"
+                        >
+                          {s.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  to="/projects"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  PROJECTS
+                </Link>
+
+                <Link
+                  to="/pricing"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  PRICING
+                </Link>
+
+                <Link
+                  to="/contact"
+                  onClick={closeMobile}
+                  className="h-[56px] px-5 flex items-center tracking-[0.12em] uppercase hover:bg-black/5"
+                >
+                  CONTACT
+                </Link>
+              </div>
+            </nav>
+
+            {/* ===== RIGHT COLUMN (DARK INFO) ===== */}
+            <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full">
+              {/* CLOSE */}
+              <button
+                onClick={closeMobile}
+                className="absolute top-4 right-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
+              >
+                ✕
+              </button>
+
+              <div className="h-full flex flex-col px-6 pt-10 pb-6">
+                <img src={logoImage} className="h-[60px] w-auto object-contain" />
+
+                <div className="mt-8 h-px bg-white/10" />
+
+                <div className="mt-6 grid grid-cols-2 gap-6 text-[12px]">
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Email</div>
+                    <div className="mt-2">contact@heights-projects.com</div>
                   </div>
 
-                  {/* divider */}
-                  <div className="mt-6 h-px w-full bg-white/10" />
-
-                  {/* Contact blocks (like the video) */}
-                  <div className="mt-6 grid grid-cols-2 gap-6 text-[12px]">
-                    <div>
-                      <div className="opacity-60 tracking-[0.18em] uppercase">Email</div>
-                      <div className="mt-2 opacity-90">contact@heights-projects.com</div>
-                    </div>
-                    <div>
-                      <div className="opacity-60 tracking-[0.18em] uppercase">Address</div>
-                      <div className="mt-2 opacity-90">Israel</div>
-                    </div>
-
-                    <div>
-                      <div className="opacity-60 tracking-[0.18em] uppercase">Phone</div>
-                      <div className="mt-2 opacity-90">055-661-6326</div>
-                    </div>
-                    <div>
-                      <div className="opacity-60 tracking-[0.18em] uppercase">Social</div>
-                      <div className="mt-2 opacity-90">Instagram / Facebook</div>
-                    </div>
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Phone</div>
+                    <div className="mt-2">055-661-6326</div>
                   </div>
 
-                  {/* bottom line + small footer */}
-                  <div className="mt-auto">
-                    <div className="h-px w-full bg-white/10" />
-                    <div className="mt-4 flex items-center justify-between text-[10px] opacity-60 tracking-[0.12em] uppercase">
-                      <span>Privacy Policy</span>
-                      <span>© A.A</span>
-                    </div>
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Location</div>
+                    <div className="mt-2">Israel</div>
+                  </div>
+
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Social</div>
+                    <div className="mt-2">Instagram / Facebook</div>
                   </div>
                 </div>
-              </aside>
-            </div>
+
+                <div className="mt-auto">
+                  <div className="h-px bg-white/10 mb-4" />
+                  <div className="flex justify-between text-[10px] opacity-60 tracking-widest">
+                    <span>Privacy Policy</span>
+                    <span>© A.A</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       )}
