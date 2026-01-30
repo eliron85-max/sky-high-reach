@@ -563,7 +563,6 @@ export default Contact;
   color: var(--lux-text) !important;
 }
 
-/* kill rings that sometimes look teal */
 .calendar-lux .ring-primary,
 .calendar-lux .focus\:ring-primary:focus,
 .calendar-lux .focus-visible\:ring-primary:focus-visible{
