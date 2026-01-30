@@ -60,12 +60,12 @@ export default function Index() {
                 <div className="mx-auto max-w-7xl px-4 py-12 md:py-16">
                   <h2 className="text-3xl md:text-5xl font-bold text-[#f5d58a] text-center">השירותים שלנו</h2>
 
-                  {/* 2 mobile / 3 tablet / 4 desktop — compact spacing */}
-                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6">
+                  {/* 2 mobile / 3 tablet / 4 desktop — tighter like YouTube */}
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4">
                     {services.map((s) => (
                       <article key={s.title} className="group cursor-pointer">
                         {/* 16:9 thumbnail */}
-                        <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black">
+                        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg bg-black">
                           <img
                             src={s.image}
                             alt={s.title}
@@ -76,15 +76,15 @@ export default function Index() {
                           <div className="absolute inset-0 ring-1 ring-white/10 pointer-events-none" />
                         </div>
 
-                        {/* title under image */}
+                        {/* text under image */}
                         <div className="mt-2">
                           <h3
-                            className="text-[16px] md:text-[17px] font-semibold text-[#ffe4ae] leading-snug line-clamp-1"
+                            className="text-[15px] md:text-[16px] font-semibold text-[#ffe4ae] leading-snug line-clamp-1"
                             style={{ fontFamily: "Montserrat, sans-serif" }}
                           >
                             {s.title}
                           </h3>
-                          <p className="text-sm text-white/55">עבודות גובה וסנפלינג</p>
+                          <p className="text-[13px] text-white/50">עבודות גובה וסנפלינג</p>
                         </div>
                       </article>
                     ))}
