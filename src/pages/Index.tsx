@@ -19,12 +19,6 @@ import demolitionOrdersImage from "@/assets/demolition-orders.webp";
 import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
 
-// Stats section images
-import statsImage1 from "@/assets/stats-1.webp";
-import statsImage2 from "@/assets/stats-2.webp";
-import statsImage3 from "@/assets/stats-3.webp";
-import statsImage4 from "@/assets/stats-4.webp";
-
 const services = [
   { title: "עבודות מיוחדות", image: specialProjectsImage },
   { title: "הרחקת מעופפים", image: birdControlImage },
