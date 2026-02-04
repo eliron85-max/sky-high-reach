@@ -107,18 +107,6 @@ export default function Index() {
           </div>
         </section>
 
-        {/* STATS SECTION */}
-        <HomeStatsSection
-          titleGold="המספרים מדברים"
-          titleBlack="בעד עצמם!"
-          stats={[
-            { value: "500+", label: "פרויקטים שהושלמו" },
-            { value: "15", label: "שנות ניסיון" },
-            { value: "50+", label: "ערים ואזורי פעילות" },
-          ]}
-          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-        />
-
         {/* EMPTY GRID SECTION */}
         <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
           <div
