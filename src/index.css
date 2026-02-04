@@ -5,35 +5,27 @@
 
 /* ========== HEADER HEIGHT TOKENS ========== */
 :root {
-  /* Dynamic safe area - set by useSafeArea hook, fallback to 0 */
   --dynamic-safe-area-top: 0px;
-  /* Dynamic header padding - set by useSafeArea hook, fallback to 44px */
   --header-dynamic-padding: 44px;
 
-  /* Mobile header: 76px bar + dynamic padding */
   --header-height-mobile: calc(76px + var(--header-dynamic-padding));
-  /* Safe-area aware mobile header height (uses dynamic padding from JS) */
   --header-height-mobile-safe: calc(76px + var(--header-dynamic-padding));
-
-  /* Desktop header: 120px (Row 1) + 44px (Row 2) = 164px */
   --header-height-desktop: 164px;
 
-  /* ✅ IMPORTANT: default header-height to prevent first-load black gap */
+  /* default */
   --header-height: var(--header-height-desktop);
 
-  /* Offsets for page content (header + breathing room) */
   --header-offset-mobile: calc(var(--header-height-mobile-safe) + 16px);
   --header-offset-desktop: calc(var(--header-height-desktop) + 16px);
 }
 
-/* ✅ IMPORTANT: set default header-height for mobile too */
 @media (max-width: 1023px) {
   :root {
     --header-height: var(--header-height-mobile-safe);
   }
 }
 
-/* Custom Font - Ploni with Heebo fallback */
+/* Custom Font - Ploni */
 @font-face {
   font-family: "Ploni";
   src: url("/fonts/PloniMedium.otf") format("opentype");
@@ -42,9 +34,7 @@
   font-display: swap;
 }
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
-All colors MUST be HSL.
-*/
+/* ===== Design System Tokens (HSL only) ===== */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -56,11 +46,8 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 9%;
 
-    /* תכלת כצבע ראשי */
     --primary: 186 100% 42%;
     --primary-foreground: 0 0% 100%;
-
-    /* גוון תכלת בהיר יותר */
     --primary-light: 186 100% 62%;
 
     --secondary: 220 13% 95%;
@@ -81,25 +68,8 @@ All colors MUST be HSL.
 
     --radius: 1.5rem;
 
-    /* צללים מותאמים אישית */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
-    --shadow-primary: 0 4px 14px rgba(0, 194, 216, 0.35);
-
-    /* מעברים */
-    --transition: all 0.25s ease;
-
-    /* Hero backgrounds */
     --hero-dark: 221 47% 7%;
     --hero-overlay: 221 47% 7% / 0.9;
-    --gradient-hero: linear-gradient(135deg, hsl(221 47% 7%) 0%, hsl(221 40% 12%) 100%);
-    --gradient-overlay: linear-gradient(
-      90deg,
-      hsla(221 47% 7% / 0.95) 0%,
-      hsla(221 47% 7% / 0.7) 50%,
-      hsla(221 47% 7% / 0.85) 100%
-    );
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -123,7 +93,6 @@ All colors MUST be HSL.
 
     --primary: 186 100% 42%;
     --primary-foreground: 0 0% 100%;
-
     --primary-light: 186 100% 62%;
 
     --secondary: 217 33% 17%;
@@ -181,37 +150,12 @@ All colors MUST be HSL.
     line-height: 1.2;
   }
 
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  @media (max-width: 1023px) {
-    h1 {
-      font-size: 2rem;
-    }
-    h2 {
-      font-size: 1.75rem;
-    }
-  }
-
-  @media (max-width: 767px) {
-    h1 {
-      font-size: 1.75rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-    }
-  }
-
   .text-gold {
     color: #e6d5a0;
   }
 }
 
+/* ===== Utilities ===== */
 @layer utilities {
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out forwards;
@@ -243,17 +187,6 @@ All colors MUST be HSL.
     }
   }
 
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .scroll-reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -279,64 +212,9 @@ All colors MUST be HSL.
     opacity: 1;
     transform: translateY(0);
   }
-
-  .scroll-reveal-stagger {
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.5s ease-out,
-      transform 0.5s ease-out;
-    /* transitionDelay is set inline via useStaggeredReveal hook */
-  }
-
-  .scroll-reveal-stagger.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ===== CSS Parallax Container ===== */
-  .parallax-container {
-    perspective: 10px;
-    perspective-origin: center center;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 100vh;
-    transform-style: preserve-3d;
-  }
-
-  .parallax-layer-back {
-    transform: translateZ(-10px) scale(2);
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .parallax-layer-mid {
-    transform: translateZ(-5px) scale(1.5);
-    position: relative;
-    z-index: 1;
-  }
-
-  .parallax-layer-front {
-    transform: translateZ(0);
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Parallax card layers for depth effect */
-  .parallax-card-slow {
-    transform: translateZ(-3px) scale(1.3);
-  }
-
-  .parallax-card-medium {
-    transform: translateZ(-1.5px) scale(1.15);
-  }
-
-  .parallax-card-fast {
-    transform: translateZ(0) scale(1);
-  }
 }
 
+/* ===== Quote shimmer ===== */
 @keyframes quoteShimmer {
   0% {
     transform: translateX(-150%) skewX(-20deg);
@@ -384,49 +262,16 @@ All colors MUST be HSL.
   animation: quoteShimmer 1.3s ease-in-out;
 }
 
-/* Mobile menu staggered animation */
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-slide-in-stagger {
-  opacity: 0;
-  animation: slideInFromRight 0.4s ease-out forwards;
-}
-
-/* Gold border sweep animation for header */
-@keyframes goldBorderSweep {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.animate-gold-border-sweep {
-  animation: goldBorderSweep 4s ease-in-out infinite;
-}
-
-/* ===== Lovable: Mobile header edge glow pulse + CTA hover boost ===== */
+/* ===== Mobile header edge glow (NO :has) ===== */
 @media (max-width: 1024px) {
-  /* Mobile header - הסרת padding-top כפול, ה-Mobile Bar ב-Header.tsx מטפל בזה */
   header.fixed.top-0 {
-    background: transparent !important; /* שקוף - ה-Mobile Bar עושה את העבודה */
+    background: transparent !important;
     transform: translateY(0);
     transition:
       transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 800ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* פס edge glow עדין בשוליים */
   header.fixed.top-0::after {
     content: "";
     position: absolute;
@@ -434,7 +279,6 @@ All colors MUST be HSL.
     bottom: 0;
     height: 1px;
     pointer-events: none;
-
     background: linear-gradient(
       90deg,
       transparent 0%,
@@ -443,17 +287,13 @@ All colors MUST be HSL.
       rgba(214, 195, 138, 0.1) 70%,
       transparent 100%
     );
-
     opacity: 0;
   }
 
-  /* כשהתפריט פתוח: הכניסה של ההדר + צל */
-  header.fixed.top-0:has([aria-expanded="true"]) {
-    transform: translateY(0);
+  header.fixed.top-0[data-mobile-open="true"] {
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
   }
 
-  /* pulse: מופיע בזמן הפתיחה ואז נחלש */
   @keyframes hpEdgeGlowPulse {
     0% {
       opacity: 0;
@@ -466,23 +306,12 @@ All colors MUST be HSL.
     }
   }
 
-  /* מפעיל pulse רק ברגע הפתיחה/מצב פתוח */
-  header.fixed.top-0:has([aria-expanded="true"])::after {
+  header.fixed.top-0[data-mobile-open="true"]::after {
     animation: hpEdgeGlowPulse 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  /* Hover על CTA: מחזק את edge glow */
-  header.fixed.top-0:has(.hp-cta:hover)::after {
-    opacity: 0.55;
-  }
-
-  /* (אופציונלי) hover גם מחזק מעט את הצל */
-  header.fixed.top-0:has(.hp-cta:hover) {
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   }
 }
 
-/* ===== WhatsApp Floating Button Breathing Animation ===== */
+/* ===== WhatsApp breathing ===== */
 @keyframes whatsapp-breathe {
   0%,
   100% {
@@ -503,9 +332,7 @@ All colors MUST be HSL.
   }
 }
 
-/* ===== Accessibility Styles ===== */
-
-/* High Contrast Mode */
+/* ===== Accessibility styles ===== */
 .accessibility-high-contrast {
   filter: contrast(1.4);
 }
@@ -514,12 +341,10 @@ All colors MUST be HSL.
   border-color: currentColor !important;
 }
 
-/* Grayscale Mode */
 .accessibility-grayscale {
   filter: grayscale(100%);
 }
 
-/* Link Highlight */
 .accessibility-link-highlight a {
   background-color: yellow !important;
   color: black !important;
@@ -527,7 +352,6 @@ All colors MUST be HSL.
   padding: 2px 4px !important;
 }
 
-/* Big Cursor */
 .accessibility-big-cursor,
 .accessibility-big-cursor * {
   cursor:
@@ -536,21 +360,18 @@ All colors MUST be HSL.
     auto !important;
 }
 
-/* Pause Animations */
 .accessibility-pause-animations,
 .accessibility-pause-animations * {
   animation: none !important;
   transition: none !important;
 }
 
-/* Dyslexic-friendly Font */
 .accessibility-dyslexic-font,
 .accessibility-dyslexic-font * {
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0.05em !important;
 }
 
-/* Text Spacing */
 .accessibility-text-spacing {
   letter-spacing: 0.12em !important;
   word-spacing: 0.16em !important;
@@ -563,6 +384,7 @@ All colors MUST be HSL.
   line-height: inherit !important;
 }
 
+/* Enable toolbar text color fix */
 #enable-toolbar i,
 .enable-toolbar i,
 #enable-toolbar span,
@@ -576,12 +398,51 @@ All colors MUST be HSL.
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.75) !important;
 }
 
-/* RTL: make LEFT arrow go forward (swap prev/next positions visually) */
+/* RTL: calendar nav mirror */
 [dir="rtl"] .rdp-nav {
   transform: scaleX(-1);
 }
 
-/* Keep icons readable after mirroring the nav */
 [dir="rtl"] .rdp-nav_button svg {
   transform: scaleX(-1);
+}
+
+/* ===============================
+   FORCE REMOVE LOVABLE BADGE (ID EXACT)
+   =============================== */
+aside#lovable-badge,
+#lovable-badge,
+#lovable-badge-cta,
+#lovable-badge-text,
+#lovable-badge-close,
+aside[id="lovable-badge"],
+a[id="lovable-badge-cta"],
+span[id="lovable-badge-text"],
+button[id="lovable-badge-close"],
+iframe[src*="lovable"],
+iframe[title*="Lovable"],
+iframe[name*="lovable"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+/* ===== KILL LOVABLE BADGE (exact selectors from Inspect) ===== */
+aside#lovable-badge,
+aside#lovable-badge * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Extra safety (direct ids inside the badge) */
+#lovable-badge-cta,
+#lovable-badge-text,
+#lovable-badge-divider,
+#lovable-badge-close {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
