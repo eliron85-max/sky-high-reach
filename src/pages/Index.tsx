@@ -8,6 +8,7 @@ import Contact from "@/components/Contact";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
+import HomeStatsSectionRemix from "@/components/HomeStatsSectionRemix";
 
 // Services images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -18,6 +19,12 @@ import stoneCladdingImage from "@/assets/stone-cladding.jpg";
 import demolitionOrdersImage from "@/assets/demolition-orders.webp";
 import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
+
+// Stats section images (חייבים להיות קיימים בתיקיית src/assets)
+import statsImage1 from "@/assets/stats-1.webp";
+import statsImage2 from "@/assets/stats-2.webp";
+import statsImage3 from "@/assets/stats-3.webp";
+import statsImage4 from "@/assets/stats-4.webp";
 
 const services = [
   { title: "עבודות מיוחדות", image: specialProjectsImage },
@@ -100,6 +107,18 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        {/* STATS SECTION (Remix) */}
+        <HomeStatsSectionRemix
+          titleGold="המספרים מדברים"
+          titleBlack="בעד עצמם!"
+          stats={[
+            { value: "500+", label: "פרויקטים שהושלמו" },
+            { value: "15", label: "שנות ניסיון" },
+            { value: "50+", label: "ערים ואזורי פעילות" },
+          ]}
+          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+        />
 
         {/* EMPTY GRID SECTION */}
         <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
