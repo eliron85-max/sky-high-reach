@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,7 +35,7 @@
   font-display: swap;
 }
 
-/* ===== Design System Tokens (HSL only) ===== */
+/* ===== Design System Tokens (HSL only) + Base styles ===== */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -120,11 +121,13 @@
     --sidebar-border: 217 33% 17%;
     --sidebar-ring: 186 100% 42%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -133,10 +136,6 @@
     font-size: 16px;
     line-height: 1.6;
     direction: rtl;
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 
   h1,
@@ -165,28 +164,6 @@
     animation: scaleIn 0.4s ease-out forwards;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
   .scroll-reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -211,6 +188,28 @@
   .scroll-reveal-fast.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -408,13 +407,14 @@
 }
 
 /* ===============================
-   FORCE REMOVE LOVABLE BADGE (ID EXACT)
+   FORCE REMOVE LOVABLE BADGE
    =============================== */
 aside#lovable-badge,
 #lovable-badge,
 #lovable-badge-cta,
 #lovable-badge-text,
 #lovable-badge-close,
+#lovable-badge-divider,
 aside[id="lovable-badge"],
 a[id="lovable-badge-cta"],
 span[id="lovable-badge-text"],
@@ -422,25 +422,6 @@ button[id="lovable-badge-close"],
 iframe[src*="lovable"],
 iframe[title*="Lovable"],
 iframe[name*="lovable"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-/* ===== KILL LOVABLE BADGE (exact selectors from Inspect) ===== */
-aside#lovable-badge,
-aside#lovable-badge * {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Extra safety (direct ids inside the badge) */
-#lovable-badge-cta,
-#lovable-badge-text,
-#lovable-badge-divider,
-#lovable-badge-close {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
