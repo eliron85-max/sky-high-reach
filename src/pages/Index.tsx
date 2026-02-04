@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
-import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
 import HomeStatsSection from "@/components/HomeStatsSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
@@ -21,32 +20,11 @@ import demolitionOrdersImage from "@/assets/demolition-orders.webp";
 import pipingGuttersImage from "@/assets/piping-gutters.webp";
 import heightSolutionsImage from "@/assets/height-solutions.webp";
 
-// Urban renewal carousel images - Stone Cladding
-import stoneCladding1 from "@/assets/stone-cladding-1.webp";
-import stoneCladding2 from "@/assets/stone-cladding-2.webp";
-import stoneCladding3 from "@/assets/stone-cladding-3.webp";
-import stoneCladding4 from "@/assets/stone-cladding-4.webp";
-import stoneCladding5 from "@/assets/stone-cladding-5.webp";
-import stoneCladding6 from "@/assets/stone-cladding-6.webp";
-import stoneCladding7 from "@/assets/stone-cladding-7.webp";
-import stoneCladding8 from "@/assets/stone-cladding-8.webp";
-
 // Stats section images
 import statsImage1 from "@/assets/stats-1.webp";
 import statsImage2 from "@/assets/stats-2.webp";
 import statsImage3 from "@/assets/stats-3.webp";
 import statsImage4 from "@/assets/stats-4.webp";
-
-const urbanImages = [
-  stoneCladding1,
-  stoneCladding2,
-  stoneCladding3,
-  stoneCladding4,
-  stoneCladding5,
-  stoneCladding6,
-  stoneCladding7,
-  stoneCladding8,
-];
 
 const services = [
   { title: "עבודות מיוחדות", image: specialProjectsImage },
@@ -140,14 +118,6 @@ export default function Index() {
             { value: "50+", label: "ערים ואזורי פעילות" },
           ]}
           images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-        />
-
-        {/* URBAN RENEWAL SECTION */}
-        <HomeUrbanRenewalHero
-          images={urbanImages}
-          titleTop="חיפוי אבן בגובה"
-          titleGold="מראה יוקרתי ועמיד"
-          subtitle="התקנת חיפוי אבן באיכות גבוהה לבניינים — עבודות גובה מקצועיות בטכנולוגיית סנפלינג, גימור מושלם ועמידות לאורך שנים."
         />
 
         {/* EMPTY GRID SECTION */}
