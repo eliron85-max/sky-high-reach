@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
-import HomeStatsSection from "@/components/HomeStatsSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
