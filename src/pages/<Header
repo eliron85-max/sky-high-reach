@@ -10,6 +10,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import { useIsMobile } from "@/hooks/use-mobile";
+import HomeStatsSectionRemix from "@/components/HomeStatsSectionRemix";
+
 
 // Images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
