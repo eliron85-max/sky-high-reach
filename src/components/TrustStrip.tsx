@@ -17,32 +17,32 @@ const items: Item[] = [
 
 export default function TrustStrip() {
   return (
-    <section dir="rtl" className="relative w-full overflow-hidden bg-black pt-16 [isolation:isolate]">
-      {/* Optional subtle gold glow (doesn't show anything behind) */}
+    <section dir="rtl" className="relative w-full overflow-hidden bg-black py-10 sm:py-12 lg:py-14 [isolation:isolate]">
+      {/* Optional subtle gold glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_0%,rgba(223,199,152,0.14),transparent_60%)]" />
 
       {/* Gold top/bottom lines */}
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-[#dfc798]/50" />
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-[#dfc798]/35" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
           {items.map(({ kicker, title, Icon }) => (
             <div key={title} className="text-center">
-              <div className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-xl border border-[#a79471] bg-black">
-                <Icon className="w-8 h-8 text-[#dfc798]" strokeWidth={1.6} />
+              <div className="mx-auto mb-3 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl border border-[#a79471] bg-black">
+                <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-[#dfc798]" strokeWidth={1.6} />
               </div>
 
-              <div className="text-[13px] text-[#dfc798]">{kicker}</div>
+              <div className="text-[11px] sm:text-[13px] text-[#dfc798]">{kicker}</div>
 
               <div
                 style={{ fontFamily: "Montserrat, sans-serif", fontWeight: 500 }}
-                className="mt-1 text-[20px] text-white leading-tight"
+                className="mt-1 text-base sm:text-lg lg:text-xl text-white leading-tight"
               >
                 {title}
               </div>
 
-              <div className="mx-auto mt-3 h-[2px] w-12 bg-gradient-to-r from-transparent via-[#dfc798] to-transparent" />
+              <div className="mx-auto mt-2 h-[2px] w-10 sm:w-12 bg-gradient-to-r from-transparent via-[#dfc798] to-transparent" />
             </div>
           ))}
         </div>

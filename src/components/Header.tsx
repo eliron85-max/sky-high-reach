@@ -60,7 +60,7 @@ export default function Header() {
     [],
   );
 
-  // ✅ Header appears ONLY when reaching the very top (scrollY ~ 0)
+  // Header appears ONLY when reaching the very top (scrollY ~ 0)
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
@@ -103,6 +103,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
+      data-mobile-open={mobileOpen ? "true" : "false"}
       className={`fixed top-0 left-0 right-0 z-50 bg-[#d2d4d6] dark:bg-black overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
         isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none"
       }`}
@@ -200,7 +201,7 @@ export default function Header() {
 
               <Link
                 to="/contact"
-                className="quote-shimmer inline-flex items-center justify-center h-8 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
+                className="quote-shimmer hp-cta inline-flex items-center justify-center h-8 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
                 להצעת מחיר
               </Link>
@@ -255,7 +256,7 @@ export default function Header() {
           <Link
             to="/contact"
             onClick={closeMobile}
-            className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
+            className="hp-cta absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
           >
             להצעת מחיר
           </Link>

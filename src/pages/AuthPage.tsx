@@ -99,25 +99,15 @@ const AuthPage = () => {
           },
         });
 
-        if (error) {
-          if (error.message.includes("already registered")) {
-            setErrors({ email: "כתובת האימייל כבר רשומה במערכת" });
-          } else {
-            toast({
-              title: "שגיאה בהרשמה",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
-        } else {
-          toast({
-            title: "ההרשמה הושלמה!",
-            description: "כעת תוכל להתחבר עם הפרטים שלך",
-          });
-          setIsLogin(true);
-          setPassword("");
-          setConfirmPassword("");
-        }
+        // Always show generic message to prevent user enumeration
+        // The same message is shown whether email exists or not
+        toast({
+          title: "בקשת הרשמה התקבלה",
+          description: "אם האימייל תקין, נשלח אליך קישור אישור בדקות הקרובות",
+        });
+        setIsLogin(true);
+        setPassword("");
+        setConfirmPassword("");
       }
     } catch (error) {
       toast({

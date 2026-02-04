@@ -13,7 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/lib/i18n";
-import { supabaseUntyped } from "@/lib/supabaseHelpers";
+import { supabase } from "@/integrations/supabase/client";
 import { contactSchema, type ContactFormData } from "@/lib/contactSchema";
 import { cn } from "@/lib/utils";
 
@@ -27,37 +27,41 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
-  // ===== STYLES =====
-  // ✅ IMPORTANT: no scroll-reveal opacity-0 on this section (prevents black gaps)
-  // ✅ Keep page background consistent with the site (black), frame provides the light surface
-  const sectionClass = "py-16 lg:py-24 bg-black";
+  // ===== Styles (match reference) =====
+  const sectionClass = "py-12 sm:py-16 lg:py-20 bg-[#e9e9e9]";
 
-  const frame =
-    "max-w-6xl mx-auto rounded-[28px] border p-6 md:p-10 bg-white border-black/10 dark:bg-[#1b1f26] dark:border-white/10";
+  // Rect frame like screenshot #2
+  const outerFrame = "max-w-6xl mx-auto border border-black/70 bg-transparent";
 
+  const inner = "px-6 py-10 md:px-14 md:py-14";
+
+  const titleRow = "mx-auto flex max-w-4xl items-center justify-center gap-6";
+  const titleLine = "hidden md:block h-px flex-1 bg-black/70";
+
+  // Light surface cards
+  const card = "rounded-[24px] border p-6 bg-white border-black/10";
+
+  // Fields: light pills
   const field =
-    "h-14 rounded-full px-6 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/70 " +
-    "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/85 " +
-    "focus-visible:ring-0 focus-visible:ring-offset-0";
+    "h-12 rounded-full px-5 border bg-white/90 border-black/10 text-black placeholder:text-black/40 " +
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c]/35 focus-visible:border-[#c9a84c]/60 " +
+    "focus-visible:ring-offset-0";
 
   const textarea =
-    "rounded-[26px] px-6 py-5 border bg-[#f4f4f4] border-black/10 text-black placeholder:text-black/70 " +
-    "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:placeholder:text-white/85 " +
-    "focus-visible:ring-0 focus-visible:ring-offset-0";
+    "rounded-[22px] px-5 py-4 border bg-white/90 border-black/10 text-black placeholder:text-black/40 " +
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c]/35 focus-visible:border-[#c9a84c]/60 " +
+    "focus-visible:ring-offset-0";
 
-  const labelCls = "font-semibold text-black dark:text-white";
-
-  const card = "rounded-[24px] border p-6 bg-white border-black/10 dark:bg-[#1b1f26] dark:border-white/10";
+  const labelCls = "text-sm font-semibold text-black/70";
 
   const uploadBtn =
-    "flex items-center gap-2 px-5 py-3 rounded-full border cursor-pointer select-none " +
-    "bg-[#f4f4f4] border-black/10 text-black hover:bg-[#ededed] " +
-    "dark:bg-[#11151c] dark:border-white/10 dark:text-white dark:hover:bg-[#151a22]";
+    "flex items-center gap-2 px-5 h-12 rounded-full border cursor-pointer select-none " +
+    "bg-white/90 border-black/10 text-black hover:border-[#c9a84c]/60 transition";
 
   const submitBtn =
-    "w-full h-14 rounded-full font-extrabold text-lg text-black " +
-    "bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] " +
-    "hover:from-[#f0ddb0] hover:to-[#d4af37]";
+    "w-full h-12 rounded-full font-extrabold text-base text-white " +
+    "bg-gradient-to-b from-[#e6c36a] to-[#b8963d] " +
+    "hover:from-[#f1d07e] hover:to-[#c39a3b] transition";
 
   // ===== Locale =====
   const getDateLocale = () => {
@@ -123,16 +127,17 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      const preferredDateIso = result.data.preferredDate ? format(result.data.preferredDate, "yyyy-MM-dd") : null;
-
-      const { error } = await supabaseUntyped.from("inquiries").insert({
-        full_name: result.data.fullName,
-        company: result.data.company || null,
-        phone: result.data.phone,
-        email: result.data.email,
-        project_type: result.data.projectType,
-        message: result.data.message,
-        preferred_date: preferredDateIso,
+      // Route all submissions through edge function for rate limiting
+      const { error } = await supabase.functions.invoke("send-inquiry-notification", {
+        body: {
+          fullName: result.data.fullName.trim(),
+          email: result.data.email.trim(),
+          phone: result.data.phone.trim(),
+          company: result.data.company?.trim() || undefined,
+          projectType: result.data.projectType,
+          message: result.data.message.trim(),
+          preferredDate: result.data.preferredDate ? format(result.data.preferredDate, "dd/MM/yyyy") : undefined,
+        },
       });
 
       if (error) throw error;
@@ -166,289 +171,315 @@ const Contact = () => {
   return (
     <section id="contact" dir={dir} className={sectionClass}>
       <div className="container mx-auto px-4">
-        <div className={frame}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* FORM */}
-            <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className={cn(card, "space-y-6")}>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label className={labelCls}>שם מלא</Label>
-                    <Input
-                      id="fullName"
-                      placeholder="שם מלא"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      className={cn(field, validationErrors.fullName && "border-red-500")}
-                      disabled={isSubmitting}
-                      required
-                    />
-                    {validationErrors.fullName && (
-                      <p className="text-sm text-red-600 mt-1">{validationErrors.fullName}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label className={labelCls}>שם חברה</Label>
-                    <Input
-                      id="company"
-                      placeholder="שם חברה (לא חובה)"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      className={field}
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label className={labelCls}>טלפון</Label>
-                    <Input
-                      id="phone"
-                      placeholder="טלפון"
-                      type="tel"
-                      inputMode="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className={cn(field, validationErrors.phone && "border-red-500")}
-                      disabled={isSubmitting}
-                      required
-                    />
-                    {validationErrors.phone && <p className="text-sm text-red-600 mt-1">{validationErrors.phone}</p>}
-                  </div>
-
-                  <div>
-                    <Label className={labelCls}>אימייל</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="אימייל"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className={cn(field, validationErrors.email && "border-red-500")}
-                      disabled={isSubmitting}
-                      required
-                      dir="ltr"
-                    />
-                    {validationErrors.email && <p className="text-sm text-red-600 mt-1">{validationErrors.email}</p>}
-                  </div>
-                </div>
-
-                {/* סוג + תאריך (בלי שעה) */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label className={labelCls}>סוג פרויקט</Label>
-                    <Select
-                      value={formData.projectType}
-                      onValueChange={handleProjectTypeChange}
-                      disabled={isSubmitting}
-                    >
-                      <SelectTrigger
-                        className={cn(
-                          field,
-                          "justify-between",
-                          "dark:text-white",
-                          "[&_[data-placeholder]]:text-black/70 dark:[&_[data-placeholder]]:text-white/85",
-                          validationErrors.projectType && "border-red-500",
-                        )}
-                      >
-                        <SelectValue placeholder="בחר סוג" />
-                      </SelectTrigger>
-                      <SelectContent dir={dir}>
-                        <SelectItem value="restoration">שיקום</SelectItem>
-                        <SelectItem value="stone">אבן</SelectItem>
-                        <SelectItem value="sealing">איטום</SelectItem>
-                        <SelectItem value="birds">הרחקת יונים</SelectItem>
-                        <SelectItem value="special">מיוחד</SelectItem>
-                        <SelectItem value="other">אחר</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {validationErrors.projectType && (
-                      <p className="text-sm text-red-600 mt-1">{validationErrors.projectType}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label className={labelCls}>תאריך מועדף</Label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          className={cn(field, "justify-between", "dark:text-white")}
-                          disabled={isSubmitting}
-                        >
-                          <span className="truncate">
-                            {formData.preferredDate
-                              ? format(formData.preferredDate, "dd/MM/yyyy", {
-                                  locale: getDateLocale(),
-                                })
-                              : "בחר תאריך"}
-                          </span>
-                          <CalendarIcon className="h-5 w-5 opacity-80" />
-                        </Button>
-                      </PopoverTrigger>
-
-                      <PopoverContent className="p-0" align="start">
-                        <div className="calendar-lux p-4" dir={dir}>
-                          <Calendar
-                            mode="single"
-                            selected={formData.preferredDate}
-                            onSelect={handleDateChange}
-                            locale={getDateLocale()}
-                            dir={dir}
-                            fromMonth={todayStart}
-                            disabled={disablePastAndWeekend}
-                            fixedWeeks
-                          />
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                </div>
-
-                <div>
-                  <Label className={labelCls}>הודעה</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="כתוב כאן את פרטי הפנייה…"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className={cn(textarea, validationErrors.message && "border-red-500")}
-                    disabled={isSubmitting}
-                    rows={6}
-                    required
-                  />
-                  {validationErrors.message && <p className="text-sm text-red-600 mt-1">{validationErrors.message}</p>}
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <label className={uploadBtn}>
-                    <Upload size={18} />
-                    בחר קובץ
-                    <input
-                      type="file"
-                      hidden
-                      onChange={handleFileChange}
-                      disabled={isSubmitting}
-                      accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx"
-                    />
-                  </label>
-                  {selectedFile && (
-                    <span className="text-sm text-black/60 dark:text-white/70">{selectedFile.name}</span>
-                  )}
-                </div>
-
-                <Button type="submit" className={submitBtn} disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <Loader2 className={dir === "rtl" ? "ml-2 animate-spin" : "mr-2 animate-spin"} size={18} />
-                  ) : (
-                    <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />
-                  )}
-                  שליחה
-                </Button>
-              </form>
+        <div className={outerFrame}>
+          <div className={inner}>
+            {/* Title like screenshot */}
+            <div className="text-center">
+              <div className={titleRow}>
+                <div className={titleLine} />
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black">
+                  אנחנו בונים עתיד למשפחה שלכם
+                </h2>
+                <div className={titleLine} />
+              </div>
+              <p className="mt-3 text-sm md:text-base text-black/70">
+                מלאו את הפרטים כדי ליצור איתנו קשר ונחזור אליכם בהקדם
+              </p>
             </div>
 
-            {/* SIDE COLUMN */}
-            <div className="space-y-6">
-              <div className={card}>
-                <div className="flex items-center gap-3">
-                  <Phone className="text-[#c9a84c]" size={18} />
-                  <span className="text-black dark:text-white">055-6616326</span>
-                </div>
-                <div className="flex items-center gap-3 mt-4">
-                  <Mail className="text-[#c9a84c]" size={18} />
-                  <span className="text-black dark:text-white">info@ropeaccess.co.il</span>
-                </div>
-                <div className="flex items-center gap-3 mt-4">
-                  <MapPin className="text-[#c9a84c]" size={18} />
-                  <span className="text-black dark:text-white">גני תקווה</span>
+            {/* Grid */}
+            <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* FORM */}
+              <div className="lg:col-span-2">
+                <form onSubmit={handleSubmit} className={cn(card, "space-y-6")}>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label className={labelCls} htmlFor="fullName">
+                        שם מלא
+                      </Label>
+                      <Input
+                        id="fullName"
+                        placeholder="שם מלא"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        className={cn(field, validationErrors.fullName && "border-red-500")}
+                        disabled={isSubmitting}
+                        required
+                      />
+                      {validationErrors.fullName && (
+                        <p className="text-sm text-red-600 mt-1">{validationErrors.fullName}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <Label className={labelCls} htmlFor="company">
+                        שם חברה
+                      </Label>
+                      <Input
+                        id="company"
+                        placeholder="שם חברה (לא חובה)"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        className={field}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label className={labelCls} htmlFor="phone">
+                        טלפון
+                      </Label>
+                      <Input
+                        id="phone"
+                        placeholder="טלפון"
+                        type="tel"
+                        inputMode="tel"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className={cn(field, validationErrors.phone && "border-red-500")}
+                        disabled={isSubmitting}
+                        required
+                      />
+                      {validationErrors.phone && <p className="text-sm text-red-600 mt-1">{validationErrors.phone}</p>}
+                    </div>
+
+                    <div>
+                      <Label className={labelCls} htmlFor="email">
+                        אימייל
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="אימייל"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className={cn(field, validationErrors.email && "border-red-500")}
+                        disabled={isSubmitting}
+                        required
+                        dir="ltr"
+                      />
+                      {validationErrors.email && <p className="text-sm text-red-600 mt-1">{validationErrors.email}</p>}
+                    </div>
+                  </div>
+
+                  {/* Project type + preferred date */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label className={labelCls}>סוג פרויקט</Label>
+
+                      <Select
+                        value={formData.projectType}
+                        onValueChange={handleProjectTypeChange}
+                        disabled={isSubmitting}
+                      >
+                        {/* ✅ Uses your updated select.tsx */}
+                        <SelectTrigger
+                          variant="light"
+                          className={cn(
+                            field,
+                            "justify-between",
+                            "[&_[data-placeholder]]:text-black/40",
+                            validationErrors.projectType && "border-red-500",
+                          )}
+                        >
+                          <SelectValue placeholder="בחר סוג" />
+                        </SelectTrigger>
+
+                        {/* Optional: make dropdown itself light too */}
+                        <SelectContent variant="light" dir={dir}>
+                          <SelectItem variant="light" value="restoration">
+                            שיקום
+                          </SelectItem>
+                          <SelectItem variant="light" value="stone">
+                            אבן
+                          </SelectItem>
+                          <SelectItem variant="light" value="sealing">
+                            איטום
+                          </SelectItem>
+                          <SelectItem variant="light" value="birds">
+                            הרחקת יונים
+                          </SelectItem>
+                          <SelectItem variant="light" value="special">
+                            מיוחד
+                          </SelectItem>
+                          <SelectItem variant="light" value="other">
+                            אחר
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      {validationErrors.projectType && (
+                        <p className="text-sm text-red-600 mt-1">{validationErrors.projectType}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <Label className={labelCls}>תאריך מועדף</Label>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            className={cn(field, "justify-between", "bg-white/90 hover:bg-white/95 border-black/10")}
+                            disabled={isSubmitting}
+                          >
+                            <span className="truncate">
+                              {formData.preferredDate
+                                ? format(formData.preferredDate, "dd/MM/yyyy", { locale: getDateLocale() })
+                                : "בחר תאריך"}
+                            </span>
+                            <CalendarIcon className="h-5 w-5 opacity-80" />
+                          </Button>
+                        </PopoverTrigger>
+
+                        <PopoverContent className="p-0" align="start">
+                          <div className="calendar-lux p-4" dir={dir}>
+                            <Calendar
+                              mode="single"
+                              selected={formData.preferredDate}
+                              onSelect={handleDateChange}
+                              locale={getDateLocale()}
+                              dir={dir}
+                              fromMonth={todayStart}
+                              disabled={disablePastAndWeekend}
+                              fixedWeeks
+                            />
+                          </div>
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label className={labelCls} htmlFor="message">
+                      הודעה
+                    </Label>
+                    <Textarea
+                      id="message"
+                      placeholder="כתוב כאן את פרטי הפנייה…"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className={cn(textarea, validationErrors.message && "border-red-500")}
+                      disabled={isSubmitting}
+                      rows={6}
+                      required
+                    />
+                    {validationErrors.message && (
+                      <p className="text-sm text-red-600 mt-1">{validationErrors.message}</p>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <label className={uploadBtn}>
+                      <Upload size={18} />
+                      בחר קובץ
+                      <input
+                        type="file"
+                        hidden
+                        onChange={handleFileChange}
+                        disabled={isSubmitting}
+                        accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx"
+                      />
+                    </label>
+                    {selectedFile && <span className="text-sm text-black/60">{selectedFile.name}</span>}
+                  </div>
+
+                  <Button type="submit" className={submitBtn} disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <Loader2 className={dir === "rtl" ? "ml-2 animate-spin" : "mr-2 animate-spin"} size={18} />
+                    ) : (
+                      <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />
+                    )}
+                    שליחה
+                  </Button>
+                </form>
+              </div>
+
+              {/* SIDE COLUMN */}
+              <div className="space-y-6">
+                <div className={card}>
+                  <div className="flex items-center gap-3">
+                    <Phone className="text-[#c9a84c]" size={18} />
+                    <span className="text-black">055-6616326</span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-4">
+                    <Mail className="text-[#c9a84c]" size={18} />
+                    <span className="text-black">info@ropeaccess.co.il</span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-4">
+                    <MapPin className="text-[#c9a84c]" size={18} />
+                    <span className="text-black">גני תקווה</span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Calendar skin (kept from your original) */}
+            <style>{`
+              .calendar-lux{
+                --lux-bg: #ffffff;
+                --lux-text: rgba(0,0,0,0.92);
+                --lux-muted: rgba(0,0,0,0.52);
+                --lux-border: rgba(0,0,0,0.10);
+                --lux-gold: rgba(201,168,76,0.90);
+                --lux-hover: rgba(0,0,0,0.05);
+
+                background: var(--lux-bg);
+                border: 1px solid var(--lux-border);
+                border-radius: 22px;
+                box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+                overflow: hidden;
+              }
+
+              .calendar-lux .rdp,
+              .calendar-lux .rdp *{ color: var(--lux-text) !important; }
+
+              .calendar-lux .rdp-caption_label{
+                font-weight: 900 !important;
+                text-shadow: 0 2px 18px rgba(201,168,76,0.18);
+              }
+
+              .calendar-lux .rdp-head_cell{
+                color: var(--lux-muted) !important;
+                font-weight: 800 !important;
+              }
+
+              .calendar-lux .rdp-day{ border-radius: 999px !important; }
+
+              .calendar-lux .rdp-day:not(.rdp-day_disabled):not([aria-selected="true"]):hover{
+                background: var(--lux-hover) !important;
+                box-shadow: 0 0 0 1px rgba(201,168,76,0.12) inset !important;
+              }
+
+              .calendar-lux button[aria-selected="true"],
+              .calendar-lux .rdp-day[aria-selected="true"],
+              .calendar-lux .rdp-day_selected,
+              .calendar-lux .day_selected{
+                background: transparent !important;
+                background-color: transparent !important;
+                color: var(--lux-text) !important;
+                border: 1px solid var(--lux-gold) !important;
+                box-shadow: 0 0 0 3px rgba(201,168,76,0.14) !important;
+              }
+
+              .calendar-lux .rdp-nav_button{
+                width: 40px !important;
+                height: 40px !important;
+                border-radius: 999px !important;
+                background: rgba(255,255,255,0.03) !important;
+                border: 1px solid rgba(201,168,76,0.18) !important;
+              }
+              .calendar-lux .rdp-nav_button:hover{ background: rgba(201,168,76,0.10) !important; }
+
+              .rdp-nav{ display:flex; align-items:center; gap:12px; }
+              [dir="rtl"] .rdp-nav_button_next{ order:1; }
+              [dir="rtl"] .rdp-nav_button_previous{ order:2; }
+            `}</style>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .calendar-lux{
-          --lux-bg: #ffffff;
-          --lux-text: rgba(0,0,0,0.92);
-          --lux-muted: rgba(0,0,0,0.52);
-          --lux-border: rgba(0,0,0,0.10);
-          --lux-gold: rgba(201,168,76,0.90);
-          --lux-hover: rgba(0,0,0,0.05);
-
-          background: var(--lux-bg);
-          border: 1px solid var(--lux-border);
-          border-radius: 22px;
-          box-shadow: 0 14px 40px rgba(0,0,0,0.10);
-          overflow: hidden;
-        }
-
-        .dark .calendar-lux{
-          --lux-bg: radial-gradient(140% 120% at 50% 0%,
-            rgba(255,255,255,0.06),
-            rgba(0,0,0,0.94)
-          );
-          --lux-text: rgba(255,255,255,0.92);
-          --lux-muted: rgba(255,255,255,0.58);
-          --lux-border: rgba(201,168,76,0.45);
-          --lux-hover: rgba(255,255,255,0.06);
-
-          background: var(--lux-bg);
-          border: 1px solid var(--lux-border);
-          box-shadow:
-            0 18px 55px rgba(0,0,0,0.55),
-            0 0 0 1px rgba(201,168,76,0.14) inset;
-        }
-
-        .calendar-lux .rdp,
-        .calendar-lux .rdp *{ color: var(--lux-text) !important; }
-
-        .calendar-lux .rdp-caption_label{
-          font-weight: 900 !important;
-          text-shadow: 0 2px 18px rgba(201,168,76,0.18);
-        }
-
-        .calendar-lux .rdp-head_cell{
-          color: var(--lux-muted) !important;
-          font-weight: 800 !important;
-        }
-
-        .calendar-lux .rdp-day{ border-radius: 999px !important; }
-
-        .calendar-lux .rdp-day:not(.rdp-day_disabled):not([aria-selected="true"]):hover{
-          background: var(--lux-hover) !important;
-          box-shadow: 0 0 0 1px rgba(201,168,76,0.12) inset !important;
-        }
-
-        .calendar-lux button[aria-selected="true"],
-        .calendar-lux .rdp-day[aria-selected="true"],
-        .calendar-lux .rdp-day_selected,
-        .calendar-lux .day_selected{
-          background: transparent !important;
-          background-color: transparent !important;
-          color: var(--lux-text) !important;
-          border: 1px solid var(--lux-gold) !important;
-          box-shadow: 0 0 0 3px rgba(201,168,76,0.14) !important;
-        }
-
-        .calendar-lux .rdp-nav_button{
-          width: 40px !important;
-          height: 40px !important;
-          border-radius: 999px !important;
-          background: rgba(255,255,255,0.03) !important;
-          border: 1px solid rgba(201,168,76,0.18) !important;
-        }
-        .calendar-lux .rdp-nav_button:hover{ background: rgba(201,168,76,0.10) !important; }
-
-        .rdp-nav{ display:flex; align-items:center; gap:12px; }
-        [dir="rtl"] .rdp-nav_button_next{ order:1; }
-        [dir="rtl"] .rdp-nav_button_previous{ order:2; }
-      `}</style>
     </section>
   );
 };

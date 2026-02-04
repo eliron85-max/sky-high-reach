@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabaseUntyped } from "@/lib/supabaseHelpers";
+import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -60,7 +60,7 @@ const AdminInquiries = () => {
   const fetchInquiries = async () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabaseUntyped
+      const { data, error } = await supabase
         .from("inquiries")
         .select("*")
         .order("created_at", { ascending: false });
@@ -80,7 +80,7 @@ const AdminInquiries = () => {
   };
 
   useEffect(() => {
-    const { data: { subscription } } = supabaseUntyped.auth.onAuthStateChange(
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (!session?.user) {
           navigate("/auth", { replace: true });
@@ -90,7 +90,7 @@ const AdminInquiries = () => {
 
     const guard = async () => {
       // 1) חייב להיות משתמש מחובר
-      const { data } = await supabaseUntyped.auth.getSession();
+      const { data } = await supabase.auth.getSession();
       const user = data.session?.user;
 
       if (!user) {
@@ -98,12 +98,13 @@ const AdminInquiries = () => {
         return;
       }
 
-      // 2) חייב להיות אדמין (טבלת user_roles)
-      const { data: roles, error } = await supabaseUntyped.from("user_roles").select("role").eq("user_id", user.id);
+      // 2) Use server-side RPC to check admin status (prevents client-side bypass)
+      const { data: isAdminResult, error } = await supabase.rpc("has_role", {
+        _user_id: user.id,
+        _role: "admin",
+      });
 
-      const isAdmin = !error && Array.isArray(roles) && roles.some((r: any) => r?.role === "admin");
-
-      if (!isAdmin) {
+      if (error || !isAdminResult) {
         toast({
           title: "גישה נדחתה",
           description: "אין לך הרשאות לצפות בדף זה",
@@ -125,7 +126,7 @@ const AdminInquiries = () => {
 
   const updateStatus = async (id: string, newStatus: InquiryStatus) => {
     try {
-      const { error } = await supabaseUntyped.from("inquiries").update({ status: newStatus }).eq("id", id);
+      const { error } = await supabase.from("inquiries").update({ status: newStatus }).eq("id", id);
 
       if (error) throw error;
 

@@ -18,7 +18,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { supabaseUntyped } from "@/lib/supabaseHelpers";
 import { cn } from "@/lib/utils";
 import { z } from "zod";
 import stoneVeneerBefore from "@/assets/stone-veneer-before.jpg";
@@ -84,31 +83,18 @@ const StoneVeneerQuoteForm = () => {
     }
     setIsSubmitting(true);
     try {
-      const { error } = await supabaseUntyped.from("inquiries").insert({
-        full_name: result.data.fullName,
-        phone: result.data.phone,
-        email: result.data.email,
-        project_type: "חיפוי אבן בטכנולוגיה מתקדמת",
-        message: `סוג מבנה: ${result.data.buildingType}\nשטח משוער: ${result.data.area} מ"ר\n\n${result.data.message || ""}`,
-        preferred_date: result.data.preferredDate ? format(result.data.preferredDate, "yyyy-MM-dd") : null,
+      // Route all submissions through edge function for rate limiting
+      const { error } = await supabase.functions.invoke("send-inquiry-notification", {
+        body: {
+          fullName: result.data.fullName.trim(),
+          email: result.data.email.trim(),
+          phone: result.data.phone.trim(),
+          projectType: "חיפוי אבן בטכנולוגיה מתקדמת",
+          message: `סוג מבנה: ${result.data.buildingType}\nשטח משוער: ${result.data.area} מ"ר\n\n${result.data.message || ""}`,
+          preferredDate: result.data.preferredDate ? format(result.data.preferredDate, "dd/MM/yyyy") : undefined,
+        },
       });
       if (error) throw error;
-
-      // Send email notification
-      try {
-        await supabase.functions.invoke("send-inquiry-notification", {
-          body: {
-            fullName: formData.fullName.trim(),
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            projectType: "חיפוי אבן בטכנולוגיה מתקדמת",
-            message: `סוג מבנה: ${formData.buildingType}\nשטח משוער: ${formData.area} מ"ר\n\n${formData.message || ""}`,
-            preferredDate: formData.preferredDate ? format(formData.preferredDate, "dd/MM/yyyy") : undefined,
-          },
-        });
-      } catch (emailError) {
-        console.error("Error sending email:", emailError);
-      }
       toast({
         title: "הבקשה נשלחה בהצלחה!",
         description: "נחזור אליך עם הצעת מחיר תוך 24 שעות.",

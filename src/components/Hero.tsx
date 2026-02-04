@@ -56,7 +56,9 @@ const Hero = () => {
     <section ref={heroRef} dir={dir} className="relative h-screen flex items-center overflow-hidden">
       {/* Video background */}
       <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
-        <source src="/hero.webm" type="video/webm" />
+   <source src="/hero.webm" type="video/webm" />
+
+
       </video>
 
       {/* Dark overlay for better text readability */}
