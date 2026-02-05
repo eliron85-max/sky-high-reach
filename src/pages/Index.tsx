@@ -87,17 +87,15 @@ export default function Index() {
         </section>
 
         {/* SERVICES SECTION */}
-       <ServicesScrollCards
-  title="השירותים שלנו"
-  subtitle="קלפים שנכנסים בגלילה בצורה חלקה"
-  items={services.map((s) => ({
-    title: s.title,
-    image: s.image,
-    href: "/services",
-  }))}
-/>
-
-        </section>
+        <ServicesScrollCards
+          title="השירותים שלנו"
+          subtitle="קלפים שנכנסים בגלילה בצורה חלקה"
+          items={services.map((s) => ({
+            title: s.title,
+            image: s.image,
+            href: "/services",
+          }))}
+        />
 
         {/* STATS SECTION */}
         <HomeStatsSection
