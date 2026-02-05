@@ -20,7 +20,7 @@ export default function ArcCardsSection({
   items,
   title = "השירותים שלנו",
   subtitle = "קלפים נכנסים אחד-אחד במסלול מעגלי ונוחתים למקום",
-  backgroundClassName = "bg-[#bfe7d6]",
+  backgroundClassName = "arc-demo-bg",
   className,
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -105,189 +105,100 @@ export default function ArcCardsSection({
           }
         }
 
-        .arc-row {
-          perspective: 1400px;
+        /* Reference-like pastel background (HSL only) */
+        .arc-demo-bg {
+          background: hsl(160 44% 83%);
+        }
+
+        .arc-stage {
+          position: relative;
+          height: clamp(420px, 60vh, 720px);
+          perspective: 1200px;
           transform-style: preserve-3d;
         }
 
         .arc-card {
+          position: absolute;
+          top: var(--top);
+          left: var(--left);
+          width: clamp(320px, 46vw, 720px);
+          max-width: 92vw;
           opacity: 0;
           transform-style: preserve-3d;
-          will-change: transform, filter, opacity;
+          will-change: transform, opacity;
 
-          --dur: 2600ms;          /* ✅ משך ארוך יותר */
+          --dur: 900ms;
           --delay: 0ms;
-          --stagger: 320ms;       /* עיכוב בין קלפים */
-          --dir: 1;               /* זוגי/אי-זוגי */
-          --zBoost: 1;
-          --shadowA: 0.22;
-          --shadowB: 0.40;
-          --entryX: 350%;         /* כניסה רחוקה יותר */
-          --entryY: -200px;       /* כניסה מגובה */
-          --peakY: -480px;        /* שיא הקשת גבוה יותר */
-          --peakX: 180%;
+          --r: 0deg;
+          --sx: 0px;
+          --sy: 0px;
+          --sr: 0deg;
 
-          animation: arc-circular var(--dur) cubic-bezier(.18,.9,.18,1) both;
+          transform:
+            translate(-50%, -50%)
+            translate3d(var(--sx), var(--sy), 0)
+            rotate(var(--sr))
+            scale(1.04);
+
+          animation: arc-ref-in var(--dur) cubic-bezier(0.16, 1, 0.3, 1) both;
           animation-delay: var(--delay);
         }
 
-        /* ✅ מהיר יותר במובייל */
-        @media (max-width: 768px) {
-          .arc-card {
-            --dur: 1800ms;
-            --stagger: 220ms;
-            --entryX: 250%;
-            --entryY: -120px;
-            --peakY: -280px;
-            --peakX: 140%;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .arc-card {
-            --dur: 1400ms;
-            --stagger: 180ms;
-            --entryX: 200%;
-            --entryY: -80px;
-            --peakY: -200px;
-            --peakX: 120%;
-          }
-        }
-
-        .arc-card:nth-child(even) {
-          --dir: -1;
-          --zBoost: 1.06;
-          --shadowA: 0.26;
-          --shadowB: 0.46;
-          --entryY: -240px;
-          --peakY: -520px;
-        }
-
-        @media (max-width: 768px) {
-          .arc-card:nth-child(even) {
-            --entryY: -140px;
-            --peakY: -300px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .arc-card:nth-child(even) {
-            --entryY: -100px;
-            --peakY: -220px;
-          }
-        }
-
-        /* ✅ "מסלול עיגולי/ספיראלי" + rotateY חזק + rotateZ גדול + bounce כפול + blur + צל */
-        @keyframes arc-circular {
+        @keyframes arc-ref-in {
           0% {
-            transform:
-              translate3d(var(--entryX), var(--entryY), 0)
-              rotateY(95deg)
-              rotateZ(calc(45deg * var(--dir) * var(--zBoost)))
-              scale(0.30);
             opacity: 0;
-            filter:
-              blur(12px)
-              drop-shadow(0 18px 38px rgba(0,0,0,var(--shadowA)));
           }
-
-          8% {
+          18% {
             opacity: 1;
-            filter:
-              blur(6px)
-              drop-shadow(0 22px 44px rgba(0,0,0,var(--shadowB)));
           }
-
-          20% {
-            transform:
-              translate3d(var(--peakX), var(--peakY), 0)
-              rotateY(75deg)
-              rotateZ(calc(38deg * var(--dir)))
-              scale(0.50);
-            filter:
-              blur(4px)
-              drop-shadow(0 26px 52px rgba(0,0,0,var(--shadowB)));
-          }
-
-          40% {
-            transform:
-              translate3d(90%, -380px, 0)
-              rotateY(45deg)
-              rotateZ(calc(20deg * var(--dir)))
-              scale(0.72);
-            filter:
-              blur(2.5px)
-              drop-shadow(0 28px 56px rgba(0,0,0,var(--shadowB)));
-          }
-
-          60% {
-            transform:
-              translate3d(25%, -200px, 0)
-              rotateY(18deg)
-              rotateZ(calc(6deg * var(--dir)))
-              scale(0.92);
-            filter:
-              blur(1px)
-              drop-shadow(0 24px 50px rgba(0,0,0,var(--shadowB)));
-          }
-
-          75% {
-            transform:
-              translate3d(5%, -60px, 0)
-              rotateY(-8deg)
-              rotateZ(calc(-3deg * var(--dir)))
-              scale(1.04);
-            filter:
-              blur(0px)
-              drop-shadow(0 22px 46px rgba(0,0,0,var(--shadowB)));
-          }
-
-          82% {
-            /* ✅ bounce ראשון חזק */
-            transform:
-              translate3d(-6%, 42px, 0)
-              rotateY(10deg)
-              rotateZ(calc(4deg * var(--dir)))
-              scale(0.88);
-            filter:
-              blur(0px)
-              drop-shadow(0 12px 32px rgba(0,0,0,var(--shadowB)));
-          }
-
-          90% {
-            /* ✅ bounce שני */
-            transform:
-              translate3d(4%, -18px, 0)
-              rotateY(-4deg)
-              rotateZ(calc(-2deg * var(--dir)))
-              scale(1.04);
-            filter:
-              blur(0px)
-              drop-shadow(0 18px 40px rgba(0,0,0,var(--shadowB)));
-          }
-
-          96% {
-            /* ✅ bounce שלישי קטן */
-            transform:
-              translate3d(-1%, 8px, 0)
-              rotateY(2deg)
-              rotateZ(calc(1deg * var(--dir)))
-              scale(0.98);
-            filter:
-              blur(0px)
-              drop-shadow(0 14px 36px rgba(0,0,0,var(--shadowA)));
-          }
-
           100% {
-            transform:
-              translate3d(0, 0, 0)
-              rotateY(0deg)
-              rotateZ(0deg)
-              scale(1);
             opacity: 1;
-            filter:
-              blur(0px)
-              drop-shadow(0 16px 36px rgba(0,0,0,var(--shadowA)));
+            transform:
+              translate(-50%, -50%)
+              translate3d(0px, 0px, 0)
+              rotate(var(--r))
+              scale(1);
+          }
+        }
+
+        /* Slots that match the screenshots */
+        .arc-card[data-slot="center"] {
+          --top: 52%;
+          --left: 50%;
+          --r: 0deg;
+          --sx: 40vw;
+          --sy: -22vh;
+          --sr: 18deg;
+        }
+        .arc-card[data-slot="right"] {
+          --top: 44%;
+          --left: 78%;
+          --r: 12deg;
+          --sx: 55vw;
+          --sy: 10vh;
+          --sr: 32deg;
+        }
+        .arc-card[data-slot="left"] {
+          --top: 62%;
+          --left: 16%;
+          --r: -12deg;
+          --sx: -55vw;
+          --sy: 18vh;
+          --sr: -32deg;
+        }
+
+        @media (max-width: 768px) {
+          .arc-stage {
+            height: clamp(360px, 52vh, 560px);
+          }
+          .arc-card {
+            width: min(86vw, 520px);
+          }
+          .arc-card[data-slot="right"] {
+            --left: 85%;
+          }
+          .arc-card[data-slot="left"] {
+            --left: 10%;
           }
         }
       `}</style>
@@ -298,81 +209,65 @@ export default function ArcCardsSection({
         className="pointer-events-none absolute inset-0 opacity-[0.22]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 15%, rgba(255,255,255,0.60), transparent 55%), radial-gradient(circle at 80% 25%, rgba(255,255,255,0.35), transparent 60%)",
+            "radial-gradient(circle at 20% 15%, hsl(0 0% 100% / 0.60), transparent 55%), radial-gradient(circle at 80% 25%, hsl(0 0% 100% / 0.35), transparent 60%)",
         }}
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#121212]">{title}</h2>
-          {subtitle ? <p className="mt-4 text-base sm:text-lg text-black/70">{subtitle}</p> : null}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">{title}</h2>
+          {subtitle ? <p className="mt-4 text-base sm:text-lg text-foreground/70">{subtitle}</p> : null}
         </div>
 
-        {/* שורה אופקית כמו בוידאו */}
-        <div className="arc-row relative mt-12 sm:mt-14 overflow-x-auto overflow-y-visible [-webkit-overflow-scrolling:touch]">
-          <div className="flex gap-8 lg:gap-10 pr-2 sm:pr-6 lg:pr-10 pl-2 sm:pl-6 lg:pl-10 pb-10 snap-x snap-mandatory">
-            {safeItems.map((it, i) => {
-              const isActive = i < activeCount;
+        {/* Reference layout: 3 tilted oversized cards */}
+        <div className="arc-stage mt-12 sm:mt-14">
+          {safeItems.slice(0, 3).map((it, i) => {
+            const isActive = i < activeCount;
+            const slot = i === 0 ? "center" : i === 1 ? "right" : "left";
 
-              return (
-                <a
-                  key={`${it.title}-${i}`}
-                  href={it.href || "#"}
-                  aria-label={it.title}
+            return (
+              <a
+                key={`${it.title}-${i}`}
+                href={it.href || "#"}
+                aria-label={it.title}
+                data-slot={slot}
+                className={cn("arc-card group", !isActive ? "pointer-events-none" : "")}
+                style={
+                  {
+                    ["--delay" as any]: `${i * getStaggerDelay()}ms`,
+                    animationPlayState: isActive ? "running" : "paused",
+                  } as React.CSSProperties
+                }
+              >
+                <div
                   className={cn(
-                    "arc-card snap-start group relative shrink-0",
-                    "w-[420px] sm:w-[460px] lg:w-[560px]",
-                    !isActive ? "pointer-events-none" : "",
+                    "relative overflow-hidden",
+                    "rounded-[44px] sm:rounded-[50px]",
+                    "bg-card text-card-foreground",
+                    "shadow-[0_60px_140px_hsl(220_13%_9%_/0.30)]",
+                    "ring-1 ring-border",
                   )}
-                  style={
-                    {
-                      // רק כשהוא "נכנס" אנחנו נותנים לו delay / אנימציה
-                      ["--delay" as any]: `${i * getStaggerDelay()}ms`,
-                      animationPlayState: isActive ? "running" : "paused",
-                    } as React.CSSProperties
-                  }
                 >
-                  <div
-                    className={cn(
-                      "relative overflow-hidden",
-                      "rounded-[44px] sm:rounded-[50px]",
-                      "bg-black/90",
-                      "shadow-[0_60px_140px_rgba(0,0,0,0.50)]",
-                      "ring-1 ring-black/10",
-                      "transition-transform duration-300 group-hover:-translate-y-1",
-                    )}
-                  >
-                    <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden">
-                      <img
-                        src={it.image}
-                        alt={it.title}
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-                      />
-                      <div className="absolute inset-0 bg-black/10" />
-                    </div>
+                  <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden">
+                    <img
+                      src={it.image}
+                      alt={it.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  </div>
 
-                    <div className="relative px-7 sm:px-8 py-6 sm:py-7 bg-black/85">
-                      <div className="flex items-center justify-between gap-5">
-                        <div className="text-right">
-                          <h3 className="text-[18px] sm:text-[20px] font-extrabold text-white/95 leading-tight">
-                            {it.title}
-                          </h3>
-                          <p className="mt-1 text-[13px] sm:text-[14px] text-white/60">עבודות גובה וסנפלינג</p>
-                        </div>
-
-                        <span className="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-105">
-                          <span className="text-white/90 text-lg">→</span>
-                        </span>
-                      </div>
-
-                      <div className="pointer-events-none absolute inset-x-8 bottom-5 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/50 to-transparent" />
+                  <div className="relative px-7 sm:px-8 py-6 sm:py-7">
+                    <div className="text-right">
+                      <h3 className="text-[18px] sm:text-[20px] font-extrabold leading-tight">{it.title}</h3>
+                      <p className="mt-1 text-[13px] sm:text-[14px] text-muted-foreground">עבודות גובה וסנפלינג</p>
                     </div>
                   </div>
-                </a>
-              );
-            })}
-          </div>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
