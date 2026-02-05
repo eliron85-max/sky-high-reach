@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import ServicesScrollCards from "@/components/ServicesScrollCards";
+import ArcCardsSection from "@/components/ArcCardsSection";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
@@ -83,16 +84,18 @@ export default function Index() {
           <div className="absolute inset-0 bg-black/45" />
         </section>
 
-        {/* SERVICES SECTION (הקומפוננטה כבר מכילה section פנימי) */}
-        <ServicesScrollCards
-          title="השירותים שלנו"
-          subtitle="קלפים שנכנסים בגלילה בצורה חלקה"
-          items={services.map((s) => ({
-            title: s.title,
-            image: s.image,
-            href: "/services",
-          }))}
-        />
+        {/* ARC CARDS SECTION */}
+<ArcCardsSection
+  title="השירותים שלנו"
+  subtitle="קלפים ענקיים שמסתובבים בקשת מימין לשמאל ונוחתים למקום"
+  backgroundClassName="bg-[#bfe7d6]"
+  items={services.map((s) => ({
+    title: s.title,
+    image: s.image,
+    href: "/services",
+  }))}
+/>
+
 
         {/* STATS SECTION */}
         <HomeStatsSection
