@@ -54,7 +54,7 @@ export default function ArcCardsSection({
           io.disconnect();
         }
       },
-      { threshold: 0.25, rootMargin: "0px 0px -18% 0px" },
+      { threshold: 0.45, rootMargin: "0px 0px -30% 0px" },
     );
 
     io.observe(el);
