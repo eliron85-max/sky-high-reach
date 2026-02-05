@@ -60,7 +60,8 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
                 "svc-card group relative overflow-hidden rounded-3xl bg-[#0b0f14] border border-white/10",
                 "shadow-[0_25px_80px_rgba(0,0,0,0.35)]",
               )}
-              style={{ ["--d" as any]: `${Math.min(i * 0.09, 0.55)}s` }}
+              // סטאגר קצת יותר מורגש
+              style={{ ["--d" as any]: `${Math.min(i * 0.12, 0.8)}s` }}
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
@@ -84,31 +85,67 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       </div>
 
       <style>{`
+        /* ===== Arc Motion (ימין -> שמאל בצורה "קמורה") ===== */
+
         .svc-card{
           opacity: 0;
-          transform: translate3d(64px, 10px, 0) rotate(0.6deg) scale(0.985);
-          filter: blur(1px);
-          transition:
-            opacity 700ms ease,
-            transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
-            filter 700ms ease;
-          transition-delay: var(--d, 0s);
+          filter: blur(0.6px);
+
+          /* התחלה בקשת: ימינה + גובה משתנה + סיבוב עדין */
+          transform:
+            perspective(900px)
+            translate3d(90px, var(--arc, 18px), 0)
+            rotate(6deg)
+            scale(0.985);
+
+          transition: opacity 550ms ease, filter 550ms ease;
           will-change: transform, opacity, filter;
         }
 
         .svc-card.svc-in{
           opacity: 1;
           filter: blur(0px);
-          transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-          animation: svc-bounce 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+          animation: svc-arc 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
           animation-delay: var(--d, 0s);
         }
 
-        @keyframes svc-bounce{
-          0%   { transform: translate3d(64px, 10px, 0) rotate(0.6deg) scale(0.985); }
-          70%  { transform: translate3d(-6px, -2px, 0) rotate(-0.15deg) scale(1.004); }
-          100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+        @keyframes svc-arc{
+          0%{
+            transform:
+              perspective(900px)
+              translate3d(90px, var(--arc, 18px), 0)
+              rotate(6deg)
+              scale(0.985);
+          }
+
+          /* עובר דרך "ראש הקשת" — נותן תחושה מעגלית */
+          60%{
+            transform:
+              perspective(900px)
+              translate3d(18px, calc(var(--arc, 18px) * -0.7), 0)
+              rotate(-2deg)
+              scale(1.005);
+          }
+
+          100%{
+            transform:
+              perspective(900px)
+              translate3d(0, 0, 0)
+              rotate(0deg)
+              scale(1);
+          }
         }
+
+        /* לכל קלף גובה קשת שונה -> זה מה שיוצר "מסלול" ולא תנועה זהה */
+        .svc-card:nth-child(1){ --arc: 26px; }
+        .svc-card:nth-child(2){ --arc: 18px; }
+        .svc-card:nth-child(3){ --arc: 30px; }
+        .svc-card:nth-child(4){ --arc: 14px; }
+        .svc-card:nth-child(5){ --arc: 22px; }
+        .svc-card:nth-child(6){ --arc: 16px; }
+        .svc-card:nth-child(7){ --arc: 28px; }
+        .svc-card:nth-child(8){ --arc: 12px; }
+        .svc-card:nth-child(9){ --arc: 20px; }
 
         @media (prefers-reduced-motion: reduce){
           .svc-card, .svc-card.svc-in{
