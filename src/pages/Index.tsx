@@ -87,8 +87,7 @@ export default function Index() {
         {/* ARC CARDS SECTION */}
         <ArcCardsSection
           title="השירותים שלנו"
-          subtitle="קלפים שמסתובבים במסלול מעגלי ונוחתים למקום"
-          backgroundClassName="arc-demo-bg"
+          backgroundClassName="bg-[#bfe7d6]"
           items={services}
         />
 
