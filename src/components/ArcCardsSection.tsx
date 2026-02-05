@@ -65,7 +65,7 @@ export default function ArcCardsSection({
     if (!started) return;
     if (activeCount >= safeItems.length) return;
 
-    // ✅ delay בין קלפים: 280ms
+    // ✅ delay בין קלפים: 320ms
     const t = window.setInterval(() => {
       setActiveCount((c) => {
         const next = c + 1;
@@ -75,7 +75,7 @@ export default function ArcCardsSection({
         }
         return next;
       });
-    }, 280);
+    }, 320);
 
     return () => window.clearInterval(t);
   }, [started, activeCount, safeItems.length]);
