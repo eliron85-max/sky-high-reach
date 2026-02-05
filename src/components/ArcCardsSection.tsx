@@ -31,6 +31,14 @@ export default function ArcCardsSection({
   const [activeCount, setActiveCount] = useState(0);
   const [started, setStarted] = useState(false);
 
+  // ✅ עיכוב דינמי לפי גודל מסך
+  const getStaggerDelay = () => {
+    if (typeof window === "undefined") return 320;
+    if (window.innerWidth <= 480) return 180;
+    if (window.innerWidth <= 768) return 220;
+    return 320;
+  };
+
   useEffect(() => {
     const prefersReduced =
       typeof window !== "undefined" &&
@@ -66,6 +74,7 @@ export default function ArcCardsSection({
     if (activeCount >= safeItems.length) return;
 
     // ✅ delay בין קלפים: 320ms
+    const staggerDelay = getStaggerDelay();
     const t = window.setInterval(() => {
       setActiveCount((c) => {
         const next = c + 1;
@@ -75,7 +84,7 @@ export default function ArcCardsSection({
         }
         return next;
       });
-    }, 320);
+    }, staggerDelay);
 
     return () => window.clearInterval(t);
   }, [started, activeCount, safeItems.length]);
@@ -108,6 +117,7 @@ export default function ArcCardsSection({
 
           --dur: 2600ms;          /* ✅ משך ארוך יותר */
           --delay: 0ms;
+          --stagger: 320ms;       /* עיכוב בין קלפים */
           --dir: 1;               /* זוגי/אי-זוגי */
           --zBoost: 1;
           --shadowA: 0.22;
@@ -121,6 +131,29 @@ export default function ArcCardsSection({
           animation-delay: var(--delay);
         }
 
+        /* ✅ מהיר יותר במובייל */
+        @media (max-width: 768px) {
+          .arc-card {
+            --dur: 1800ms;
+            --stagger: 220ms;
+            --entryX: 250%;
+            --entryY: -120px;
+            --peakY: -280px;
+            --peakX: 140%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .arc-card {
+            --dur: 1400ms;
+            --stagger: 180ms;
+            --entryX: 200%;
+            --entryY: -80px;
+            --peakY: -200px;
+            --peakX: 120%;
+          }
+        }
+
         .arc-card:nth-child(even) {
           --dir: -1;
           --zBoost: 1.06;
@@ -128,6 +161,20 @@ export default function ArcCardsSection({
           --shadowB: 0.46;
           --entryY: -240px;
           --peakY: -520px;
+        }
+
+        @media (max-width: 768px) {
+          .arc-card:nth-child(even) {
+            --entryY: -140px;
+            --peakY: -300px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .arc-card:nth-child(even) {
+            --entryY: -100px;
+            --peakY: -220px;
+          }
         }
 
         /* ✅ "מסלול עיגולי/ספיראלי" + rotateY חזק + rotateZ גדול + bounce כפול + blur + צל */
@@ -266,7 +313,6 @@ export default function ArcCardsSection({
           <div className="flex gap-8 lg:gap-10 pr-2 sm:pr-6 lg:pr-10 pl-2 sm:pl-6 lg:pl-10 pb-10 snap-x snap-mandatory">
             {safeItems.map((it, i) => {
               const isActive = i < activeCount;
-              const delayMs = i * 320; // ✅ delay 320ms למרווח טוב יותר
 
               return (
                 <a
@@ -281,7 +327,7 @@ export default function ArcCardsSection({
                   style={
                     {
                       // רק כשהוא "נכנס" אנחנו נותנים לו delay / אנימציה
-                      ["--delay" as any]: `${delayMs}ms`,
+                      ["--delay" as any]: `${i * getStaggerDelay()}ms`,
                       animationPlayState: isActive ? "running" : "paused",
                     } as React.CSSProperties
                   }
