@@ -65,7 +65,7 @@ export default function ArcCardsSection({
     if (!started) return;
     if (activeCount >= safeItems.length) return;
 
-    // ✅ delay בין קלפים: 280ms
+    // ✅ delay בין קלפים: 320ms
     const t = window.setInterval(() => {
       setActiveCount((c) => {
         const next = c + 1;
@@ -75,7 +75,7 @@ export default function ArcCardsSection({
         }
         return next;
       });
-    }, 280);
+    }, 320);
 
     return () => window.clearInterval(t);
   }, [started, activeCount, safeItems.length]);
@@ -106,12 +106,16 @@ export default function ArcCardsSection({
           transform-style: preserve-3d;
           will-change: transform, filter, opacity;
 
-          --dur: 2200ms;          /* ✅ 2200ms */
+          --dur: 2600ms;          /* ✅ משך ארוך יותר */
           --delay: 0ms;
           --dir: 1;               /* זוגי/אי-זוגי */
           --zBoost: 1;
           --shadowA: 0.22;
           --shadowB: 0.40;
+          --entryX: 350%;         /* כניסה רחוקה יותר */
+          --entryY: -200px;       /* כניסה מגובה */
+          --peakY: -480px;        /* שיא הקשת גבוה יותר */
+          --peakX: 180%;
 
           animation: arc-circular var(--dur) cubic-bezier(.18,.9,.18,1) both;
           animation-delay: var(--delay);
@@ -122,84 +126,109 @@ export default function ArcCardsSection({
           --zBoost: 1.06;
           --shadowA: 0.26;
           --shadowB: 0.46;
+          --entryY: -240px;
+          --peakY: -520px;
         }
 
         /* ✅ "מסלול עיגולי/ספיראלי" + rotateY חזק + rotateZ גדול + bounce כפול + blur + צל */
         @keyframes arc-circular {
           0% {
             transform:
-              translate3d(280%, -120px, 0)
-              rotateY(85deg)
-              rotateZ(calc(35deg * var(--dir) * var(--zBoost)))
-              scale(0.40);
+              translate3d(var(--entryX), var(--entryY), 0)
+              rotateY(95deg)
+              rotateZ(calc(45deg * var(--dir) * var(--zBoost)))
+              scale(0.30);
             opacity: 0;
             filter:
-              blur(8px)
+              blur(12px)
               drop-shadow(0 18px 38px rgba(0,0,0,var(--shadowA)));
           }
 
-          10% {
+          8% {
             opacity: 1;
             filter:
-              blur(4px)
+              blur(6px)
               drop-shadow(0 22px 44px rgba(0,0,0,var(--shadowB)));
           }
 
-          25% {
+          20% {
             transform:
-              translate3d(160%, -380px, 0) /* ✅ שיא גבוה יותר */
-              rotateY(65deg)
-              rotateZ(calc(25deg * var(--dir)))
-              scale(0.60);
+              translate3d(var(--peakX), var(--peakY), 0)
+              rotateY(75deg)
+              rotateZ(calc(38deg * var(--dir)))
+              scale(0.50);
             filter:
-              blur(3px)
+              blur(4px)
               drop-shadow(0 26px 52px rgba(0,0,0,var(--shadowB)));
           }
 
-          50% {
+          40% {
             transform:
-              translate3d(60%, -320px, 0)
-              rotateY(25deg)
-              rotateZ(calc(8deg * var(--dir)))
-              scale(0.85);
+              translate3d(90%, -380px, 0)
+              rotateY(45deg)
+              rotateZ(calc(20deg * var(--dir)))
+              scale(0.72);
             filter:
-              blur(2px)
+              blur(2.5px)
               drop-shadow(0 28px 56px rgba(0,0,0,var(--shadowB)));
           }
 
-          70% {
+          60% {
             transform:
-              translate3d(5%, -140px, 0)
-              rotateY(-12deg)
-              rotateZ(calc(-5deg * var(--dir)))
-              scale(1.06);
+              translate3d(25%, -200px, 0)
+              rotateY(18deg)
+              rotateZ(calc(6deg * var(--dir)))
+              scale(0.92);
+            filter:
+              blur(1px)
+              drop-shadow(0 24px 50px rgba(0,0,0,var(--shadowB)));
+          }
+
+          75% {
+            transform:
+              translate3d(5%, -60px, 0)
+              rotateY(-8deg)
+              rotateZ(calc(-3deg * var(--dir)))
+              scale(1.04);
             filter:
               blur(0px)
-              drop-shadow(0 24px 50px rgba(0,0,0,var(--shadowB)));
+              drop-shadow(0 22px 46px rgba(0,0,0,var(--shadowB)));
           }
 
           82% {
             /* ✅ bounce ראשון חזק */
             transform:
-              translate3d(-8%, 28px, 0)
-              rotateY(6deg)
-              rotateZ(calc(2deg * var(--dir)))
-              scale(0.94);
+              translate3d(-6%, 42px, 0)
+              rotateY(10deg)
+              rotateZ(calc(4deg * var(--dir)))
+              scale(0.88);
+            filter:
+              blur(0px)
+              drop-shadow(0 12px 32px rgba(0,0,0,var(--shadowB)));
+          }
+
+          90% {
+            /* ✅ bounce שני */
+            transform:
+              translate3d(4%, -18px, 0)
+              rotateY(-4deg)
+              rotateZ(calc(-2deg * var(--dir)))
+              scale(1.04);
             filter:
               blur(0px)
               drop-shadow(0 18px 40px rgba(0,0,0,var(--shadowB)));
           }
 
-          92% {
-            /* ✅ bounce שני */
+          96% {
+            /* ✅ bounce שלישי קטן */
             transform:
-              translate3d(3%, -8px, 0)
-              rotateY(-2deg)
-              rotateZ(calc(-1deg * var(--dir)))
-              scale(1.02);
+              translate3d(-1%, 8px, 0)
+              rotateY(2deg)
+              rotateZ(calc(1deg * var(--dir)))
+              scale(0.98);
             filter:
               blur(0px)
-              drop-shadow(0 20px 44px rgba(0,0,0,var(--shadowB)));
+              drop-shadow(0 14px 36px rgba(0,0,0,var(--shadowA)));
           }
 
           100% {
@@ -237,7 +266,7 @@ export default function ArcCardsSection({
           <div className="flex gap-8 lg:gap-10 pr-2 sm:pr-6 lg:pr-10 pl-2 sm:pl-6 lg:pl-10 pb-10 snap-x snap-mandatory">
             {safeItems.map((it, i) => {
               const isActive = i < activeCount;
-              const delayMs = i * 280; // ✅ delay 280ms
+              const delayMs = i * 320; // ✅ delay 320ms למרווח טוב יותר
 
               return (
                 <a
