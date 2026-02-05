@@ -79,7 +79,7 @@ export default function ArcCardsSection({
       ref={sectionRef}
       className={cn("relative", backgroundClassName, className)}
       dir="rtl"
-      style={{ height: `${100 + total * 180}vh` }}
+      style={{ height: `${100 + total * 300}vh` }}
     >
       <style>{`
         @media (prefers-reduced-motion: reduce) {
@@ -125,22 +125,41 @@ export default function ArcCardsSection({
 
           if (state.phase === "waiting") {
             translateX = 120;
-            rotate = 18;
+            rotate = 12;
             opacity = 0;
-            scale = 0.85;
+            scale = 0.92;
           } else if (state.phase === "exited") {
             translateX = -120;
-            rotate = -18;
+            rotate = -12;
             opacity = 0;
-            scale = 0.85;
+            scale = 0.92;
           } else {
-            // Smooth easing: cubic ease-in-out
-            const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-            translateX = 100 - eased * 200; // 100 → 0 → -100
-            rotate = 15 - eased * 30; // 15 → 0 → -15
-            scale = 0.88 + Math.sin(eased * Math.PI) * 0.14; // peaks at ~1.02 in center
-            opacity = Math.sin(eased * Math.PI);
-            opacity = Math.max(0.15, opacity);
+            // Smooth ease with longer center dwell time
+            // t: 0→0.3 = entering, 0.3→0.7 = center, 0.7→1 = exiting
+            let eased: number;
+            if (t < 0.25) {
+              // Entering phase: ease out
+              eased = t / 0.25 * 0.5;
+            } else if (t < 0.75) {
+              // Center phase: stay centered
+              eased = 0.5;
+            } else {
+              // Exiting phase: ease in
+              eased = 0.5 + ((t - 0.75) / 0.25) * 0.5;
+            }
+
+            translateX = 80 - eased * 160; // 80 → 0 → -80
+            rotate = 10 - eased * 20; // 10 → 0 → -10
+            scale = 0.94 + Math.sin(eased * Math.PI) * 0.08; // peaks at ~1.02 in center
+            
+            // Opacity: quick fade in, hold, quick fade out
+            if (t < 0.15) {
+              opacity = t / 0.15;
+            } else if (t > 0.85) {
+              opacity = (1 - t) / 0.15;
+            } else {
+              opacity = 1;
+            }
           }
 
           return (
