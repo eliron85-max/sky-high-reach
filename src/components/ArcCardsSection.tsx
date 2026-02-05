@@ -79,7 +79,7 @@ export default function ArcCardsSection({
       ref={sectionRef}
       className={cn("relative", backgroundClassName, className)}
       dir="rtl"
-      style={{ height: `${100 + total * 100}vh` }}
+      style={{ height: `${100 + total * 180}vh` }}
     >
       <style>{`
         @media (prefers-reduced-motion: reduce) {
