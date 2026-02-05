@@ -87,22 +87,16 @@ export default function Index() {
         </section>
 
         {/* SERVICES SECTION */}
-        <section
-          ref={ref as React.RefObject<HTMLElement>}
-          className={`relative z-20 bg-black py-10 sm:py-14 lg:py-20 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          } transition-opacity duration-700`}
-        >
-          {/* במקום הכותרת + הגריד הישן — משתמשים בקומפוננטה עם האנימציה */}
-          <ServicesScrollCards
-            title="השירותים שלנו"
-            subtitle="קלפים שנכנסים בגלילה בצורה חלקה"
-            items={services.map((s) => ({
-              title: s.title,
-              image: s.image,
-              href: "/services",
-            }))}
-          />
+       <ServicesScrollCards
+  title="השירותים שלנו"
+  subtitle="קלפים שנכנסים בגלילה בצורה חלקה"
+  items={services.map((s) => ({
+    title: s.title,
+    image: s.image,
+    href: "/services",
+  }))}
+/>
+
         </section>
 
         {/* STATS SECTION */}
