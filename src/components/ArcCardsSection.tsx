@@ -31,6 +31,14 @@ export default function ArcCardsSection({
   const [activeCount, setActiveCount] = useState(0);
   const [started, setStarted] = useState(false);
 
+  // ✅ עיכוב דינמי לפי גודל מסך
+  const getStaggerDelay = () => {
+    if (typeof window === "undefined") return 320;
+    if (window.innerWidth <= 480) return 180;
+    if (window.innerWidth <= 768) return 220;
+    return 320;
+  };
+
   useEffect(() => {
     const prefersReduced =
       typeof window !== "undefined" &&
@@ -66,6 +74,7 @@ export default function ArcCardsSection({
     if (activeCount >= safeItems.length) return;
 
     // ✅ delay בין קלפים: 320ms
+    const staggerDelay = getStaggerDelay();
     const t = window.setInterval(() => {
       setActiveCount((c) => {
         const next = c + 1;
@@ -75,7 +84,7 @@ export default function ArcCardsSection({
         }
         return next;
       });
-    }, 320);
+    }, staggerDelay);
 
     return () => window.clearInterval(t);
   }, [started, activeCount, safeItems.length]);
