@@ -8,7 +8,6 @@ import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
 import HomeStatsSection from "@/components/HomeStatsSection";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 
@@ -61,8 +60,6 @@ const services = [
 ];
 
 export default function Index() {
-  const { ref, isVisible } = useScrollReveal();
-
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -86,7 +83,7 @@ export default function Index() {
           <div className="absolute inset-0 bg-black/45" />
         </section>
 
-        {/* SERVICES SECTION */}
+        {/* SERVICES SECTION (הקומפוננטה כבר מכילה section פנימי) */}
         <ServicesScrollCards
           title="השירותים שלנו"
           subtitle="קלפים שנכנסים בגלילה בצורה חלקה"
