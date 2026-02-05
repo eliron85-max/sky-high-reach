@@ -3,6 +3,7 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
+import ServicesScrollCards from "@/components/ServicesScrollCards";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
