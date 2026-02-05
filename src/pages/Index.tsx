@@ -85,17 +85,12 @@ export default function Index() {
         </section>
 
         {/* ARC CARDS SECTION */}
-<ArcCardsSection
-  title="השירותים שלנו"
-  subtitle="קלפים ענקיים שמסתובבים בקשת מימין לשמאל ונוחתים למקום"
-  backgroundClassName="bg-[#bfe7d6]"
-  items={services.map((s) => ({
-    title: s.title,
-    image: s.image,
-    href: "/services",
-  }))}
-/>
-
+        <ArcCardsSection
+          title="השירותים שלנו"
+          subtitle="קלפים שמסתובבים במסלול מעגלי ונוחתים למקום"
+          backgroundClassName="bg-[#bfe7d6]"
+          items={services}
+        />
 
         {/* STATS SECTION */}
         <HomeStatsSection
