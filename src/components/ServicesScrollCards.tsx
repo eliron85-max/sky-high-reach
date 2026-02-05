@@ -22,20 +22,18 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     const root = rootRef.current;
     if (!root) return;
 
-    // חשוב: אנחנו מחפשים לפי class (לא data-attr), כדי שלא יהיה חוסר התאמה
     const cards = Array.from(root.querySelectorAll<HTMLElement>(".svc-card"));
 
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
+        entries.forEach((e) => {
           if (e.isIntersecting) {
             (e.target as HTMLElement).classList.add("svc-in");
             io.unobserve(e.target);
           }
-        }
+        });
       },
-      // גורם לזה לקרות "כשהקלף כבר נכנס" ולא מוקדם מדי
-      { threshold: 0.22, rootMargin: "0px 0px -18% 0px" }
+      { threshold: 0.22, rootMargin: "0px 0px -18% 0px" },
     );
 
     cards.forEach((c) => io.observe(c));
@@ -45,14 +43,10 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
   return (
     <section className={cn("py-10 sm:py-14 lg:py-20", className)} dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#f5d58a] text-center">
-          {title}
-        </h2>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#f5d58a] text-center">{title}</h2>
 
         {subtitle ? (
-          <p className="text-center text-white/55 mt-3 mb-10 sm:mb-12">
-            {subtitle}
-          </p>
+          <p className="text-center text-white/55 mt-3 mb-10 sm:mb-12">{subtitle}</p>
         ) : (
           <div className="mb-10 sm:mb-12" />
         )}
@@ -63,13 +57,11 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
               key={`${s.title}-${i}`}
               href={s.href || "#"}
               className={cn(
-                // ⚠️ זה הקריטי: svc-card חייב להיות כאן
                 "svc-card group relative overflow-hidden rounded-3xl bg-[#0b0f14] border border-white/10",
-                "shadow-[0_25px_80px_rgba(0,0,0,0.35)]"
+                "shadow-[0_25px_80px_rgba(0,0,0,0.35)]",
               )}
               style={{ ["--d" as any]: `${Math.min(i * 0.09, 0.55)}s` }}
             >
-              {/* image */}
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
                   src={s.image}
@@ -80,24 +72,17 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
               </div>
 
-              {/* bottom bar */}
               <div className="px-6 py-5 bg-[#0d1218]">
-                <h3 className="text-[15px] sm:text-[16px] font-semibold text-white/90 text-right">
-                  {s.title}
-                </h3>
-                <p className="mt-1 text-[12px] sm:text-[13px] text-white/45 text-right">
-                  עבודות גובה וסנפלינג
-                </p>
+                <h3 className="text-[15px] sm:text-[16px] font-semibold text-white/90 text-right">{s.title}</h3>
+                <p className="mt-1 text-[12px] sm:text-[13px] text-white/45 text-right">עבודות גובה וסנפלינג</p>
               </div>
 
-              {/* subtle gold line */}
               <div className="pointer-events-none absolute inset-x-6 bottom-4 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/35 to-transparent" />
             </a>
           ))}
         </div>
       </div>
 
-      {/* Animation */}
       <style>{`
         .svc-card{
           opacity: 0;
@@ -128,4 +113,13 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
         @media (prefers-reduced-motion: reduce){
           .svc-card, .svc-card.svc-in{
             transition: none !important;
-            anim
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
