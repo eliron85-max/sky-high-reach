@@ -313,7 +313,6 @@ export default function ArcCardsSection({
           <div className="flex gap-8 lg:gap-10 pr-2 sm:pr-6 lg:pr-10 pl-2 sm:pl-6 lg:pl-10 pb-10 snap-x snap-mandatory">
             {safeItems.map((it, i) => {
               const isActive = i < activeCount;
-              const delayMs = i * 320; // ✅ delay 320ms למרווח טוב יותר
 
               return (
                 <a
@@ -328,7 +327,7 @@ export default function ArcCardsSection({
                   style={
                     {
                       // רק כשהוא "נכנס" אנחנו נותנים לו delay / אנימציה
-                      ["--delay" as any]: `${delayMs}ms`,
+                      ["--delay" as any]: `${i * getStaggerDelay()}ms`,
                       animationPlayState: isActive ? "running" : "paused",
                     } as React.CSSProperties
                   }
