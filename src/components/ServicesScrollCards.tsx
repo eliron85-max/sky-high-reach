@@ -1,155 +1,81 @@
-// src/components/ServicesScrollCards.tsx
-import React, { useEffect, useMemo, useRef } from "react";
-import { cn } from "@/lib/utils";
+import React, { useEffect, useRef } from "react";
 
-type ServiceItem = {
+type Item = {
   title: string;
   image: string;
   href?: string;
-  subtitle?: string;
 };
 
 type Props = {
-  title?: string;
+  title: string;
   subtitle?: string;
-  items: ServiceItem[];
-  className?: string;
+  items: Item[];
 };
 
-export default function ServicesScrollCards({
-  title = "השירותים שלנו",
-  subtitle = "גלול למטה ותראה את הקלפים נכנסים בצורה חלקה",
-  items,
-  className,
-}: Props) {
-  const rootRef = useRef<HTMLDivElement | null>(null);
+export default function ServicesScrollCards({ title, subtitle, items }: Props) {
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-svc-card]"));
+    const cards = rootRef.current?.querySelectorAll(".svc-card");
+    if (!cards) return;
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const el = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            el.classList.add("svc-in");
-            io.unobserve(el); // פעם אחת וזהו (לא ייצא/ייכנס שוב)
+            entry.target.classList.add("svc-in");
+            io.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.18, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.2 },
     );
 
-    cards.forEach((el) => io.observe(el));
+    cards.forEach((c) => io.observe(c));
     return () => io.disconnect();
-  }, [items]);
-
-  // סטאגר דיליי אוטומטי לכל קלף
-  const delays = useMemo(() => items.map((_, i) => Math.min(0.08 * i, 0.5)), [items]);
+  }, []);
 
   return (
-    <section className={cn("py-16 md:py-24", className)} dir="rtl">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white">{title}</h2>
-          <p className="mt-4 text-white/70 text-base md:text-lg">{subtitle}</p>
-        </div>
+    <section className="py-12" dir="rtl">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-[#f5d58a] text-center">{title}</h2>
 
-        <div
-          ref={rootRef}
-          className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-        >
+        {subtitle && <p className="text-center text-white/60 mt-3 mb-10">{subtitle}</p>}
+
+        <div ref={rootRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((s, i) => (
             <a
-              key={s.title + i}
+              key={i}
               href={s.href || "#"}
-              data-svc-card
-              className={cn(
-                "svc-card group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b0f14]/70",
-                "backdrop-blur-md shadow-[0_25px_80px_rgba(0,0,0,0.35)]",
-                "focus:outline-none focus:ring-2 focus:ring-[#c9a84c]/35"
-              )}
-              style={{ ["--svc-delay" as any]: `${delays[i]}s` }}
+              className="svc-card block rounded-2xl overflow-hidden bg-[#0b0f14]"
+              style={{ transitionDelay: `${i * 90}ms` }}
             >
-              {/* תמונה */}
-              <div className="relative h-[220px] w-full overflow-hidden">
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-                  loading="lazy"
-                />
-                {/* שכבת כהות עדינה + גולד */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_20%,rgba(201,168,76,0.22),transparent_55%)]" />
+              <div className="relative aspect-[16/9]">
+                <img src={s.image} className="absolute inset-0 w-full h-full object-cover" />
               </div>
 
-              {/* טקסט */}
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-xl font-extrabold text-white leading-tight">{s.title}</h3>
-                  <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all duration-300 group-hover:bg-white/10 group-hover:text-white">
-                    →
-                  </span>
-                </div>
-
-                {s.subtitle ? (
-                  <p className="mt-3 text-white/70 leading-relaxed">{s.subtitle}</p>
-                ) : (
-                  <p className="mt-3 text-white/60 leading-relaxed">
-                    לפרטים נוספים לחץ כאן
-                  </p>
-                )}
+              <div className="p-4">
+                <h3 className="text-white font-semibold">{s.title}</h3>
+                <p className="text-white/50 text-sm mt-1">עבודות גובה וסנפלינג</p>
               </div>
-
-              {/* קו גולד תחתון */}
-              <div className="pointer-events-none absolute inset-x-6 bottom-5 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/45 to-transparent opacity-70" />
             </a>
           ))}
         </div>
       </div>
 
-      {/* CSS מקומי לאפקט */}
+      {/* Animation CSS */}
       <style>{`
-        .svc-card{
+        .svc-card {
           opacity: 0;
-          transform: translate3d(56px, 10px, 0) rotate(0.8deg);
-          filter: blur(1px);
+          transform: translateX(60px) scale(0.96);
           transition:
-            opacity 700ms ease,
-            transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
-            filter 700ms ease;
-          transition-delay: var(--svc-delay, 0s);
-          will-change: transform, opacity, filter;
+            opacity 0.6s ease,
+            transform 0.8s cubic-bezier(.2,.9,.2,1);
         }
 
-        /* כשהקלף נכנס */
-        .svc-card.svc-in{
+        .svc-card.svc-in {
           opacity: 1;
-          transform: translate3d(0, 0, 0) rotate(0deg);
-          filter: blur(0px);
-          animation: svc-bounce 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
-          animation-delay: var(--svc-delay, 0s);
-        }
-
-        /* bounce עדין מאוד */
-        @keyframes svc-bounce{
-          0%   { transform: translate3d(56px, 10px, 0) rotate(0.8deg); }
-          70%  { transform: translate3d(-6px, -2px, 0) rotate(-0.2deg); }
-          100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-        }
-
-        @media (prefers-reduced-motion: reduce){
-          .svc-card, .svc-card.svc-in{
-            transition: none !important;
-            animation: none !important;
-            opacity: 1 !important;
-            transform: none !important;
-            filter: none !important;
-          }
+          transform: translateX(0) scale(1);
         }
       `}</style>
     </section>
