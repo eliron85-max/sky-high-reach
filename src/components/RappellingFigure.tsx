@@ -1,75 +1,87 @@
 import { useEffect, useState } from "react";
-import rappellingFigure from "@/assets/Worker.png";
 
-export default function RappellingFigure() {
+type Props = {
+  image: string;
+  side: "left" | "right";
+  figureWidth?: number;
+};
+
+export default function RappellingFigure({
+  image,
+  side,
+  figureWidth = 245,
+}: Props) {
   const [figureY, setFigureY] = useState(0);
 
-  // 🔧 גודל הדמות
-  const figureWidth = 245;
-
-  // 🔧 מיקום החבל (נעול לפי מצב מדויק שהיה: right=136 כשהדמות 300)
-  const ropeRight = Math.round((136 / 300) * figureWidth);
-
-  // 🔧 נקודת החיבור האנכית על הדמות
   const ropeAttachOffset = 60;
-
-  // 🔧 כמה להאריך את החבל מעל המסך (כדי שלא יראו התחלה)
   const ropeOverhang = 500;
+
+  // יחס ימני שננעל כשהיה 300px
+  const baseRight = Math.round((136 / 300) * figureWidth);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
 
-      const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+      const progress =
+        scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
 
       const maxY = window.innerHeight - 350;
-
       setFigureY(progress * maxY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () =>
+      window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // החבל מתחיל מעל המסך אך נשאר מחובר למכשיר
   const ropeTop = -ropeOverhang;
   const ropeHeight = figureY + ropeAttachOffset + ropeOverhang;
 
+  const positionStyle =
+    side === "right"
+      ? { right: 0 }
+      : { left: 0 };
+
+  const ropePosition =
+    side === "right"
+      ? { right: baseRight }
+      : { left: baseRight };
+
   return (
-    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
+    <div
+      className="hidden lg:block fixed inset-0 pointer-events-none"
+      style={{ zIndex: 9999 }}
+    >
       {/* Rope */}
       <div
         className="absolute"
         style={{
-          right: ropeRight,
+          ...ropePosition,
           top: ropeTop,
           width: 1.2,
           height: ropeHeight,
           backgroundColor: "#808080",
-          willChange: "height",
         }}
       />
 
       {/* Figure */}
       <img
-        src={rappellingFigure}
-        alt="פועל סנפלינג"
+        src={image}
         draggable={false}
         className="absolute"
         style={{
-          right: 0,
+          ...positionStyle,
           top: figureY,
           width: figureWidth,
           height: "auto",
-          willChange: "top",
           animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
         }}
       />
 
-      {/* Animation */}
       <style>{`
         @keyframes sway {
           0% { transform: rotate(-1.2deg); }
