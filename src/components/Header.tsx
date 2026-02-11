@@ -348,7 +348,7 @@ export default function Header() {
                 <Link
                   to="/pricing"
                   onClick={closeMobile}
-                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] hover:bg-black/5"
+                  className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
                   מחירים
                 </Link>
