@@ -210,7 +210,7 @@ export default function ArcCardsSection({
         <div className="absolute bottom-8 inset-x-0 flex justify-center gap-2 z-10">
           {safeItems.map((_, i) => {
             const state = getCardState(i);
-            const isActive = state.phase === "active" && state.t > 0.15 && state.t < 0.85;
+            const isActive = state.phase === "active" && state.progress > 0.15 && state.progress < 0.85;
             return (
               <div
                 key={i}
