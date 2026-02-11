@@ -373,7 +373,7 @@ const Contact = () => {
                   <div className="flex items-center gap-4 flex-wrap">
                     <label className={uploadBtn}>
                       <Upload size={18} />
-                      בחר קובץ
+                      {t("contact.form.chooseFile")}
                       <input
                         type="file"
                         hidden
