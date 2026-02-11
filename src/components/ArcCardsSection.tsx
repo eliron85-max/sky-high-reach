@@ -69,9 +69,9 @@ export default function ArcCardsSection({
       const cardStart = index;
       const localProgress = cardProgress - cardStart;
 
-      if (localProgress < 0) return { phase: "waiting" as const, t: 0 };
-      if (localProgress <= 1) return { phase: "active" as const, t: localProgress };
-      return { phase: "exited" as const, t: 1 };
+      if (localProgress < 0) return { phase: "waiting" as const, progress: 0 };
+      if (localProgress <= 1) return { phase: "active" as const, progress: localProgress };
+      return { phase: "exited" as const, progress: 1 };
     },
     [progress, total],
   );
@@ -118,7 +118,7 @@ export default function ArcCardsSection({
 
         {safeItems.map((it, i) => {
           const state = getCardState(i);
-          const progressT = state.t;
+          const progressT = state.progress;
 
           let translateX: number;
           let rotate: number;
@@ -210,7 +210,7 @@ export default function ArcCardsSection({
         <div className="absolute bottom-8 inset-x-0 flex justify-center gap-2 z-10">
           {safeItems.map((_, i) => {
             const state = getCardState(i);
-            const isActive = state.phase === "active" && state.t > 0.15 && state.t < 0.85;
+            const isActive = state.phase === "active" && state.progress > 0.15 && state.progress < 0.85;
             return (
               <div
                 key={i}
