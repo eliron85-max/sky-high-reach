@@ -1,6 +1,7 @@
 import { useTranslation, Language } from "@/lib/i18n";
 import { useState, useEffect } from "react";
 import { Globe } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "he", label: "עברית", flag: "https://flagcdn.com/w40/il.png" },
@@ -28,6 +29,8 @@ export const FloatingLanguageSwitcher = () => {
       className="fixed top-28 left-3 z-[70] lg:hidden"
     >
       <div className="flex flex-col items-center gap-2">
+        {/* Theme toggle above globe */}
+        <ThemeToggle />
         {/* Toggle button - always visible */}
         <button
           onClick={() => setIsOpen(!isOpen)}

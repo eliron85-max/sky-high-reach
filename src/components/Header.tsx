@@ -265,9 +265,8 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT: ThemeToggle + CTA */}
+          {/* LEFT: CTA */}
           <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-            <ThemeToggle />
             <Link
               to="/contact"
               onClick={closeMobile}
