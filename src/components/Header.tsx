@@ -326,7 +326,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  עמוד ראשי
+                  {t("nav.home")}
                 </Link>
 
                 <Link
@@ -334,7 +334,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  אודות
+                  {t("nav.about")}
                 </Link>
 
                 <div>
@@ -343,7 +343,7 @@ export default function Header() {
                     onClick={() => setServicesOpen((v) => !v)}
                     className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] hover:bg-black/5"
                   >
-                    שירותים
+                    {t("nav.services")}
                     <span className="text-[14px]">{servicesOpen ? "▲" : "▼"}</span>
                   </button>
 
@@ -368,7 +368,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  פרויקטים
+                  {t("nav.projects")}
                 </Link>
 
                 <Link
@@ -376,7 +376,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  מחירים
+                  {t("nav.pricing")}
                 </Link>
 
                 <Link
@@ -384,7 +384,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  צור קשר
+                  {t("nav.contact")}
                 </Link>
               </div>
             </nav>
