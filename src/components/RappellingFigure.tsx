@@ -4,26 +4,36 @@ import rappellingFigure from "@/assets/rappelling-figure.png";
 export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
 
+  // 🔧 גודל הדמות
+  const figureWidth = 245;
+
+  // 🔧 חישוב מיקום החבל לפי יחס שננעל (136 כשהיה 300)
+  const ropeRight = Math.round((136 / 300) * figureWidth);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+
       const maxY = window.innerHeight - 350;
+
       setFigureY(progress * maxY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* Single rope */}
+      {/* Rope */}
       <div
         className="absolute"
         style={{
-          right: 136, // 👈 תשנה כאן לפי הכיוון שסגרנו
+          right: ropeRight,
           top: 0,
           width: 1.2,
           height: figureY + 8,
@@ -32,7 +42,7 @@ export default function RappellingFigure() {
         }}
       />
 
-      {/* Figure image */}
+      {/* Figure */}
       <img
         src={rappellingFigure}
         alt="פועל סנפלינג"
@@ -41,7 +51,7 @@ export default function RappellingFigure() {
         style={{
           right: 0,
           top: figureY,
-          width: 300,
+          width: figureWidth,
           height: "auto",
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
@@ -49,7 +59,7 @@ export default function RappellingFigure() {
         }}
       />
 
-      {/* Sway animation */}
+      {/* Animation */}
       <style>{`
         @keyframes sway {
           0% { transform: rotate(-1.2deg); }
