@@ -152,8 +152,8 @@ export default function Header() {
                 aria-haspopup="menu"
                 aria-expanded={servicesOpen}
               >
-                שירותים
                 {t("nav.services")}
+                <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
               </button>
 
               {servicesOpen && (
