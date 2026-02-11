@@ -9,7 +9,7 @@ import { useTranslation } from "@/lib/i18n";
 const PricingPage = () => {
   const { ref, isVisible } = useScrollReveal();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, tArray } = useTranslation();
 
   const planKeys = ["maintenance", "renovation", "fullProject"] as const;
 
@@ -36,16 +36,7 @@ const PricingPage = () => {
                 const name = t(`pricingPage.plans.${key}.name`);
                 const priceRange = t(`pricingPage.plans.${key}.priceRange`);
                 const description = t(`pricingPage.plans.${key}.description`);
-                
-                // Build features array from translation keys
-                const featuresCount = key === "maintenance" ? 5 : key === "renovation" ? 6 : 7;
-                const features: string[] = [];
-                for (let i = 0; i < featuresCount; i++) {
-                  // Access features by index - they're stored as arrays in JSON
-                  const featureKey = `pricingPage.plans.${key}.features`;
-                  // Since t() doesn't support array access, we'll use a workaround
-                  features.push(""); // placeholder
-                }
+                const features = tArray(`pricingPage.plans.${key}.features`);
 
                 return (
                   <div
@@ -72,7 +63,12 @@ const PricingPage = () => {
                     </div>
 
                     <ul className="space-y-3 mb-8">
-                      {/* We need to handle the features array directly */}
+                      {features.map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-start gap-3">
+                          <Check className="text-primary flex-shrink-0 mt-0.5" size={20} />
+                          <span className="text-sm text-foreground">{feature}</span>
+                        </li>
+                      ))}
                     </ul>
 
                     <Button
