@@ -12,6 +12,7 @@ import HomeStatsSection from "@/components/HomeStatsSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
+import { useTranslation } from "@/lib/i18n";
 
 // Services images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -50,18 +51,20 @@ const urbanImages = [
   stoneCladding8,
 ];
 
-const services = [
-  { title: "עבודות מיוחדות", image: specialProjectsImage },
-  { title: "הרחקת מעופפים", image: birdControlImage },
-  { title: "איטום בגובה", image: waterproofingImage },
-  { title: "שיקום מעטפת", image: facadeRestorationImage },
-  { title: "חיפוי אבן", image: stoneCladdingImage },
-  { title: "ביטול צווי הריסה", image: demolitionOrdersImage },
-  { title: "צנרת ומרזבים", image: pipingGuttersImage },
-  { title: "פתרונות בגובה", image: heightSolutionsImage },
-];
-
 export default function Index() {
+  const { t } = useTranslation();
+
+  const services = [
+    { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage },
+    { title: t("home.serviceCards.birdControl"), image: birdControlImage },
+    { title: t("home.serviceCards.waterproofing"), image: waterproofingImage },
+    { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage },
+    { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage },
+    { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage },
+    { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage },
+    { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage },
+  ];
+
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -88,19 +91,19 @@ export default function Index() {
 
         {/* ARC CARDS SECTION */}
         <ArcCardsSection
-          title="השירותים שלנו"
+          title={t("home.servicesTitle")}
           backgroundClassName="bg-[#bfe7d6]"
           items={services}
         />
 
         {/* STATS SECTION */}
         <HomeStatsSection
-          titleGold="המספרים מדברים"
-          titleBlack="בעד עצמם!"
+          titleGold={t("home.statsGold")}
+          titleBlack={t("home.statsBlack")}
           stats={[
-            { value: "500+", label: "פרויקטים שהושלמו" },
-            { value: "15", label: "שנות ניסיון" },
-            { value: "50+", label: "ערים ואזורי פעילות" },
+            { value: "500+", label: t("home.statsProjects") },
+            { value: "15", label: t("home.statsExperience") },
+            { value: "50+", label: t("home.statsCities") },
           ]}
           images={[statsImage1, statsImage2, statsImage3, statsImage4]}
         />
@@ -108,9 +111,9 @@ export default function Index() {
         {/* URBAN RENEWAL SECTION */}
         <HomeUrbanRenewalHero
           images={urbanImages}
-          titleTop="חיפוי אבן בגובה"
-          titleGold="מראה יוקרתי ועמיד"
-          subtitle="התקנת חיפוי אבן באיכות גבוהה לבניינים — עבודות גובה מקצועיות בטכנולוגיית סנפלינג, גימור מושלם ועמידות לאורך שנים."
+          titleTop={t("home.urbanTitleTop")}
+          titleGold={t("home.urbanTitleGold")}
+          subtitle={t("home.urbanSubtitle")}
         />
 
         {/* EMPTY GRID SECTION */}
