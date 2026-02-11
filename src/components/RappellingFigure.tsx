@@ -18,22 +18,25 @@ export default function RappellingFigure() {
   }, []);
 
   return (
-    <div className="fixed top-0 right-8 h-screen hidden lg:block pointer-events-none" style={{ zIndex: 30 }}>
+    <div className="fixed top-0 left-6 h-screen hidden lg:block pointer-events-none" style={{ zIndex: 9999 }}>
       {/* Rope */}
       <div
-        className="absolute right-1/2 top-0 w-[2px] bg-foreground/40"
+        className="absolute top-0 w-[2px] bg-white/50"
         style={{
+          left: "50%",
           height: figureY + 10,
-          transform: "translateX(50%)",
+          transform: "translateX(-50%)",
           willChange: "height",
         }}
       />
       {/* Figure */}
       <div
-        className="absolute right-0"
+        className="absolute"
         style={{
+          left: "50%",
+          transform: "translateX(-50%)",
           top: figureY,
-          willChange: "transform",
+          willChange: "top",
           animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
         }}
