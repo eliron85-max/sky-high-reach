@@ -37,7 +37,7 @@ export default function RappellingFigure() {
           position: "absolute",
           right: 0,
           top: figureY,
-          width: 300,
+          width: 150,
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
@@ -48,7 +48,7 @@ export default function RappellingFigure() {
           alt="פועל סנפלינג"
           draggable={false}
           style={{
-            width: 300,
+            width: 150,
             height: "auto",
           }}
         />
