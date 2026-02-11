@@ -8,6 +8,7 @@ import { useTranslation } from "@/lib/i18n";
 import logoImage from "@/assets/logo-new.webp";
 
 export default function Header() {
+  const { t, dir } = useTranslation();
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
