@@ -173,5 +173,27 @@
     "he": "עברית",
     "en": "English",
     "fr": "Français"
+  },
+  "home": {
+    "servicesTitle": "Nos Services",
+    "serviceCards": {
+      "specialProjects": "Projets Spéciaux",
+      "birdControl": "Contrôle des Oiseaux",
+      "waterproofing": "Étanchéité en Hauteur",
+      "facadeRestoration": "Restauration de Façade",
+      "stoneVeneer": "Revêtement en Pierre",
+      "demolitionOrders": "Ordres de Démolition",
+      "pipingGutters": "Tuyauterie & Gouttières",
+      "heightSolutions": "Solutions en Hauteur",
+      "subtitle": "Travaux en Hauteur & Rappel"
+    },
+    "statsGold": "Les Chiffres Parlent",
+    "statsBlack": "D'eux-mêmes !",
+    "statsProjects": "Projets Réalisés",
+    "statsExperience": "Années d'Expérience",
+    "statsCities": "Villes & Zones d'Activité",
+    "urbanTitleTop": "Revêtement en Pierre en Hauteur",
+    "urbanTitleGold": "Aspect Luxueux & Durable",
+    "urbanSubtitle": "Installation de revêtement en pierre de haute qualité pour les bâtiments — travaux en hauteur professionnels avec technologie de rappel, finition parfaite et durabilité sur des années."
   }
 }

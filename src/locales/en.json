@@ -173,5 +173,27 @@
     "he": "עברית",
     "en": "English",
     "fr": "Français"
+  },
+  "home": {
+    "servicesTitle": "Our Services",
+    "serviceCards": {
+      "specialProjects": "Special Projects",
+      "birdControl": "Bird Control",
+      "waterproofing": "High-Rise Waterproofing",
+      "facadeRestoration": "Facade Restoration",
+      "stoneVeneer": "Stone Veneer",
+      "demolitionOrders": "Demolition Orders",
+      "pipingGutters": "Piping & Gutters",
+      "heightSolutions": "Height Solutions",
+      "subtitle": "Height & Rappelling Work"
+    },
+    "statsGold": "The Numbers Speak",
+    "statsBlack": "For Themselves!",
+    "statsProjects": "Completed Projects",
+    "statsExperience": "Years of Experience",
+    "statsCities": "Cities & Activity Areas",
+    "urbanTitleTop": "Stone Cladding at Height",
+    "urbanTitleGold": "Luxurious & Durable Look",
+    "urbanSubtitle": "High-quality stone cladding installation for buildings — professional height work using rappelling technology, perfect finish and years of durability."
   }
 }
