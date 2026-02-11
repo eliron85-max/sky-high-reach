@@ -139,15 +139,15 @@ export default function ArcCardsSection({
             // Smooth ease with longer center dwell time
             // t: 0→0.3 = entering, 0.3→0.7 = center, 0.7→1 = exiting
             let eased: number;
-            if (t < 0.25) {
+            if (progressT < 0.25) {
               // Entering phase: ease out
-              eased = t / 0.25 * 0.5;
-            } else if (t < 0.75) {
+              eased = progressT / 0.25 * 0.5;
+            } else if (progressT < 0.75) {
               // Center phase: stay centered
               eased = 0.5;
             } else {
               // Exiting phase: ease in
-              eased = 0.5 + ((t - 0.75) / 0.25) * 0.5;
+              eased = 0.5 + ((progressT - 0.75) / 0.25) * 0.5;
             }
 
             translateX = 80 - eased * 160; // 80 → 0 → -80
@@ -155,10 +155,10 @@ export default function ArcCardsSection({
             scale = 0.94 + Math.sin(eased * Math.PI) * 0.08; // peaks at ~1.02 in center
             
             // Opacity: quick fade in, hold, quick fade out
-            if (t < 0.15) {
-              opacity = t / 0.15;
-            } else if (t > 0.85) {
-              opacity = (1 - t) / 0.15;
+            if (progressT < 0.15) {
+              opacity = progressT / 0.15;
+            } else if (progressT > 0.85) {
+              opacity = (1 - progressT) / 0.15;
             } else {
               opacity = 1;
             }
