@@ -8,7 +8,7 @@ export default function RappellingFigure() {
   const figureWidth = 245;
 
   // 🔧 מיקום חבל שננעל מדויק כשהדמות הייתה 300 עם right=136
-  const ropeRight = Math.round((136 / 300) * figureWidth);
+  const ropeRight = Math.round((136 / 300) * figureWidth) + 18;
 
   useEffect(() => {
     const handleScroll = () => {
