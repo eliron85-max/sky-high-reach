@@ -14,7 +14,8 @@ export const FloatingLanguageSwitcher = () => {
 
   return (
     <div 
-      className="fixed top-28 left-3 z-[70] lg:hidden"
+      className="fixed top-28 left-3 z-[70] lg:hidden [[data-mobile-menu-open='true']_&]:hidden"
+      style={{ display: document.documentElement.dataset.mobileMenuOpen ? 'none' : undefined }}
     >
       <div className="flex flex-col items-center gap-2">
         {/* Toggle button - always visible */}

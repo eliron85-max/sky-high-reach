@@ -388,17 +388,9 @@ export default function Header() {
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
 
               <div className="h-full flex flex-col px-6 pt-4 pb-6">
-                {/* Top row: language switcher (left) + X button (right) */}
-                <div className="flex items-center justify-between mb-4">
+                {/* Top row: language switcher */}
+                <div className="flex items-center mb-4">
                   <LanguageSwitcher />
-                  <button
-                    type="button"
-                    onClick={closeMobile}
-                    className="w-11 h-11 rounded-xl border border-white/20 text-[#e6dccb] hover:bg-white/10 flex items-center justify-center"
-                    aria-label="סגור תפריט"
-                  >
-                    ✕
-                  </button>
                 </div>
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
 
