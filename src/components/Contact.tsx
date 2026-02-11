@@ -21,7 +21,7 @@ import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon } from "lucide
 
 const Contact = () => {
   const { toast } = useToast();
-  const { dir, language } = useTranslation();
+  const { dir, language, t } = useTranslation();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
