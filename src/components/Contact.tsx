@@ -409,7 +409,7 @@ const Contact = () => {
                   </div>
                   <div className="flex items-center gap-3 mt-4">
                     <MapPin className="text-[#c9a84c]" size={18} />
-                    <span className="text-black">גני תקווה</span>
+                    <span className="text-black">{t("contact.info.addressValue")}</span>
                   </div>
                 </div>
               </div>
