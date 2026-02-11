@@ -23,7 +23,7 @@ export default function RappellingFigure() {
       <div
         className="absolute bg-white/50"
         style={{
-          right: 105,
+          right: 112,
           top: 0,
           width: 1.5,
           height: figureY + 8,
@@ -40,7 +40,7 @@ export default function RappellingFigure() {
         style={{
           right: 0,
           top: figureY,
-          width: 250,
+          width: 300,
           height: "auto",
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
