@@ -11,6 +11,7 @@ import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
 import HomeStatsSection from "@/components/HomeStatsSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
+import RappellingFigure from "@/components/RappellingFigure";
 
 // Services images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -66,6 +67,7 @@ export default function Index() {
       <Header />
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
+      <RappellingFigure />
 
       <main className="pt-[var(--header-height)]">
         {/* HERO VIDEO SECTION */}
