@@ -174,7 +174,7 @@ export default function ArcCardsSection({
                 transform: `translateX(${translateX}vw) rotate(${rotate}deg) scale(${scale})`,
                 opacity,
                 zIndex: state.phase === "active" ? 10 : 1,
-                pointerEvents: state.phase === "active" && t > 0.2 && t < 0.8 ? "auto" : "none",
+                pointerEvents: state.phase === "active" && progressT > 0.2 && progressT < 0.8 ? "auto" : "none",
               }}
             >
               <div
