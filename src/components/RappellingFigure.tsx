@@ -5,7 +5,7 @@ export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
 
   // ✅ זה הגודל של הדמות — פה אתה משנה 300 / 200 וכו'
-  const figureWidth = 300;
+  const figureWidth = 250;
 
   // ✅ מיקום "קופסת הדמות" מצד ימין של המסך (זה מחליף את right של החבל)
   const wrapperRight = 0;
