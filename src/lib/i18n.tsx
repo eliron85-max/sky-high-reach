@@ -5,7 +5,7 @@ import fr from "@/locales/fr.json";
 
 export type Language = "he" | "en" | "fr";
 
-type TranslationValue = string | { [key: string]: TranslationValue };
+type TranslationValue = string | string[] | { [key: string]: TranslationValue };
 type Translations = { [key: string]: TranslationValue };
 
 const translations: Record<Language, Translations> = { he, en, fr };
