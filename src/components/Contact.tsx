@@ -327,7 +327,7 @@ const Contact = () => {
                             <span className="truncate">
                               {formData.preferredDate
                                 ? format(formData.preferredDate, "dd/MM/yyyy", { locale: getDateLocale() })
-                                : "בחר תאריך"}
+                                : t("contact.form.preferredDatePlaceholder")}
                             </span>
                             <CalendarIcon className="h-5 w-5 opacity-80" />
                           </Button>
