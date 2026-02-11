@@ -263,14 +263,17 @@ export default function Header() {
             />
           </Link>
 
-          {/* LEFT: CTA */}
-          <Link
-            to="/contact"
-            onClick={closeMobile}
-            className="hp-cta absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
-          >
-            להצעת מחיר
-          </Link>
+          {/* LEFT: ThemeToggle + CTA */}
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+            <ThemeToggle />
+            <Link
+              to="/contact"
+              onClick={closeMobile}
+              className="hp-cta inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
+            >
+              להצעת מחיר
+            </Link>
+          </div>
         </div>
       </div>
 
