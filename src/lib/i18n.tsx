@@ -14,6 +14,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  tArray: (key: string) => string[];
   dir: "rtl" | "ltr";
 }
 
