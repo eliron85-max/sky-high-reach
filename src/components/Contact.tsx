@@ -183,7 +183,7 @@ const Contact = () => {
                 <div className={titleLine} />
               </div>
               <p className="mt-3 text-sm md:text-base text-black/70">
-                מלאו את הפרטים כדי ליצור איתנו קשר ונחזור אליכם בהקדם
+                {t("contact.subtitle")}
               </p>
             </div>
 
