@@ -353,7 +353,7 @@ const Contact = () => {
 
                   <div>
                     <Label className={labelCls} htmlFor="message">
-                      הודעה
+                      {t("contact.form.message")}
                     </Label>
                     <Textarea
                       id="message"
