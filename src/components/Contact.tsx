@@ -233,7 +233,7 @@ const Contact = () => {
                       </Label>
                       <Input
                         id="phone"
-                        placeholder="טלפון"
+                        placeholder={t("contact.form.phonePlaceholder")}
                         type="tel"
                         inputMode="tel"
                         value={formData.phone}
