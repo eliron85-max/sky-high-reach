@@ -7,7 +7,11 @@
     "pricing": "Pricing",
     "testimonials": "Testimonials",
     "contact": "Contact",
-    "cta": "Request a Quote"
+    "cta": "Get a Quote",
+    "accessibility": "Accessibility Statement",
+    "openAccessibility": "Open accessibility menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "serviceCategories": {
     "restoration": "Restoration & Renovation",
@@ -29,6 +33,14 @@
     "birdControl": "Bird Control",
     "demolitionOrders": "Demolition Orders"
   },
+  "serviceLinks": {
+    "facadeRestoration": "Facade Restoration",
+    "stoneVeneer": "Stone Veneer",
+    "waterproofing": "Waterproofing",
+    "birdControl": "Bird Control",
+    "demolitionOrders": "Demolition Orders",
+    "specialProjects": "Special Projects"
+  },
   "hero": {
     "slide1Title": "Experts in High-Rise Work at the Highest Level",
     "slide1Subtitle": "Facade restoration, high-rise sealing, stone cladding and bird control - professional solutions for every challenge",
@@ -41,6 +53,10 @@
     "prevSlide": "Previous slide",
     "nextSlide": "Next slide",
     "goToSlide": "Go to slide"
+  },
+  "aboutPage": {
+    "heroTitle": "About the Company",
+    "heroSubtitle": "Over 15 years of experience in professional high-rise work"
   },
   "about": {
     "title": "About Us",
@@ -56,6 +72,44 @@
     "imagePlaceholder": "Team / Work Image",
     "clientsTitle": "Clients Who Trust Us",
     "logoPlaceholder": "Logo"
+  },
+  "servicesPage": {
+    "heroTitle": "Our Services",
+    "heroSubtitle": "A wide range of professional high-rise work services with emphasis on safety, quality and reliable service",
+    "items": {
+      "facadeRestoration": {
+        "title": "Facade Restoration & Renovation",
+        "description": "Repair and renovation of building facades, crack treatment, replacement of damaged elements and facade structure restoration."
+      },
+      "stoneVeneer": {
+        "title": "Stone Cladding & Anchoring",
+        "description": "Installation of stone cladding at height, anchoring loose stones and treatment of natural and artificial stone facades."
+      },
+      "waterproofing": {
+        "title": "High-Rise Waterproofing",
+        "description": "Sealing roofs, exterior walls, balconies and windows. Prevention of water and moisture penetration into the building."
+      },
+      "birdControl": {
+        "title": "Bird Control",
+        "description": "Installation of pigeon and bird deterrent systems, nets, spikes and electronic systems."
+      },
+      "specialWorks": {
+        "title": "Special High-Rise Works",
+        "description": "Unique projects requiring rope access, including special installations and art projects."
+      },
+      "demolitionOrders": {
+        "title": "Demolition Orders",
+        "description": "Legal and professional support in the process of legalizing building violations and handling demolition orders."
+      },
+      "pipingGutters": {
+        "title": "Piping & Gutters Installation",
+        "description": "Installation and repair of drainage systems, pipes and gutters at height."
+      },
+      "heightSolutions": {
+        "title": "Height Solutions",
+        "description": "Any solution requiring height access - cleaning, repair, installation and maintenance."
+      }
+    }
   },
   "services": {
     "title": "Our Services",
@@ -95,45 +149,86 @@
       }
     }
   },
+  "pricingPage": {
+    "heroTitle": "Pricing",
+    "heroSubtitle": "Prices vary depending on project complexity. Contact us for an accurate quote",
+    "plans": {
+      "maintenance": {
+        "name": "Maintenance Work",
+        "priceRange": "₪2,000 - ₪5,000",
+        "description": "Suitable for small jobs and routine maintenance",
+        "features": ["Free initial survey", "Up to one day of work", "Basic equipment included", "1 year warranty", "Technical support"]
+      },
+      "renovation": {
+        "name": "Renovation Project",
+        "priceRange": "₪10,000 - ₪50,000",
+        "description": "Suitable for medium renovation and restoration projects",
+        "features": ["Detailed survey and consultation", "3-7 working days", "Advanced professional equipment", "3 year warranty", "Quality monitoring", "Detailed photo reports"]
+      },
+      "fullProject": {
+        "name": "Full Facade Project",
+        "priceRange": "₪100,000+",
+        "description": "Suitable for large and complex projects",
+        "features": ["Comprehensive consultation and planning", "Full project management", "Phased execution", "Special equipment and expanded team", "5 year warranty", "Ongoing maintenance for a year", "Weekly reporting"]
+      }
+    },
+    "mostPopular": "Most Popular",
+    "requestQuote": "Request a Quote",
+    "disclaimer": "* Prices are estimates only. Final price will be determined after a professional on-site survey."
+  },
+  "contactPage": {
+    "heroTitle": "Contact Us",
+    "heroSubtitle": "Interested in a consultation or quote? Fill in the details and we'll get back to you soon"
+  },
+  "projectsPage": {
+    "heroTitle": "Our Projects",
+    "heroSubtitle": "A gallery of successful projects we've completed across the country"
+  },
+  "testimonialsPage": {
+    "heroTitle": "Client Testimonials",
+    "heroSubtitle": "What our clients say about our service and professionalism"
+  },
   "contact": {
-    "title": "Contact Us",
-    "subtitle": "Interested in a consultation or quote? Fill in the details and we'll get back to you soon",
+    "title": "We Build a Future for Your Family",
+    "subtitle": "Fill in the details to contact us and we'll get back to you soon",
     "form": {
-      "fullName": "Full Name *",
-      "fullNamePlaceholder": "First and last name",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Full name",
       "company": "Company Name",
       "companyPlaceholder": "Company name (optional)",
-      "phone": "Phone *",
-      "phonePlaceholder": "050-1234567",
-      "email": "Email *",
-      "emailPlaceholder": "example@email.com",
-      "projectType": "Project Type *",
-      "projectTypePlaceholder": "Select project type",
+      "phone": "Phone",
+      "phonePlaceholder": "Phone",
+      "email": "Email",
+      "emailPlaceholder": "Email",
+      "projectType": "Project Type",
+      "projectTypePlaceholder": "Select type",
       "projectTypes": {
-        "restoration": "Facade Restoration & Renovation",
-        "stone": "Stone Cladding & Anchoring",
-        "sealing": "High-Rise Waterproofing",
+        "restoration": "Restoration",
+        "stone": "Stone",
+        "sealing": "Sealing",
         "birds": "Bird Control",
-        "special": "Special High-Rise Works",
+        "special": "Special",
         "other": "Other"
       },
-      "preferredDate": "Preferred Date (optional)",
-      "preferredDatePlaceholder": "Select a date",
-      "message": "Project Description *",
-      "messagePlaceholder": "Tell us about your project - location, scope, special challenges and any relevant information",
-      "fileUpload": "Upload Files (plans, photos, documents)",
+      "preferredDate": "Preferred Date",
+      "preferredDatePlaceholder": "Select date",
+      "message": "Message",
+      "messagePlaceholder": "Write your inquiry details here…",
+      "fileUpload": "Choose File",
       "chooseFile": "Choose File",
       "supportedFormats": "Supported formats: PDF, JPG, PNG, DWG, DOC (up to 10MB)",
-      "submit": "Send Inquiry",
-      "successTitle": "Inquiry sent successfully!",
-      "successMessage": "We'll get back to you as soon as possible"
+      "submit": "Send",
+      "successTitle": "Sent Successfully",
+      "successMessage": "We received your inquiry and will get back to you soon.",
+      "errorTitle": "Error",
+      "errorMessage": "An error occurred while sending the inquiry"
     },
     "info": {
       "title": "Contact Information",
       "phone": "Phone",
       "email": "Email",
       "address": "Address",
-      "addressValue": "123 Example Street\nTel Aviv, Israel"
+      "addressValue": "Ganei Tikva"
     },
     "hours": {
       "title": "Business Hours",
@@ -147,7 +242,7 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
-    "addressValue": "Tel Aviv, Israel",
+    "addressValue": "Ganei Tikva, Israel",
     "quickNav": "Quick Navigation",
     "home": "Home",
     "about": "About",
@@ -157,6 +252,7 @@
     "pricing": "Pricing",
     "testimonials": "Testimonials",
     "contact": "Contact",
+    "accessibility": "Accessibility Statement",
     "companyTitle": "Professional",
     "companyHighlight": "High-Rise Work",
     "companyDescription": "Leading in high-rise work in Israel with over 15 years of experience",

@@ -7,7 +7,11 @@
     "pricing": "Tarifs",
     "testimonials": "Témoignages",
     "contact": "Contact",
-    "cta": "Demander un devis"
+    "cta": "Demander un devis",
+    "accessibility": "Déclaration d'accessibilité",
+    "openAccessibility": "Ouvrir le menu d'accessibilité",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "serviceCategories": {
     "restoration": "Restauration & Rénovation",
@@ -29,6 +33,14 @@
     "birdControl": "Contrôle des pigeons",
     "demolitionOrders": "Ordres de démolition"
   },
+  "serviceLinks": {
+    "facadeRestoration": "Restauration de façade",
+    "stoneVeneer": "Revêtement en pierre",
+    "waterproofing": "Étanchéité",
+    "birdControl": "Contrôle des pigeons",
+    "demolitionOrders": "Ordres de démolition",
+    "specialProjects": "Projets spéciaux"
+  },
   "hero": {
     "slide1Title": "Experts en travaux en hauteur au plus haut niveau",
     "slide1Subtitle": "Restauration de façade, étanchéité en hauteur, revêtement en pierre et contrôle des oiseaux - des solutions professionnelles pour chaque défi",
@@ -41,6 +53,10 @@
     "prevSlide": "Diapositive précédente",
     "nextSlide": "Diapositive suivante",
     "goToSlide": "Aller à la diapositive"
+  },
+  "aboutPage": {
+    "heroTitle": "À propos de l'entreprise",
+    "heroSubtitle": "Plus de 15 ans d'expérience en travaux en hauteur professionnels"
   },
   "about": {
     "title": "À propos de nous",
@@ -56,6 +72,44 @@
     "imagePlaceholder": "Image équipe / travail",
     "clientsTitle": "Clients qui nous font confiance",
     "logoPlaceholder": "Logo"
+  },
+  "servicesPage": {
+    "heroTitle": "Nos services",
+    "heroSubtitle": "Une large gamme de services professionnels de travaux en hauteur avec un accent sur la sécurité, la qualité et un service fiable",
+    "items": {
+      "facadeRestoration": {
+        "title": "Restauration et rénovation de façade",
+        "description": "Réparation et rénovation des façades de bâtiments, traitement des fissures, remplacement des éléments endommagés et restauration de la structure de façade."
+      },
+      "stoneVeneer": {
+        "title": "Revêtement et ancrage de pierre",
+        "description": "Installation de revêtement en pierre en hauteur, ancrage de pierres desserrées et traitement des façades en pierre naturelle et artificielle."
+      },
+      "waterproofing": {
+        "title": "Étanchéité en hauteur",
+        "description": "Étanchéité des toits, murs extérieurs, balcons et fenêtres. Prévention de la pénétration de l'eau et de l'humidité dans le bâtiment."
+      },
+      "birdControl": {
+        "title": "Contrôle des oiseaux",
+        "description": "Installation de systèmes de dissuasion des pigeons et oiseaux, filets, pics et systèmes électroniques."
+      },
+      "specialWorks": {
+        "title": "Travaux spéciaux en hauteur",
+        "description": "Projets uniques nécessitant un accès sur corde, y compris des installations spéciales et des projets artistiques."
+      },
+      "demolitionOrders": {
+        "title": "Ordres de démolition",
+        "description": "Accompagnement juridique et professionnel dans le processus de régularisation des infractions de construction."
+      },
+      "pipingGutters": {
+        "title": "Installation de tuyauterie et gouttières",
+        "description": "Installation et réparation de systèmes de drainage, tuyaux et gouttières en hauteur."
+      },
+      "heightSolutions": {
+        "title": "Solutions en hauteur",
+        "description": "Toute solution nécessitant un accès en hauteur - nettoyage, réparation, installation et maintenance."
+      }
+    }
   },
   "services": {
     "title": "Nos services",
@@ -95,45 +149,86 @@
       }
     }
   },
+  "pricingPage": {
+    "heroTitle": "Tarifs",
+    "heroSubtitle": "Les prix varient selon la complexité du projet. Contactez-nous pour un devis précis",
+    "plans": {
+      "maintenance": {
+        "name": "Travaux de maintenance",
+        "priceRange": "₪2 000 - ₪5 000",
+        "description": "Adapté aux petits travaux et à la maintenance courante",
+        "features": ["Inspection initiale gratuite", "Jusqu'à une journée de travail", "Équipement de base inclus", "Garantie 1 an", "Support technique"]
+      },
+      "renovation": {
+        "name": "Projet de rénovation",
+        "priceRange": "₪10 000 - ₪50 000",
+        "description": "Adapté aux projets de rénovation et restauration moyens",
+        "features": ["Inspection détaillée et consultation", "3-7 jours de travail", "Équipement professionnel avancé", "Garantie 3 ans", "Suivi qualité", "Rapports photo détaillés"]
+      },
+      "fullProject": {
+        "name": "Projet façade complet",
+        "priceRange": "₪100 000+",
+        "description": "Adapté aux grands projets complexes",
+        "features": ["Consultation et planification complètes", "Gestion de projet complète", "Exécution par phases", "Équipement spécial et équipe élargie", "Garantie 5 ans", "Maintenance continue pendant un an", "Rapports hebdomadaires"]
+      }
+    },
+    "mostPopular": "Le plus populaire",
+    "requestQuote": "Demander un devis",
+    "disclaimer": "* Les prix sont des estimations uniquement. Le prix final sera déterminé après une inspection professionnelle sur site."
+  },
+  "contactPage": {
+    "heroTitle": "Contactez-nous",
+    "heroSubtitle": "Intéressé par une consultation ou un devis? Remplissez les détails et nous vous répondrons rapidement"
+  },
+  "projectsPage": {
+    "heroTitle": "Nos projets",
+    "heroSubtitle": "Une galerie de projets réussis que nous avons réalisés à travers le pays"
+  },
+  "testimonialsPage": {
+    "heroTitle": "Témoignages clients",
+    "heroSubtitle": "Ce que nos clients disent de notre service et de notre professionnalisme"
+  },
   "contact": {
-    "title": "Contactez-nous",
-    "subtitle": "Intéressé par une consultation ou un devis? Remplissez les détails et nous vous répondrons rapidement",
+    "title": "Nous construisons un avenir pour votre famille",
+    "subtitle": "Remplissez les détails pour nous contacter et nous vous répondrons rapidement",
     "form": {
-      "fullName": "Nom complet *",
-      "fullNamePlaceholder": "Prénom et nom de famille",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Nom complet",
       "company": "Nom de l'entreprise",
       "companyPlaceholder": "Nom de l'entreprise (facultatif)",
-      "phone": "Téléphone *",
-      "phonePlaceholder": "050-1234567",
-      "email": "Email *",
-      "emailPlaceholder": "exemple@email.com",
-      "projectType": "Type de projet *",
-      "projectTypePlaceholder": "Sélectionnez le type de projet",
+      "phone": "Téléphone",
+      "phonePlaceholder": "Téléphone",
+      "email": "Email",
+      "emailPlaceholder": "Email",
+      "projectType": "Type de projet",
+      "projectTypePlaceholder": "Sélectionnez le type",
       "projectTypes": {
-        "restoration": "Restauration et rénovation de façade",
-        "stone": "Revêtement et ancrage de pierre",
-        "sealing": "Étanchéité en hauteur",
+        "restoration": "Restauration",
+        "stone": "Pierre",
+        "sealing": "Étanchéité",
         "birds": "Contrôle des oiseaux",
-        "special": "Travaux spéciaux en hauteur",
+        "special": "Spécial",
         "other": "Autre"
       },
-      "preferredDate": "Date préférée (facultatif)",
+      "preferredDate": "Date préférée",
       "preferredDatePlaceholder": "Sélectionner une date",
-      "message": "Description du projet *",
-      "messagePlaceholder": "Parlez-nous de votre projet - emplacement, portée, défis particuliers et toute information pertinente",
-      "fileUpload": "Télécharger des fichiers (plans, photos, documents)",
+      "message": "Message",
+      "messagePlaceholder": "Écrivez les détails de votre demande ici…",
+      "fileUpload": "Choisir un fichier",
       "chooseFile": "Choisir un fichier",
       "supportedFormats": "Formats supportés: PDF, JPG, PNG, DWG, DOC (jusqu'à 10 Mo)",
-      "submit": "Envoyer la demande",
-      "successTitle": "Demande envoyée avec succès!",
-      "successMessage": "Nous vous répondrons dès que possible"
+      "submit": "Envoyer",
+      "successTitle": "Envoyé avec succès",
+      "successMessage": "Nous avons reçu votre demande et vous répondrons rapidement.",
+      "errorTitle": "Erreur",
+      "errorMessage": "Une erreur s'est produite lors de l'envoi de la demande"
     },
     "info": {
       "title": "Coordonnées",
       "phone": "Téléphone",
       "email": "Email",
       "address": "Adresse",
-      "addressValue": "123 Rue Exemple\nTel Aviv, Israël"
+      "addressValue": "Ganei Tikva"
     },
     "hours": {
       "title": "Heures d'ouverture",
@@ -147,7 +242,7 @@
     "phone": "Téléphone",
     "email": "Email",
     "address": "Adresse",
-    "addressValue": "Tel Aviv, Israël",
+    "addressValue": "Ganei Tikva, Israël",
     "quickNav": "Navigation rapide",
     "home": "Accueil",
     "about": "À propos",
@@ -157,6 +252,7 @@
     "pricing": "Tarifs",
     "testimonials": "Témoignages",
     "contact": "Contact",
+    "accessibility": "Déclaration d'accessibilité",
     "companyTitle": "Travaux en hauteur",
     "companyHighlight": "professionnels",
     "companyDescription": "Leader des travaux en hauteur en Israël avec plus de 15 ans d'expérience",
