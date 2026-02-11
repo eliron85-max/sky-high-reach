@@ -41,7 +41,7 @@ export default function RappellingFigure() {
         style={{
           right: 0,
           top: figureY,
-          width: 300,
+          width: 250,
           height: "auto",
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
