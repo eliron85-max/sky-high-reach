@@ -252,7 +252,7 @@ const Contact = () => {
                       <Input
                         id="email"
                         type="email"
-                        placeholder="אימייל"
+                        placeholder={t("contact.form.emailPlaceholder")}
                         value={formData.email}
                         onChange={handleInputChange}
                         className={cn(field, validationErrors.email && "border-red-500")}
