@@ -143,8 +143,8 @@ const Contact = () => {
       if (error) throw error;
 
       toast({
-        title: "נשלח בהצלחה",
-        description: "קיבלנו את הפנייה שלך ונחזור אליך בהקדם.",
+        title: t("contact.form.successTitle"),
+        description: t("contact.form.successMessage"),
       });
 
       setFormData({
