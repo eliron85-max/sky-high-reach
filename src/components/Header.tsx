@@ -133,7 +133,7 @@ export default function Header() {
           {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
-              עמוד ראשי
+              {t("nav.home")}
             </Link>
 
             <Link to="/about" className={`${goldText} whitespace-nowrap`}>
