@@ -178,7 +178,7 @@ const Contact = () => {
               <div className={titleRow}>
                 <div className={titleLine} />
                 <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black">
-                  אנחנו בונים עתיד למשפחה שלכם
+                  {t("contact.title")}
                 </h2>
                 <div className={titleLine} />
               </div>
