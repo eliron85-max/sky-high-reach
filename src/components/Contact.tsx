@@ -315,7 +315,7 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label className={labelCls}>תאריך מועדף</Label>
+                      <Label className={labelCls}>{t("contact.form.preferredDate")}</Label>
                       <Popover>
                         <PopoverTrigger asChild>
                           <Button
