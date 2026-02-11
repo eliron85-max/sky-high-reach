@@ -298,7 +298,7 @@ export default function Header() {
                 <Link
                   to="/"
                   onClick={closeMobile}
-                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] hover:bg-black/5"
+                  className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
                   עמוד ראשי
                 </Link>
@@ -306,7 +306,7 @@ export default function Header() {
                 <Link
                   to="/about"
                   onClick={closeMobile}
-                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] hover:bg-black/5"
+                  className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
                   אודות
                 </Link>
@@ -317,8 +317,8 @@ export default function Header() {
                     onClick={() => setServicesOpen((v) => !v)}
                     className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] hover:bg-black/5"
                   >
-                    <span className="text-[14px]">{servicesOpen ? "▲" : "▼"}</span>
                     שירותים
+                    <span className="text-[14px]">{servicesOpen ? "▲" : "▼"}</span>
                   </button>
 
                   {servicesOpen && (
@@ -340,7 +340,7 @@ export default function Header() {
                 <Link
                   to="/projects"
                   onClick={closeMobile}
-                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] hover:bg-black/5"
+                  className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
                   פרויקטים
                 </Link>
@@ -348,7 +348,7 @@ export default function Header() {
                 <Link
                   to="/pricing"
                   onClick={closeMobile}
-                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] hover:bg-black/5"
+                  className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
                   מחירים
                 </Link>
@@ -356,7 +356,7 @@ export default function Header() {
                 <Link
                   to="/contact"
                   onClick={closeMobile}
-                  className="h-[56px] px-5 flex items-center justify-end tracking-[0.12em] hover:bg-black/5"
+                  className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
                   צור קשר
                 </Link>
