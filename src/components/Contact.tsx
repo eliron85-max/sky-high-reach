@@ -247,7 +247,7 @@ const Contact = () => {
 
                     <div>
                       <Label className={labelCls} htmlFor="email">
-                        אימייל
+                        {t("contact.form.email")}
                       </Label>
                       <Input
                         id="email"
