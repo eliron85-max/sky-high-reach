@@ -199,7 +199,7 @@ const Contact = () => {
                       </Label>
                       <Input
                         id="fullName"
-                        placeholder="שם מלא"
+                        placeholder={t("contact.form.fullNamePlaceholder")}
                         value={formData.fullName}
                         onChange={handleInputChange}
                         className={cn(field, validationErrors.fullName && "border-red-500")}
