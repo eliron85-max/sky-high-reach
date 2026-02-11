@@ -153,7 +153,7 @@ export default function Header() {
                 aria-expanded={servicesOpen}
               >
                 שירותים
-                <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
+                {t("nav.services")}
               </button>
 
               {servicesOpen && (
