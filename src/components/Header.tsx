@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Accessibility } from "lucide-react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
+import { useTranslation } from "@/lib/i18n";
 import logoImage from "@/assets/logo-new.webp";
 
 export default function Header() {
