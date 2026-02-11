@@ -60,11 +60,19 @@ export default function Header() {
     [],
   );
 
-  // Header appears ONLY when reaching the very top (scrollY ~ 0)
+  // Header shows on scroll-up, hides on scroll-down, always visible at top or when menu open
+  const lastScrollY = useRef(0);
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
-      setIsVisible(y <= 2);
+      if (y <= 2) {
+        setIsVisible(true);
+      } else if (y < lastScrollY.current) {
+        setIsVisible(true);
+      } else if (y > lastScrollY.current + 5) {
+        setIsVisible(false);
+      }
+      lastScrollY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
