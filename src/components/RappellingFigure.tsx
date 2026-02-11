@@ -34,7 +34,7 @@ export default function RappellingFigure() {
         className="absolute"
         style={{
           right: ropeRight,
-          top: 20,
+          top: 40,
           width: 1.2,
           height: figureY + 8,
           backgroundColor: "#808080",
