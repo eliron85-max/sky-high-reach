@@ -273,7 +273,7 @@ export default function Header() {
               onClick={closeMobile}
               className="hp-cta inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
             >
-              להצעת מחיר
+              {t("nav.cta")}
             </Link>
           </div>
         </div>
