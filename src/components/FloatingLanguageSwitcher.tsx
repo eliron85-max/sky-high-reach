@@ -1,6 +1,7 @@
 import { useTranslation, Language } from "@/lib/i18n";
 import { useState, useEffect } from "react";
 import { Globe } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "he", label: "עברית", flag: "https://flagcdn.com/w40/il.png" },
