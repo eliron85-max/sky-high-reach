@@ -14,11 +14,11 @@ const FloatingWhatsApp = () => {
       className="
         fixed z-[60]
         
-        /* Mobile: bottom-left */
-        left-4 bottom-4
+        /* Mobile: bottom-right */
+        right-4 bottom-4
         
         /* Desktop: bottom-right */
-        lg:left-auto lg:right-6 lg:bottom-6
+        lg:right-6 lg:bottom-6
         
         /* Size: small → medium → large */
         w-12 h-12
