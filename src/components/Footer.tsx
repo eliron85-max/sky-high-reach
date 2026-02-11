@@ -193,7 +193,7 @@ const Footer = () => {
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
-                  הצהרת נגישות
+                  {t("footer.accessibility")}
                 </Link>
               </nav>
             </div>

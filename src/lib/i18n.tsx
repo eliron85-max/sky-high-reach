@@ -5,7 +5,7 @@ import fr from "@/locales/fr.json";
 
 export type Language = "he" | "en" | "fr";
 
-type TranslationValue = string | { [key: string]: TranslationValue };
+type TranslationValue = string | string[] | { [key: string]: TranslationValue };
 type Translations = { [key: string]: TranslationValue };
 
 const translations: Record<Language, Translations> = { he, en, fr };
@@ -14,6 +14,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  tArray: (key: string) => string[];
   dir: "rtl" | "ltr";
 }
 
@@ -61,8 +62,21 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     return typeof value === "string" ? value : key;
   };
 
+  const tArray = (key: string): string[] => {
+    const keys = key.split(".");
+    let value: TranslationValue = translations[language];
+    for (const k of keys) {
+      if (value && typeof value === "object" && !Array.isArray(value) && k in value) {
+        value = value[k];
+      } else {
+        return [];
+      }
+    }
+    return Array.isArray(value) ? value : [];
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, dir }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, tArray, dir }}>
       {children}
     </LanguageContext.Provider>
   );

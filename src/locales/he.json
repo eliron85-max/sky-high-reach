@@ -6,7 +6,12 @@
     "projects": "פרויקטים",
     "pricing": "מחירים",
     "contact": "צור קשר",
-    "cta": "בקשת הצעת מחיר"
+    "cta": "להצעת מחיר",
+    "testimonials": "לקוחות ממליצים",
+    "accessibility": "הצהרת נגישות",
+    "openAccessibility": "פתח תפריט נגישות",
+    "openMenu": "פתח תפריט",
+    "closeMenu": "סגור תפריט"
   },
   "serviceCategories": {
     "restoration": "שיקום ושיפוץ",
@@ -26,7 +31,15 @@
     "stoneVeneer": "חיפוי אבן",
     "waterproofing": "איטום",
     "birdControl": "הרחקת יונים",
-    "demolitionOrders": "צווי הריסה"
+    "demolitionOrders": "צו הריסה"
+  },
+  "serviceLinks": {
+    "facadeRestoration": "שיקום מעטפת",
+    "stoneVeneer": "חיפוי אבן",
+    "waterproofing": "איטום",
+    "birdControl": "הרחקת יונים",
+    "demolitionOrders": "טיפול בצווי הריסה",
+    "specialProjects": "פרויקטים מיוחדים"
   },
   "hero": {
     "slide1Title": "מומחים בעבודות גובה ברמה הגבוהה ביותר",
@@ -40,6 +53,10 @@
     "prevSlide": "שקופית קודמת",
     "nextSlide": "שקופית הבאה",
     "goToSlide": "עבור לשקופית"
+  },
+  "aboutPage": {
+    "heroTitle": "אודות החברה",
+    "heroSubtitle": "למעלה מ-15 שנות ניסיון בעבודות גובה מקצועיות"
   },
   "about": {
     "title": "קצת עלינו",
@@ -55,6 +72,44 @@
     "imagePlaceholder": "תמונת צוות / עבודה",
     "clientsTitle": "לקוחות שסומכים עלינו",
     "logoPlaceholder": "לוגו"
+  },
+  "servicesPage": {
+    "heroTitle": "השירותים שלנו",
+    "heroSubtitle": "מגוון רחב של שירותי עבודות גובה מקצועיים עם דגש על בטיחות, איכות ושירות אמין",
+    "items": {
+      "facadeRestoration": {
+        "title": "שיקום ושיפוץ מעטפת",
+        "description": "תיקון ושיפוץ מעטפות בניינים, טיפול בסדקים, החלפת אלמנטים פגומים ושיקום מבני חזית."
+      },
+      "stoneVeneer": {
+        "title": "חיפוי ועיגון אבנים",
+        "description": "התקנת חיפוי אבן בגובה, עיגון אבנים רופפות וטיפול במעטפות אבן טבעית ומלאכותית."
+      },
+      "waterproofing": {
+        "title": "איטום בגובה",
+        "description": "איטום גגות, קירות חוץ, מרפסות וחלונות. מניעת חדירת מים ולחות לבניין."
+      },
+      "birdControl": {
+        "title": "הרחקת מעופפים",
+        "description": "התקנת מערכות הרחקת יונים ועופות, רשתות, קוצים ומערכות אלקטרוניות."
+      },
+      "specialWorks": {
+        "title": "עבודות גובה מיוחדות",
+        "description": "פרויקטים ייחודיים הדורשים גישה בחבלים, כולל התקנות מיוחדות ופרויקטי אמנות."
+      },
+      "demolitionOrders": {
+        "title": "ביטול צווי הריסה",
+        "description": "ליווי משפטי ומקצועי בתהליך הכשרת חריגות בנייה וטיפול בצווי הריסה."
+      },
+      "pipingGutters": {
+        "title": "התקנת צנרת ומרזבים",
+        "description": "התקנה ותיקון מערכות ניקוז, צנרות ומרזבים בגבהים."
+      },
+      "heightSolutions": {
+        "title": "פתרונות בגובה",
+        "description": "כל פתרון שדורש גישה בגובה - ניקוי, תיקון, התקנה ותחזוקה."
+      }
+    }
   },
   "services": {
     "title": "השירותים שלנו",
@@ -94,45 +149,86 @@
       }
     }
   },
+  "pricingPage": {
+    "heroTitle": "מחירון",
+    "heroSubtitle": "המחירים משתנים בהתאם למורכבות הפרויקט. צרו קשר לקבלת הצעת מחיר מדויקת",
+    "plans": {
+      "maintenance": {
+        "name": "עבודת תחזוקה",
+        "priceRange": "₪2,000 - ₪5,000",
+        "description": "מתאים לעבודות קטנות ותחזוקה שוטפת",
+        "features": ["סקר ראשוני חינם", "ביצוע עד יום עבודה אחד", "ציוד בסיסי כלול במחיר", "אחריות לשנה", "תמיכה טכנית"]
+      },
+      "renovation": {
+        "name": "פרויקט שיקום",
+        "priceRange": "₪10,000 - ₪50,000",
+        "description": "מתאים לפרויקטי שיקום ושיפוץ בינוניים",
+        "features": ["סקר מפורט וייעוץ", "ביצוע 3-7 ימי עבודה", "ציוד מקצועי מתקדם", "אחריות ל-3 שנים", "מעקב ובקרת איכות", "דוחות צילום מפורטים"]
+      },
+      "fullProject": {
+        "name": "פרויקט מעטפת מלא",
+        "priceRange": "₪100,000+",
+        "description": "מתאים לפרויקטים גדולים ומורכבים",
+        "features": ["ייעוץ ותכנון מקיף", "ניהול פרויקט מלא", "ביצוע בשלבים מתוזמנים", "ציוד מיוחד וצוות מורחב", "אחריות ל-5 שנים", "תחזוקה שוטפת לשנה", "דיווח שבועי"]
+      }
+    },
+    "mostPopular": "פופולרי ביותר",
+    "requestQuote": "בקשת הצעת מחיר",
+    "disclaimer": "* המחירים הם אומדן בלבד. המחיר הסופי ייקבע לאחר סקר מקצועי במקום."
+  },
+  "contactPage": {
+    "heroTitle": "צור קשר",
+    "heroSubtitle": "מעוניינים בייעוץ או הצעת מחיר? מלאו את הפרטים ונחזור אליכם בהקדם"
+  },
+  "projectsPage": {
+    "heroTitle": "הפרויקטים שלנו",
+    "heroSubtitle": "גלריה של פרויקטים מוצלחים שביצענו ברחבי הארץ"
+  },
+  "testimonialsPage": {
+    "heroTitle": "לקוחות ממליצים",
+    "heroSubtitle": "מה הלקוחות שלנו אומרים על השירות והמקצועיות"
+  },
   "contact": {
-    "title": "צור קשר",
-    "subtitle": "מעוניינים בייעוץ או הצעת מחיר? מלאו את הפרטים ונחזור אליכם בהקדם",
+    "title": "אנחנו בונים עתיד למשפחה שלכם",
+    "subtitle": "מלאו את הפרטים כדי ליצור איתנו קשר ונחזור אליכם בהקדם",
     "form": {
-      "fullName": "שם מלא *",
-      "fullNamePlaceholder": "שם פרטי ושם משפחה",
-      "company": "שם החברה",
-      "companyPlaceholder": "שם החברה (אופציונלי)",
-      "phone": "טלפון *",
-      "phonePlaceholder": "050-1234567",
-      "email": "דוא״ל *",
-      "emailPlaceholder": "example@email.com",
-      "projectType": "סוג הפרויקט *",
-      "projectTypePlaceholder": "בחר סוג פרויקט",
+      "fullName": "שם מלא",
+      "fullNamePlaceholder": "שם מלא",
+      "company": "שם חברה",
+      "companyPlaceholder": "שם חברה (לא חובה)",
+      "phone": "טלפון",
+      "phonePlaceholder": "טלפון",
+      "email": "אימייל",
+      "emailPlaceholder": "אימייל",
+      "projectType": "סוג פרויקט",
+      "projectTypePlaceholder": "בחר סוג",
       "projectTypes": {
-        "restoration": "שיקום ושיפוץ מעטפת",
-        "stone": "חיפוי ועיגון אבנים",
-        "sealing": "איטום בגובה",
-        "birds": "הרחקת מעופפים",
-        "special": "עבודות גובה מיוחדות",
+        "restoration": "שיקום",
+        "stone": "אבן",
+        "sealing": "איטום",
+        "birds": "הרחקת יונים",
+        "special": "מיוחד",
         "other": "אחר"
       },
-      "preferredDate": "תאריך מבוקש לביצוע (אופציונלי)",
+      "preferredDate": "תאריך מועדף",
       "preferredDatePlaceholder": "בחר תאריך",
-      "message": "תיאור הפרויקט *",
-      "messagePlaceholder": "ספרו לנו על הפרויקט שלכם - מיקום, היקף, אתגרים מיוחדים וכל מידע רלוונטי",
-      "fileUpload": "העלאת קבצים (תכניות, תמונות, מסמכים)",
+      "message": "הודעה",
+      "messagePlaceholder": "כתוב כאן את פרטי הפנייה…",
+      "fileUpload": "בחר קובץ",
       "chooseFile": "בחר קובץ",
       "supportedFormats": "פורמטים נתמכים: PDF, JPG, PNG, DWG, DOC (עד 10MB)",
-      "submit": "שלח פנייה",
-      "successTitle": "הפנייה נשלחה בהצלחה!",
-      "successMessage": "נחזור אליך בהקדם האפשרי"
+      "submit": "שליחה",
+      "successTitle": "נשלח בהצלחה",
+      "successMessage": "קיבלנו את הפנייה שלך ונחזור אליך בהקדם.",
+      "errorTitle": "שגיאה",
+      "errorMessage": "אירעה שגיאה בשליחת הפנייה"
     },
     "info": {
       "title": "פרטי התקשרות",
       "phone": "טלפון",
       "email": "דוא״ל",
-    "address": "כתובת",
-    "addressValue": "הערבה 5\nגני תקווה"
+      "address": "כתובת",
+      "addressValue": "גני תקווה"
     },
     "hours": {
       "title": "שעות פעילות",
@@ -156,6 +252,7 @@
     "pricing": "מחירים",
     "testimonials": "לקוחות ממליצים",
     "contact": "צור קשר",
+    "accessibility": "הצהרת נגישות",
     "companyTitle": "עבודות גובה",
     "companyHighlight": "מקצועיות",
     "companyDescription": "מובילים בתחום עבודות הגובה בישראל עם למעלה מ-15 שנות ניסיון",

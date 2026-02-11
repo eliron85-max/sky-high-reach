@@ -21,7 +21,7 @@ import { Upload, Phone, Mail, MapPin, Send, Loader2, CalendarIcon } from "lucide
 
 const Contact = () => {
   const { toast } = useToast();
-  const { dir, language } = useTranslation();
+  const { dir, language, t } = useTranslation();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -143,8 +143,8 @@ const Contact = () => {
       if (error) throw error;
 
       toast({
-        title: "נשלח בהצלחה",
-        description: "קיבלנו את הפנייה שלך ונחזור אליך בהקדם.",
+        title: t("contact.form.successTitle"),
+        description: t("contact.form.successMessage"),
       });
 
       setFormData({
@@ -159,8 +159,8 @@ const Contact = () => {
       setSelectedFile(null);
     } catch {
       toast({
-        title: "שגיאה",
-        description: "אירעה שגיאה בשליחת הפנייה",
+        title: t("contact.form.errorTitle"),
+        description: t("contact.form.errorMessage"),
         variant: "destructive",
       });
     } finally {
@@ -178,12 +178,12 @@ const Contact = () => {
               <div className={titleRow}>
                 <div className={titleLine} />
                 <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black">
-                  אנחנו בונים עתיד למשפחה שלכם
+                  {t("contact.title")}
                 </h2>
                 <div className={titleLine} />
               </div>
               <p className="mt-3 text-sm md:text-base text-black/70">
-                מלאו את הפרטים כדי ליצור איתנו קשר ונחזור אליכם בהקדם
+                {t("contact.subtitle")}
               </p>
             </div>
 
@@ -195,11 +195,11 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <Label className={labelCls} htmlFor="fullName">
-                        שם מלא
+                        {t("contact.form.fullName")}
                       </Label>
                       <Input
                         id="fullName"
-                        placeholder="שם מלא"
+                        placeholder={t("contact.form.fullNamePlaceholder")}
                         value={formData.fullName}
                         onChange={handleInputChange}
                         className={cn(field, validationErrors.fullName && "border-red-500")}
@@ -213,11 +213,11 @@ const Contact = () => {
 
                     <div>
                       <Label className={labelCls} htmlFor="company">
-                        שם חברה
+                        {t("contact.form.company")}
                       </Label>
                       <Input
                         id="company"
-                        placeholder="שם חברה (לא חובה)"
+                        placeholder={t("contact.form.companyPlaceholder")}
                         value={formData.company}
                         onChange={handleInputChange}
                         className={field}
@@ -229,11 +229,11 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <Label className={labelCls} htmlFor="phone">
-                        טלפון
+                        {t("contact.form.phone")}
                       </Label>
                       <Input
                         id="phone"
-                        placeholder="טלפון"
+                        placeholder={t("contact.form.phonePlaceholder")}
                         type="tel"
                         inputMode="tel"
                         value={formData.phone}
@@ -247,12 +247,12 @@ const Contact = () => {
 
                     <div>
                       <Label className={labelCls} htmlFor="email">
-                        אימייל
+                        {t("contact.form.email")}
                       </Label>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="אימייל"
+                        placeholder={t("contact.form.emailPlaceholder")}
                         value={formData.email}
                         onChange={handleInputChange}
                         className={cn(field, validationErrors.email && "border-red-500")}
@@ -267,7 +267,7 @@ const Contact = () => {
                   {/* Project type + preferred date */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label className={labelCls}>סוג פרויקט</Label>
+                      <Label className={labelCls}>{t("contact.form.projectType")}</Label>
 
                       <Select
                         value={formData.projectType}
@@ -284,28 +284,27 @@ const Contact = () => {
                             validationErrors.projectType && "border-red-500",
                           )}
                         >
-                          <SelectValue placeholder="בחר סוג" />
+                          <SelectValue placeholder={t("contact.form.projectTypePlaceholder")} />
                         </SelectTrigger>
 
-                        {/* Optional: make dropdown itself light too */}
                         <SelectContent variant="light" dir={dir}>
                           <SelectItem variant="light" value="restoration">
-                            שיקום
+                            {t("contact.form.projectTypes.restoration")}
                           </SelectItem>
                           <SelectItem variant="light" value="stone">
-                            אבן
+                            {t("contact.form.projectTypes.stone")}
                           </SelectItem>
                           <SelectItem variant="light" value="sealing">
-                            איטום
+                            {t("contact.form.projectTypes.sealing")}
                           </SelectItem>
                           <SelectItem variant="light" value="birds">
-                            הרחקת יונים
+                            {t("contact.form.projectTypes.birds")}
                           </SelectItem>
                           <SelectItem variant="light" value="special">
-                            מיוחד
+                            {t("contact.form.projectTypes.special")}
                           </SelectItem>
                           <SelectItem variant="light" value="other">
-                            אחר
+                            {t("contact.form.projectTypes.other")}
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -316,7 +315,7 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label className={labelCls}>תאריך מועדף</Label>
+                      <Label className={labelCls}>{t("contact.form.preferredDate")}</Label>
                       <Popover>
                         <PopoverTrigger asChild>
                           <Button
@@ -328,7 +327,7 @@ const Contact = () => {
                             <span className="truncate">
                               {formData.preferredDate
                                 ? format(formData.preferredDate, "dd/MM/yyyy", { locale: getDateLocale() })
-                                : "בחר תאריך"}
+                                : t("contact.form.preferredDatePlaceholder")}
                             </span>
                             <CalendarIcon className="h-5 w-5 opacity-80" />
                           </Button>
@@ -354,11 +353,11 @@ const Contact = () => {
 
                   <div>
                     <Label className={labelCls} htmlFor="message">
-                      הודעה
+                      {t("contact.form.message")}
                     </Label>
                     <Textarea
                       id="message"
-                      placeholder="כתוב כאן את פרטי הפנייה…"
+                      placeholder={t("contact.form.messagePlaceholder")}
                       value={formData.message}
                       onChange={handleInputChange}
                       className={cn(textarea, validationErrors.message && "border-red-500")}
@@ -374,7 +373,7 @@ const Contact = () => {
                   <div className="flex items-center gap-4 flex-wrap">
                     <label className={uploadBtn}>
                       <Upload size={18} />
-                      בחר קובץ
+                      {t("contact.form.chooseFile")}
                       <input
                         type="file"
                         hidden
@@ -392,7 +391,7 @@ const Contact = () => {
                     ) : (
                       <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />
                     )}
-                    שליחה
+                    {t("contact.form.submit")}
                   </Button>
                 </form>
               </div>
@@ -410,7 +409,7 @@ const Contact = () => {
                   </div>
                   <div className="flex items-center gap-3 mt-4">
                     <MapPin className="text-[#c9a84c]" size={18} />
-                    <span className="text-black">גני תקווה</span>
+                    <span className="text-black">{t("contact.info.addressValue")}</span>
                   </div>
                 </div>
               </div>

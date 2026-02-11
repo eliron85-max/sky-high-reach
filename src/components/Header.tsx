@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { Accessibility } from "lucide-react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
+import { useTranslation } from "@/lib/i18n";
 import logoImage from "@/assets/logo-new.webp";
 
 export default function Header() {
+  const { t, dir } = useTranslation();
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -39,25 +41,25 @@ export default function Header() {
 
   const quickLinks = useMemo(
     () => [
-      { label: "שיקום מעטפת", path: "/facade-restoration" },
-      { label: "חיפוי אבן", path: "/stone-veneer" },
-      { label: "איטום", path: "/waterproofing" },
-      { label: "הרחקת יונים", path: "/bird-control" },
-      { label: "צו הריסה", path: "/demolition-orders" },
+      { label: t("quickLinks.facadeRestoration"), path: "/facade-restoration" },
+      { label: t("quickLinks.stoneVeneer"), path: "/stone-veneer" },
+      { label: t("quickLinks.waterproofing"), path: "/waterproofing" },
+      { label: t("quickLinks.birdControl"), path: "/bird-control" },
+      { label: t("quickLinks.demolitionOrders"), path: "/demolition-orders" },
     ],
-    [],
+    [t],
   );
 
   const serviceLinks = useMemo(
     () => [
-      { label: "שיקום מעטפת", path: "/facade-restoration" },
-      { label: "חיפוי אבן", path: "/stone-veneer" },
-      { label: "איטום", path: "/waterproofing" },
-      { label: "הרחקת יונים", path: "/bird-control" },
-      { label: "טיפול בצווי הריסה", path: "/demolition-orders" },
-      { label: "פרויקטים מיוחדים", path: "/special-projects" },
+      { label: t("serviceLinks.facadeRestoration"), path: "/facade-restoration" },
+      { label: t("serviceLinks.stoneVeneer"), path: "/stone-veneer" },
+      { label: t("serviceLinks.waterproofing"), path: "/waterproofing" },
+      { label: t("serviceLinks.birdControl"), path: "/bird-control" },
+      { label: t("serviceLinks.demolitionOrders"), path: "/demolition-orders" },
+      { label: t("serviceLinks.specialProjects"), path: "/special-projects" },
     ],
-    [],
+    [t],
   );
 
   // Header shows on scroll-up, hides on scroll-down, always visible at top or when menu open
@@ -131,11 +133,11 @@ export default function Header() {
           {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
-              עמוד ראשי
+              {t("nav.home")}
             </Link>
 
             <Link to="/about" className={`${goldText} whitespace-nowrap`}>
-              אודות
+              {t("nav.about")}
             </Link>
 
             {/* Services dropdown */}
@@ -150,7 +152,7 @@ export default function Header() {
                 aria-haspopup="menu"
                 aria-expanded={servicesOpen}
               >
-                שירותים
+                {t("nav.services")}
                 <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
               </button>
 
@@ -186,15 +188,15 @@ export default function Header() {
           <div className="flex items-center justify-self-start gap-4 xl:gap-6 min-w-0">
             <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold">
               <Link to="/projects" className={`${goldText} whitespace-nowrap`}>
-                פרויקטים
+                {t("nav.projects")}
               </Link>
 
               <Link to="/pricing" className={`${goldText} whitespace-nowrap`}>
-                מחירים
+                {t("nav.pricing")}
               </Link>
 
               <Link to="/contact" className={`${goldText} whitespace-nowrap`}>
-                צור קשר
+                {t("nav.contact")}
               </Link>
             </nav>
 
@@ -214,7 +216,7 @@ export default function Header() {
                 to="/contact"
                 className="quote-shimmer hp-cta inline-flex items-center justify-center h-8 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
-                להצעת מחיר
+                {t("nav.cta")}
               </Link>
             </div>
           </div>
@@ -271,7 +273,7 @@ export default function Header() {
               onClick={closeMobile}
               className="hp-cta inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
             >
-              להצעת מחיר
+              {t("nav.cta")}
             </Link>
           </div>
         </div>
@@ -324,7 +326,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  עמוד ראשי
+                  {t("nav.home")}
                 </Link>
 
                 <Link
@@ -332,7 +334,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  אודות
+                  {t("nav.about")}
                 </Link>
 
                 <div>
@@ -341,7 +343,7 @@ export default function Header() {
                     onClick={() => setServicesOpen((v) => !v)}
                     className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] hover:bg-black/5"
                   >
-                    שירותים
+                    {t("nav.services")}
                     <span className="text-[14px]">{servicesOpen ? "▲" : "▼"}</span>
                   </button>
 
@@ -366,7 +368,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  פרויקטים
+                  {t("nav.projects")}
                 </Link>
 
                 <Link
@@ -374,7 +376,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  מחירים
+                  {t("nav.pricing")}
                 </Link>
 
                 <Link
@@ -382,7 +384,7 @@ export default function Header() {
                   onClick={closeMobile}
                   className="h-[56px] px-5 flex items-center justify-start tracking-[0.12em] hover:bg-black/5"
                 >
-                  צור קשר
+                  {t("nav.contact")}
                 </Link>
               </div>
             </nav>
