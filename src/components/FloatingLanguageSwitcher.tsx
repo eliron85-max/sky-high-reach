@@ -1,5 +1,5 @@
 import { useTranslation, Language } from "@/lib/i18n";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Globe } from "lucide-react";
 
 const languages: { code: Language; label: string; flag: string }[] = [
@@ -11,11 +11,21 @@ const languages: { code: Language; label: string; flag: string }[] = [
 export const FloatingLanguageSwitcher = () => {
   const { language, setLanguage } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setMenuOpen(!!document.documentElement.dataset.mobileMenuOpen);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-mobile-menu-open"] });
+    return () => observer.disconnect();
+  }, []);
+
+  if (menuOpen) return null;
 
   return (
     <div 
-      className="fixed top-28 left-3 z-[70] lg:hidden [[data-mobile-menu-open='true']_&]:hidden"
-      style={{ display: document.documentElement.dataset.mobileMenuOpen ? 'none' : undefined }}
+      className="fixed top-28 left-3 z-[70] lg:hidden"
     >
       <div className="flex flex-col items-center gap-2">
         {/* Toggle button - always visible */}
