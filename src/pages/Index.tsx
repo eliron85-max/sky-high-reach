@@ -11,7 +11,7 @@ import HomeStatsSection from "@/components/HomeStatsSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
-import RappellingFigureLeft from "@/components/RappellingFigureLeft";
+import RappellingFigureLeft from "../components/RappellingFigureLeft";
 import { useTranslation } from "@/lib/i18n";
 
 // Services images
