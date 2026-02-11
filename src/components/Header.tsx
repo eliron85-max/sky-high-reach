@@ -376,7 +376,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={closeMobile}
-                className="absolute top-4 left-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
+                className="absolute top-4 right-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
                 aria-label="Close"
               >
                 ✕
