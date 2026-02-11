@@ -18,18 +18,18 @@ export default function RappellingFigure() {
   }, []);
 
   return (
-    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* Single rope */}
-      <div
-        className="absolute bg-white/50"
-        style={{
-          right: 136,
-          top: 0,
-          width: 1.5,
-          height: figureY + 8,
-          willChange: "height",
-        }}
-      />
+  <div
+  className="absolute"
+  style={{
+    right: 136,
+    top: 0,
+    width: 1.5,
+    height: figureY + 8,
+    backgroundColor: "#808080",
+    willChange: "height",
+  }}
+/>
+
 
       {/* Figure image */}
       <img
