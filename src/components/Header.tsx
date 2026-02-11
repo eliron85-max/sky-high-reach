@@ -79,19 +79,22 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile drawer is open
+  // Lock body scroll when mobile drawer is open + signal to other components
   useEffect(() => {
     if (mobileOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.documentElement.dataset.mobileMenuOpen = "true";
     } else {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      delete document.documentElement.dataset.mobileMenuOpen;
     }
     return () => {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      delete document.documentElement.dataset.mobileMenuOpen;
     };
   }, [mobileOpen]);
 
