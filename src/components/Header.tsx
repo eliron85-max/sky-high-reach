@@ -317,8 +317,8 @@ export default function Header() {
                     onClick={() => setServicesOpen((v) => !v)}
                     className="w-full h-[56px] px-5 flex items-center justify-between tracking-[0.12em] hover:bg-black/5"
                   >
-                    <span className="text-[14px]">{servicesOpen ? "▲" : "▼"}</span>
                     שירותים
+                    <span className="text-[14px]">{servicesOpen ? "▲" : "▼"}</span>
                   </button>
 
                   {servicesOpen && (
