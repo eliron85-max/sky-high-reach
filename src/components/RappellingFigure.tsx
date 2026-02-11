@@ -25,7 +25,7 @@ export default function RappellingFigure() {
         style={{
           right: 136, // 👈 תשנה כאן לפי הכיוון שסגרנו
           top: 0,
-          width: 1.0,
+          width: 1.2,
           height: figureY + 8,
           backgroundColor: "#808080",
           willChange: "height",
