@@ -357,7 +357,7 @@ const Contact = () => {
                     </Label>
                     <Textarea
                       id="message"
-                      placeholder="כתוב כאן את פרטי הפנייה…"
+                      placeholder={t("contact.form.messagePlaceholder")}
                       value={formData.message}
                       onChange={handleInputChange}
                       className={cn(textarea, validationErrors.message && "border-red-500")}
