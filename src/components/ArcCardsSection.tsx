@@ -118,7 +118,7 @@ export default function ArcCardsSection({
 
         {safeItems.map((it, i) => {
           const state = getCardState(i);
-          const progressT = state.t;
+          const progressT = state.progress;
 
           let translateX: number;
           let rotate: number;
