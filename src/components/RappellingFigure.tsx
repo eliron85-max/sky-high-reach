@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import rappellingFigure from "@/assets/rappelling-figure.png";
+import rappellingFigure from "@/assets/Worker.png";
 
 export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
