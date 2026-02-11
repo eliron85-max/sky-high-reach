@@ -172,5 +172,27 @@
     "he": "עברית",
     "en": "English",
     "fr": "Français"
+  },
+  "home": {
+    "servicesTitle": "השירותים שלנו",
+    "serviceCards": {
+      "specialProjects": "עבודות מיוחדות",
+      "birdControl": "הרחקת מעופפים",
+      "waterproofing": "איטום בגובה",
+      "facadeRestoration": "שיקום מעטפת",
+      "stoneVeneer": "חיפוי אבן",
+      "demolitionOrders": "ביטול צווי הריסה",
+      "pipingGutters": "צנרת ומרזבים",
+      "heightSolutions": "פתרונות בגובה",
+      "subtitle": "עבודות גובה וסנפלינג"
+    },
+    "statsGold": "המספרים מדברים",
+    "statsBlack": "בעד עצמם!",
+    "statsProjects": "פרויקטים שהושלמו",
+    "statsExperience": "שנות ניסיון",
+    "statsCities": "ערים ואזורי פעילות",
+    "urbanTitleTop": "חיפוי אבן בגובה",
+    "urbanTitleGold": "מראה יוקרתי ועמיד",
+    "urbanSubtitle": "התקנת חיפוי אבן באיכות גבוהה לבניינים — עבודות גובה מקצועיות בטכנולוגיית סנפלינג, גימור מושלם ועמידות לאורך שנים."
   }
 }

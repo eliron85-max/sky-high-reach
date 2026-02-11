@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/lib/i18n";
 
 export type ArcCardItem = {
   title: string;
@@ -22,6 +23,7 @@ export default function ArcCardsSection({
   backgroundClassName = "bg-[#bfe7d6]",
   className,
 }: Props) {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
@@ -116,7 +118,7 @@ export default function ArcCardsSection({
 
         {safeItems.map((it, i) => {
           const state = getCardState(i);
-          const t = state.t;
+          const progressT = state.t;
 
           let translateX: number;
           let rotate: number;
@@ -137,15 +139,15 @@ export default function ArcCardsSection({
             // Smooth ease with longer center dwell time
             // t: 0→0.3 = entering, 0.3→0.7 = center, 0.7→1 = exiting
             let eased: number;
-            if (t < 0.25) {
+            if (progressT < 0.25) {
               // Entering phase: ease out
-              eased = t / 0.25 * 0.5;
-            } else if (t < 0.75) {
+              eased = progressT / 0.25 * 0.5;
+            } else if (progressT < 0.75) {
               // Center phase: stay centered
               eased = 0.5;
             } else {
               // Exiting phase: ease in
-              eased = 0.5 + ((t - 0.75) / 0.25) * 0.5;
+              eased = 0.5 + ((progressT - 0.75) / 0.25) * 0.5;
             }
 
             translateX = 80 - eased * 160; // 80 → 0 → -80
@@ -153,10 +155,10 @@ export default function ArcCardsSection({
             scale = 0.94 + Math.sin(eased * Math.PI) * 0.08; // peaks at ~1.02 in center
             
             // Opacity: quick fade in, hold, quick fade out
-            if (t < 0.15) {
-              opacity = t / 0.15;
-            } else if (t > 0.85) {
-              opacity = (1 - t) / 0.15;
+            if (progressT < 0.15) {
+              opacity = progressT / 0.15;
+            } else if (progressT > 0.85) {
+              opacity = (1 - progressT) / 0.15;
             } else {
               opacity = 1;
             }
@@ -172,7 +174,7 @@ export default function ArcCardsSection({
                 transform: `translateX(${translateX}vw) rotate(${rotate}deg) scale(${scale})`,
                 opacity,
                 zIndex: state.phase === "active" ? 10 : 1,
-                pointerEvents: state.phase === "active" && t > 0.2 && t < 0.8 ? "auto" : "none",
+                pointerEvents: state.phase === "active" && progressT > 0.2 && progressT < 0.8 ? "auto" : "none",
               }}
             >
               <div
@@ -196,7 +198,7 @@ export default function ArcCardsSection({
                 <div className="relative px-6 sm:px-8 py-5 sm:py-7">
                   <div className="text-right">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold leading-tight">{it.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">עבודות גובה וסנפלינג</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{t("home.serviceCards.subtitle")}</p>
                   </div>
                 </div>
               </div>
