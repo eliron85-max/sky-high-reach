@@ -159,8 +159,8 @@ const Contact = () => {
       setSelectedFile(null);
     } catch {
       toast({
-        title: "שגיאה",
-        description: "אירעה שגיאה בשליחת הפנייה",
+        title: t("contact.form.errorTitle"),
+        description: t("contact.form.errorMessage"),
         variant: "destructive",
       });
     } finally {
