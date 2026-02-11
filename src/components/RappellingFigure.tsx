@@ -4,21 +4,6 @@ import rappellingFigure from "@/assets/rappelling-figure.png";
 export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
 
-  // ✅ זה הגודל של הדמות — פה אתה משנה 300 / 200 וכו'
-  const figureWidth = 250;
-
-  // ✅ מיקום "קופסת הדמות" מצד ימין של המסך (זה מחליף את right של החבל)
-  const wrapperRight = 0;
-
-  // ✅ מיקום החבל יחסית לדמות (מתוך הקצה השמאלי של הדמות)
-  // ככה זה לא בורח כשמשנים figureWidth
-  // התחלתי לך ביחס ל-300 שהיה לך: 136/300 ≈ 0.453
-  const ropeLeft = Math.round(0.453 * figureWidth);
-
-  // ✅ נקודת חיבור על הדמות (כמה פיקסלים מלמעלה של הדמות)
-  // אם צריך להוריד/להעלות את נקודת החיבור – משנים רק פה
-  const ropeAttachY = Math.round(0.36 * figureWidth); // ערך התחלתי, אפשר לכוון
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -32,58 +17,44 @@ export default function RappellingFigure() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // גובה החבל: מראש הדף (0) עד נקודת החיבור על הדמות
-  const ropeHeight = Math.max(0, figureY + ropeAttachY);
-
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* ✅ WRAPPER משותף: הדמות + החבל */}
+      {/* Single rope */}
       <div
-        className="rappel-swing"
+        className="absolute"
         style={{
-          position: "absolute",
-          right: wrapperRight,
+          right: 136, // 👈 תשנה כאן לפי הכיוון שסגרנו
+          top: 0,
+          width: 1.2,
+          height: figureY + 8,
+          backgroundColor: "#808080",
+          willChange: "height",
+        }}
+      />
+
+      {/* Figure image */}
+      <img
+        src={rappellingFigure}
+        alt="פועל סנפלינג"
+        draggable={false}
+        className="absolute"
+        style={{
+          right: 0,
           top: figureY,
-          width: figureWidth,
+          width: 300,
+          height: "auto",
+          willChange: "top",
+          animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
         }}
-      >
-        {/* ✅ החבל: יחסית לדמות (left בתוך ה-wrapper), ונמתח עד ראש הדף */}
-        <div
-          style={{
-            position: "absolute",
-            left: ropeLeft,
-            top: -figureY,
-            width: 1.5,
-            height: ropeHeight,
-            backgroundColor: "#808080",
-            willChange: "height",
-          }}
-        />
+      />
 
-        {/* ✅ הדמות */}
-        <img
-          src={rappellingFigure}
-          alt="פועל סנפלינג"
-          draggable={false}
-          style={{
-            display: "block",
-            width: figureWidth,
-            height: "auto",
-            userSelect: "none",
-          }}
-        />
-      </div>
-
-      {/* ✅ אנימציה: עכשיו גם החבל וגם הדמות מתנדנדים יחד */}
+      {/* Sway animation */}
       <style>{`
         @keyframes sway {
           0% { transform: rotate(-1.2deg); }
           50% { transform: rotate(1.2deg); }
           100% { transform: rotate(-1.2deg); }
-        }
-        .rappel-swing {
-          animation: sway 4s ease-in-out infinite;
         }
       `}</style>
     </div>
