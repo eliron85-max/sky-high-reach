@@ -19,40 +19,34 @@ export default function RappellingFigure() {
 
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* Rope from top of screen to the figure's attachment point */}
+      {/* Single rope */}
       <div
         className="absolute bg-white/50"
         style={{
-          right: 182,
+          right: 105,
           top: 0,
           width: 1.5,
-          height: figureY + 140,
+          height: figureY + 8,
           willChange: "height",
         }}
       />
 
-      {/* Wrapper for figure + sway animation */}
-      <div
+      {/* Figure image */}
+      <img
+        src={rappellingFigure}
+        alt="פועל סנפלינג"
+        draggable={false}
+        className="absolute"
         style={{
-          position: "absolute",
           right: 0,
           top: figureY,
-          width: 150,
+          width: 250,
+          height: "auto",
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
         }}
-      >
-        <img
-          src={rappellingFigure}
-          alt="פועל סנפלינג"
-          draggable={false}
-          style={{
-            width: 150,
-            height: "auto",
-          }}
-        />
-      </div>
+      />
     </div>
   );
 }
