@@ -284,28 +284,27 @@ const Contact = () => {
                             validationErrors.projectType && "border-red-500",
                           )}
                         >
-                          <SelectValue placeholder="בחר סוג" />
+                          <SelectValue placeholder={t("contact.form.projectTypePlaceholder")} />
                         </SelectTrigger>
 
-                        {/* Optional: make dropdown itself light too */}
                         <SelectContent variant="light" dir={dir}>
                           <SelectItem variant="light" value="restoration">
-                            שיקום
+                            {t("contact.form.projectTypes.restoration")}
                           </SelectItem>
                           <SelectItem variant="light" value="stone">
-                            אבן
+                            {t("contact.form.projectTypes.stone")}
                           </SelectItem>
                           <SelectItem variant="light" value="sealing">
-                            איטום
+                            {t("contact.form.projectTypes.sealing")}
                           </SelectItem>
                           <SelectItem variant="light" value="birds">
-                            הרחקת יונים
+                            {t("contact.form.projectTypes.birds")}
                           </SelectItem>
                           <SelectItem variant="light" value="special">
-                            מיוחד
+                            {t("contact.form.projectTypes.special")}
                           </SelectItem>
                           <SelectItem variant="light" value="other">
-                            אחר
+                            {t("contact.form.projectTypes.other")}
                           </SelectItem>
                         </SelectContent>
                       </Select>
