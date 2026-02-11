@@ -299,8 +299,17 @@ export default function Header() {
         <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
             {/* RIGHT: MENU */}
-            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right" dir="rtl">
-              <div className="h-[64px] border-b border-black/20" />
+            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right relative" dir="rtl">
+              <div className="h-[64px] border-b border-black/20 flex items-center justify-end px-4">
+                <button
+                  type="button"
+                  onClick={closeMobile}
+                  className="w-11 h-11 rounded-xl border border-black/20 text-[#1b1b1b] hover:bg-black/10 flex items-center justify-center"
+                  aria-label="סגור תפריט"
+                >
+                  ✕
+                </button>
+              </div>
 
               <div className="divide-y divide-black/20">
                 <Link
@@ -373,14 +382,6 @@ export default function Header() {
 
             {/* LEFT: INFO */}
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
-              <button
-                type="button"
-                onClick={closeMobile}
-                className="absolute top-4 right-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
-                aria-label="Close"
-              >
-                ✕
-              </button>
 
               <div className="h-full flex flex-col px-6 pt-10 pb-6">
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
