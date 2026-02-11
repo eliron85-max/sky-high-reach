@@ -29,6 +29,8 @@ export const FloatingLanguageSwitcher = () => {
       className="fixed top-28 left-3 z-[70] lg:hidden"
     >
       <div className="flex flex-col items-center gap-2">
+        {/* Theme toggle above globe */}
+        <ThemeToggle />
         {/* Toggle button - always visible */}
         <button
           onClick={() => setIsOpen(!isOpen)}
