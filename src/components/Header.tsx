@@ -382,14 +382,6 @@ export default function Header() {
 
             {/* LEFT: INFO */}
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
-              <button
-                type="button"
-                onClick={closeMobile}
-                className="absolute top-4 right-4 w-11 h-11 rounded-xl border border-white/20 text-white hover:bg-white/10"
-                aria-label="Close"
-              >
-                ✕
-              </button>
 
               <div className="h-full flex flex-col px-6 pt-10 pb-6">
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
