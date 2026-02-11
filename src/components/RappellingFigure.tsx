@@ -1,23 +1,14 @@
 import { useEffect, useState } from "react";
+import workerLeft from "@/assets/Worker.png";
 
-type Props = {
-  image: string;
-  side: "left" | "right";
-  figureWidth?: number;
-};
-
-export default function RappellingFigure({
-  image,
-  side,
-  figureWidth = 245,
-}: Props) {
+export default function RappellingFigureLeft() {
   const [figureY, setFigureY] = useState(0);
+
+  const figureWidth = 245;
+  const ropeLeft = Math.round((136 / 300) * figureWidth);
 
   const ropeAttachOffset = 60;
   const ropeOverhang = 500;
-
-  // יחס ימני שננעל כשהיה 300px
-  const baseRight = Math.round((136 / 300) * figureWidth);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,33 +24,18 @@ export default function RappellingFigure({
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () =>
-      window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const ropeTop = -ropeOverhang;
   const ropeHeight = figureY + ropeAttachOffset + ropeOverhang;
 
-  const positionStyle =
-    side === "right"
-      ? { right: 0 }
-      : { left: 0 };
-
-  const ropePosition =
-    side === "right"
-      ? { right: baseRight }
-      : { left: baseRight };
-
   return (
-    <div
-      className="hidden lg:block fixed inset-0 pointer-events-none"
-      style={{ zIndex: 9999 }}
-    >
-      {/* Rope */}
+    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
       <div
         className="absolute"
         style={{
-          ...ropePosition,
+          left: ropeLeft,
           top: ropeTop,
           width: 1.2,
           height: ropeHeight,
@@ -67,13 +43,12 @@ export default function RappellingFigure({
         }}
       />
 
-      {/* Figure */}
       <img
-        src={image}
+        src={workerLeft}
         draggable={false}
         className="absolute"
         style={{
-          ...positionStyle,
+          left: 0,
           top: figureY,
           width: figureWidth,
           height: "auto",
