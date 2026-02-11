@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Link } from "react-router-dom";
 import { ImageWithSkeleton } from "@/components/ui/image-with-skeleton";
+import { useTranslation } from "@/lib/i18n";
 
 // Import service images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -16,54 +17,55 @@ import heightSolutionsImage from "@/assets/height-solutions.webp";
 
 const ServicesPage = () => {
   const { ref, isVisible } = useScrollReveal();
+  const { t } = useTranslation();
   
   const services = [
     {
       image: facadeRestorationImage,
-      title: "שיקום ושיפוץ מעטפת",
-      description: "תיקון ושיפוץ מעטפות בניינים, טיפול בסדקים, החלפת אלמנטים פגומים ושיקום מבני חזית.",
+      title: t("servicesPage.items.facadeRestoration.title"),
+      description: t("servicesPage.items.facadeRestoration.description"),
       link: "/facade-restoration",
     },
     {
       image: stoneVeneerImage,
-      title: "חיפוי ועיגון אבנים",
-      description: "התקנת חיפוי אבן בגובה, עיגון אבנים רופפות וטיפול במעטפות אבן טבעית ומלאכותית.",
+      title: t("servicesPage.items.stoneVeneer.title"),
+      description: t("servicesPage.items.stoneVeneer.description"),
       link: "/stone-veneer",
     },
     {
       image: waterproofingImage,
-      title: "איטום בגובה",
-      description: "איטום גגות, קירות חוץ, מרפסות וחלונות. מניעת חדירת מים ולחות לבניין.",
+      title: t("servicesPage.items.waterproofing.title"),
+      description: t("servicesPage.items.waterproofing.description"),
       link: "/waterproofing",
     },
     {
       image: birdControlImage,
-      title: "הרחקת מעופפים",
-      description: "התקנת מערכות הרחקת יונים ועופות, רשתות, קוצים ומערכות אלקטרוניות.",
+      title: t("servicesPage.items.birdControl.title"),
+      description: t("servicesPage.items.birdControl.description"),
       link: "/bird-control",
     },
     {
       image: specialProjectsImage,
-      title: "עבודות גובה מיוחדות",
-      description: "פרויקטים ייחודיים הדורשים גישה בחבלים, כולל התקנות מיוחדות ופרויקטי אמנות.",
+      title: t("servicesPage.items.specialWorks.title"),
+      description: t("servicesPage.items.specialWorks.description"),
       link: "/special-projects",
     },
     {
       image: demolitionOrdersImage,
-      title: "ביטול צווי הריסה",
-      description: "ליווי משפטי ומקצועי בתהליך הכשרת חריגות בנייה וטיפול בצווי הריסה.",
+      title: t("servicesPage.items.demolitionOrders.title"),
+      description: t("servicesPage.items.demolitionOrders.description"),
       link: "/demolition-orders",
     },
     {
       image: pipingGuttersImage,
-      title: "התקנת צנרת ומרזבים",
-      description: "התקנה ותיקון מערכות ניקוז, צנרות ומרזבים בגבהים.",
+      title: t("servicesPage.items.pipingGutters.title"),
+      description: t("servicesPage.items.pipingGutters.description"),
       link: "/piping-gutters",
     },
     {
       image: heightSolutionsImage,
-      title: "פתרונות בגובה",
-      description: "כל פתרון שדורש גישה בגובה - ניקוי, תיקון, התקנה ותחזוקה.",
+      title: t("servicesPage.items.heightSolutions.title"),
+      description: t("servicesPage.items.heightSolutions.description"),
       link: "/height-solutions",
     },
   ];
@@ -75,9 +77,9 @@ const ServicesPage = () => {
         {/* Hero Section */}
         <section className="py-16 lg:py-24 bg-hero-dark text-white overflow-hidden">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">השירותים שלנו</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">{t("servicesPage.heroTitle")}</h1>
             <p className="text-lg text-white/80 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
-              מגוון רחב של שירותי עבודות גובה מקצועיים עם דגש על בטיחות, איכות ושירות אמין
+              {t("servicesPage.heroSubtitle")}
             </p>
           </div>
         </section>
