@@ -3,7 +3,6 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
-import ServicesScrollCards from "@/components/ServicesScrollCards";
 import ArcCardsSection from "@/components/ArcCardsSection";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
@@ -12,6 +11,7 @@ import HomeStatsSection from "@/components/HomeStatsSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
+import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 import { useTranslation } from "@/lib/i18n";
 
 // Services images
@@ -70,7 +70,12 @@ export default function Index() {
       <Header />
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
+
+      {/* Right side (workerRight.png) */}
       <RappellingFigure />
+
+      {/* Left side (Worker.png) */}
+      <RappellingFigureLeft />
 
       <main className="pt-[var(--header-height)]">
         {/* HERO VIDEO SECTION */}
