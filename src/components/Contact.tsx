@@ -267,7 +267,7 @@ const Contact = () => {
                   {/* Project type + preferred date */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <Label className={labelCls}>סוג פרויקט</Label>
+                      <Label className={labelCls}>{t("contact.form.projectType")}</Label>
 
                       <Select
                         value={formData.projectType}
