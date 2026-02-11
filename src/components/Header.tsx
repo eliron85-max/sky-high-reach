@@ -41,25 +41,25 @@ export default function Header() {
 
   const quickLinks = useMemo(
     () => [
-      { label: "שיקום מעטפת", path: "/facade-restoration" },
-      { label: "חיפוי אבן", path: "/stone-veneer" },
-      { label: "איטום", path: "/waterproofing" },
-      { label: "הרחקת יונים", path: "/bird-control" },
-      { label: "צו הריסה", path: "/demolition-orders" },
+      { label: t("quickLinks.facadeRestoration"), path: "/facade-restoration" },
+      { label: t("quickLinks.stoneVeneer"), path: "/stone-veneer" },
+      { label: t("quickLinks.waterproofing"), path: "/waterproofing" },
+      { label: t("quickLinks.birdControl"), path: "/bird-control" },
+      { label: t("quickLinks.demolitionOrders"), path: "/demolition-orders" },
     ],
-    [],
+    [t],
   );
 
   const serviceLinks = useMemo(
     () => [
-      { label: "שיקום מעטפת", path: "/facade-restoration" },
-      { label: "חיפוי אבן", path: "/stone-veneer" },
-      { label: "איטום", path: "/waterproofing" },
-      { label: "הרחקת יונים", path: "/bird-control" },
-      { label: "טיפול בצווי הריסה", path: "/demolition-orders" },
-      { label: "פרויקטים מיוחדים", path: "/special-projects" },
+      { label: t("serviceLinks.facadeRestoration"), path: "/facade-restoration" },
+      { label: t("serviceLinks.stoneVeneer"), path: "/stone-veneer" },
+      { label: t("serviceLinks.waterproofing"), path: "/waterproofing" },
+      { label: t("serviceLinks.birdControl"), path: "/bird-control" },
+      { label: t("serviceLinks.demolitionOrders"), path: "/demolition-orders" },
+      { label: t("serviceLinks.specialProjects"), path: "/special-projects" },
     ],
-    [],
+    [t],
   );
 
   // Header shows on scroll-up, hides on scroll-down, always visible at top or when menu open
