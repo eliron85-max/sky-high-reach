@@ -1,50 +1,45 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import rappellingFigure from "@/assets/Worker.png";
 
 export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
-  const [vh, setVh] = useState(() => (typeof window !== "undefined" ? window.innerHeight : 0));
 
   // 🔧 גודל הדמות
   const figureWidth = 245;
 
-  // 🔧 מיקום החבל (נעול לפי מצב שהיה מדויק: right=136 כשהדמות 300)
+  // 🔧 מיקום החבל (נעול לפי מצב מדויק שהיה: right=136 כשהדמות 300)
   const ropeRight = Math.round((136 / 300) * figureWidth);
 
-  // 🔧 נקודת החיבור האנכית על הדמות (אותו offset שהיה לך: +8)
+  // 🔧 נקודת החיבור האנכית על הדמות
   const ropeAttachOffset = 60;
 
-  // 🔧 כמה "להמשיך" את החבל מעל המסך (כדי שלא יראו התחלה)
+  // 🔧 כמה להאריך את החבל מעל המסך (כדי שלא יראו התחלה)
   const ropeOverhang = 500;
-
-  useEffect(() => {
-    const handleResize = () => setVh(window.innerHeight);
-    window.addEventListener("resize", handleResize, { passive: true });
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
 
       const maxY = window.innerHeight - 350;
+
       setFigureY(progress * maxY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ מקצועי: החבל מתחיל מעל המסך (שלילי), אבל האורך שלו מפצה כדי להגיע לנקודת החיבור
+  // החבל מתחיל מעל המסך אך נשאר מחובר למכשיר
   const ropeTop = -ropeOverhang;
   const ropeHeight = figureY + ropeAttachOffset + ropeOverhang;
 
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* Rope (always vertical, no "end" at top) */}
+      {/* Rope */}
       <div
         className="absolute"
         style={{
