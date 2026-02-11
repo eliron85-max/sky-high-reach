@@ -217,7 +217,7 @@ const Contact = () => {
                       </Label>
                       <Input
                         id="company"
-                        placeholder="שם חברה (לא חובה)"
+                        placeholder={t("contact.form.companyPlaceholder")}
                         value={formData.company}
                         onChange={handleInputChange}
                         className={field}
