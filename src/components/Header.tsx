@@ -216,7 +216,7 @@ export default function Header() {
                 to="/contact"
                 className="quote-shimmer hp-cta inline-flex items-center justify-center h-8 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
-                להצעת מחיר
+                {t("nav.cta")}
               </Link>
             </div>
           </div>
