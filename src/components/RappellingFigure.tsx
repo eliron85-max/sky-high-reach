@@ -8,7 +8,7 @@ export default function RappellingFigure() {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-      const maxY = window.innerHeight - 160;
+      const maxY = window.innerHeight - 200;
       setFigureY(progress * maxY);
     };
 
@@ -18,36 +18,36 @@ export default function RappellingFigure() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-6 h-screen hidden lg:block pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* Rope */}
+    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
+      {/* Rope line from top to figure */}
       <div
-        className="absolute top-0 w-[2px] bg-white/50"
+        className="absolute bg-white/60"
         style={{
-          left: "50%",
-          height: figureY + 10,
-          transform: "translateX(-50%)",
+          left: 40,
+          top: 0,
+          width: 2,
+          height: figureY + 20,
           willChange: "height",
         }}
       />
-      {/* Figure */}
-      <div
-        className="absolute"
+
+      {/* Figure image */}
+      <img
+        src={rappellingFigure}
+        alt="פועל סנפלינג"
+        draggable={false}
+        className="absolute drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
         style={{
-          left: "50%",
-          transform: "translateX(-50%)",
+          left: 0,
           top: figureY,
+          width: 150,
+          height: "auto",
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
+          filter: "drop-shadow(0 0 6px rgba(255,255,255,0.5))",
         }}
-      >
-        <img
-          src={rappellingFigure}
-          alt="פועל סנפלינג"
-          className="h-[140px] w-auto object-contain"
-          draggable={false}
-        />
-      </div>
+      />
     </div>
   );
 }
