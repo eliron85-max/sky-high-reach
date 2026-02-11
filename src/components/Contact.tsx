@@ -391,7 +391,7 @@ const Contact = () => {
                     ) : (
                       <Send className={dir === "rtl" ? "ml-2" : "mr-2"} size={18} />
                     )}
-                    שליחה
+                    {t("contact.form.submit")}
                   </Button>
                 </form>
               </div>
