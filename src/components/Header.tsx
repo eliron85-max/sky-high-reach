@@ -388,9 +388,10 @@ export default function Header() {
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
 
               <div className="h-full flex flex-col px-6 pt-4 pb-6">
-                {/* Top row: language switcher */}
-                <div className="flex items-center mb-4">
+                {/* Top row: language switcher + theme toggle */}
+                <div className="flex items-center justify-between mb-4">
                   <LanguageSwitcher />
+                  <ThemeToggle />
                 </div>
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
 
