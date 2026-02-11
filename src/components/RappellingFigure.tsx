@@ -26,7 +26,7 @@ export default function RappellingFigure() {
           right: 142,
           top: 0,
           width: 1.5,
-          height: figureY + 55,
+          height: figureY + 140,
           willChange: "height",
         }}
       />
