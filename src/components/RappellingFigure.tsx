@@ -23,7 +23,7 @@ export default function RappellingFigure() {
       <div
         className="absolute bg-white/50"
         style={{
-          right: 88,
+          right: 110,
           top: 0,
           width: 1.5,
           height: figureY + 8,
