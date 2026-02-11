@@ -188,15 +188,15 @@ export default function Header() {
           <div className="flex items-center justify-self-start gap-4 xl:gap-6 min-w-0">
             <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold">
               <Link to="/projects" className={`${goldText} whitespace-nowrap`}>
-                פרויקטים
+                {t("nav.projects")}
               </Link>
 
               <Link to="/pricing" className={`${goldText} whitespace-nowrap`}>
-                מחירים
+                {t("nav.pricing")}
               </Link>
 
               <Link to="/contact" className={`${goldText} whitespace-nowrap`}>
-                צור קשר
+                {t("nav.contact")}
               </Link>
             </nav>
 
