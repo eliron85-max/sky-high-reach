@@ -23,6 +23,7 @@ export default function ArcCardsSection({
   backgroundClassName = "bg-[#bfe7d6]",
   className,
 }: Props) {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
