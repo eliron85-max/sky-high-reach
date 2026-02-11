@@ -19,28 +19,8 @@ export default function RappellingFigure() {
 
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
-      {/* Rope extending up from figure - left rope */}
-      <div
-        className="absolute bg-white/50"
-        style={{
-          right: 112,
-          top: 0,
-          width: 1.5,
-          height: figureY + 5,
-          willChange: "height",
-        }}
-      />
-      {/* Rope extending up from figure - right rope */}
-      <div
-        className="absolute bg-white/50"
-        style={{
-          right: 100,
-          top: 0,
-          width: 1.5,
-          height: figureY + 5,
-          willChange: "height",
-        }}
-      />
+
+
 
       {/* Figure image */}
       <img
