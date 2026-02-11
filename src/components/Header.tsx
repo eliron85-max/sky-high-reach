@@ -79,19 +79,22 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile drawer is open
+  // Lock body scroll when mobile drawer is open + signal to other components
   useEffect(() => {
     if (mobileOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.documentElement.dataset.mobileMenuOpen = "true";
     } else {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      delete document.documentElement.dataset.mobileMenuOpen;
     }
     return () => {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
+      delete document.documentElement.dataset.mobileMenuOpen;
     };
   }, [mobileOpen]);
 
@@ -300,7 +303,17 @@ export default function Header() {
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
             {/* RIGHT: MENU */}
             <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right relative" dir="rtl">
-              <div className="h-[64px]" />
+              {/* X close button at top of nav panel */}
+              <div className="h-[64px] flex items-center justify-start px-5">
+                <button
+                  type="button"
+                  onClick={closeMobile}
+                  className="w-11 h-11 rounded-xl border border-black/20 text-[#1b1b1b] hover:bg-black/10 flex items-center justify-center"
+                  aria-label="סגור תפריט"
+                >
+                  ✕
+                </button>
+              </div>
 
               <div className="divide-y divide-black/20">
                 <Link
@@ -375,17 +388,9 @@ export default function Header() {
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
 
               <div className="h-full flex flex-col px-6 pt-4 pb-6">
-                {/* Top row: language switcher (left) + X button (right) */}
-                <div className="flex items-center justify-between mb-4">
+                {/* Top row: language switcher */}
+                <div className="flex items-center mb-4">
                   <LanguageSwitcher />
-                  <button
-                    type="button"
-                    onClick={closeMobile}
-                    className="w-11 h-11 rounded-xl border border-white/20 text-[#e6dccb] hover:bg-white/10 flex items-center justify-center"
-                    aria-label="סגור תפריט"
-                  >
-                    ✕
-                  </button>
                 </div>
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
 
