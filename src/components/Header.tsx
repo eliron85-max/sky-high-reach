@@ -113,7 +113,7 @@ export default function Header() {
       ref={headerRef}
       data-mobile-open={mobileOpen ? "true" : "false"}
       className={`fixed top-0 left-0 right-0 z-50 bg-[#d2d4d6] dark:bg-black overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
-        isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full pointer-events-none"
+        isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"
       }`}
       dir="rtl"
     >
