@@ -12,7 +12,7 @@ export default function RappellingFigure() {
   const ropeRight = Math.round((136 / 300) * figureWidth);
 
   // 🔧 נקודת החיבור האנכית על הדמות (אותו offset שהיה לך: +8)
-  const ropeAttachOffset = 30;
+  const ropeAttachOffset = 40;
 
   // 🔧 כמה "להמשיך" את החבל מעל המסך (כדי שלא יראו התחלה)
   const ropeOverhang = 500;
