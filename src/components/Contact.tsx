@@ -213,7 +213,7 @@ const Contact = () => {
 
                     <div>
                       <Label className={labelCls} htmlFor="company">
-                        שם חברה
+                        {t("contact.form.company")}
                       </Label>
                       <Input
                         id="company"
