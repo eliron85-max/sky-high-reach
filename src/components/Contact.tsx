@@ -229,7 +229,7 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <Label className={labelCls} htmlFor="phone">
-                        טלפון
+                        {t("contact.form.phone")}
                       </Label>
                       <Input
                         id="phone"
