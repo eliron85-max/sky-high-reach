@@ -36,7 +36,7 @@ export default function RappellingFigure() {
         src={rappellingFigure}
         alt="פועל סנפלינג"
         draggable={false}
-        className="absolute drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+        className="absolute"
         style={{
           right: 0,
           top: figureY,
@@ -45,7 +45,6 @@ export default function RappellingFigure() {
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
           transformOrigin: "top center",
-          filter: "drop-shadow(0 0 6px rgba(255,255,255,0.5))",
         }}
       />
     </div>
