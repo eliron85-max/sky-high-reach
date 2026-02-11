@@ -137,7 +137,7 @@ export default function Header() {
             </Link>
 
             <Link to="/about" className={`${goldText} whitespace-nowrap`}>
-              אודות
+              {t("nav.about")}
             </Link>
 
             {/* Services dropdown */}
