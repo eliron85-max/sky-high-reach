@@ -8,7 +8,7 @@ export default function RappellingFigure() {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-      const maxY = window.innerHeight - 200;
+      const maxY = window.innerHeight - 350;
       setFigureY(progress * maxY);
     };
 
@@ -23,7 +23,7 @@ export default function RappellingFigure() {
       <div
         className="absolute bg-white/60"
         style={{
-          left: 40,
+          right: 110,
           top: 0,
           width: 2,
           height: figureY + 20,
@@ -38,9 +38,9 @@ export default function RappellingFigure() {
         draggable={false}
         className="absolute drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
         style={{
-          left: 0,
+          right: 0,
           top: figureY,
-          width: 150,
+          width: 300,
           height: "auto",
           willChange: "top",
           animation: "sway 4s ease-in-out infinite",
