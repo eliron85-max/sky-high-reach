@@ -195,7 +195,7 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <Label className={labelCls} htmlFor="fullName">
-                        שם מלא
+                        {t("contact.form.fullName")}
                       </Label>
                       <Input
                         id="fullName"
