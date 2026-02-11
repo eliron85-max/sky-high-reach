@@ -198,7 +198,7 @@ export default function ArcCardsSection({
                 <div className="relative px-6 sm:px-8 py-5 sm:py-7">
                   <div className="text-right">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold leading-tight">{it.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">עבודות גובה וסנפלינג</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{t("home.serviceCards.subtitle")}</p>
                   </div>
                 </div>
               </div>
