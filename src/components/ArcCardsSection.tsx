@@ -69,9 +69,9 @@ export default function ArcCardsSection({
       const cardStart = index;
       const localProgress = cardProgress - cardStart;
 
-      if (localProgress < 0) return { phase: "waiting" as const, t: 0 };
-      if (localProgress <= 1) return { phase: "active" as const, t: localProgress };
-      return { phase: "exited" as const, t: 1 };
+      if (localProgress < 0) return { phase: "waiting" as const, progress: 0 };
+      if (localProgress <= 1) return { phase: "active" as const, progress: localProgress };
+      return { phase: "exited" as const, progress: 1 };
     },
     [progress, total],
   );
