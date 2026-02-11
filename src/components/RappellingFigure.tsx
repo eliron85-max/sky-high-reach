@@ -23,7 +23,7 @@ export default function RappellingFigure() {
       <div
         className="absolute"
         style={{
-          right: 131, // 👈 תשנה כאן לפי הכיוון שסגרנו
+          right: 136, // 👈 תשנה כאן לפי הכיוון שסגרנו
           top: 0,
           width: 1.5,
           height: figureY + 8,
