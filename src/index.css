@@ -463,6 +463,22 @@ aside#lovable-badge * {
 /* Laptop scale fix */
 @media (min-width: 1280px) and (max-width: 1600px) {
   html {
-    zoom: 0.8;
+    zoom: 0.9;
+  }
+}
+/* ===== Laptop layout scale fix ===== */
+@media (min-width: 1280px) and (max-width: 1600px) {
+  html {
+    font-size: 90%;
+  }
+
+  body {
+    zoom: 0.9;
+  }
+
+  .container,
+  .max-w-screen-xl,
+  .max-w-7xl {
+    max-width: 1200px !important;
   }
 }
