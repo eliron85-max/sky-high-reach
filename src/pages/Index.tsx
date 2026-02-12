@@ -54,15 +54,16 @@ const urbanImages = [
 export default function Index() {
   const { t } = useTranslation();
 
+  // ✅ הוספתי href לכל כרטיסיה (קליקים)
   const services = [
-    { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage },
-    { title: t("home.serviceCards.birdControl"), image: birdControlImage },
-    { title: t("home.serviceCards.waterproofing"), image: waterproofingImage },
-    { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage },
-    { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage },
-    { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage },
-    { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage },
-    { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage },
+    { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage, href: "/special-projects" },
+    { title: t("home.serviceCards.birdControl"), image: birdControlImage, href: "/bird-control" },
+    { title: t("home.serviceCards.waterproofing"), image: waterproofingImage, href: "/waterproofing" },
+    { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage, href: "/facade-restoration" },
+    { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage, href: "/stone-veneer" },
+    { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage, href: "/demolition-orders" },
+    { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage, href: "/piping-gutters" },
+    { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage, href: "/height-solutions" },
   ];
 
   const scrollToNext = () => {
