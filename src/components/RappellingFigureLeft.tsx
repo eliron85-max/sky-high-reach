@@ -4,7 +4,7 @@ import workerLeft from "@/assets/workerLeftNew.png";
 export default function RappellingFigureLeft() {
   const [figureY, setFigureY] = useState(0);
 
-  const figureWidth = 245;
+  const figureWidth = 184;
 
   // אותו יחס כמו הימני, רק שמאל => left
   const ropeLeft = Math.round((136 / 300) * figureWidth);
@@ -14,11 +14,9 @@ export default function RappellingFigureLeft() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-      const progress =
-        scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+      const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
 
       const maxY = window.innerHeight - 350;
       setFigureY(progress * maxY);
