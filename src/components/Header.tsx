@@ -13,7 +13,6 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // ====== Dynamic header height -> writes --header-height to :root ======
   const headerRef = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -145,7 +144,7 @@ export default function Header() {
         <div className="h-full w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-gold-border-sweep" />
       </div>
 
-      {/* ================= ROW 1 (Desktop/Laptop: md+) ================= */}
+      {/* ================= ROW 1 (Laptop/Desktop: md+) ================= */}
       <div className="hidden md:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[150px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
@@ -237,7 +236,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR (sm only: <md) ================= */}
+      {/* ================= MOBILE BAR (Only <md) ================= */}
       <div
         className="md:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
@@ -289,7 +288,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= ROW 2 (Desktop/Laptop: md+) ================= */}
+      {/* ================= ROW 2 (Laptop/Desktop: md+) ================= */}
       <div className="hidden md:block relative z-10 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-t border-border dark:border-[#c9a84c]/10">
         <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[60px] grid grid-cols-[auto_1fr_auto] items-center">
           <div className="flex items-center">
@@ -312,7 +311,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER (sm only: <md) ================= */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[2147483647] md:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
