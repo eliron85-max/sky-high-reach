@@ -23,10 +23,11 @@ const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2
 
 // === פוזיציות סיום (כמו אצלך ב-DevTools) ===
 const POSES_END_RAW: CardPose[] = [
-  { x: -27.279, y: -23.411, r: -0.5618, z: 4 },
-  { x: 1484.17, y: 771.048, r: 29.4382, z: 3 },
-  { x: 1500, y: 800, r: 30, z: 2 },
-  { x: 1500, y: 800, r: 30, z: 1 },
+const POSES_END_RAW: CardPose[] = [
+  { x: -520, y: -140, r: -12, z: 4 },
+  { x: -170, y: -60,  r: -6,  z: 3 },
+  { x: 170,  y: -60,  r: 6,   z: 2 },
+  { x: 520,  y: -140, r: 12,  z: 1 },
 ];
 
 export default function ServicesScrollCards({ title, subtitle, items, className }: Props) {
