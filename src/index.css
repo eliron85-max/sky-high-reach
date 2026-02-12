@@ -482,3 +482,20 @@ aside#lovable-badge * {
     max-width: 1200px !important;
   }
 }
+.heroScrollDot {
+  animation: heroScrollDot 1.35s ease-in-out infinite;
+}
+@keyframes heroScrollDot {
+  0% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(-50%) translateY(12px);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
