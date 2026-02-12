@@ -21,17 +21,13 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-// ===== הערכים המדויקים מה-DevTools אצלך (translate3d + rotate + z-index) =====
+// ===== הערכים המדויקים מה-DevTools (translate3d + rotate + z-index) =====
 const POSES_END_RAW: CardPose[] = [
   { x: -899.646, y: 99.701, r: -15.974, z: 4 }, // card-1
   { x: 863.126, y: -9.518, r: 14.026, z: 3 }, // card-2
   { x: 1500, y: 800, r: 30, z: 2 }, // card-3
   { x: 1500, y: 800, r: 30, z: 1 }, // card-4
 ];
-
-// הבסיס למסך שממנו נמדדו הערכים אצלך (מה-DevTools)
-const BASE_VIEWPORT_W = 2279; // px
-const BASE_VIEWPORT_H = 842.333; // px
 
 export default function ServicesScrollCards({ title, subtitle, items, className }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -76,7 +72,7 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     return () => io.disconnect();
   }, [deck, isDesktop]);
 
-  // ===== DESKTOP/LAPTOP: pinned scroll + scaling =====
+  // ===== DESKTOP/LAPTOP: pinned scroll + global scale (כמו 80% זום) =====
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -97,13 +93,11 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     const setHeights = () => {
       scrollLen = getScrollLen();
       pin.style.height = `${scrollLen}px`;
-    };
 
-    // סקייל לפי המסך שלך לעומת מסך הבסיס שממנו נמדדו הערכים
-    const getScale = () => {
+      // scale כללי ללפטופ: קטן יותר/נושם יותר (דומה ל-80%-90% זום)
       const vw = window.innerWidth || 1200;
-      const vh = window.innerHeight || 800;
-      return { sx: vw / BASE_VIEWPORT_W, sy: vh / BASE_VIEWPORT_H };
+      const s = Math.max(0.78, Math.min(1, vw / 1550)); // 0.78..1
+      stage.style.setProperty("--deck-scale", String(s));
     };
 
     const applyPose = (el: HTMLElement, pose: CardPose) => {
@@ -130,9 +124,7 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       const rect = pin.getBoundingClientRect();
       const raw = -rect.top / (scrollLen - (window.innerHeight || 1));
       const p = clamp01(raw);
-
       const t = easeInOutCubic(p);
-      const { sx, sy } = getScale();
 
       cards.forEach((el, i) => {
         const end = POSES_END_RAW[i] ?? POSES_END_RAW[POSES_END_RAW.length - 1];
@@ -140,19 +132,11 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
         // התחלה: stack במרכז
         const start: CardPose = { x: 0, y: 0, r: 0, z: 10 - i };
 
-        // יעד: אותם ערכים אבל מסוקיילים למסך שלך
-        const target: CardPose = {
-          x: end.x * sx,
-          y: end.y * sy,
-          r: end.r,
-          z: end.z,
-        };
+        const x = lerp(start.x, end.x, t);
+        const y = lerp(start.y, end.y, t);
+        const r = lerp(start.r, end.r, t);
 
-        const x = lerp(start.x, target.x, t);
-        const y = lerp(start.y, target.y, t);
-        const r = lerp(start.r, target.r, t);
-
-        applyPose(el, { x, y, r, z: target.z });
+        applyPose(el, { x, y, r, z: end.z });
       });
 
       rafRef.current = requestAnimationFrame(tick);
@@ -211,6 +195,10 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
           <div
             ref={stageRef}
             className="sticky top-[var(--header-height,0px)] h-[calc(100vh-var(--header-height,0px))] overflow-hidden"
+            style={{
+              transform: "scale(var(--deck-scale, 1))",
+              transformOrigin: "center center",
+            }}
           >
             <div className="relative w-full h-full">
               {deck.map((s, i) => (
