@@ -133,45 +133,55 @@ export default function Index() {
           </button>
           {/* SERVICES SCROLL CARDS */}
           className="relative z-0 bg-[#bfe7d6]"
-          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-transparent" items={services} />
-        </section>
+   {/* SERVICES SCROLL CARDS */}
+  <section id="next-section" className="relative z-0">
+    <ServicesScrollCards
+      title={t("home.servicesTitle")}
+      className="bg-[#bfe7d6]"
+      items={services}
+    />
+  </section>
 
-        {/* STATS SECTION */}
-        <HomeStatsSection
-          titleGold={t("home.statsGold")}
-          titleBlack={t("home.statsBlack")}
-          stats={[
-            { value: "500+", label: t("home.statsProjects") },
-            { value: "15", label: t("home.statsExperience") },
-            { value: "50+", label: t("home.statsCities") },
-          ]}
-          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-        />
+  {/* everything after services should be above the pinned cards */}
+  <div className="relative z-10">
+    {/* STATS SECTION */}
+    <HomeStatsSection
+      titleGold={t("home.statsGold")}
+      titleBlack={t("home.statsBlack")}
+      stats={[
+        { value: "500+", label: t("home.statsProjects") },
+        { value: "15", label: t("home.statsExperience") },
+        { value: "50+", label: t("home.statsCities") },
+      ]}
+      images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+    />
 
-        {/* URBAN RENEWAL SECTION */}
-        <HomeUrbanRenewalHero
-          images={urbanImages}
-          titleTop={t("home.urbanTitleTop")}
-          titleGold={t("home.urbanTitleGold")}
-          subtitle={t("home.urbanSubtitle")}
-        />
+    {/* URBAN RENEWAL SECTION */}
+    <HomeUrbanRenewalHero
+      images={urbanImages}
+      titleTop={t("home.urbanTitleTop")}
+      titleGold={t("home.urbanTitleGold")}
+      subtitle={t("home.urbanSubtitle")}
+    />
 
-        {/* EMPTY GRID SECTION */}
-        <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-[0.35]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }}
-          />
-        </section>
+    {/* EMPTY GRID SECTION */}
+    <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+    </section>
 
-        <TrustStrip />
-        <HomeTestimonials />
-        <Contact />
+    <TrustStrip />
+    <HomeTestimonials />
+    <Contact />
+  </div>
+
       </main>
 
       <Footer />
