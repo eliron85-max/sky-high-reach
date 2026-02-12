@@ -8,7 +8,7 @@ import { useTranslation } from "@/lib/i18n";
 import logoImage from "@/assets/logo-new.webp";
 
 export default function Header() {
-  const { t, dir } = useTranslation();
+  const { t } = useTranslation();
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -64,12 +64,12 @@ export default function Header() {
 
   /**
    * Scroll behavior:
-   * - Mobile (<768px): keep your original behavior (show on scroll up, hide on scroll down, always visible at top).
+   * - Mobile (<768px): show on scroll up, hide on scroll down, always visible at top.
    * - Laptop/Desktop (>=768px): show ONLY when at top of page (<=20px). Otherwise hidden.
    */
   const lastScrollY = useRef(0);
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)"); // desktop/laptop only
+    const mq = window.matchMedia("(min-width: 768px)");
 
     const desktopApply = () => {
       const y = window.scrollY || 0;
@@ -78,24 +78,19 @@ export default function Header() {
 
     const mobileApply = () => {
       const y = window.scrollY || 0;
-      if (y <= 2) {
-        setIsVisible(true);
-      } else if (y < lastScrollY.current) {
-        setIsVisible(true);
-      } else if (y > lastScrollY.current + 5) {
-        setIsVisible(false);
-      }
+      if (y <= 2) setIsVisible(true);
+      else if (y < lastScrollY.current) setIsVisible(true);
+      else if (y > lastScrollY.current + 5) setIsVisible(false);
       lastScrollY.current = y;
     };
 
     const onScroll = () => {
-      if (mobileOpen) return; // drawer open => header always visible via class condition
+      if (mobileOpen) return;
       if (mq.matches) desktopApply();
       else mobileApply();
     };
 
     const onMqChange = () => {
-      // reset lastScroll for mobile logic when switching breakpoints
       lastScrollY.current = window.scrollY || 0;
       onScroll();
     };
@@ -103,7 +98,6 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     mq.addEventListener("change", onMqChange);
 
-    // initial
     lastScrollY.current = window.scrollY || 0;
     onScroll();
 
@@ -132,7 +126,6 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  // Close services accordion when closing drawer
   useEffect(() => {
     if (!mobileOpen) setServicesOpen(false);
   }, [mobileOpen]);
@@ -161,7 +154,8 @@ export default function Header() {
 
       {/* ================= ROW 1 (Desktop only) ================= */}
       <div className="hidden lg:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[120px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
+        {/* ✅ הגדלנו גובה ההדר בדסקטופ */}
+        <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[150px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
@@ -211,7 +205,7 @@ export default function Header() {
             <img
               src={logoImage}
               alt="א.א פרויקטים וגובה"
-              className="h-[90px] lg:h-[110px] w-auto object-contain"
+              className="h-[110px] lg:h-[135px] w-auto object-contain"
               draggable={false}
             />
           </Link>
@@ -246,7 +240,7 @@ export default function Header() {
 
               <Link
                 to="/contact"
-                className="quote-shimmer hp-cta inline-flex items-center justify-center h-8 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
+                className="quote-shimmer hp-cta inline-flex items-center justify-center h-9 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
                 {t("nav.cta")}
               </Link>
@@ -260,8 +254,8 @@ export default function Header() {
         className="lg:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
       >
-        <div className="relative h-[84px] px-4 overflow-visible">
-          {/* RIGHT: Toggle button (Hamburger <-> Close) */}
+        {/* ✅ הגדלנו גובה ההדר במובייל */}
+        <div className="relative h-[104px] px-4 overflow-visible">
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
@@ -282,7 +276,6 @@ export default function Header() {
             )}
           </button>
 
-          {/* CENTER: Logo */}
           <Link
             to="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -292,17 +285,16 @@ export default function Header() {
             <img
               src={logoImage}
               alt="א.א פרויקטים וגובה"
-              className="h-[56px] w-auto max-w-[140px] object-contain"
+              className="h-[72px] w-auto max-w-[170px] object-contain"
               draggable={false}
             />
           </Link>
 
-          {/* LEFT: CTA */}
           <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
             <Link
               to="/contact"
               onClick={closeMobile}
-              className="hp-cta inline-flex items-center justify-center h-9 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
+              className="hp-cta inline-flex items-center justify-center h-10 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
             >
               {t("nav.cta")}
             </Link>
@@ -312,7 +304,8 @@ export default function Header() {
 
       {/* ================= ROW 2 (Desktop Quick Links) ================= */}
       <div className="hidden lg:block relative z-10 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-t border-border dark:border-[#c9a84c]/10">
-        <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[44px] grid grid-cols-[auto_1fr_auto] items-center">
+        {/* ✅ הגדלנו גובה השורה השניה */}
+        <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[60px] grid grid-cols-[auto_1fr_auto] items-center">
           <div className="flex items-center">
             <LanguageSwitcher />
           </div>
@@ -337,12 +330,10 @@ export default function Header() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
-            {/* RIGHT: MENU */}
             <nav
               className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right relative"
               dir="rtl"
             >
-              {/* X close button at top of nav panel */}
               <div className="h-[64px] flex items-center justify-start px-5">
                 <button
                   type="button"
@@ -423,10 +414,8 @@ export default function Header() {
               </div>
             </nav>
 
-            {/* LEFT: INFO */}
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
               <div className="h-full flex flex-col px-6 pt-4 pb-6">
-                {/* Top row: language switcher + theme toggle */}
                 <div className="flex items-center justify-between mb-4">
                   <LanguageSwitcher />
                   <ThemeToggle />
@@ -443,33 +432,3 @@ export default function Header() {
                   </div>
 
                   <div>
-                    <div className="opacity-60 uppercase tracking-widest">Phone</div>
-                    <div className="mt-2 break-words">055-661-6326</div>
-                  </div>
-
-                  <div>
-                    <div className="opacity-60 uppercase tracking-widest">Location</div>
-                    <div className="mt-2 break-words">Israel</div>
-                  </div>
-
-                  <div>
-                    <div className="opacity-60 uppercase tracking-widest">Social</div>
-                    <div className="mt-2 break-words">Instagram / Facebook</div>
-                  </div>
-                </div>
-
-                <div className="mt-auto">
-                  <div className="h-px bg-white/10 mb-4" />
-                  <div className="flex justify-between text-[10px] opacity-60 tracking-widest">
-                    <span>Privacy Policy</span>
-                    <span>© A.A</span>
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-      )}
-    </header>
-  );
-}
