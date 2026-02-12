@@ -1,14 +1,12 @@
 // src/components/RappellingFigure.tsx
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import workerRight from "@/assets/workerRightNew.png";
 
 export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
 
-  // גודל אחיד (כמו שעשית)
   const figureWidth = 184;
-
-  // מיקום החבל ביחס לרוחב התמונה (אותו חישוב, רק יציב)
   const ropeRight = useMemo(() => Math.round((136 / 300) * figureWidth), [figureWidth]);
 
   const ropeAttachOffset = 60;
@@ -18,20 +16,14 @@ export default function RappellingFigure() {
     const handleScroll = () => {
       const doc = document.documentElement;
       const scrollHeight = doc.scrollHeight - window.innerHeight;
-
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-
-      // שלא "יברח" למטה מדי
       const maxY = Math.max(0, window.innerHeight - 350);
-
       setFigureY(progress * maxY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    // גם בריסייז
     window.addEventListener("resize", handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -42,12 +34,17 @@ export default function RappellingFigure() {
   const ropeTop = -ropeOverhang;
   const ropeHeight = figureY + ropeAttachOffset + ropeOverhang;
 
-  return (
-    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }} aria-hidden="true">
-      {/* Rope */}
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
+    <div
+      className="hidden md:block pointer-events-none"
+      style={{ position: "fixed", inset: 0, zIndex: 2147483647 }}
+      aria-hidden="true"
+    >
       <div
-        className="absolute"
         style={{
+          position: "absolute",
           right: ropeRight,
           top: ropeTop,
           width: 1.2,
@@ -57,30 +54,31 @@ export default function RappellingFigure() {
         }}
       />
 
-      {/* Figure */}
       <img
         src={workerRight}
         alt="Worker Right"
         draggable={false}
-        className="absolute select-none"
         style={{
+          position: "absolute",
           right: 0,
           top: figureY,
           width: figureWidth,
           height: "auto",
-          animation: "sway 4s ease-in-out infinite",
+          animation: "swayRight 4s ease-in-out infinite",
           transformOrigin: "top center",
           willChange: "transform, top",
+          userSelect: "none",
         }}
       />
 
       <style>{`
-        @keyframes sway {
+        @keyframes swayRight {
           0% { transform: rotate(-1.2deg); }
           50% { transform: rotate(1.2deg); }
           100% { transform: rotate(-1.2deg); }
         }
       `}</style>
-    </div>
+    </div>,
+    document.body,
   );
 }
