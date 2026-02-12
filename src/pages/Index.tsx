@@ -111,7 +111,7 @@ export default function Index() {
 
             {/* Mouse shape */}
             <div
-              className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm my-[25px]">
+              className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm my-[38px]">
 
 
 
