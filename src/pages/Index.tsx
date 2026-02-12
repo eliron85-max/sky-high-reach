@@ -54,7 +54,6 @@ const urbanImages = [
 export default function Index() {
   const { t } = useTranslation();
 
-  // ✅ הוספתי href לכל כרטיסיה (קליקים)
   const services = [
     { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage, href: "/special-projects" },
     { title: t("home.serviceCards.birdControl"), image: birdControlImage, href: "/bird-control" },
@@ -83,9 +82,10 @@ export default function Index() {
       {/* Left side */}
       <RappellingFigureLeft />
 
-      <main className="pt-[var(--header-height)]">
-        {/* HERO VIDEO SECTION */}
-        <section className="relative z-10 w-full h-[calc(100vh-var(--header-height))] overflow-visible">
+      {/* ✅ היה pt-[var(--header-height)] — גורם להירו להסתיים מוקדם בלפטופ */}
+      <main>
+        {/* HERO VIDEO SECTION ✅ גובה מלא של המסך */}
+        <section className="relative z-10 w-full h-screen overflow-visible">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
@@ -108,7 +108,7 @@ export default function Index() {
             className="absolute left-1/2 -translate-x-1/2 z-[99999] bottom-[12px] sm:bottom-[14px] flex flex-col items-center"
           >
             <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
-              <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot px-0 my-[3px] py-px" />
+              <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
             </div>
 
             <div className="mt-2 w-[10px] h-[10px] border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-90" />
