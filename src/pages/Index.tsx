@@ -54,15 +54,48 @@ const urbanImages = [
 export default function Index() {
   const { t } = useTranslation();
 
+  // חשוב: הוספתי href לכל שירות (לשינוי בעתיד לפי הנתיבים שלך)
   const services = [
-    { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage },
-    { title: t("home.serviceCards.birdControl"), image: birdControlImage },
-    { title: t("home.serviceCards.waterproofing"), image: waterproofingImage },
-    { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage },
-    { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage },
-    { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage },
-    { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage },
-    { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage },
+    {
+      title: t("home.serviceCards.specialProjects"),
+      image: specialProjectsImage,
+      href: "/services#special-projects",
+    },
+    {
+      title: t("home.serviceCards.birdControl"),
+      image: birdControlImage,
+      href: "/services#bird-control",
+    },
+    {
+      title: t("home.serviceCards.waterproofing"),
+      image: waterproofingImage,
+      href: "/services#waterproofing",
+    },
+    {
+      title: t("home.serviceCards.facadeRestoration"),
+      image: facadeRestorationImage,
+      href: "/services#facade-restoration",
+    },
+    {
+      title: t("home.serviceCards.stoneVeneer"),
+      image: stoneCladdingImage,
+      href: "/services#stone-cladding",
+    },
+    {
+      title: t("home.serviceCards.demolitionOrders"),
+      image: demolitionOrdersImage,
+      href: "/services#demolition-orders",
+    },
+    {
+      title: t("home.serviceCards.pipingGutters"),
+      image: pipingGuttersImage,
+      href: "/services#piping-gutters",
+    },
+    {
+      title: t("home.serviceCards.heightSolutions"),
+      image: heightSolutionsImage,
+      href: "/services#height-solutions",
+    },
   ];
 
   const scrollToNext = () => {
@@ -76,10 +109,7 @@ export default function Index() {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
 
-      {/* Right side */}
       <RappellingFigure />
-
-      {/* Left side */}
       <RappellingFigureLeft />
 
       <main className="pt-[var(--header-height)]">
@@ -121,7 +151,6 @@ export default function Index() {
 
         {/* everything after services should be above the pinned cards */}
         <div className="relative z-10">
-          {/* STATS SECTION */}
           <HomeStatsSection
             titleGold={t("home.statsGold")}
             titleBlack={t("home.statsBlack")}
@@ -133,7 +162,6 @@ export default function Index() {
             images={[statsImage1, statsImage2, statsImage3, statsImage4]}
           />
 
-          {/* URBAN RENEWAL SECTION */}
           <HomeUrbanRenewalHero
             images={urbanImages}
             titleTop={t("home.urbanTitleTop")}
@@ -141,7 +169,6 @@ export default function Index() {
             subtitle={t("home.urbanSubtitle")}
           />
 
-          {/* EMPTY GRID SECTION */}
           <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
             <div
               aria-hidden="true"
