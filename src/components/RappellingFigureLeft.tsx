@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import workerLeft from "@/assets/Worker.png";
+import workerLeft from "@/assets/workerLeftNew.png";
 
 export default function RappellingFigureLeft() {
   const [figureY, setFigureY] = useState(0);
