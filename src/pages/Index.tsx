@@ -181,10 +181,10 @@ export default function Index() {
     <HomeTestimonials />
     <Contact />
   </div>
+</main>
 
-      </main>
+<Footer />
+</div>
 
-      <Footer />
-    </div>
   );
 }
