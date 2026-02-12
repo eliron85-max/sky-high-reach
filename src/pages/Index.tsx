@@ -76,10 +76,10 @@ export default function Index() {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
 
-      {/* Right side (workerRight.png) */}
+      {/* Right side */}
       <RappellingFigure />
 
-      {/* Left side (Worker.png) */}
+      {/* Left side */}
       <RappellingFigureLeft />
 
       <main className="pt-[var(--header-height)]">
@@ -96,91 +96,71 @@ export default function Index() {
           >
             <source src="/hero.webm" type="video/webm" />
           </video>
+
           <div className="absolute inset-0 bg-black/45" />
+
           {/* Scroll icon */}
           <button
             type="button"
             onClick={scrollToNext}
             aria-label="גלול למטה"
-            className="absolute left-1/2 -translate-x-1/2 z-[99999]
-             bottom-[12px] sm:bottom-[14px]
-             flex flex-col items-center"
+            className="absolute left-1/2 -translate-x-1/2 z-[99999] bottom-[12px] sm:bottom-[14px] flex flex-col items-center"
           >
-            {/* Mouse shape */}
-            <div
-              className="relative w-[28px] h-[56px] rounded-full
-               border-2 border-[#e8d5a3]
-               bg-black/40 backdrop-blur-sm"
-            >
-              {/* Moving dot */}
-              <div
-                className="absolute left-1/2 top-[10px]
-                 -translate-x-1/2
-                 w-[6px] h-[10px]
-                 rounded-full
-                 bg-[#e8d5a3]
-                 heroScrollDot"
-              />
+            <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
+              <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
             </div>
 
-            {/* Small arrow */}
-            <div
-              className="mt-2 w-[10px] h-[10px]
-               border-b-2 border-r-2
-               border-[#e8d5a3]
-               rotate-45 opacity-90"
-            />
+            <div className="mt-2 w-[10px] h-[10px] border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-90" />
           </button>
-          {/* SERVICES SCROLL CARDS */}
-          className="relative z-0 bg-[#bfe7d6]"
-   {/* SERVICES SCROLL CARDS */}
-  <section id="next-section" className="relative z-0">
-    <ServicesScrollCards
-      title={t("home.servicesTitle")}
-      className="bg-[#bfe7d6]"
-      items={services}
-    />
-  </section>
+        </section>
 
-  {/* everything after services should be above the pinned cards */}
-  <div className="relative z-10">
-    {/* STATS SECTION */}
-    <HomeStatsSection
-      titleGold={t("home.statsGold")}
-      titleBlack={t("home.statsBlack")}
-      stats={[
-        { value: "500+", label: t("home.statsProjects") },
-        { value: "15", label: t("home.statsExperience") },
-        { value: "50+", label: t("home.statsCities") },
-      ]}
-      images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-    />
+        {/* SERVICES SCROLL CARDS */}
+        <section id="next-section" className="relative z-0">
+          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
+        </section>
 
-    {/* URBAN RENEWAL SECTION */}
-    <HomeUrbanRenewalHero
-      images={urbanImages}
-      titleTop={t("home.urbanTitleTop")}
-      titleGold={t("home.urbanTitleGold")}
-      subtitle={t("home.urbanSubtitle")}
-    />
+        {/* everything after services should be above the pinned cards */}
+        <div className="relative z-10">
+          {/* STATS SECTION */}
+          <HomeStatsSection
+            titleGold={t("home.statsGold")}
+            titleBlack={t("home.statsBlack")}
+            stats={[
+              { value: "500+", label: t("home.statsProjects") },
+              { value: "15", label: t("home.statsExperience") },
+              { value: "50+", label: t("home.statsCities") },
+            ]}
+            images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+          />
 
-    {/* EMPTY GRID SECTION */}
-    <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-    </section>
-    <TrustStrip />
-<HomeTestimonials />
-<Contact />
-</main>
+          {/* URBAN RENEWAL SECTION */}
+          <HomeUrbanRenewalHero
+            images={urbanImages}
+            titleTop={t("home.urbanTitleTop")}
+            titleGold={t("home.urbanTitleGold")}
+            subtitle={t("home.urbanSubtitle")}
+          />
 
-<Footer />
-</div>
+          {/* EMPTY GRID SECTION */}
+          <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-[0.35]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }}
+            />
+          </section>
+
+          <TrustStrip />
+          <HomeTestimonials />
+          <Contact />
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
