@@ -137,7 +137,7 @@ export default function Index() {
         </section>
 
         {/* SERVICES SCROLL CARDS (Pinned on desktop) */}
-        <section id="next-section" className="relative z-0 mt-[22px] sm:mt-[26px]">
+        <section id="next-section" className="relative z-0 mt-[30px] sm:mt-[34px]">
           <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
         </section>
 
