@@ -76,13 +76,15 @@ export default function Index() {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
 
+      {/* Right side */}
       <RappellingFigure />
+
+      {/* Left side */}
       <RappellingFigureLeft />
 
-      {/* חשוב: מפנה מקום להדר הדינמי */}
-      <main className="pt-[var(--header-height)]">
-        {/* HERO: ממלא בדיוק את המסך מתחת להדר */}
-        <section className="relative z-10 w-full h-[calc(100vh-var(--header-height))] overflow-hidden">
+      <main>
+        {/* HERO VIDEO SECTION (ממלא 100vh, והשירותים מתחילים רק אחרי) */}
+        <section className="relative z-10 w-full h-screen overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
@@ -97,6 +99,7 @@ export default function Index() {
 
           <div className="absolute inset-0 bg-black/45" />
 
+          {/* Scroll icon */}
           <button
             type="button"
             onClick={scrollToNext}
@@ -106,15 +109,17 @@ export default function Index() {
             <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
               <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
             </div>
+
             <div className="mt-2 w-[10px] h-[10px] border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-90" />
           </button>
         </section>
 
-        {/* SERVICES מתחיל רק אחרי ההירו (לא רואים ירוק במסך הראשון) */}
+        {/* SERVICES SCROLL CARDS */}
         <section id="next-section" className="relative z-0">
           <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
         </section>
 
+        {/* everything after services should be above the pinned cards */}
         <div className="relative z-10">
           <HomeStatsSection
             titleGold={t("home.statsGold")}
