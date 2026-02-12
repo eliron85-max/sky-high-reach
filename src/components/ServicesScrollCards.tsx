@@ -1,10 +1,10 @@
-// src/components/ServicesScrollCards.tsx
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Item {
   title: string;
   image: string;
-  href?: string; // אופציונלי - אם תוסיף, הכרטיס יהיה קליקי
+  href?: string;
 }
 
 interface Props {
@@ -13,43 +13,39 @@ interface Props {
   className?: string;
 }
 
-const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-
 export default function ServicesScrollCards({ title, items, className = "" }: Props) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
+      if (!sectionRef.current) return;
 
-      const rect = section.getBoundingClientRect();
+      const rect = sectionRef.current.getBoundingClientRect();
       const windowH = window.innerHeight || 1;
 
       const progress = 1 - rect.top / windowH;
-      const clamped = clamp01(progress);
+      const clamped = Math.max(0, Math.min(1, progress));
 
-      const cards = section.querySelectorAll<HTMLDivElement>(".deck-card");
+      const cards = sectionRef.current.querySelectorAll<HTMLAnchorElement>(".deck-card");
 
       const count = items.length;
       const mid = (count - 1) / 2;
 
       const vw = window.innerWidth || 1200;
-
-      // רספונסיבי: בלפטופ זה לא יתפזר/יעוף יותר מדי
-      const spread = vw >= 1440 ? 280 : vw >= 1200 ? 240 : 200; // פיזור אופקי
-      const yStep = vw >= 1440 ? 46 : vw >= 1200 ? 40 : 34; // ירידה קלה
+      const spread = vw >= 1440 ? 280 : vw >= 1200 ? 240 : 200;
+      const yStep = vw >= 1440 ? 46 : vw >= 1200 ? 40 : 34;
 
       cards.forEach((card, i) => {
         const pos = i - mid;
+        const r = pos * 7;
 
-        const baseRotate = pos * 7; // רוטציה בסיסית
-        const offsetX = pos * spread * clamped;
-        const offsetY = Math.abs(pos) * yStep * clamped;
+        const x = pos * spread * clamped;
+        const y = Math.abs(pos) * yStep * clamped;
 
-        card.style.setProperty("--x", `${offsetX}px`);
-        card.style.setProperty("--y", `${offsetY}px`);
-        card.style.setProperty("--r", `${baseRotate}deg`);
+        card.style.setProperty("--x", `${x}px`);
+        card.style.setProperty("--y", `${y}px`);
+        card.style.setProperty("--r", `${r}deg`);
         card.style.setProperty("--z", String(100 - i));
       });
     };
@@ -70,25 +66,35 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
         <h2 className="absolute top-16 text-4xl font-bold text-[#f5d58a]">{title}</h2>
 
         <div className="relative w-full h-full">
-          {items.map((item, i) => (
-            <div
-              key={i}
-              className="deck-card absolute left-1/2 top-1/2 select-none"
-              onClick={() => {
-                if (item.href) window.location.href = item.href;
-              }}
-              role={item.href ? "link" : undefined}
-              aria-label={item.title}
-              style={{
-                backgroundImage: `url(${item.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="absolute bottom-6 right-6 text-white text-2xl font-semibold">{item.title}</div>
-            </div>
-          ))}
+          {items.map((item, i) => {
+            const isHover = hovered === i;
+
+            return (
+              <Link
+                key={i}
+                to={item.href || "/"}
+                className={`deck-card absolute left-1/2 top-1/2 select-none ${isHover ? "is-hover" : ""}`}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                aria-label={item.title}
+                style={{
+                  backgroundImage: `url(${item.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                {/* שכבת כהות כללית */}
+                <div className="deck-dim absolute inset-0" />
+
+                {/* שכבת הארה לכרטיס הנבחר */}
+                <div className="deck-glow absolute inset-0" />
+
+                <div className="absolute bottom-6 right-6 text-white text-2xl font-semibold drop-shadow-[0_10px_22px_rgba(0,0,0,0.55)]">
+                  {item.title}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
 
@@ -99,40 +105,60 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 18px 40px rgba(0,0,0,.35);
-          transition: transform 700ms ease, box-shadow 350ms ease, filter 350ms ease;
+          transition: transform 650ms ease, box-shadow 300ms ease, filter 300ms ease;
           transform:
             translate(-50%, -50%)
             translateX(var(--x, 0px))
             translateY(var(--y, 0px))
             rotate(var(--r, 0deg));
           z-index: var(--z, 1);
-          cursor: default;
+          cursor: pointer;
           will-change: transform;
         }
 
-        /* "יוצאת מהחבילה" בריחוף */
-        .deck-card:hover{
+        /* כהות ברירת מחדל לכל הכרטיסים */
+        .deck-dim{
+          background: rgba(0,0,0,0.48);
+          transition: opacity 220ms ease;
+          opacity: 1;
+        }
+
+        /* הארה שמופיעה רק בהובר */
+        .deck-glow{
+          background:
+            radial-gradient(900px 520px at 50% 28%, rgba(255,255,255,0.28), rgba(255,255,255,0) 60%),
+            linear-gradient(to top, rgba(0,0,0,0.25), rgba(0,0,0,0));
+          opacity: 0;
+          transition: opacity 220ms ease;
+          pointer-events: none;
+        }
+
+        /* הכרטיס הנבחר: יוצא מהחבילה + הכי מואר */
+        .deck-card.is-hover{
           transform:
             translate(-50%, -50%)
             translateX(var(--x, 0px))
-            translateY(calc(var(--y, 0px) - 28px))
+            translateY(calc(var(--y, 0px) - 32px))
             rotate(0deg)
-            scale(1.08);
+            scale(1.09);
           z-index: 999;
-          box-shadow: 0 28px 70px rgba(0,0,0,.45);
-          filter: saturate(1.05) contrast(1.02);
+          box-shadow: 0 30px 80px rgba(0,0,0,.50);
+          filter: saturate(1.12) contrast(1.06);
         }
 
-        /* קליק רק אם יש href */
-        .deck-card[role="link"]{
-          cursor: pointer;
+        .deck-card.is-hover .deck-dim{
+          opacity: 0.18;
+        }
+
+        .deck-card.is-hover .deck-glow{
+          opacity: 1;
         }
 
         @media (prefers-reduced-motion: reduce){
           .deck-card{
             transition: none !important;
           }
-          .deck-card:hover{
+          .deck-card.is-hover{
             transform:
               translate(-50%, -50%)
               translateX(var(--x, 0px))
