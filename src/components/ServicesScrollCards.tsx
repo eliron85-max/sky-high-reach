@@ -143,7 +143,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
             scale(1.09);
           z-index: 999;
           box-shadow: 0 30px 80px rgba(0,0,0,.50);
-          filter: brightness(0.65) saturate(1.05) contrast(1.03);
+          filter: saturate(1.12) contrast(1.06) brightness(0.85);
         }
 
         .deck-card.is-hover .deck-dim{
