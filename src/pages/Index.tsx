@@ -99,24 +99,27 @@ export default function Index() {
 
           <div className="absolute inset-0 bg-black/45" />
 
-          {/* Scroll icon - forced above EVERYTHING (with CSS .hero-scroll-cue) */}
+          {/* Scroll icon */}
           <button
             type="button"
             onClick={scrollToNext}
             aria-label="גלול למטה"
-            className="hero-scroll-cue
-                       absolute left-1/2 -translate-x-1/2
-                       z-[99999]
-                       bottom-[-32px] sm:bottom-[-36px]
-                       h-14 w-14 rounded-full
-                       bg-black/50 backdrop-blur-md
-                       border border-[#c9a84c]/70
-                       shadow-[0_15px_40px_rgba(0,0,0,0.5)]
-                       grid place-items-center"
+            className="absolute left-1/2 -translate-x-1/2
+             z-[99999]
+             bottom-[-32px] sm:bottom-[-36px]
+             flex flex-col items-center gap-1"
           >
-            <span className="relative h-8 w-5 rounded-full border-2 border-[#e8d5a3]">
-              <span className="heroScrollDot absolute left-1/2 -translate-x-1/2 top-1.5 h-1.5 w-1.5 rounded-full bg-[#e8d5a3]" />
-            </span>
+            {/* Elliptical mouse shape */}
+            <div
+              className="w-[30px] h-[58px] rounded-full border-2 border-[#e8d5a3] 
+                  flex items-start justify-center pt-2
+                  bg-black/40 backdrop-blur-sm"
+            >
+              <div className="w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
+            </div>
+
+            {/* Small arrow */}
+            <div className="w-3 h-3 border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-80" />
           </button>
         </section>
 
@@ -147,7 +150,6 @@ export default function Index() {
 
         {/* EMPTY GRID SECTION */}
         <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
-          ——
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.35]"
