@@ -176,15 +176,12 @@ export default function Index() {
         }}
       />
     </section>
-
     <TrustStrip />
-    <HomeTestimonials />
-    <Contact />
-  </div>
+<HomeTestimonials />
+<Contact />
+</div>
 </main>
 
 <Footer />
 </div>
-
-  );
 }
