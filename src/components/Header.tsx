@@ -62,10 +62,21 @@ export default function Header() {
     [t],
   );
 
-  // Header shows on scroll-up, hides on scroll-down, always visible at top or when menu open
+  /**
+   * Scroll behavior:
+   * - Mobile (<768px): keep your original behavior (show on scroll up, hide on scroll down, always visible at top).
+   * - Laptop/Desktop (>=768px): show ONLY when at top of page (<=20px). Otherwise hidden.
+   */
   const lastScrollY = useRef(0);
   useEffect(() => {
-    const onScroll = () => {
+    const mq = window.matchMedia("(min-width: 768px)"); // desktop/laptop only
+
+    const desktopApply = () => {
+      const y = window.scrollY || 0;
+      setIsVisible(y <= 20);
+    };
+
+    const mobileApply = () => {
       const y = window.scrollY || 0;
       if (y <= 2) {
         setIsVisible(true);
@@ -76,10 +87,31 @@ export default function Header() {
       }
       lastScrollY.current = y;
     };
+
+    const onScroll = () => {
+      if (mobileOpen) return; // drawer open => header always visible via class condition
+      if (mq.matches) desktopApply();
+      else mobileApply();
+    };
+
+    const onMqChange = () => {
+      // reset lastScroll for mobile logic when switching breakpoints
+      lastScrollY.current = window.scrollY || 0;
+      onScroll();
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
+    mq.addEventListener("change", onMqChange);
+
+    // initial
+    lastScrollY.current = window.scrollY || 0;
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      mq.removeEventListener("change", onMqChange);
+    };
+  }, [mobileOpen]);
 
   // Lock body scroll when mobile drawer is open + signal to other components
   useEffect(() => {
@@ -306,7 +338,10 @@ export default function Header() {
         <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
             {/* RIGHT: MENU */}
-            <nav className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right relative" dir="rtl">
+            <nav
+              className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right relative"
+              dir="rtl"
+            >
               {/* X close button at top of nav panel */}
               <div className="h-[64px] flex items-center justify-start px-5">
                 <button
@@ -390,13 +425,13 @@ export default function Header() {
 
             {/* LEFT: INFO */}
             <aside className="bg-[#1c1714] text-[#e6dccb] relative h-full min-h-[100dvh] overflow-hidden" dir="ltr">
-
               <div className="h-full flex flex-col px-6 pt-4 pb-6">
                 {/* Top row: language switcher + theme toggle */}
                 <div className="flex items-center justify-between mb-4">
                   <LanguageSwitcher />
                   <ThemeToggle />
                 </div>
+
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
 
                 <div className="mt-8 h-px bg-white/10" />
