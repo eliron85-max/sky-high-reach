@@ -100,40 +100,40 @@ export default function Index() {
           <div className="absolute inset-0 bg-black/45" />
 
           {/* Scroll icon */}
-          <button
-            type="button"
-            onClick={scrollToNext}
-            aria-label="גלול למטה"
-            className="absolute left-1/2 -translate-x-1/2
-                       z-[99999]
-                       bottom-[-18px] sm:bottom-[-20px]
-                       flex flex-col items-center"
-          >
-            {/* Mouse shape */}
-            <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm my-[38px]">
-              {/* Moving dot – perfectly centered */}
-              <div
-                className="absolute left-1/2 top-[10px]
-                           -translate-x-1/2
-                           w-[6px] h-[10px]
-                           rounded-full
-                           bg-[#e8d5a3]
-                           heroScrollDot"
-              />
-            </div>
+        <button
+  type="button"
+  onClick={scrollToNext}
+  aria-label="גלול למטה"
+  className="absolute left-1/2 -translate-x-1/2 z-[99999]
+             bottom-[12px] sm:bottom-[14px]
+             flex flex-col items-center"
+>
+  {/* Mouse shape */}
+  <div
+    className="relative w-[28px] h-[56px] rounded-full
+               border-2 border-[#e8d5a3]
+               bg-black/40 backdrop-blur-sm"
+  >
+    {/* Moving dot */}
+    <div
+      className="absolute left-1/2 top-[10px]
+                 -translate-x-1/2
+                 w-[6px] h-[10px]
+                 rounded-full
+                 bg-[#e8d5a3]
+                 heroScrollDot"
+    />
+  </div>
 
-            {/* Small arrow */}
-            {/* Small arrow */}
-            <svg className="mt-2 h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" stroke="#e8d5a3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </section>
+  {/* Small arrow */}
+  <div
+    className="mt-2 w-[10px] h-[10px]
+               border-b-2 border-r-2
+               border-[#e8d5a3]
+               rotate-45 opacity-90"
+  />
+</button>
 
-        {/* SERVICES SCROLL CARDS (Pinned on desktop) */}
-        <section id="next-section" className="relative z-0">
-          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
-        </section>
 
         {/* STATS SECTION */}
         <HomeStatsSection
