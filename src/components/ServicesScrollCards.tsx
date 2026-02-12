@@ -21,12 +21,12 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-// ===== הערכים המדויקים מה-DevTools אצלך (translate3d + rotate) =====
+// === פוזיציות סיום (כמו אצלך ב-DevTools) ===
 const POSES_END_RAW: CardPose[] = [
-  { x: -27.279, y: -23.411, r: -0.5618, z: 4 }, // card-1
-  { x: 1484.17, y: 771.048, r: 29.4382, z: 3 }, // card-2
-  { x: 1500, y: 800, r: 30, z: 2 }, // card-3
-  { x: 1500, y: 800, r: 30, z: 1 }, // card-4
+  { x: -27.279, y: -23.411, r: -0.5618, z: 4 },
+  { x: 1484.17, y: 771.048, r: 29.4382, z: 3 },
+  { x: 1500, y: 800, r: 30, z: 2 },
+  { x: 1500, y: 800, r: 30, z: 1 },
 ];
 
 export default function ServicesScrollCards({ title, subtitle, items, className }: Props) {
@@ -36,11 +36,15 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
   const cardsRef = useRef<Array<HTMLAnchorElement | null>>([]);
   const rafRef = useRef<number | null>(null);
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const hoveredRef = useRef<number | null>(null);
+  useEffect(() => {
+    hoveredRef.current = hovered;
+  }, [hovered]);
 
   const deck = useMemo(() => items.slice(0, 4), [items]);
 
-  // ===== MOBILE/SMALL: grid עם אנימציה =====
+  // ===== MOBILE: grid + reveal =====
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -62,7 +66,7 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     return () => io.disconnect();
   }, [deck]);
 
-  // ===== DESKTOP/LAPTOP: pinned scroll =====
+  // ===== DESKTOP: pinned deck =====
   useEffect(() => {
     const pin = pinRef.current;
     const stage = stageRef.current;
@@ -105,7 +109,6 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
         el.style.minHeight = "45vh";
         el.style.borderRadius = "2vw";
         el.style.willChange = "transform";
-        el.style.transition = "transform 240ms ease, box-shadow 240ms ease";
       });
     };
 
@@ -120,22 +123,26 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       const p = clamp01(raw);
       const t = easeInOutCubic(p);
 
+      const h = hoveredRef.current;
+
       cards.forEach((el, i) => {
         const end = POSES_END_RAW[i] ?? POSES_END_RAW[POSES_END_RAW.length - 1];
         const start: CardPose = { x: 0, y: 0, r: 0, z: 10 - i };
 
         let x = lerp(start.x, end.x, t);
         let y = lerp(start.y, end.y, t);
-        const r = lerp(start.r, end.r, t);
+        let r = lerp(start.r, end.r, t);
+        let z = end.z;
+        let s = 1;
 
         // "יוצאת מהחבילה" בריחוף
-        const isActive = activeIndex === i;
-        const scale = isActive ? 1.06 : 1;
-        if (isActive) y -= 22;
+        if (h === i) {
+          y -= 90;
+          s = 1.06;
+          z = 99;
+        }
 
-        const z = isActive ? 999 : end.z;
-        applyPose(el, { x, y, r, z }, scale);
-        el.style.boxShadow = isActive ? "0 20px 60px rgba(0,0,0,0.45)" : "";
+        applyPose(el, { x, y, r, z }, s);
       });
 
       rafRef.current = requestAnimationFrame(tick);
@@ -154,7 +161,7 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     };
-  }, [deck, activeIndex]);
+  }, [deck]);
 
   return (
     <section className={cn("py-12 sm:py-16 lg:py-24", className)} dir="rtl">
@@ -170,12 +177,8 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
             <a
               key={i}
               href={s.href || "#"}
-              className="svc-card group relative overflow-hidden rounded-3xl bg-[#0b0f14] border border-white/10 shadow-2xl transition-transform duration-300 ease-out"
-              style={{
-                ["--d" as any]: `${i * 0.12}s`,
-              }}
-              onMouseEnter={() => setActiveIndex(i)}
-              onMouseLeave={() => setActiveIndex(null)}
+              className="svc-card group relative overflow-hidden rounded-3xl bg-[#0b0f14] border border-white/10"
+              style={{ ["--d" as any]: `${i * 0.12}s` }}
             >
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img
@@ -213,10 +216,10 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
                 key={i}
                 ref={(el) => (cardsRef.current[i] = el)}
                 href={s.href || "#"}
-                className="group relative overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10"
+                className="deck-card group relative overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10"
                 aria-label={s.title}
-                onMouseEnter={() => setActiveIndex(i)}
-                onMouseLeave={() => setActiveIndex(null)}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
               >
                 <div className="relative w-full h-[70%] overflow-hidden">
                   <img
@@ -242,13 +245,13 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
         </div>
       </div>
 
-      {/* ===== MOBILE ANIMATION CSS ===== */}
       <style>{`
+        /* Mobile reveal */
         .svc-card{
           opacity:0;
           transform: translateX(120px) translateY(40px) rotate(10deg) scale(0.92);
           filter: blur(2px);
-          transition: opacity .6s ease, filter .6s ease, transform .3s ease;
+          transition: opacity .6s ease, filter .6s ease;
         }
         .svc-card.svc-in{
           opacity:1;
@@ -256,14 +259,12 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
           animation: card-arc-in 1s cubic-bezier(.16,1,.3,1) both;
           animation-delay:var(--d);
         }
-        .svc-card:hover{
-          transform: translateY(-10px) scale(1.03);
-        }
         @keyframes card-arc-in{
           0%{ transform: translateX(120px) translateY(40px) rotate(10deg) scale(.92); }
           60%{ transform: translateX(-12px) translateY(-6px) rotate(-1deg) scale(1.02); }
           100%{ transform: translateX(0) translateY(0) rotate(0) scale(1); }
         }
+
         @media (prefers-reduced-motion: reduce){
           .svc-card, .svc-card.svc-in{
             animation:none!important;
