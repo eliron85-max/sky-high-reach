@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
-import workerLeft from "@/assets/Worker.png";
+import workerLeft from "@/assets/workerLeftNew.png";
 
 export default function RappellingFigureLeft() {
   const [figureY, setFigureY] = useState(0);
 
+  // גודל הדמות
   const figureWidth = 245;
+
+  // מיקום החבל לפי יחס שהיה מדויק ב-300px עם 136
   const ropeLeft = Math.round((136 / 300) * figureWidth);
 
+  // נקודת חיבור על הדמות
   const ropeAttachOffset = 60;
+
+  // כמה להמשיך את החבל מעל המסך
   const ropeOverhang = 500;
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-      const progress =
-        scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+      const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
 
       const maxY = window.innerHeight - 350;
       setFigureY(progress * maxY);
@@ -32,6 +36,7 @@ export default function RappellingFigureLeft() {
 
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
+      {/* Rope */}
       <div
         className="absolute"
         style={{
@@ -43,8 +48,10 @@ export default function RappellingFigureLeft() {
         }}
       />
 
+      {/* Figure */}
       <img
         src={workerLeft}
+        alt="Worker Left"
         draggable={false}
         className="absolute"
         style={{
@@ -57,6 +64,7 @@ export default function RappellingFigureLeft() {
         }}
       />
 
+      {/* Animation */}
       <style>{`
         @keyframes sway {
           0% { transform: rotate(-1.2deg); }
