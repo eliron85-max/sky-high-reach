@@ -4,16 +4,10 @@ import workerLeft from "@/assets/workerLeftNew.png";
 export default function RappellingFigureLeft() {
   const [figureY, setFigureY] = useState(0);
 
-  // גודל הדמות
   const figureWidth = 245;
-
-  // מיקום החבל לפי יחס שהיה מדויק ב-300px עם 136
   const ropeLeft = Math.round((136 / 300) * figureWidth);
 
-  // נקודת חיבור על הדמות
   const ropeAttachOffset = 60;
-
-  // כמה להמשיך את החבל מעל המסך
   const ropeOverhang = 500;
 
   useEffect(() => {
@@ -21,8 +15,8 @@ export default function RappellingFigureLeft() {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
       const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-
       const maxY = window.innerHeight - 350;
+
       setFigureY(progress * maxY);
     };
 
@@ -35,7 +29,7 @@ export default function RappellingFigureLeft() {
   const ropeHeight = figureY + ropeAttachOffset + ropeOverhang;
 
   return (
-    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
+    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9998 }}>
       {/* Rope */}
       <div
         className="absolute"
@@ -64,7 +58,6 @@ export default function RappellingFigureLeft() {
         }}
       />
 
-      {/* Animation */}
       <style>{`
         @keyframes sway {
           0% { transform: rotate(-1.2deg); }
