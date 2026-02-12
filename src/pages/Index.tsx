@@ -3,7 +3,7 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
-import ArcCardsSection from "@/components/ArcCardsSection";
+import ServicesScrollCards from "@/components/ServicesScrollCards";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
@@ -94,12 +94,8 @@ export default function Index() {
           <div className="absolute inset-0 bg-black/45" />
         </section>
 
-        {/* ARC CARDS SECTION */}
-        <ArcCardsSection
-          title={t("home.servicesTitle")}
-          backgroundClassName="bg-[#bfe7d6]"
-          items={services}
-        />
+        {/* SERVICES SCROLL CARDS (Pinned on desktop) */}
+        <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
 
         {/* STATS SECTION */}
         <HomeStatsSection
