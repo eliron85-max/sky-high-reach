@@ -179,7 +179,6 @@ export default function Index() {
     <TrustStrip />
 <HomeTestimonials />
 <Contact />
-</div>
 </main>
 
 <Footer />
