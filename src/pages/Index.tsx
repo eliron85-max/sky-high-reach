@@ -84,7 +84,7 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO VIDEO SECTION */}
-        <section className="relative z-50 w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+        <section className="relative z-50 w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-visible">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
@@ -105,33 +105,33 @@ export default function Index() {
             onClick={scrollToNext}
             aria-label="גלול למטה"
             className="absolute left-1/2 -translate-x-1/2
-             z-[99999]
-             bottom-[-34px] sm:bottom-[-38px]
-             flex flex-col items-center"
+                       z-[99999]
+                       bottom-[-18px] sm:bottom-[-20px]
+                       flex flex-col items-center"
           >
             {/* Mouse shape */}
             <div
               className="relative w-[28px] h-[56px] rounded-full
-                  border-2 border-[#e8d5a3]
-                  bg-black/40 backdrop-blur-sm"
+                         border-2 border-[#e8d5a3]
+                         bg-black/40 backdrop-blur-sm"
             >
               {/* Moving dot – perfectly centered */}
               <div
                 className="absolute left-1/2 top-[10px]
-                    -translate-x-1/2
-                    w-[6px] h-[10px]
-                    rounded-full
-                    bg-[#e8d5a3]
-                    heroScrollDot"
+                           -translate-x-1/2
+                           w-[6px] h-[10px]
+                           rounded-full
+                           bg-[#e8d5a3]
+                           heroScrollDot"
               />
             </div>
 
             {/* Small arrow */}
             <div
               className="mt-2 w-[10px] h-[10px]
-                  border-b-2 border-r-2
-                  border-[#e8d5a3]
-                  rotate-45 opacity-80"
+                         border-b-2 border-r-2
+                         border-[#e8d5a3]
+                         rotate-45 opacity-80"
             />
           </button>
         </section>
