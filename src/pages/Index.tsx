@@ -65,6 +65,11 @@ export default function Index() {
     { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage },
   ];
 
+  const scrollToNext = () => {
+    const el = document.getElementById("next-section");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -79,7 +84,7 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO VIDEO SECTION */}
-        <section id="next-section" className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+        <section className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
@@ -91,11 +96,32 @@ export default function Index() {
           >
             <source src="/hero.webm" type="video/webm" />
           </video>
+
           <div className="absolute inset-0 bg-black/45" />
+
+          {/* Scroll icon - sits exactly on the seam (covers green strip) */}
+          <button
+            type="button"
+            onClick={scrollToNext}
+            aria-label="גלול למטה"
+            className="absolute left-1/2 -translate-x-1/2 z-[999]
+                       bottom-[-28px] sm:bottom-[-32px]
+                       h-14 w-14 rounded-full
+                       bg-black/40 backdrop-blur-md
+                       border border-[#c9a84c]/60
+                       shadow-[0_10px_30px_rgba(0,0,0,0.35)]
+                       grid place-items-center"
+          >
+            <span className="relative h-8 w-5 rounded-full border-2 border-[#e8d5a3]">
+              <span className="heroScrollDot absolute left-1/2 -translate-x-1/2 top-1.5 h-1.5 w-1.5 rounded-full bg-[#e8d5a3]" />
+            </span>
+          </button>
         </section>
 
         {/* SERVICES SCROLL CARDS (Pinned on desktop) */}
-        <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
+        <section id="next-section">
+          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
+        </section>
 
         {/* STATS SECTION */}
         <HomeStatsSection
