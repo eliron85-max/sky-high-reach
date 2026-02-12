@@ -31,21 +31,6 @@ export default function RappellingFigure() {
   return (
     <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
       {/* DEBUG Badge Right */}
-      <div
-        className="absolute"
-        style={{
-          right: 10,
-          top: 10,
-          padding: "4px 8px",
-          fontSize: 12,
-          background: "rgba(255,255,255,0.15)",
-          border: "1px solid rgba(255,255,255,0.25)",
-          borderRadius: 8,
-          color: "#fff",
-        }}
-      >
-        RIGHT
-      </div>
 
       {/* Rope */}
       <div
