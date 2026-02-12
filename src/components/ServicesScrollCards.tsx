@@ -21,16 +21,17 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
+// ===== הערכים המדויקים מה-DevTools אצלך (translate3d + rotate + z-index) =====
 const POSES_END_RAW: CardPose[] = [
-  { x: -260.488, y: 170.088, r: -4.74076, z: 4 }, // card-1
-  { x: 1342.35, y: 537.945, r: 25.2593, z: 3 }, // card-2
-  { x: -609.386, y: -138.402, r: -10.2682, z: 2 }, // card-3
-  { x: 1128.92, y: 248.403, r: 19.7318, z: 1 }, // card-4
+  { x: -899.646, y: 99.701, r: -15.974, z: 4 }, // card-1
+  { x: 863.126, y: -9.518, r: 14.026, z: 3 }, // card-2
+  { x: 1500, y: 800, r: 30, z: 2 }, // card-3
+  { x: 1500, y: 800, r: 30, z: 1 }, // card-4
 ];
 
-// הבסיס שממנו צילמת (מה-devtools אצלם בזום 25%)
-const BASE_VIEWPORT_W = 9115; // px
-const BASE_VIEWPORT_H = 3365; // px
+// הבסיס למסך שממנו נמדדו הערכים אצלך (מה-DevTools)
+const BASE_VIEWPORT_W = 2279; // px
+const BASE_VIEWPORT_H = 842.333; // px
 
 export default function ServicesScrollCards({ title, subtitle, items, className }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -98,7 +99,7 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       pin.style.height = `${scrollLen}px`;
     };
 
-    // סקייל לפי המסך שלך לעומת המסך ה"ענק" של 25% זום
+    // סקייל לפי המסך שלך לעומת מסך הבסיס שממנו נמדדו הערכים
     const getScale = () => {
       const vw = window.innerWidth || 1200;
       const vh = window.innerHeight || 800;
@@ -217,30 +218,26 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
                   key={i}
                   ref={(el) => (cardsRef.current[i] = el)}
                   href={s.href || "#"}
-                  className="group overflow-visible shadow-2xl border border-black/10 bg-white"
+                  className="group relative overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10"
                   aria-label={s.title}
                 >
-                  <div
-                    className="flex items-center justify-center"
-                    style={{ paddingTop: "3vw", paddingBottom: "1.5vw", marginTop: "-7vw" }}
-                  >
+                  {/* תמונה גדולה כמו בסנפלינג */}
+                  <div className="relative w-full h-[70%] overflow-hidden">
                     <img
                       src={s.image}
                       alt={s.title}
-                      className="object-contain"
-                      style={{ width: "20vw", height: "auto" }}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       draggable={false}
                     />
+                    <div className="absolute inset-0 bg-black/10" />
                   </div>
 
-                  <div style={{ padding: "0px 3vw 3.5vw" }}>
-                    <h3
-                      className="text-right font-bold"
-                      style={{ color: "rgb(225, 116, 68)", fontSize: "3.2vw", marginBottom: "1.2vw", lineHeight: 1.1 }}
-                    >
+                  {/* פס תחתון */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-[#0d1218] px-[2.2vw] py-[1.6vw]">
+                    <h3 className="text-right font-semibold text-white" style={{ fontSize: "1.9vw", lineHeight: 1.1 }}>
                       {s.title}
                     </h3>
-                    <p className="text-right" style={{ color: "rgb(36, 58, 56)", fontSize: "1.4vw" }}>
+                    <p className="text-right text-white/60 mt-[.4vw]" style={{ fontSize: "1.05vw" }}>
                       עבודות גובה וסנפלינג
                     </p>
                   </div>
