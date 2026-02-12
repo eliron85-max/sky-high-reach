@@ -123,12 +123,10 @@ export default function Index() {
             </div>
 
             {/* Small arrow */}
-            <div
-              className="mt-2 w-[10px] h-[10px]
-             border-b-2 border-r-2
-             border-[#e8d5a3]
-             rotate-45 opacity-80"
-            />
+            {/* Small arrow */}
+            <svg className="mt-2 h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="#e8d5a3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         </section>
 
