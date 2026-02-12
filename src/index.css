@@ -504,6 +504,6 @@ aside#lovable-badge * {
   position: fixed !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  top: calc(var(--header-height) + 50vh - 32px) !important; /* על התפר של ההירו */
+  top: calc(var(--header-height) + 50vh - 35px) !important; /* על התפר של ההירו */
   z-index: 2147483647 !important;
 }
