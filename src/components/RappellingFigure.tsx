@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import workerLeft from "@/assets/workerLeftNew.png";
+import workerRight from "@/assets/workerRightNew.png";
 
-export default function RappellingFigureLeft() {
+export default function RappellingFigure() {
   const [figureY, setFigureY] = useState(0);
 
   const figureWidth = 245;
-  const ropeLeft = Math.round((136 / 300) * figureWidth);
+  const ropeRight = Math.round((136 / 300) * figureWidth);
 
   const ropeAttachOffset = 60;
   const ropeOverhang = 500;
@@ -29,12 +29,29 @@ export default function RappellingFigureLeft() {
   const ropeHeight = figureY + ropeAttachOffset + ropeOverhang;
 
   return (
-    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9998 }}>
+    <div className="hidden lg:block fixed inset-0 pointer-events-none" style={{ zIndex: 9999 }}>
+      {/* DEBUG Badge Right */}
+      <div
+        className="absolute"
+        style={{
+          right: 10,
+          top: 10,
+          padding: "4px 8px",
+          fontSize: 12,
+          background: "rgba(255,255,255,0.15)",
+          border: "1px solid rgba(255,255,255,0.25)",
+          borderRadius: 8,
+          color: "#fff",
+        }}
+      >
+        RIGHT
+      </div>
+
       {/* Rope */}
       <div
         className="absolute"
         style={{
-          left: ropeLeft,
+          right: ropeRight,
           top: ropeTop,
           width: 1.2,
           height: ropeHeight,
@@ -44,12 +61,12 @@ export default function RappellingFigureLeft() {
 
       {/* Figure */}
       <img
-        src={workerLeft}
-        alt="Worker Left"
+        src={workerRight}
+        alt="Worker Right"
         draggable={false}
         className="absolute"
         style={{
-          left: 0,
+          right: 0,
           top: figureY,
           width: figureWidth,
           height: "auto",
