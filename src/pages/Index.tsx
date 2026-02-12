@@ -41,29 +41,29 @@ import statsImage3 from "@/assets/stats-3.webp";
 import statsImage4 from "@/assets/stats-4.webp";
 
 const urbanImages = [
-  stoneCladding1,
-  stoneCladding2,
-  stoneCladding3,
-  stoneCladding4,
-  stoneCladding5,
-  stoneCladding6,
-  stoneCladding7,
-  stoneCladding8,
-];
+stoneCladding1,
+stoneCladding2,
+stoneCladding3,
+stoneCladding4,
+stoneCladding5,
+stoneCladding6,
+stoneCladding7,
+stoneCladding8];
+
 
 export default function Index() {
   const { t } = useTranslation();
 
   const services = [
-    { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage },
-    { title: t("home.serviceCards.birdControl"), image: birdControlImage },
-    { title: t("home.serviceCards.waterproofing"), image: waterproofingImage },
-    { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage },
-    { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage },
-    { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage },
-    { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage },
-    { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage },
-  ];
+  { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage },
+  { title: t("home.serviceCards.birdControl"), image: birdControlImage },
+  { title: t("home.serviceCards.waterproofing"), image: waterproofingImage },
+  { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage },
+  { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage },
+  { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage },
+  { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage },
+  { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage }];
+
 
   const scrollToNext = () => {
     const el = document.getElementById("next-section");
@@ -92,8 +92,8 @@ export default function Index() {
             loop
             playsInline
             preload="auto"
-            poster="/hero-poster.jpg"
-          >
+            poster="/hero-poster.jpg">
+
             <source src="/hero.webm" type="video/webm" />
           </video>
 
@@ -107,14 +107,14 @@ export default function Index() {
             className="absolute left-1/2 -translate-x-1/2
                        z-[99999]
                        bottom-[-18px] sm:bottom-[-20px]
-                       flex flex-col items-center"
-          >
+                       flex flex-col items-center">
+
             {/* Mouse shape */}
             <div
-              className="relative w-[28px] h-[56px] rounded-full
-                         border-2 border-[#e8d5a3]
-                         bg-black/40 backdrop-blur-sm"
-            >
+              className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm my-[25px]">
+
+
+
               {/* Moving dot – perfectly centered */}
               <div
                 className="absolute left-1/2 top-[10px]
@@ -122,8 +122,8 @@ export default function Index() {
                            w-[6px] h-[10px]
                            rounded-full
                            bg-[#e8d5a3]
-                           heroScrollDot"
-              />
+                           heroScrollDot" />
+
             </div>
 
             {/* Small arrow */}
@@ -131,8 +131,8 @@ export default function Index() {
               className="mt-2 w-[10px] h-[10px]
                          border-b-2 border-r-2
                          border-[#e8d5a3]
-                         rotate-45 opacity-80"
-            />
+                         rotate-45 opacity-80" />
+
           </button>
         </section>
 
@@ -146,20 +146,20 @@ export default function Index() {
           titleGold={t("home.statsGold")}
           titleBlack={t("home.statsBlack")}
           stats={[
-            { value: "500+", label: t("home.statsProjects") },
-            { value: "15", label: t("home.statsExperience") },
-            { value: "50+", label: t("home.statsCities") },
-          ]}
-          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-        />
+          { value: "500+", label: t("home.statsProjects") },
+          { value: "15", label: t("home.statsExperience") },
+          { value: "50+", label: t("home.statsCities") }]
+          }
+          images={[statsImage1, statsImage2, statsImage3, statsImage4]} />
+
 
         {/* URBAN RENEWAL SECTION */}
         <HomeUrbanRenewalHero
           images={urbanImages}
           titleTop={t("home.urbanTitleTop")}
           titleGold={t("home.urbanTitleGold")}
-          subtitle={t("home.urbanSubtitle")}
-        />
+          subtitle={t("home.urbanSubtitle")} />
+
 
         {/* EMPTY GRID SECTION */}
         <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
@@ -168,10 +168,10 @@ export default function Index() {
             className="pointer-events-none absolute inset-0 opacity-[0.35]"
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }}
-          />
+              "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
+              backgroundSize: "60px 60px"
+            }} />
+
         </section>
 
         <TrustStrip />
@@ -180,6 +180,6 @@ export default function Index() {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 }
