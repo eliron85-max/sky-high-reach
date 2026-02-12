@@ -38,15 +38,10 @@ export default function RappellingFigureLeft() {
 
   return createPortal(
     <div
-      className="hidden lg:block pointer-events-none"
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 2147483647,
-      }}
+      className="hidden md:block pointer-events-none"
+      style={{ position: "fixed", inset: 0, zIndex: 2147483647 }}
       aria-hidden="true"
     >
-      {/* Rope */}
       <div
         style={{
           position: "absolute",
@@ -59,7 +54,6 @@ export default function RappellingFigureLeft() {
         }}
       />
 
-      {/* Figure */}
       <img
         src={workerLeft}
         alt="Worker Left"
