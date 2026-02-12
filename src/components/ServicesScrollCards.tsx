@@ -1,5 +1,5 @@
 // src/components/ServicesScrollCards.tsx
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 type Item = {
@@ -21,10 +21,10 @@ const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-// ===== הערכים המדויקים מה-DevTools (translate3d + rotate + z-index) =====
+// ===== הערכים המדויקים מה-DevTools אצלך (translate3d + rotate) =====
 const POSES_END_RAW: CardPose[] = [
-  { x: -899.646, y: 99.701, r: -15.974, z: 4 }, // card-1
-  { x: 863.126, y: -9.518, r: 14.026, z: 3 }, // card-2
+  { x: -27.279, y: -23.411, r: -0.5618, z: 4 }, // card-1
+  { x: 1484.17, y: 771.048, r: 29.4382, z: 3 }, // card-2
   { x: 1500, y: 800, r: 30, z: 2 }, // card-3
   { x: 1500, y: 800, r: 30, z: 1 }, // card-4
 ];
@@ -36,22 +36,10 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
   const cardsRef = useRef<Array<HTMLAnchorElement | null>>([]);
   const rafRef = useRef<number | null>(null);
 
-  const [isDesktop, setIsDesktop] = useState(false);
-
   const deck = useMemo(() => items.slice(0, 4), [items]);
 
+  // ===== MOBILE/SMALL: grid עם אנימציה (כמו שהיה) =====
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const apply = () => setIsDesktop(mq.matches);
-    apply();
-    mq.addEventListener?.("change", apply);
-    return () => mq.removeEventListener?.("change", apply);
-  }, []);
-
-  // ===== MOBILE/SMALL: כמו שהיה =====
-  useEffect(() => {
-    if (isDesktop) return;
-
     const root = rootRef.current;
     if (!root) return;
 
@@ -70,15 +58,16 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
 
     cards.forEach((c) => io.observe(c));
     return () => io.disconnect();
-  }, [deck, isDesktop]);
+  }, [deck]);
 
-  // ===== DESKTOP/LAPTOP: pinned scroll + global scale (כמו 80% זום) =====
+  // ===== DESKTOP/LAPTOP: pinned scroll (בלי תלות ב-state) =====
   useEffect(() => {
-    if (!isDesktop) return;
-
     const pin = pinRef.current;
     const stage = stageRef.current;
     if (!pin || !stage) return;
+
+    const isLg = () => (window.innerWidth || 0) >= 1024;
+    if (!isLg()) return;
 
     const cards = cardsRef.current.filter(Boolean) as HTMLAnchorElement[];
     if (cards.length < 2) return;
@@ -90,11 +79,11 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
 
     let scrollLen = getScrollLen();
 
-    const setHeights = () => {
+    const setHeightsAndScale = () => {
       scrollLen = getScrollLen();
       pin.style.height = `${scrollLen}px`;
 
-      // scale כללי ללפטופ: קטן יותר/נושם יותר (דומה ל-80%-90% זום)
+      // קטן יותר בלפטופ כמו זום 80-90
       const vw = window.innerWidth || 1200;
       const s = Math.max(0.78, Math.min(1, vw / 1550)); // 0.78..1
       stage.style.setProperty("--deck-scale", String(s));
@@ -118,9 +107,12 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     };
 
     initCards();
-    setHeights();
+    setHeightsAndScale();
 
     const tick = () => {
+      // אם ירדת מתחת ל-lg — עוצרים
+      if (!isLg()) return;
+
       const rect = pin.getBoundingClientRect();
       const raw = -rect.top / (scrollLen - (window.innerHeight || 1));
       const p = clamp01(raw);
@@ -128,8 +120,6 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
 
       cards.forEach((el, i) => {
         const end = POSES_END_RAW[i] ?? POSES_END_RAW[POSES_END_RAW.length - 1];
-
-        // התחלה: stack במרכז
         const start: CardPose = { x: 0, y: 0, r: 0, z: 10 - i };
 
         const x = lerp(start.x, end.x, t);
@@ -142,15 +132,20 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    window.addEventListener("resize", setHeights, { passive: true });
+    const onResize = () => {
+      if (!isLg()) return;
+      setHeightsAndScale();
+    };
+
+    window.addEventListener("resize", onResize, { passive: true });
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
-      window.removeEventListener("resize", setHeights);
+      window.removeEventListener("resize", onResize);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     };
-  }, [isDesktop, deck]);
+  }, [deck]);
 
   return (
     <section className={cn("py-12 sm:py-16 lg:py-24", className)} dir="rtl">
@@ -160,81 +155,78 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       </div>
 
       {/* ===== MOBILE GRID ===== */}
-      {!isDesktop && (
-        <div className="max-w-7xl mx-auto px-4">
-          <div ref={rootRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-            {items.map((s, i) => (
+      <div className="lg:hidden max-w-7xl mx-auto px-4">
+        <div ref={rootRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          {items.map((s, i) => (
+            <a
+              key={i}
+              href={s.href || "#"}
+              className="svc-card group relative overflow-hidden rounded-3xl bg-[#0b0f14] border border-white/10"
+              style={{ ["--d" as any]: `${i * 0.12}s` }}
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+
+              <div className="px-6 py-5 bg-[#0d1218]">
+                <h3 className="text-[16px] font-semibold text-white text-right">{s.title}</h3>
+                <p className="text-[13px] text-white/50 mt-1 text-right">עבודות גובה וסנפלינג</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* ===== DESKTOP PINNED ===== */}
+      <div
+        ref={pinRef}
+        className="hidden lg:block relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]"
+        style={{ height: 0 }}
+      >
+        <div
+          ref={stageRef}
+          className="sticky top-[var(--header-height,0px)] h-[calc(100vh-var(--header-height,0px))] overflow-hidden"
+          style={{ transform: "scale(var(--deck-scale, 1))", transformOrigin: "center center" }}
+        >
+          <div className="relative w-full h-full">
+            {deck.map((s, i) => (
               <a
                 key={i}
+                ref={(el) => (cardsRef.current[i] = el)}
                 href={s.href || "#"}
-                className="svc-card group relative overflow-hidden rounded-3xl bg-[#0b0f14] border border-white/10"
-                style={{ ["--d" as any]: `${i * 0.12}s` }}
+                className="group relative overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10"
+                aria-label={s.title}
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
+                {/* תמונה גדולה כמו בסנפלינג */}
+                <div className="relative w-full h-[70%] overflow-hidden">
                   <img
                     src={s.image}
                     alt={s.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    draggable={false}
                   />
-                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute inset-0 bg-black/10" />
                 </div>
 
-                <div className="px-6 py-5 bg-[#0d1218]">
-                  <h3 className="text-[16px] font-semibold text-white text-right">{s.title}</h3>
-                  <p className="text-[13px] text-white/50 mt-1 text-right">עבודות גובה וסנפלינג</p>
+                {/* פס תחתון */}
+                <div className="absolute bottom-0 left-0 right-0 bg-[#0d1218] px-[2.2vw] py-[1.6vw]">
+                  <h3 className="text-right font-semibold text-white" style={{ fontSize: "1.9vw", lineHeight: 1.1 }}>
+                    {s.title}
+                  </h3>
+                  <p className="text-right text-white/60 mt-[.4vw]" style={{ fontSize: "1.05vw" }}>
+                    עבודות גובה וסנפלינג
+                  </p>
                 </div>
               </a>
             ))}
           </div>
         </div>
-      )}
-
-      {/* ===== DESKTOP PINNED (Full-bleed) ===== */}
-      {isDesktop && (
-        <div ref={pinRef} className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]" style={{ height: 0 }}>
-          <div
-            ref={stageRef}
-            className="sticky top-[var(--header-height,0px)] h-[calc(100vh-var(--header-height,0px))] overflow-hidden"
-            style={{
-              transform: "scale(var(--deck-scale, 1))",
-              transformOrigin: "center center",
-            }}
-          >
-            <div className="relative w-full h-full">
-              {deck.map((s, i) => (
-                <a
-                  key={i}
-                  ref={(el) => (cardsRef.current[i] = el)}
-                  href={s.href || "#"}
-                  className="group relative overflow-hidden shadow-2xl bg-[#0b0f14] border border-white/10"
-                  aria-label={s.title}
-                >
-                  {/* תמונה גדולה כמו בסנפלינג */}
-                  <div className="relative w-full h-[70%] overflow-hidden">
-                    <img
-                      src={s.image}
-                      alt={s.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      draggable={false}
-                    />
-                    <div className="absolute inset-0 bg-black/10" />
-                  </div>
-
-                  {/* פס תחתון */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-[#0d1218] px-[2.2vw] py-[1.6vw]">
-                    <h3 className="text-right font-semibold text-white" style={{ fontSize: "1.9vw", lineHeight: 1.1 }}>
-                      {s.title}
-                    </h3>
-                    <p className="text-right text-white/60 mt-[.4vw]" style={{ fontSize: "1.05vw" }}>
-                      עבודות גובה וסנפלינג
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
 
       {/* ===== MOBILE ANIMATION CSS ===== */}
       <style>{`
