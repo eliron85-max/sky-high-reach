@@ -84,7 +84,7 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO VIDEO SECTION */}
-        <section className="relative z-50 w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+        <section className="relative z-50 w-full h-screen overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
