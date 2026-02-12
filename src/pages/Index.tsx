@@ -84,7 +84,7 @@ export default function Index() {
 
       <main className="pt-[var(--header-height)]">
         {/* HERO VIDEO SECTION */}
-        <section className="relative z-50 w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-visible">
+        <section className="relative z-50 w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
@@ -138,7 +138,7 @@ export default function Index() {
 
         {/* SERVICES SCROLL CARDS (Pinned on desktop) */}
         <section id="next-section" className="relative z-0">
-          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6] pt-[40px]" items={services} />
+          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
         </section>
 
         {/* STATS SECTION */}
