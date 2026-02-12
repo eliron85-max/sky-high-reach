@@ -62,11 +62,6 @@ export default function Header() {
     [t],
   );
 
-  /**
-   * Scroll behavior:
-   * - Mobile (<768px): show on scroll up, hide on scroll down, always visible at top.
-   * - Laptop/Desktop (>=768px): show ONLY when at top of page (<=20px). Otherwise hidden.
-   */
   const lastScrollY = useRef(0);
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -107,7 +102,6 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  // Lock body scroll when mobile drawer is open + signal to other components
   useEffect(() => {
     if (mobileOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -147,26 +141,21 @@ export default function Header() {
       }`}
       dir="rtl"
     >
-      {/* Animated gold border line */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
         <div className="h-full w-full bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-gold-border-sweep" />
       </div>
 
       {/* ================= ROW 1 (Desktop only) ================= */}
       <div className="hidden lg:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
-        {/* ✅ הגדלנו גובה ההדר בדסקטופ */}
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[150px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
-          {/* RIGHT column: NAV */}
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
               {t("nav.home")}
             </Link>
-
             <Link to="/about" className={`${goldText} whitespace-nowrap`}>
               {t("nav.about")}
             </Link>
 
-            {/* Services dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setServicesOpen(true)}
@@ -200,27 +189,23 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* CENTER column: LOGO */}
           <Link to="/" className="justify-self-center" aria-label="א.א פרויקטים וגובה">
             <img
               src={logoImage}
               alt="א.א פרויקטים וגובה"
-              className="h-[110px] lg:h-[135px] w-auto object-contain"
+              className="h-[120px] lg:h-[140px] w-auto object-contain"
               draggable={false}
             />
           </Link>
 
-          {/* LEFT column: NAV + BUTTONS */}
           <div className="flex items-center justify-self-start gap-4 xl:gap-6 min-w-0">
             <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold">
               <Link to="/projects" className={`${goldText} whitespace-nowrap`}>
                 {t("nav.projects")}
               </Link>
-
               <Link to="/pricing" className={`${goldText} whitespace-nowrap`}>
                 {t("nav.pricing")}
               </Link>
-
               <Link to="/contact" className={`${goldText} whitespace-nowrap`}>
                 {t("nav.contact")}
               </Link>
@@ -249,12 +234,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE BAR (SOLID + TOGGLE ICON) ================= */}
+      {/* ================= MOBILE BAR ================= */}
       <div
         className="lg:hidden relative z-[55] overflow-visible bg-black text-white border-b border-[#c9a84c]/25 [isolation:isolate]"
         dir="rtl"
       >
-        {/* ✅ הגדלנו גובה ההדר במובייל */}
         <div className="relative h-[104px] px-4 overflow-visible">
           <button
             type="button"
@@ -304,7 +288,6 @@ export default function Header() {
 
       {/* ================= ROW 2 (Desktop Quick Links) ================= */}
       <div className="hidden lg:block relative z-10 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-t border-border dark:border-[#c9a84c]/10">
-        {/* ✅ הגדלנו גובה השורה השניה */}
         <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[60px] grid grid-cols-[auto_1fr_auto] items-center">
           <div className="flex items-center">
             <LanguageSwitcher />
@@ -326,7 +309,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ================= MOBILE DRAWER (ARCCA 1:1 - MENU RIGHT, INFO LEFT) ================= */}
+      {/* ================= MOBILE DRAWER ================= */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[2147483647] lg:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
@@ -432,3 +415,33 @@ export default function Header() {
                   </div>
 
                   <div>
+                    <div className="opacity-60 uppercase tracking-widest">Phone</div>
+                    <div className="mt-2 break-words">055-661-6326</div>
+                  </div>
+
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Location</div>
+                    <div className="mt-2 break-words">Israel</div>
+                  </div>
+
+                  <div>
+                    <div className="opacity-60 uppercase tracking-widest">Social</div>
+                    <div className="mt-2 break-words">Instagram / Facebook</div>
+                  </div>
+                </div>
+
+                <div className="mt-auto">
+                  <div className="h-px bg-white/10 mb-4" />
+                  <div className="flex justify-between text-[10px] opacity-60 tracking-widest">
+                    <span>Privacy Policy</span>
+                    <span>© A.A</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
