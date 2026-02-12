@@ -313,9 +313,16 @@
 
 /* ===== Rappelling figure sway ===== */
 @keyframes sway {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(1.5deg); }
-  75% { transform: rotate(-1.5deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1.5deg);
+  }
+  75% {
+    transform: rotate(-1.5deg);
+  }
 }
 
 /* ===== WhatsApp breathing ===== */
@@ -452,4 +459,10 @@ aside#lovable-badge * {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+/* Laptop scale fix */
+@media (min-width: 1280px) and (max-width: 1600px) {
+  html {
+    zoom: 0.9;
+  }
 }
