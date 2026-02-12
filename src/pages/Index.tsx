@@ -99,12 +99,13 @@ export default function Index() {
 
           <div className="absolute inset-0 bg-black/45" />
 
-          {/* Scroll icon - forced above EVERYTHING */}
+          {/* Scroll icon - forced above EVERYTHING (with CSS .hero-scroll-cue) */}
           <button
             type="button"
             onClick={scrollToNext}
             aria-label="גלול למטה"
-            className="absolute left-1/2 -translate-x-1/2
+            className="hero-scroll-cue
+                       absolute left-1/2 -translate-x-1/2
                        z-[99999]
                        bottom-[-32px] sm:bottom-[-36px]
                        h-14 w-14 rounded-full
@@ -146,6 +147,7 @@ export default function Index() {
 
         {/* EMPTY GRID SECTION */}
         <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
+          ——
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.35]"
