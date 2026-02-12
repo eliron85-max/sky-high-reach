@@ -19,29 +19,28 @@ type CardPose = { x: number; y: number; r: number; z: number };
 
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-// easing דומה לתחושה של ScrollTrigger scrub
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-// ====== הערכים המדויקים שמדדת מהאתר השני ======
-const POSES_END: CardPose[] = [
+const POSES_END_RAW: CardPose[] = [
   { x: -260.488, y: 170.088, r: -4.74076, z: 4 }, // card-1
   { x: 1342.35, y: 537.945, r: 25.2593, z: 3 }, // card-2
   { x: -609.386, y: -138.402, r: -10.2682, z: 2 }, // card-3
   { x: 1128.92, y: 248.403, r: 19.7318, z: 1 }, // card-4
 ];
 
+// הבסיס שממנו צילמת (מה-devtools אצלם בזום 25%)
+const BASE_VIEWPORT_W = 9115; // px
+const BASE_VIEWPORT_H = 3365; // px
+
 export default function ServicesScrollCards({ title, subtitle, items, className }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<Array<HTMLAnchorElement | null>>([]);
   const rafRef = useRef<number | null>(null);
 
-  // מובייל: להשאיר כמו שהיה
   const [isDesktop, setIsDesktop] = useState(false);
 
-  // נשתמש רק ב-4 הראשונים (כמו הדוגמה)
   const deck = useMemo(() => items.slice(0, 4), [items]);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     return () => mq.removeEventListener?.("change", apply);
   }, []);
 
-  // ====== MOBILE/SMALL: אותה אנימציה חד פעמית כמו שהיה ======
+  // ===== MOBILE/SMALL: כמו שהיה =====
   useEffect(() => {
     if (isDesktop) return;
 
@@ -60,7 +59,6 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     if (!root) return;
 
     const cards = Array.from(root.querySelectorAll<HTMLElement>(".svc-card"));
-
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -77,20 +75,19 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     return () => io.disconnect();
   }, [deck, isDesktop]);
 
-  // ====== DESKTOP/LAPTOP: pinned scroll כמו האתר השני ======
+  // ===== DESKTOP/LAPTOP: pinned scroll + scaling =====
   useEffect(() => {
     if (!isDesktop) return;
 
     const pin = pinRef.current;
-    if (!pin) return;
+    const stage = stageRef.current;
+    if (!pin || !stage) return;
 
     const cards = cardsRef.current.filter(Boolean) as HTMLAnchorElement[];
-    if (!cards.length) return;
+    if (cards.length < 2) return;
 
-    // "pin-spacer" גובה גלילה (ביחס למסך, דומה ל-16825px אצלם רק דינמי)
     const getScrollLen = () => {
       const vh = window.innerHeight || 900;
-      // 4 כרטיסים -> מסלול ארוך, דומה לאפקט שלהם
       return Math.max(4.5 * vh, 3200);
     };
 
@@ -101,68 +98,66 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
       pin.style.height = `${scrollLen}px`;
     };
 
-    // Pose התחלה: stack נקי במרכז (מבוסס רק על זה ששם תמיד center + translate(-50%,-50%))
-    const POSES_START: CardPose[] = POSES_END.map((p, idx) => ({
-      x: 0,
-      y: 0,
-      r: 0,
-      z: 10 - idx, // שמירה על סדר שכבות בזמן התחלה
-    }));
+    // סקייל לפי המסך שלך לעומת המסך ה"ענק" של 25% זום
+    const getScale = () => {
+      const vw = window.innerWidth || 1200;
+      const vh = window.innerHeight || 800;
+      return { sx: vw / BASE_VIEWPORT_W, sy: vh / BASE_VIEWPORT_H };
+    };
 
     const applyPose = (el: HTMLElement, pose: CardPose) => {
       el.style.zIndex = String(pose.z);
       el.style.transform = `translate(-50%, -50%) translate3d(${pose.x}px, ${pose.y}px, 0px) rotate(${pose.r}deg)`;
     };
 
-    // init styles
-    cards.forEach((el, i) => {
-      el.style.position = "absolute";
-      el.style.top = "55%";
-      el.style.left = "50%";
-      el.style.width = "38vw";
-      el.style.minHeight = "45vh";
-      el.style.borderRadius = "2vw";
-      el.style.willChange = "transform";
-      applyPose(el, POSES_START[i] ?? POSES_START[POSES_START.length - 1]);
-    });
+    const initCards = () => {
+      cards.forEach((el) => {
+        el.style.position = "absolute";
+        el.style.top = "55%";
+        el.style.left = "50%";
+        el.style.width = "38vw";
+        el.style.minHeight = "45vh";
+        el.style.borderRadius = "2vw";
+        el.style.willChange = "transform";
+      });
+    };
+
+    initCards();
+    setHeights();
 
     const tick = () => {
       const rect = pin.getBoundingClientRect();
-      // progress: כשה-pin מתחיל להיכנס עד שהוא נגמר
       const raw = -rect.top / (scrollLen - (window.innerHeight || 1));
       const p = clamp01(raw);
 
-      // חלוקה ל-2 שלבים כדי לקבל תחושה "נפתחת" ואז מתייצבת
-      // 0..0.7 -> כניסה עיקרית, 0.7..1 -> התייצבות קטנה
-      const p1 = clamp01(p / 0.7);
-      const p2 = clamp01((p - 0.7) / 0.3);
-
-      const tMain = easeInOutCubic(p1);
-      const tSettle = easeOutCubic(p2);
+      const t = easeInOutCubic(p);
+      const { sx, sy } = getScale();
 
       cards.forEach((el, i) => {
-        const a = POSES_START[i] ?? POSES_START[POSES_START.length - 1];
-        const b = POSES_END[i] ?? POSES_END[POSES_END.length - 1];
+        const end = POSES_END_RAW[i] ?? POSES_END_RAW[POSES_END_RAW.length - 1];
 
-        // קודם מתקרבים לערכי היעד
-        let x = lerp(a.x, b.x, tMain);
-        let y = lerp(a.y, b.y, tMain);
-        let r = lerp(a.r, b.r, tMain);
+        // התחלה: stack במרכז
+        const start: CardPose = { x: 0, y: 0, r: 0, z: 10 - i };
 
-        // ואז "התייצבות" עדינה (בלי להמציא ערכים חדשים: רק תיקון קטן לכיוון היעד)
-        x = lerp(x, b.x, tSettle);
-        y = lerp(y, b.y, tSettle);
-        r = lerp(r, b.r, tSettle);
+        // יעד: אותם ערכים אבל מסוקיילים למסך שלך
+        const target: CardPose = {
+          x: end.x * sx,
+          y: end.y * sy,
+          r: end.r,
+          z: end.z,
+        };
 
-        applyPose(el, { x, y, r, z: b.z });
+        const x = lerp(start.x, target.x, t);
+        const y = lerp(start.y, target.y, t);
+        const r = lerp(start.r, target.r, t);
+
+        applyPose(el, { x, y, r, z: target.z });
       });
 
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    setHeights();
     window.addEventListener("resize", setHeights, { passive: true });
-
     rafRef.current = requestAnimationFrame(tick);
 
     return () => {
@@ -172,15 +167,16 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
     };
   }, [isDesktop, deck]);
 
-  // ====== UI ======
   return (
     <section className={cn("py-12 sm:py-16 lg:py-24", className)} dir="rtl">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl sm:text-4xl font-bold text-[#f5d58a] text-center">{title}</h2>
         {subtitle && <p className="text-center text-white/55 mt-3 mb-12">{subtitle}</p>}
+      </div>
 
-        {/* ===== MOBILE / SMALL GRID ===== */}
-        {!isDesktop && (
+      {/* ===== MOBILE GRID ===== */}
+      {!isDesktop && (
+        <div className="max-w-7xl mx-auto px-4">
           <div ref={rootRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             {items.map((s, i) => (
               <a
@@ -205,68 +201,57 @@ export default function ServicesScrollCards({ title, subtitle, items, className 
               </a>
             ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {/* ===== DESKTOP / LAPTOP PINNED STACK ===== */}
-        {isDesktop && (
+      {/* ===== DESKTOP PINNED (Full-bleed) ===== */}
+      {isDesktop && (
+        <div ref={pinRef} className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]" style={{ height: 0 }}>
           <div
-            ref={pinRef}
-            className="relative"
-            // זה ה"pin-spacer" אצלנו (גובה גלילה)
-            style={{ height: 0 }}
+            ref={stageRef}
+            className="sticky top-[var(--header-height,0px)] h-[calc(100vh-var(--header-height,0px))] overflow-hidden"
           >
-            {/* ה-stage המקובע */}
-            <div
-              className="sticky top-[var(--header-height,0px)] h-[calc(100vh-var(--header-height,0px))] overflow-hidden"
-              style={{ background: "transparent" }}
-            >
-              <div className="relative w-full h-full">
-                {deck.map((s, i) => (
-                  <a
-                    key={i}
-                    ref={(el) => (cardsRef.current[i] = el)}
-                    href={s.href || "#"}
-                    className="group overflow-visible shadow-2xl border border-white/10 bg-white"
-                    aria-label={s.title}
+            <div className="relative w-full h-full">
+              {deck.map((s, i) => (
+                <a
+                  key={i}
+                  ref={(el) => (cardsRef.current[i] = el)}
+                  href={s.href || "#"}
+                  className="group overflow-visible shadow-2xl border border-black/10 bg-white"
+                  aria-label={s.title}
+                >
+                  <div
+                    className="flex items-center justify-center"
+                    style={{ paddingTop: "3vw", paddingBottom: "1.5vw", marginTop: "-7vw" }}
                   >
-                    <div
-                      className="flex items-center justify-center"
-                      style={{ paddingTop: "3vw", paddingBottom: "1.5vw", marginTop: "-7vw" }}
-                    >
-                      <img
-                        src={s.image}
-                        alt={s.title}
-                        className="object-contain"
-                        style={{ width: "20vw", height: "auto" }}
-                        draggable={false}
-                      />
-                    </div>
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      className="object-contain"
+                      style={{ width: "20vw", height: "auto" }}
+                      draggable={false}
+                    />
+                  </div>
 
-                    <div style={{ padding: "0px 3vw 3.5vw" }}>
-                      <h3
-                        className="text-right font-bold"
-                        style={{
-                          color: "rgb(225, 116, 68)",
-                          fontSize: "3.2vw",
-                          marginBottom: "1.2vw",
-                          lineHeight: 1.1,
-                        }}
-                      >
-                        {s.title}
-                      </h3>
-                      <p className="text-right" style={{ color: "rgb(36, 58, 56)", fontSize: "1.4vw" }}>
-                        עבודות גובה וסנפלינג
-                      </p>
-                    </div>
-                  </a>
-                ))}
-              </div>
+                  <div style={{ padding: "0px 3vw 3.5vw" }}>
+                    <h3
+                      className="text-right font-bold"
+                      style={{ color: "rgb(225, 116, 68)", fontSize: "3.2vw", marginBottom: "1.2vw", lineHeight: 1.1 }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p className="text-right" style={{ color: "rgb(36, 58, 56)", fontSize: "1.4vw" }}>
+                      עבודות גובה וסנפלינג
+                    </p>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* ===== MOBILE ANIMATION (כמו שהיה) ===== */}
+      {/* ===== MOBILE ANIMATION CSS ===== */}
       <style>{`
         .svc-card{
           opacity:0;
