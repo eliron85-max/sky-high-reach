@@ -3,6 +3,7 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
+import ServicesScrollCards from "@/components/ServicesScrollCards";
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
@@ -10,9 +11,8 @@ import HomeStatsSection from "@/components/HomeStatsSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
-import RappellingFigureLeft from "../components/RappellingFigureLeft";
+import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 import { useTranslation } from "@/lib/i18n";
-import ServicesScrollCards from "@/components/ServicesScrollCards";
 
 // Services images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -71,7 +71,10 @@ export default function Index() {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
 
+      {/* Right side (workerRight.png) */}
       <RappellingFigure />
+
+      {/* Left side (Worker.png) */}
       <RappellingFigureLeft />
 
       <main className="pt-[var(--header-height)]">
@@ -91,7 +94,7 @@ export default function Index() {
           <div className="absolute inset-0 bg-black/45" />
         </section>
 
-        {/* SERVICES (PINNED on desktop, GRID on mobile) */}
+        {/* SERVICES SCROLL CARDS (Pinned on desktop) */}
         <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
 
         {/* STATS SECTION */}
