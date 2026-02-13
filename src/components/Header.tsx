@@ -61,43 +61,23 @@ export default function Header() {
     [t],
   );
 
-  const lastScrollY = useRef(0);
+  // ✅ אותו חוק לכל הרוחבים: נראה רק בראש העמוד (כמו "דסקטופ")
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-
-    const desktopApply = () => {
+    const apply = () => {
       const y = window.scrollY || 0;
       setIsVisible(y <= 20);
     };
 
-    const mobileApply = () => {
-      const y = window.scrollY || 0;
-      if (y <= 2) setIsVisible(true);
-      else if (y < lastScrollY.current) setIsVisible(true);
-      else if (y > lastScrollY.current + 5) setIsVisible(false);
-      lastScrollY.current = y;
-    };
-
     const onScroll = () => {
       if (mobileOpen) return;
-      if (mq.matches) desktopApply();
-      else mobileApply();
-    };
-
-    const onMqChange = () => {
-      lastScrollY.current = window.scrollY || 0;
-      onScroll();
+      apply();
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    mq.addEventListener("change", onMqChange);
-
-    lastScrollY.current = window.scrollY || 0;
-    onScroll();
+    apply();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      mq.removeEventListener("change", onMqChange);
     };
   }, [mobileOpen]);
 
