@@ -82,10 +82,9 @@ export default function Index() {
       {/* Left side */}
       <RappellingFigureLeft />
 
-      {/* ✅ ההירו תמיד יושב מתחת להדר, וממלא בדיוק את שאר המסך */}
-      <main className="pt-[var(--header-height)]">
-        {/* HERO VIDEO SECTION */}
-        <section className="relative z-10 w-full h-[calc(100vh-var(--header-height))] overflow-hidden">
+      <main>
+        {/* HERO VIDEO SECTION (ממלא 100vh, והשירותים מתחילים רק אחרי) */}
+        <section className="relative z-10 w-full h-screen overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay
