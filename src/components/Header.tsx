@@ -104,7 +104,7 @@ export default function Header() {
   }, [mobileOpen]);
 
   const goldText =
-    "text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] hover:brightness-125 transition";
+    "text-[#1a1a1a] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] hover:text-[#c9a84c] dark:hover:brightness-125 transition font-semibold";
 
   const closeMobile = () => {
     setMobileOpen(false);
