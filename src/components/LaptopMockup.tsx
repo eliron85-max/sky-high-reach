@@ -71,14 +71,14 @@ const LaptopMockup: React.FC = () => {
           <div className="relative bg-[#1c1c1c] rounded-t-2xl border border-[#333] p-[6px] sm:p-[10px] shadow-[0_0_80px_rgba(201,168,76,0.15)]">
             <div className="absolute top-[8px] sm:top-[12px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#333] border border-[#444]" />
             <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black mt-2 sm:mt-3">
-              <iframe
-                src={window.location.origin}
-                title="אתר א.א פרויקטים וגובה - דסקטופ"
-                className="w-full h-full border-0 pointer-events-none"
-                loading="lazy"
-                style={{ transform: "scale(1)", transformOrigin: "top left" }}
+              <video
+                src="/hero.webm"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-transparent" />
             </div>
           </div>
 
@@ -106,19 +106,14 @@ const LaptopMockup: React.FC = () => {
           <div className="relative bg-[#1c1c1c] rounded-[24px] lg:rounded-[30px] border-2 border-[#333] p-[5px] lg:p-[6px] shadow-[0_0_60px_rgba(201,168,76,0.12)]">
             <div className="absolute top-[6px] lg:top-[8px] left-1/2 -translate-x-1/2 w-14 lg:w-16 h-[4px] lg:h-[5px] bg-[#333] rounded-full z-20" />
             <div className="relative w-full rounded-[20px] lg:rounded-[24px] overflow-hidden bg-black" style={{ aspectRatio: "9/19.5" }}>
-              <iframe
-                src={window.location.origin}
-                title="אתר א.א פרויקטים וגובה - מובייל"
-                className="border-0 pointer-events-none"
-                loading="lazy"
-                style={{
-                  width: "390px",
-                  height: "844px",
-                  transform: "scale(0.358)",
-                  transformOrigin: "top left",
-                }}
+              <video
+                src="/hero.webm"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-transparent" />
             </div>
           </div>
           <div className="w-[80%] mx-auto h-2 bg-black/40 rounded-[50%] blur-md mt-1" />
