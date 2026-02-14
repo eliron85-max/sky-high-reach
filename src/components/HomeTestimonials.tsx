@@ -65,7 +65,7 @@ const HomeTestimonials = () => {
       style={{ height: `${totalScrollHeight}px`, background: "hsl(100 30% 72%)", isolation: "isolate" }}
     >
       {/* Sticky container */}
-      <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden pt-[5vh] sm:pt-[8vh]">
+      <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden pt-[2vh] sm:pt-[4vh]">
         {/* Title text — above cards */}
         <h2
           className="text-[18vw] sm:text-[14vw] lg:text-[10vw] font-black text-center mb-4 pointer-events-none select-none leading-none"
