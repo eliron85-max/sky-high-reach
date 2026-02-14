@@ -78,7 +78,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
       <div className="absolute inset-0 -z-10 bg-white/10 dark:bg-black/20" aria-hidden="true" />
 
       <div className="sticky top-0 h-screen flex items-center justify-center">
-        <h2 className="absolute top-16 text-4xl font-bold text-[#c9a84c]">{title}</h2>
+        <h2 className="absolute top-16 text-4xl font-bold text-[#c9a84c] drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] [text-shadow:0_1px_3px_rgba(0,0,0,0.5),0_4px_12px_rgba(0,0,0,0.3)] px-8 py-3 rounded-2xl bg-black/30 backdrop-blur-sm">{title}</h2>
 
         <div className="relative w-full h-full">
           {items.map((item, i) => {
