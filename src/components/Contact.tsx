@@ -39,24 +39,24 @@ const Contact = () => {
   const titleLine = "hidden md:block h-px flex-1 bg-black/70";
 
   // Light surface cards
-  const card = "rounded-[24px] border p-6 bg-white border-black/10";
+  const card = "rounded-[24px] border p-6 bg-white/60 backdrop-blur-xl border-white/40 shadow-lg";
 
-  // Fields: light pills
+  // Fields: glassmorphism pills
   const field =
-    "h-12 rounded-full px-5 border bg-white/90 border-black/10 text-black placeholder:text-black/40 " +
+    "h-12 rounded-full px-5 border bg-white/30 backdrop-blur-md border-white/40 text-black placeholder:text-black/40 " +
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c]/35 focus-visible:border-[#c9a84c]/60 " +
-    "focus-visible:ring-offset-0";
+    "focus-visible:ring-offset-0 shadow-sm";
 
   const textarea =
-    "rounded-[22px] px-5 py-4 border bg-white/90 border-black/10 text-black placeholder:text-black/40 " +
+    "rounded-[22px] px-5 py-4 border bg-white/30 backdrop-blur-md border-white/40 text-black placeholder:text-black/40 " +
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c]/35 focus-visible:border-[#c9a84c]/60 " +
-    "focus-visible:ring-offset-0";
+    "focus-visible:ring-offset-0 shadow-sm";
 
   const labelCls = "text-sm font-semibold text-black/70";
 
   const uploadBtn =
     "flex items-center gap-2 px-5 h-12 rounded-full border cursor-pointer select-none " +
-    "bg-white/90 border-black/10 text-black hover:border-[#c9a84c]/60 transition";
+    "bg-white/30 backdrop-blur-md border-white/40 text-black hover:border-[#c9a84c]/60 transition shadow-sm";
 
   const submitBtn =
     "w-full h-12 rounded-full font-extrabold text-base text-white " +
@@ -321,7 +321,7 @@ const Contact = () => {
                           <Button
                             type="button"
                             variant="outline"
-                            className={cn(field, "justify-between", "bg-white/90 hover:bg-white/95 border-black/10")}
+                            className={cn(field, "justify-between", "bg-white/30 hover:bg-white/40 border-white/40")}
                             disabled={isSubmitting}
                           >
                             <span className="truncate">
