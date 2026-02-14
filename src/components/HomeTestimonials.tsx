@@ -64,6 +64,46 @@ const HomeTestimonials = () => {
       className="relative z-20"
       style={{ height: `${totalScrollHeight}px`, background: "#efeae2", isolation: "isolate" }}
     >
+      {/* WhatsApp-style doodle wallpaper */}
+      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.06 }}>
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="wa-pattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+              {/* Clock */}
+              <circle cx="15" cy="15" r="6" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <line x1="15" y1="15" x2="15" y2="11" stroke="#54656f" strokeWidth="1.2" />
+              <line x1="15" y1="15" x2="18" y2="15" stroke="#54656f" strokeWidth="1.2" />
+              {/* Chat bubble */}
+              <rect x="50" y="8" width="16" height="12" rx="3" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <polygon points="52,20 55,24 58,20" fill="#54656f" />
+              {/* Phone */}
+              <rect x="95" y="8" width="10" height="16" rx="2" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <circle cx="100" cy="21" r="1" fill="#54656f" />
+              {/* Camera */}
+              <rect x="8" y="50" width="18" height="13" rx="2" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <circle cx="17" cy="56.5" r="4" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <rect x="12" y="48" width="6" height="3" rx="1" fill="#54656f" />
+              {/* Heart */}
+              <path d="M58,52 C58,49 54,48 54,51 C54,54 58,57 58,57 C58,57 62,54 62,51 C62,48 58,49 58,52Z" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              {/* Music note */}
+              <path d="M100,48 L100,58 M100,48 L106,46 L106,56" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <circle cx="100" cy="58" r="2.5" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <circle cx="106" cy="56" r="2.5" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              {/* Star */}
+              <polygon points="15,90 17,96 23,96 18,100 20,106 15,102 10,106 12,100 7,96 13,96" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              {/* Location pin */}
+              <path d="M58,88 C58,88 52,95 52,98 C52,101 55,103 58,103 C61,103 64,101 64,98 C64,95 58,88 58,88Z" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <circle cx="58" cy="97" r="2" fill="#54656f" />
+              {/* Emoji smiley */}
+              <circle cx="100" cy="95" r="8" stroke="#54656f" strokeWidth="1.2" fill="none" />
+              <circle cx="97" cy="93" r="1" fill="#54656f" />
+              <circle cx="103" cy="93" r="1" fill="#54656f" />
+              <path d="M96,98 Q100,102 104,98" stroke="#54656f" strokeWidth="1.2" fill="none" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#wa-pattern)" />
+        </svg>
+      </div>
       {/* Sticky container */}
       <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden">
         {/* Title text — pinned to top */}
