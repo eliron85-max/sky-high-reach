@@ -43,13 +43,37 @@ const testimonials: Testimonial[] = [
     initials: "רג",
     avatarBg: "bg-purple-500",
   },
+  {
+    id: 5,
+    name: "יוסי כהן",
+    role: "קבלן שיפוצים",
+    text: "עבודה ברמה גבוהה מאוד, צוות מקצועי שמבין את העבודה לעומק. שיתוף פעולה מעולה מתחילת הפרויקט ועד סופו.",
+    initials: "יכ",
+    avatarBg: "bg-rose-500",
+  },
+  {
+    id: 6,
+    name: "מיכל דוד",
+    role: "דיירת, תל אביב",
+    text: "הגיעו בזמן, עבדו בצורה נקייה ומסודרת, והתוצאה הסופית פשוט מדהימה. הבניין נראה כמו חדש!",
+    initials: "מד",
+    avatarBg: "bg-teal-500",
+  },
+  {
+    id: 7,
+    name: "אבי ישראלי",
+    role: "מהנדס בניין",
+    text: "מקצוענים אמיתיים. טיפלו בבעיות איטום מורכבות עם פתרונות חכמים ויצירתיים. ממליץ לכל פרויקט גובה.",
+    initials: "אי",
+    avatarBg: "bg-indigo-500",
+  },
 ];
 
 const BACKGROUND_TEXT = "לקוחות ממליצים עלינו";
 
 const HomeTestimonials = () => {
   const sectionRef = React.useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
     const section = sectionRef.current;
@@ -59,20 +83,17 @@ const HomeTestimonials = () => {
       const rect = section.getBoundingClientRect();
       const sectionHeight = section.offsetHeight;
       const viewportH = window.innerHeight;
-      // How far we've scrolled into the section (0 at top, 1 at bottom)
-      const scrolled = (viewportH - rect.top) / sectionHeight;
-      const clamped = Math.max(0, Math.min(1, scrolled));
-      const idx = Math.min(
-        testimonials.length - 1,
-        Math.floor(clamped * testimonials.length)
-      );
-      setActiveIndex(idx);
+      const scrolled = (viewportH - rect.top) / (sectionHeight);
+      setProgress(Math.max(0, Math.min(1, scrolled)));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Map progress to a continuous float index
+  const floatIndex = progress * testimonials.length;
 
   return (
     <section
@@ -83,13 +104,14 @@ const HomeTestimonials = () => {
       style={{ height: `${(testimonials.length + 1) * 100}vh` }}
     >
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
+      <div
+        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
         style={{ background: "hsl(100 30% 72%)" }}
       >
         {/* Large background text */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
           <p
-            className="text-[12vw] sm:text-[10vw] font-black leading-[0.95] text-center whitespace-pre-wrap break-words"
+            className="text-[14vw] sm:text-[11vw] font-black leading-[0.9] text-center whitespace-pre-wrap break-words"
             style={{
               color: "hsl(140 30% 22%)",
               opacity: 0.35,
@@ -102,63 +124,63 @@ const HomeTestimonials = () => {
         </div>
 
         {/* Stacked cards */}
-        <div className="relative w-[90vw] max-w-[520px] aspect-[3/4] sm:aspect-[4/5]">
+        <div className="relative w-[85vw] max-w-[480px]" style={{ height: "60vh", maxHeight: "520px" }}>
           {testimonials.map((t, i) => {
-            const diff = i - activeIndex;
-            // Cards behind: slightly visible stacked
-            const isActive = diff === 0;
-            const isBehind = diff < 0;
-            const isAhead = diff > 0;
+            const diff = i - floatIndex;
 
-            // Rotation & offset
-            const rotate = isActive ? -6 : isBehind ? -6 - diff * 2 : -6 + diff * 3;
-            const translateY = isActive ? 0 : isAhead ? diff * 12 : diff * 8;
-            const scale = isActive ? 1 : isBehind ? 1 - Math.abs(diff) * 0.03 : 1 - diff * 0.05;
-            const opacity = Math.abs(diff) > 2 ? 0 : isActive ? 1 : isBehind ? 0.6 - Math.abs(diff) * 0.2 : 1 - diff * 0.3;
-            const zIndex = testimonials.length - Math.abs(diff) + (isActive ? 10 : 0);
+            // Smooth interpolation for each card
+            // Active card: diff ~ 0, behind: diff < 0, ahead: diff > 0
+            const rotate = -6 + diff * 3;
+            const translateY = diff * 40;
+            const translateX = diff * -15;
+            const scale = 1 - Math.abs(diff) * 0.04;
+            const opacity = Math.abs(diff) > 2.5 ? 0 : 1 - Math.abs(diff) * 0.35;
+            const zIndex = 100 - Math.round(Math.abs(diff) * 10);
+
+            // Floating/breathing effect via CSS animation offset per card
+            const floatDelay = i * 0.4;
 
             return (
               <div
                 key={t.id}
-                className="absolute inset-0 transition-all duration-700 ease-out"
+                className="absolute inset-0"
                 style={{
-                  transform: `rotate(${rotate}deg) translateY(${translateY}px) scale(${scale})`,
-                  opacity: Math.max(0, opacity),
+                  transform: `rotate(${rotate}deg) translateY(${translateY}px) translateX(${translateX}px) scale(${Math.max(0.8, scale)})`,
+                  opacity: Math.max(0, Math.min(1, opacity)),
                   zIndex,
+                  transition: "transform 0.15s ease-out, opacity 0.2s ease-out",
+                  animation: `testimonialFloat 4s ease-in-out ${floatDelay}s infinite`,
                 }}
               >
                 <div className="w-full h-full bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8 flex flex-col justify-between">
                   {/* Header */}
                   <div>
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-3">
                         <div
                           className={cn(
-                            "w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm",
+                            "w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm",
                             t.avatarBg
                           )}
                         >
                           {t.initials}
                         </div>
                         <div>
-                          <h4 className="font-bold text-gray-900 text-lg">{t.name}</h4>
+                          <h4 className="font-bold text-gray-900 text-base">{t.name}</h4>
                           <p className="text-gray-500 text-sm">{t.role}</p>
                         </div>
                       </div>
-                      {/* Star icon */}
-                      <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#c9a84c]" fill="currentColor">
+                      <svg viewBox="0 0 24 24" className="w-7 h-7 text-[#c9a84c]" fill="currentColor">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
                     </div>
 
-                    {/* Quote text */}
                     <p className="text-gray-800 text-lg sm:text-xl leading-relaxed font-medium">
                       {t.text}
                     </p>
                   </div>
 
-                  {/* Footer */}
-                  <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="mt-4 pt-3 border-t border-gray-100">
                     <p className="text-gray-400 text-sm">
                       א.א פרויקטים וגובה
                     </p>
@@ -169,6 +191,13 @@ const HomeTestimonials = () => {
           })}
         </div>
       </div>
+
+      <style>{`
+        @keyframes testimonialFloat {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+        }
+      `}</style>
     </section>
   );
 };
