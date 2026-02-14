@@ -1,7 +1,3 @@
-import { Quote } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
@@ -11,156 +7,166 @@ interface Testimonial {
   role: string;
   text: string;
   initials: string;
+  avatarBg: string;
 }
 
+const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "דודו בוזגלו",
+    role: "מנהל פרויקטים",
+    text: "עבדנו עם החברה על מספר פרויקטים מורכבים. המקצועיות והאמינות שהם מפגינים היא ברמה הגבוהה ביותר. ממליץ בחום!",
+    initials: "דב",
+    avatarBg: "bg-amber-500",
+  },
+  {
+    id: 2,
+    name: "שרה לוי",
+    role: "יזמית נדל״ן",
+    text: "תוצאות מעולות בשיפוץ חזית הבניין שלנו. הצוות היה מקצועי, עמד בלוחות הזמנים והתוצאה עלתה על הציפיות.",
+    initials: "של",
+    avatarBg: "bg-emerald-500",
+  },
+  {
+    id: 3,
+    name: "משה אברהם",
+    role: "וועד בית, רמת גן",
+    text: "פתרון מקצועי לבעיית הרטיבות שנמשכה שנים. עבודה יסודית ומקיפה עם אחריות מלאה. תודה רבה!",
+    initials: "מא",
+    avatarBg: "bg-blue-500",
+  },
+  {
+    id: 4,
+    name: "רחל גולדשטיין",
+    role: "מנהלת נכסים",
+    text: "שירות אדיב, מקצועי ואמין. ביצעו עבודות גובה מורכבות בבניין שלנו בצורה מושלמת ובטוחה.",
+    initials: "רג",
+    avatarBg: "bg-purple-500",
+  },
+];
+
+const BACKGROUND_TEXT = "לקוחות ממליצים עלינו";
+
 const HomeTestimonials = () => {
-  const { ref, isVisible } = useScrollReveal();
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "דודו בוזגלו",
-      role: "מנהל פרויקטים, חברת בנייה",
-      text: "עבדנו עם החברה על מספר פרויקטים מורכבים. המקצועיות והאמינות שהם מפגינים היא ברמה הגבוהה ביותר. ממליץ בחום!",
-      initials: "דב",
-    },
-    {
-      id: 2,
-      name: "שרה לוי",
-      role: "יזמית נדל״ן",
-      text: "תוצאות מעולות בשיפוץ חזית הבניין שלנו. הצוות היה מקצועי, עמד בלוחות הזמנים והתוצאה עלתה על הציפיות.",
-      initials: "של",
-    },
-    {
-      id: 3,
-      name: "משה אברהם",
-      role: "וועד בית, רמת גן",
-      text: "פתרון מקצועי לבעיית הרטיבות שנמשכה שנים. עבודה יסודית ומקיפה עם אחריות מלאה. תודה רבה!",
-      initials: "מא",
-    },
-    {
-      id: 4,
-      name: "רחל גולדשטיין",
-      role: "מנהלת נכסים",
-      text: "שירות אדיב, מקצועי ואמין. ביצעו עבודות גובה מורכבות בבניין שלנו בצורה מושלמת ובטוחה.",
-      initials: "רג",
-    },
-  ];
-
-  const clientAvatars = [
-    { initials: "דב", bg: "bg-amber-500" },
-    { initials: "של", bg: "bg-emerald-500" },
-    { initials: "מא", bg: "bg-blue-500" },
-    { initials: "רג", bg: "bg-purple-500" },
-    { initials: "יכ", bg: "bg-rose-500" },
-  ];
-
-  const autoplayPlugin = React.useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+  const sectionRef = React.useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = React.useState(0);
 
   React.useEffect(() => {
-    if (!api) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    setCurrent(api.selectedScrollSnap());
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const sectionHeight = section.offsetHeight;
+      const viewportH = window.innerHeight;
+      // How far we've scrolled into the section (0 at top, 1 at bottom)
+      const scrolled = (viewportH - rect.top) / sectionHeight;
+      const clamped = Math.max(0, Math.min(1, scrolled));
+      const idx = Math.min(
+        testimonials.length - 1,
+        Math.floor(clamped * testimonials.length)
+      );
+      setActiveIndex(idx);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       id="testimonials"
       dir="rtl"
-      className={cn(
-        "bg-black py-12 sm:py-16 lg:py-20",
-        "transition-opacity duration-700",
-        isVisible ? "opacity-100" : "opacity-0"
-      )}
+      className="relative overflow-hidden"
+      style={{ height: `${(testimonials.length + 1) * 100}vh` }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Client Avatars Row */}
-        <div className="flex justify-center mb-6 sm:mb-8">
-          <div className="flex -space-x-2 sm:-space-x-3 rtl:space-x-reverse">
-            {clientAvatars.map((avatar, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "w-8 h-8 sm:w-10 sm:h-10 rounded-full",
-                  avatar.bg,
-                  "flex items-center justify-center text-white text-xs sm:text-sm font-medium",
-                  "border-2 border-black shadow-md"
-                )}
-                style={{ zIndex: clientAvatars.length - index }}
-              >
-                {avatar.initials}
-              </div>
-            ))}
-          </div>
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
+        style={{ background: "hsl(100 30% 72%)" }}
+      >
+        {/* Large background text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+          <p
+            className="text-[12vw] sm:text-[10vw] font-black leading-[0.95] text-center whitespace-pre-wrap break-words"
+            style={{
+              color: "hsl(140 30% 22%)",
+              opacity: 0.35,
+              fontFamily: "'Ploni', sans-serif",
+              maxWidth: "100vw",
+            }}
+          >
+            {BACKGROUND_TEXT}
+          </p>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-3 sm:mb-4 text-white">
-          מה הלקוחות שלנו אומרים
-        </h2>
-        <p className="text-white/70 text-center mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto text-sm sm:text-base">
-          לקוחות מרוצים משתפים את החוויה שלהם מעבודה איתנו
-        </p>
+        {/* Stacked cards */}
+        <div className="relative w-[90vw] max-w-[520px] aspect-[3/4] sm:aspect-[4/5]">
+          {testimonials.map((t, i) => {
+            const diff = i - activeIndex;
+            // Cards behind: slightly visible stacked
+            const isActive = diff === 0;
+            const isBehind = diff < 0;
+            const isAhead = diff > 0;
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-            direction: "rtl",
-          }}
-          plugins={[autoplayPlugin.current]}
-          setApi={setApi}
-          className="w-full max-w-5xl mx-auto"
-          onMouseEnter={() => autoplayPlugin.current.stop()}
-          onMouseLeave={() => autoplayPlugin.current.play()}
-        >
-          <CarouselContent className="-ml-3 sm:-ml-4">
-            {testimonials.map((testimonial) => (
-              <CarouselItem key={testimonial.id} className="pl-3 sm:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                <div className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-border h-full flex flex-col">
-                  <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-primary/20 mb-3 sm:mb-4" />
-                  <p className="text-foreground/80 leading-relaxed flex-grow mb-3 sm:mb-4 text-sm sm:text-base">
-                    {testimonial.text}
-                  </p>
-                  <div className="flex items-center gap-2 sm:gap-3 mt-auto pt-3 sm:pt-4 border-t border-border/50">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium text-xs sm:text-sm">
-                      {testimonial.initials}
+            // Rotation & offset
+            const rotate = isActive ? -6 : isBehind ? -6 - diff * 2 : -6 + diff * 3;
+            const translateY = isActive ? 0 : isAhead ? diff * 12 : diff * 8;
+            const scale = isActive ? 1 : isBehind ? 1 - Math.abs(diff) * 0.03 : 1 - diff * 0.05;
+            const opacity = Math.abs(diff) > 2 ? 0 : isActive ? 1 : isBehind ? 0.6 - Math.abs(diff) * 0.2 : 1 - diff * 0.3;
+            const zIndex = testimonials.length - Math.abs(diff) + (isActive ? 10 : 0);
+
+            return (
+              <div
+                key={t.id}
+                className="absolute inset-0 transition-all duration-700 ease-out"
+                style={{
+                  transform: `rotate(${rotate}deg) translateY(${translateY}px) scale(${scale})`,
+                  opacity: Math.max(0, opacity),
+                  zIndex,
+                }}
+              >
+                <div className="w-full h-full bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8 flex flex-col justify-between">
+                  {/* Header */}
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={cn(
+                            "w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm",
+                            t.avatarBg
+                          )}
+                        >
+                          {t.initials}
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-gray-900 text-lg">{t.name}</h4>
+                          <p className="text-gray-500 text-sm">{t.role}</p>
+                        </div>
+                      </div>
+                      {/* Star icon */}
+                      <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#c9a84c]" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground text-sm sm:text-base">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground">
-                        {testimonial.role}
-                      </p>
-                    </div>
+
+                    {/* Quote text */}
+                    <p className="text-gray-800 text-lg sm:text-xl leading-relaxed font-medium">
+                      {t.text}
+                    </p>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="mt-6 pt-4 border-t border-gray-100">
+                    <p className="text-gray-400 text-sm">
+                      א.א פרויקטים וגובה
+                    </p>
                   </div>
                 </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-
-        {/* Dots Indicator */}
-        <div className="flex justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              className={cn(
-                "h-2 sm:h-2.5 rounded-full transition-all duration-300",
-                current === index
-                  ? "bg-primary w-5 sm:w-6"
-                  : "bg-white/25 w-2 sm:w-2.5 hover:bg-white/40"
-              )}
-              onClick={() => api?.scrollTo(index)}
-              aria-label={`עבור להמלצה ${index + 1}`}
-            />
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
