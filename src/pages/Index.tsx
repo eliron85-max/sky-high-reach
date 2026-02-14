@@ -12,6 +12,7 @@ import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
+import BouncingTextSection from "@/components/BouncingTextSection";
 import { useTranslation } from "@/lib/i18n";
 
 // Services images
@@ -122,6 +123,9 @@ export default function Index() {
           <div className="h-screen pointer-events-none" aria-hidden="true" />
 
           <div className="relative bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
+            {/* BOUNCING TEXT */}
+            <BouncingTextSection text="ברוכים הבאים לאתר א.א פרויקטים" />
+
             {/* TRUST STRIP */}
             <div className="relative z-[5]">
               <TrustStrip />
