@@ -59,13 +59,13 @@ const HomeTestimonials = () => {
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {/* Large background text */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+        {/* Large background text — behind cards */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
           <p
-            className="text-[14vw] sm:text-[11vw] font-black leading-[0.9] text-center whitespace-pre-wrap break-words"
+            className="text-[16vw] sm:text-[12vw] font-black leading-[0.85] text-center whitespace-pre-wrap break-words"
             style={{
               color: "hsl(140 30% 22%)",
-              opacity: 0.35,
+              opacity: 0.25,
               fontFamily: "'Ploni', sans-serif",
               maxWidth: "100vw",
             }}
