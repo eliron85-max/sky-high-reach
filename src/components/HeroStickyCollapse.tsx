@@ -39,8 +39,8 @@ export default function HeroStickyCollapse({
   const p = useMemo(() => clamp(y / distance, 0, 1), [y, distance]);
 
   // Hero animation values
-  const scale = 1 - 0.08 * p;        // 1 → 0.92
-  const opacity = 1 - 0.4 * p;       // 1 → 0.6
+  const scale = 1 - 0.15 * p;        // 1 → 0.85
+  const opacity = 1 - 0.2 * p;       // 1 → 0.8
   const translateY = -50 * p;         // 0 → -50px
 
   const borderRadius = 40 * p;        // 0 → 40px on after section
