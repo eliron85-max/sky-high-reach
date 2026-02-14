@@ -107,7 +107,7 @@ const LaptopMockup: React.FC = () => {
             <div className="absolute top-[6px] lg:top-[8px] left-1/2 -translate-x-1/2 w-14 lg:w-16 h-[4px] lg:h-[5px] bg-[#333] rounded-full z-20" />
             <div className="relative w-full rounded-[20px] lg:rounded-[24px] overflow-hidden bg-black" style={{ aspectRatio: "9/19.5" }}>
               <video
-                src="/hero.webm"
+                src="/hero-stone-veneer.webm"
                 autoPlay
                 muted
                 loop
