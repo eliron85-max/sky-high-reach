@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useCallback } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/lib/i18n";
 import LoadingSpinner from "./components/LoadingSpinner";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import AccessibilityButton from "./components/AccessibilityButton";
+import SplashScreen from "./components/SplashScreen";
 
 // Lazy load all pages for code splitting
 const Index = React.lazy(() => import("./pages/Index"));
@@ -29,10 +30,15 @@ const AuthPage = React.lazy(() => import("./pages/AuthPage"));
 const AdminInquiries = React.lazy(() => import("./pages/AdminInquiries"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const queryClient = new QueryClient();
-const App = () => <QueryClientProvider client={queryClient}>
+const App = () => {
+  const [splashDone, setSplashDone] = useState(false);
+  const handleSplashFinish = useCallback(() => setSplashDone(true), []);
+
+  return <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <LanguageProvider>
         <TooltipProvider>
+          {!splashDone && <SplashScreen onFinish={handleSplashFinish} />}
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -64,5 +70,6 @@ const App = () => <QueryClientProvider client={queryClient}>
         </TooltipProvider>
       </LanguageProvider>
     </ThemeProvider>
-  </QueryClientProvider>;
+   </QueryClientProvider>;
+};
 export default App;
