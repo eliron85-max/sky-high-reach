@@ -1,46 +1,6 @@
 // src/components/HomeStatsSection.tsx
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-
-function useCountUp(target: number, start: boolean, duration = 1800) {
-  const [value, setValue] = useState(0);
-  const rafRef = useRef<number>();
-
-  useEffect(() => {
-    if (!start) return;
-    const startTime = performance.now();
-    const animate = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(eased * target));
-      if (progress < 1) {
-        rafRef.current = requestAnimationFrame(animate);
-      }
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [start, target, duration]);
-
-  return value;
-}
-
-function parseStatValue(value: string): { prefix: string; number: number; suffix: string } {
-  const match = value.match(/^([^\d]*)([\d,]+)(.*)$/);
-  if (!match) return { prefix: "", number: 0, suffix: value };
-  return {
-    prefix: match[1],
-    number: parseInt(match[2].replace(/,/g, ""), 10),
-    suffix: match[3],
-  };
-}
-
-function AnimatedStat({ value, started }: { value: string; started: boolean }) {
-  const { prefix, number, suffix } = parseStatValue(value);
-  const count = useCountUp(number, started);
-  return <>{prefix}{count.toLocaleString()}{suffix}</>;
-}
 
 type StatItem = {
   value: string;
@@ -115,7 +75,7 @@ export default function HomeStatsSection({
                   )}
                 >
                   <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#d7b46a]">
-                    <AnimatedStat value={stat.value} started={show} />
+                    {stat.value}
                   </div>
                   <div className="mt-1 text-sm sm:text-base text-white/70">
                     {stat.label}
