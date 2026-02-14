@@ -104,7 +104,7 @@ export default function Header() {
   }, [mobileOpen]);
 
   const goldText =
-    "text-foreground hover:text-primary dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition";
+    "text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] hover:brightness-125 transition";
 
   const closeMobile = () => {
     setMobileOpen(false);
@@ -149,7 +149,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                 aria-expanded={servicesOpen}
               >
                 {t("nav.services")}
-                <span className="text-[14px] text-foreground dark:text-[#c9a84c] opacity-80">▼</span>
+                <span className="text-[14px] text-[#c9a84c] opacity-80">▼</span>
               </button>
 
               {servicesOpen && (
@@ -159,7 +159,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                       <Link
                         key={item.path}
                         to={item.path}
-                        className="block py-2 text-foreground hover:text-primary dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
+                        className="block py-2 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] hover:brightness-125 transition"
                       >
                         {item.label}
                       </Link>
