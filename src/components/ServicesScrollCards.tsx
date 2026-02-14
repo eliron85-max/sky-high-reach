@@ -65,7 +65,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
       {/* ===== BACKGROUND IMAGE ===== */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/services-bg.jpg')" }}
+        style={{ backgroundImage: "url('/images/services-cards-bg.webp')" }}
         aria-hidden="true"
       />
 
