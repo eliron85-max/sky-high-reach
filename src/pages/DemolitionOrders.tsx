@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import logo from "@/assets/logo-new.webp";
+import demolitionHero from "@/assets/demolition-hero.webp";
 
 interface FAQItem {
   question: string;
@@ -198,8 +199,9 @@ const DemolitionOrders = () => {
       
       <main className="pt-header-offset lg:pt-header-offset-lg">
         {/* Hero Section */}
-        <section className="relative min-h-[70vh] flex items-center bg-hero-dark overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-l from-hero-dark/95 via-hero-dark/90 to-hero-dark/95" />
+        <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+          <img src={demolitionHero} alt="" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+          <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/60 to-black/80" />
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mr-auto text-right">
