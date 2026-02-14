@@ -1,23 +1,30 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+import avatar1 from "@/assets/avatar-1.webp";
+import avatar2 from "@/assets/avatar-2.webp";
+import avatar3 from "@/assets/avatar-3.webp";
+import avatar4 from "@/assets/avatar-4.webp";
+import avatar5 from "@/assets/avatar-5.webp";
+import avatar6 from "@/assets/avatar-6.webp";
+import avatar7 from "@/assets/avatar-7.webp";
+
 interface Testimonial {
   id: number;
   name: string;
   role: string;
   text: string;
-  initials: string;
-  avatarBg: string;
+  avatar: string;
 }
 
 const testimonials: Testimonial[] = [
-  { id: 1, name: "דודו בוזגלו", role: "מנהל פרויקטים", text: "עבדנו עם החברה על מספר פרויקטים מורכבים. המקצועיות והאמינות שהם מפגינים היא ברמה הגבוהה ביותר. ממליץ בחום!", initials: "דב", avatarBg: "bg-amber-500" },
-  { id: 2, name: "שרה לוי", role: "יזמית נדל״ן", text: "תוצאות מעולות בשיפוץ חזית הבניין שלנו. הצוות היה מקצועי, עמד בלוחות הזמנים והתוצאה עלתה על הציפיות.", initials: "של", avatarBg: "bg-emerald-500" },
-  { id: 3, name: "משה אברהם", role: "וועד בית, רמת גן", text: "פתרון מקצועי לבעיית הרטיבות שנמשכה שנים. עבודה יסודית ומקיפה עם אחריות מלאה. תודה רבה!", initials: "מא", avatarBg: "bg-blue-500" },
-  { id: 4, name: "רחל גולדשטיין", role: "מנהלת נכסים", text: "שירות אדיב, מקצועי ואמין. ביצעו עבודות גובה מורכבות בבניין שלנו בצורה מושלמת ובטוחה.", initials: "רג", avatarBg: "bg-purple-500" },
-  { id: 5, name: "יוסי כהן", role: "קבלן שיפוצים", text: "עבודה ברמה גבוהה מאוד, צוות מקצועי שמבין את העבודה לעומק. שיתוף פעולה מעולה מתחילת הפרויקט ועד סופו.", initials: "יכ", avatarBg: "bg-rose-500" },
-  { id: 6, name: "מיכל דוד", role: "דיירת, תל אביב", text: "הגיעו בזמן, עבדו בצורה נקייה ומסודרת, והתוצאה הסופית פשוט מדהימה. הבניין נראה כמו חדש!", initials: "מד", avatarBg: "bg-teal-500" },
-  { id: 7, name: "אבי ישראלי", role: "מהנדס בניין", text: "מקצוענים אמיתיים. טיפלו בבעיות איטום מורכבות עם פתרונות חכמים ויצירתיים. ממליץ לכל פרויקט גובה.", initials: "אי", avatarBg: "bg-indigo-500" },
+  { id: 1, name: "דודו בוזגלו", role: "מנהל פרויקטים", text: "עבדנו עם החברה על מספר פרויקטים מורכבים. המקצועיות והאמינות שהם מפגינים היא ברמה הגבוהה ביותר. ממליץ בחום!", avatar: avatar1 },
+  { id: 2, name: "שרה לוי", role: "יזמית נדל״ן", text: "תוצאות מעולות בשיפוץ חזית הבניין שלנו. הצוות היה מקצועי, עמד בלוחות הזמנים והתוצאה עלתה על הציפיות.", avatar: avatar2 },
+  { id: 3, name: "משה אברהם", role: "וועד בית, רמת גן", text: "פתרון מקצועי לבעיית הרטיבות שנמשכה שנים. עבודה יסודית ומקיפה עם אחריות מלאה. תודה רבה!", avatar: avatar3 },
+  { id: 4, name: "רחל גולדשטיין", role: "מנהלת נכסים", text: "שירות אדיב, מקצועי ואמין. ביצעו עבודות גובה מורכבות בבניין שלנו בצורה מושלמת ובטוחה.", avatar: avatar4 },
+  { id: 5, name: "יוסי כהן", role: "קבלן שיפוצים", text: "עבודה ברמה גבוהה מאוד, צוות מקצועי שמבין את העבודה לעומק. שיתוף פעולה מעולה מתחילת הפרויקט ועד סופו.", avatar: avatar5 },
+  { id: 6, name: "מיכל דוד", role: "דיירת, תל אביב", text: "הגיעו בזמן, עבדו בצורה נקייה ומסודרת, והתוצאה הסופית פשוט מדהימה. הבניין נראה כמו חדש!", avatar: avatar6 },
+  { id: 7, name: "אבי ישראלי", role: "מהנדס בניין", text: "מקצוענים אמיתיים. טיפלו בבעיות איטום מורכבות עם פתרונות חכמים ויצירתיים. ממליץ לכל פרויקט גובה.", avatar: avatar7 },
 ];
 
 const BACKGROUND_TEXT = "לקוחות ממליצים עלינו";
@@ -120,9 +127,7 @@ const HomeTestimonials = () => {
                     <div>
                       <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-3">
-                          <div className={cn("w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm", t.avatarBg)}>
-                            {t.initials}
-                          </div>
+                          <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2 border-[#c9a84c] shadow-md" />
                           <div>
                             <h4 className="font-bold text-gray-900 text-base">{t.name}</h4>
                             <p className="text-gray-500 text-sm">{t.role}</p>
