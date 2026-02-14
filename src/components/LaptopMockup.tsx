@@ -30,9 +30,10 @@ const LaptopMockup: React.FC = () => {
         </p>
       </div>
 
-      {/* Laptop mockup */}
-      <div className="relative z-10 flex justify-center px-4">
-        <div className="w-full max-w-[900px]">
+      {/* Devices container */}
+      <div className="relative z-10 flex items-end justify-center gap-6 sm:gap-10 lg:gap-14 px-4">
+        {/* Laptop mockup */}
+        <div className="w-full max-w-[700px] lg:max-w-[800px]">
           {/* Screen bezel */}
           <div className="relative bg-[#1c1c1c] rounded-t-2xl border border-[#333] p-[6px] sm:p-[10px] shadow-[0_0_80px_rgba(201,168,76,0.15)]">
             {/* Camera dot */}
@@ -42,12 +43,11 @@ const LaptopMockup: React.FC = () => {
             <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-black mt-2 sm:mt-3">
               <iframe
                 src={window.location.origin}
-                title="אתר א.א פרויקטים וגובה"
+                title="אתר א.א פרויקטים וגובה - דסקטופ"
                 className="w-full h-full border-0 pointer-events-none"
                 loading="lazy"
                 style={{ transform: "scale(1)", transformOrigin: "top left" }}
               />
-              {/* Overlay to prevent interaction */}
               <div className="absolute inset-0 bg-transparent" />
             </div>
           </div>
@@ -60,12 +60,40 @@ const LaptopMockup: React.FC = () => {
                 clipPath: "polygon(3% 0%, 97% 0%, 100% 100%, 0% 100%)",
               }}
             />
-            {/* Notch */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-[5px] bg-[#333] rounded-b-md" />
           </div>
 
           {/* Shadow underneath */}
           <div className="w-[90%] mx-auto h-3 bg-black/40 rounded-[50%] blur-md mt-1" />
+        </div>
+
+        {/* Phone mockup */}
+        <div className="hidden sm:block w-[140px] sm:w-[160px] lg:w-[200px] flex-shrink-0 -mb-4">
+          {/* Phone frame */}
+          <div className="relative bg-[#1c1c1c] rounded-[24px] lg:rounded-[30px] border-2 border-[#333] p-[5px] lg:p-[6px] shadow-[0_0_60px_rgba(201,168,76,0.12)]">
+            {/* Notch */}
+            <div className="absolute top-[6px] lg:top-[8px] left-1/2 -translate-x-1/2 w-14 lg:w-16 h-[4px] lg:h-[5px] bg-[#333] rounded-full z-20" />
+
+            {/* Screen */}
+            <div className="relative w-full rounded-[20px] lg:rounded-[24px] overflow-hidden bg-black" style={{ aspectRatio: "9/19.5" }}>
+              <iframe
+                src={window.location.origin}
+                title="אתר א.א פרויקטים וגובה - מובייל"
+                className="border-0 pointer-events-none"
+                loading="lazy"
+                style={{
+                  width: "390px",
+                  height: "844px",
+                  transform: "scale(0.358)",
+                  transformOrigin: "top left",
+                }}
+              />
+              <div className="absolute inset-0 bg-transparent" />
+            </div>
+          </div>
+
+          {/* Shadow underneath */}
+          <div className="w-[80%] mx-auto h-2 bg-black/40 rounded-[50%] blur-md mt-1" />
         </div>
       </div>
     </section>
