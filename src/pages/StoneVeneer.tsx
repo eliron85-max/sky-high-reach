@@ -568,9 +568,9 @@ const StoneVeneer = () => {
                   // Dark mode
                   "dark:bg-white/[0.03] dark:border-[#c9a84c]/10 dark:hover:border-[#c9a84c]/30 dark:hover:shadow-[0_8px_40px_rgba(201,168,76,0.1)] dark:backdrop-blur-sm",
                   // Stagger animation
-                  "opacity-0 translate-y-6 animate-[fade-in_0.6s_ease-out_forwards]",
+                  "animate-fade-in-up",
                 )}
-                style={{ animationDelay: `${i * 100}ms` }}
+                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
               >
                 {/* Icon with colored background circle */}
                 <div className={cn(
