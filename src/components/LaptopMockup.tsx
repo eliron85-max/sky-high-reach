@@ -44,17 +44,17 @@ const LaptopMockup: React.FC = () => {
         className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(201,168,76,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.3) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
+          "linear-gradient(rgba(201,168,76,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.3) 1px, transparent 1px)",
+          backgroundSize: "80px 80px"
+        }} />
+
 
       {/* Title */}
       <div className="relative z-10 text-center mb-12 sm:mb-16 px-4">
         <h2
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
-          style={{ fontFamily: "'Heebo', sans-serif" }}
-        >
+          style={{ fontFamily: "'Heebo', sans-serif" }}>
+
           האתר שלנו{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#c9a84c] to-[#e8d5a3]">
             בפעולה
@@ -72,9 +72,9 @@ const LaptopMockup: React.FC = () => {
           className="w-full max-w-[900px] transition-all duration-1000 ease-out"
           style={{
             opacity: desktopVisible ? 1 : 0,
-            transform: desktopVisible ? "translateY(0)" : "translateY(80px)",
-          }}
-        >
+            transform: desktopVisible ? "translateY(0)" : "translateY(80px)"
+          }}>
+
           {/* iMac-style screen */}
           <div className="relative bg-[#1c1c1c] rounded-2xl border border-[#333] p-[8px] sm:p-[12px] shadow-[0_0_100px_rgba(201,168,76,0.18)]">
             {/* Camera */}
@@ -86,8 +86,8 @@ const LaptopMockup: React.FC = () => {
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover"
-              />
+                className="w-full h-full object-cover" />
+
             </div>
           </div>
           {/* Stand */}
@@ -95,8 +95,8 @@ const LaptopMockup: React.FC = () => {
             <div className="w-16 sm:w-20 h-12 sm:h-16 bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] border-x border-[#333]" />
             <div
               className="w-32 sm:w-44 h-3 sm:h-4 bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] rounded-b-lg border border-t-0 border-[#333]"
-              style={{ clipPath: "polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%)" }}
-            />
+              style={{ clipPath: "polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%)" }} />
+
           </div>
           <div className="w-[70%] mx-auto h-3 bg-black/40 rounded-[50%] blur-md mt-1" />
         </div>
@@ -111,9 +111,9 @@ const LaptopMockup: React.FC = () => {
           style={{
             opacity: laptopVisible ? 1 : 0,
             transform: laptopVisible ? "translateY(0)" : "translateY(80px)",
-            transitionDelay: "100ms",
-          }}
-        >
+            transitionDelay: "100ms"
+          }}>
+
           <div className="relative bg-[#1c1c1c] rounded-t-xl border border-[#333] p-[5px] sm:p-[8px] shadow-[0_0_60px_rgba(201,168,76,0.12)]">
             <div className="absolute top-[6px] sm:top-[10px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#333] border border-[#444]" />
             <div className="relative w-full aspect-video rounded-md overflow-hidden bg-black mt-1.5 sm:mt-2">
@@ -123,15 +123,15 @@ const LaptopMockup: React.FC = () => {
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover"
-              />
+                className="w-full h-full object-cover" />
+
             </div>
           </div>
           <div className="relative">
             <div
               className="w-full h-3 sm:h-4 bg-gradient-to-b from-[#2a2a2a] to-[#1a1a1a] rounded-b-lg"
-              style={{ clipPath: "polygon(3% 0%, 97% 0%, 100% 100%, 0% 100%)" }}
-            />
+              style={{ clipPath: "polygon(3% 0%, 97% 0%, 100% 100%, 0% 100%)" }} />
+
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-24 h-[4px] bg-[#333] rounded-b-md" />
           </div>
           <div className="w-[85%] mx-auto h-2 bg-black/40 rounded-[50%] blur-md mt-1" />
@@ -144,9 +144,9 @@ const LaptopMockup: React.FC = () => {
           style={{
             opacity: tabletVisible ? 1 : 0,
             transform: tabletVisible ? "translateY(0)" : "translateY(90px)",
-            transitionDelay: "200ms",
-          }}
-        >
+            transitionDelay: "200ms"
+          }}>
+
           <div className="relative bg-[#1c1c1c] rounded-[16px] lg:rounded-[20px] border-2 border-[#333] p-[5px] lg:p-[7px] shadow-[0_0_50px_rgba(201,168,76,0.1)]">
             {/* Camera */}
             <div className="absolute top-[5px] lg:top-[7px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#333] border border-[#444] z-20" />
@@ -157,8 +157,8 @@ const LaptopMockup: React.FC = () => {
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover"
-              />
+                className="w-full h-full object-cover" />
+
             </div>
             {/* Home button */}
             <div className="mx-auto mt-1 w-4 h-4 lg:w-5 lg:h-5 rounded-full border border-[#444] bg-[#222]" />
@@ -173,9 +173,9 @@ const LaptopMockup: React.FC = () => {
           style={{
             opacity: phoneVisible ? 1 : 0,
             transform: phoneVisible ? "translateY(0)" : "translateY(100px)",
-            transitionDelay: "300ms",
-          }}
-        >
+            transitionDelay: "300ms"
+          }}>
+
           <div className="relative bg-[#1c1c1c] rounded-[20px] lg:rounded-[26px] border-2 border-[#333] p-[4px] lg:p-[5px] shadow-[0_0_50px_rgba(201,168,76,0.1)]">
             {/* Notch */}
             <div className="absolute top-[5px] lg:top-[7px] left-1/2 -translate-x-1/2 w-12 lg:w-14 h-[3px] lg:h-[4px] bg-[#333] rounded-full z-20" />
@@ -186,8 +186,8 @@ const LaptopMockup: React.FC = () => {
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover"
-              />
+                className="w-full h-full object-cover" />
+
             </div>
           </div>
           <div className="w-[75%] mx-auto h-2 bg-black/40 rounded-[50%] blur-md mt-1" />
@@ -200,9 +200,9 @@ const LaptopMockup: React.FC = () => {
           style={{
             opacity: watchVisible ? 1 : 0,
             transform: watchVisible ? "translateY(0)" : "translateY(60px)",
-            transitionDelay: "400ms",
-          }}
-        >
+            transitionDelay: "400ms"
+          }}>
+
           {/* Watch band top */}
           <div className="w-[50%] mx-auto h-8 bg-gradient-to-b from-[#333] to-[#2a2a2a] rounded-t-lg" />
           {/* Watch body */}
@@ -210,14 +210,14 @@ const LaptopMockup: React.FC = () => {
             {/* Crown button */}
             <div className="absolute top-1/2 -translate-y-1/2 -right-[5px] w-[4px] h-4 bg-[#444] rounded-r-sm" />
             <div className="relative w-full rounded-[13px] overflow-hidden bg-black" style={{ aspectRatio: "1/1.15" }}>
-              <video
-                src="/hero.webm"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              
+
+
+
+
+
+
+
             </div>
           </div>
           {/* Watch band bottom */}
@@ -225,8 +225,8 @@ const LaptopMockup: React.FC = () => {
           <div className="w-[70%] mx-auto h-2 bg-black/40 rounded-[50%] blur-md mt-1" />
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default LaptopMockup;
