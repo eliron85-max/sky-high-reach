@@ -70,15 +70,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
           className="h-[100px] md:h-[140px] w-auto object-contain drop-shadow-[0_0_30px_rgba(201,168,76,0.4)]"
         />
 
-        <div className="flex flex-col items-center gap-2">
-          <h1
-            className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]"
-            style={{ fontFamily: "'Ploni', sans-serif" }}
-          >
-            א.א פרויקטים וגובה
-          </h1>
-          <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
-        </div>
+        <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
 
         {/* Loading bar */}
         <div className="w-48 h-[3px] rounded-full bg-white/10 overflow-hidden mt-4">
