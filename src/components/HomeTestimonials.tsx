@@ -65,10 +65,10 @@ const HomeTestimonials = () => {
       style={{ height: `${totalScrollHeight}px`, background: "hsl(100 30% 72%)", isolation: "isolate" }}
     >
       {/* Sticky container */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Title text — above cards */}
+      <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden">
+        {/* Title text — pinned to top */}
         <h2
-          className="text-[18vw] sm:text-[14vw] lg:text-[10vw] font-black text-center mb-4 pointer-events-none select-none leading-none"
+          className="text-[18vw] sm:text-[14vw] lg:text-[10vw] font-black text-center pointer-events-none select-none leading-none pt-0"
           style={{
             color: "hsl(140 30% 22%)",
             opacity: 0.3,
@@ -77,6 +77,9 @@ const HomeTestimonials = () => {
         >
           {BACKGROUND_TEXT}
         </h2>
+
+        {/* Spacer to push cards to center */}
+        <div className="flex-1" />
 
         {/* Cards stack */}
         <div className="relative w-[85vw] max-w-[480px]" style={{ height: `${CARD_HEIGHT}px` }}>
@@ -145,6 +148,8 @@ const HomeTestimonials = () => {
             );
           })}
         </div>
+        {/* Spacer to center cards */}
+        <div className="flex-1" />
       </div>
 
       <style>{`
