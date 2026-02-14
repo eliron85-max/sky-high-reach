@@ -43,7 +43,7 @@ export const ScrollToTopButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full 
+      className="fixed bottom-6 left-4 z-50 w-12 h-12 rounded-full 
 bg-transparent 
 border border-[#c9a84c] 
 text-[#c9a84c] 
