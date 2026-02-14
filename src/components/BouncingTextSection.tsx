@@ -41,7 +41,7 @@ export default function BouncingTextSection({ lines }: Props) {
             <h2
               key={lineIdx}
               className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-center leading-tight"
-              style={{ fontFamily: "'Assistant', sans-serif", fontWeight: 800 }}
+              style={{ fontFamily: "'Heebo', sans-serif", fontWeight: 800 }}
             >
               {chars.map((char, i) => {
                 if (char === " ") {
