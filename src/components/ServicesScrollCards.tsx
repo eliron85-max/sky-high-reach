@@ -62,15 +62,15 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
 
   return (
     <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden ${className}`} dir="rtl">
-      {/* ===== BACKGROUND IMAGE ===== */}
+      {/* ===== BACKGROUND: solid dark in light mode, image in dark mode ===== */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 -z-10 bg-[#1e2a3a] dark:bg-cover dark:bg-center dark:bg-no-repeat"
         style={{ backgroundImage: "url('/images/services-cards-bg.webp')" }}
         aria-hidden="true"
       />
 
-      {/* ===== DARK OVERLAY (שנה שקיפות כאן) ===== */}
-      <div className="absolute inset-0 -z-10 bg-black/20" aria-hidden="true" />
+      {/* ===== DARK OVERLAY (dark mode only) ===== */}
+      <div className="absolute inset-0 -z-10 bg-transparent dark:bg-black/20" aria-hidden="true" />
 
       <div className="sticky top-0 h-screen flex items-center justify-center">
         <h2 className="absolute top-16 text-4xl font-bold text-[#f5d58a]">{title}</h2>
