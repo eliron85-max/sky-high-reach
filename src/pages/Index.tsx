@@ -13,7 +13,6 @@ import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher"
 import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 import { useTranslation } from "@/lib/i18n";
-import HeroStickyCollapse from "@/components/HeroStickyCollapse";
 
 // Services images
 import facadeRestorationImage from "@/assets/facade-restoration.webp";
@@ -84,83 +83,78 @@ export default function Index() {
       <RappellingFigureLeft />
 
       <main>
-        <HeroStickyCollapse
-          after={
-            <>
-              {/* SERVICES SCROLL CARDS */}
-              <section id="next-section" className="relative z-0">
-                <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
-              </section>
+        {/* HERO VIDEO SECTION (ממלא 100vh, והשירותים מתחילים רק אחרי) */}
+        <section className="relative z-10 w-full h-screen overflow-hidden">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/hero-poster.jpg"
+          >
+            <source src="/hero.webm" type="video/webm" />
+          </video>
 
-              {/* everything after services should be above the pinned cards */}
-              <div className="relative z-10">
-                <HomeStatsSection
-                  titleGold={t("home.statsGold")}
-                  titleBlack={t("home.statsBlack")}
-                  stats={[
-                    { value: "500+", label: t("home.statsProjects") },
-                    { value: "15", label: t("home.statsExperience") },
-                    { value: "50+", label: t("home.statsCities") },
-                  ]}
-                  images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-                />
+          <div className="absolute inset-0 bg-black/45" />
 
-                <HomeUrbanRenewalHero
-                  images={urbanImages}
-                  titleTop={t("home.urbanTitleTop")}
-                  titleGold={t("home.urbanTitleGold")}
-                  subtitle={t("home.urbanSubtitle")}
-                />
+          {/* Scroll icon */}
+          <button
+            type="button"
+            onClick={scrollToNext}
+            aria-label="גלול למטה"
+            className="absolute left-1/2 -translate-x-1/2 z-[99999] bottom-[12px] sm:bottom-[14px] flex flex-col items-center"
+          >
+            <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
+              <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
+            </div>
 
-                <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 opacity-[0.35]"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
-                      backgroundSize: "60px 60px",
-                    }}
-                  />
-                </section>
+            <div className="mt-2 w-[10px] h-[10px] border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-90" />
+          </button>
+        </section>
 
-                <TrustStrip />
-                <HomeTestimonials />
-                <Contact />
-              </div>
-            </>
-          }
-        >
-          {/* HERO VIDEO */}
-          <section className="relative w-full h-full overflow-hidden">
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster="/hero-poster.jpg"
-            >
-              <source src="/hero.webm" type="video/webm" />
-            </video>
+        {/* SERVICES SCROLL CARDS */}
+        <section id="next-section" className="relative z-0">
+          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
+        </section>
 
-            <div className="absolute inset-0 bg-black/45" />
+        {/* everything after services should be above the pinned cards */}
+        <div className="relative z-10">
+          <HomeStatsSection
+            titleGold={t("home.statsGold")}
+            titleBlack={t("home.statsBlack")}
+            stats={[
+              { value: "500+", label: t("home.statsProjects") },
+              { value: "15", label: t("home.statsExperience") },
+              { value: "50+", label: t("home.statsCities") },
+            ]}
+            images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+          />
 
-            {/* Scroll icon */}
-            <button
-              type="button"
-              onClick={scrollToNext}
-              aria-label="גלול למטה"
-              className="absolute left-1/2 -translate-x-1/2 z-[99999] bottom-[12px] sm:bottom-[14px] flex flex-col items-center"
-            >
-              <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
-                <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
-              </div>
-              <div className="mt-2 w-[10px] h-[10px] border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-90" />
-            </button>
+          <HomeUrbanRenewalHero
+            images={urbanImages}
+            titleTop={t("home.urbanTitleTop")}
+            titleGold={t("home.urbanTitleGold")}
+            subtitle={t("home.urbanSubtitle")}
+          />
+
+          <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-[0.35]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
+                backgroundSize: "60px 60px",
+              }}
+            />
           </section>
-        </HeroStickyCollapse>
+
+          <TrustStrip />
+          <HomeTestimonials />
+          <Contact />
+        </div>
       </main>
 
       <Footer />
