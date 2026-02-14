@@ -62,7 +62,7 @@ const HomeTestimonials = () => {
       dir="rtl"
       ref={sectionRef}
       className="relative z-20"
-      style={{ height: `${totalScrollHeight}px`, background: "hsl(100 30% 72%)", isolation: "isolate" }}
+      style={{ height: `${totalScrollHeight}px`, background: "#efeae2", isolation: "isolate" }}
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden">
@@ -70,7 +70,7 @@ const HomeTestimonials = () => {
         <h2
           className="text-[18vw] sm:text-[14vw] lg:text-[10vw] font-black text-center pointer-events-none select-none leading-none pt-0"
           style={{
-            color: "hsl(140 30% 22%)",
+            color: "#54656f",
             opacity: 0.3,
             fontFamily: "'Ploni', sans-serif",
           }}
