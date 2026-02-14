@@ -159,7 +159,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                       <Link
                         key={item.path}
                         to={item.path}
-                        className="block py-2 text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] hover:brightness-125 transition"
+                        className="block py-2 text-[#1a1a1a] hover:text-[#c9a84c] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
                       >
                         {item.label}
                       </Link>
