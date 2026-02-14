@@ -61,7 +61,12 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
   }, [items.length]);
 
   return (
-    <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden ${className}`} dir="rtl">
+   <section
+  ref={sectionRef}
+  className={`relative w-full h-[120vh] overflow-hidden bg-cover bg-center ${className}`}
+  style={{ backgroundImage: "url('/services-bg.jpg')" }}
+  dir="rtl"
+>
       <div className="sticky top-0 h-screen flex items-center justify-center">
         <h2 className="absolute top-16 text-4xl font-bold text-[#f5d58a]">{title}</h2>
 
