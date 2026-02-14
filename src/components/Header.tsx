@@ -115,7 +115,7 @@ export default function Header() {
     <header
       ref={headerRef}
       data-mobile-open={mobileOpen ? "true" : "false"}
-      className={`fixed top-0 left-0 right-0 z-50 bg-[#d2d4d6] dark:bg-black overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/40 backdrop-blur-xl dark:bg-black overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
         isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"
       }`}
       dir="rtl"
@@ -125,7 +125,7 @@ export default function Header() {
       </div>
 
       {/* ================= ROW 1 (Laptop/Desktop: md+) ================= */}
-      <div className="hidden md:block relative z-20 bg-[#d2d4d6] dark:bg-black/20 backdrop-blur-2xl border-b border-border dark:border-[#c9a84c]/20">
+      <div className="hidden md:block relative z-20 bg-white/30 dark:bg-black/20 backdrop-blur-2xl border-b border-white/20 dark:border-[#c9a84c]/20">
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[150px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
             <Link to="/" className={`${goldText} whitespace-nowrap`} aria-current="page">
@@ -269,7 +269,7 @@ export default function Header() {
       </div>
 
       {/* ================= ROW 2 (Laptop/Desktop: md+) ================= */}
-      <div className="hidden md:block relative z-10 bg-white/80 dark:bg-black/20 backdrop-blur-2xl border-t border-border dark:border-[#c9a84c]/10">
+      <div className="hidden md:block relative z-10 bg-white/20 dark:bg-black/20 backdrop-blur-2xl border-t border-white/20 dark:border-[#c9a84c]/10">
         <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[60px] grid grid-cols-[auto_1fr_auto] items-center">
           <div className="flex items-center">
             <LanguageSwitcher />
