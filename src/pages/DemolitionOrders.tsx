@@ -630,7 +630,7 @@ const DemolitionOrders = () => {
         </section>
 
         {/* Contact Form Section */}
-        <section id="contact-form" className="py-16 lg:py-24 bg-secondary">
+        <section id="contact-form" className="py-16 lg:py-24 bg-secondary" data-force-light="true">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-8">
