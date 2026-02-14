@@ -33,8 +33,8 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
       const mid = (count - 1) / 2;
 
       const vw = window.innerWidth || 1200;
-      const spread = vw >= 1440 ? 280 : vw >= 1200 ? 240 : 200;
-      const yStep = vw >= 1440 ? 46 : vw >= 1200 ? 40 : 34;
+      const spread = vw >= 1440 ? 280 : vw >= 1200 ? 240 : vw >= 1024 ? 160 : 120;
+      const yStep = vw >= 1440 ? 46 : vw >= 1200 ? 40 : vw >= 1024 ? 30 : 24;
 
       cards.forEach((card, i) => {
         const pos = i - mid;
@@ -107,8 +107,8 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
 
       <style>{`
         .deck-card{
-          width: clamp(260px, 22vw, 340px);
-          height: clamp(340px, 30vw, 440px);
+          width: clamp(200px, 18vw, 340px);
+          height: clamp(280px, 25vw, 440px);
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 18px 40px rgba(0,0,0,.35);
