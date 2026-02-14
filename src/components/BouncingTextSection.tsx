@@ -10,13 +10,14 @@ export default function BouncingTextSection({ lines }: Props) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = throttle(() => {
+    const onScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const vh = window.innerHeight;
-      const raw = 1 - rect.top / vh;
+      // Slower, more gradual: spread progress over a larger scroll range
+      const raw = (vh - rect.top) / (vh + rect.height);
       setProgress(Math.max(0, Math.min(1, raw)));
-    }, 16);
+    };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -32,7 +33,7 @@ export default function BouncingTextSection({ lines }: Props) {
   return (
     <div
       ref={sectionRef}
-      className="relative py-24 md:py-32 lg:py-40 overflow-hidden bg-background"
+      className="relative py-32 md:py-44 lg:py-56 overflow-hidden bg-background"
     >
       <div className="container mx-auto px-4" dir="rtl">
         {lines.map((line, lineIdx) => {
@@ -50,9 +51,10 @@ export default function BouncingTextSection({ lines }: Props) {
 
                 const idx = globalCharIndex++;
                 const threshold = idx / totalNonSpace;
+                // Much more staggered: each char waits longer before animating
                 const charProgress = Math.max(
                   0,
-                  Math.min(1, (progress - threshold * 0.7) / 0.3)
+                  Math.min(1, (progress - threshold * 0.85) / 0.15)
                 );
 
                 const translateY = (1 - charProgress) * 120;
