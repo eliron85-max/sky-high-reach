@@ -115,9 +115,10 @@ export default function Header() {
     <header
       ref={headerRef}
       data-mobile-open={mobileOpen ? "true" : "false"}
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/40 backdrop-blur-xl dark:bg-black overflow-visible transition-transform duration-700 [padding-top:env(safe-area-inset-top)] ${
-        isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 overflow-visible [padding-top:env(safe-area-inset-top)]
+backdrop-blur-xl supports-[backdrop-filter]:bg-black/20 bg-black/30
+border-b border-white/10
+transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"}`}
       dir="rtl"
     >
       <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
