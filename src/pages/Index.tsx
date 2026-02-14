@@ -13,6 +13,7 @@ import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher"
 import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 import BouncingTextSection from "@/components/BouncingTextSection";
+import LaptopMockup from "@/components/LaptopMockup";
 import { useTranslation } from "@/lib/i18n";
 
 // Services images
@@ -169,6 +170,7 @@ export default function Index() {
               </section>
 
               <HomeTestimonials />
+              <LaptopMockup />
               <Contact />
             </div>
           </div>
