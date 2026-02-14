@@ -79,9 +79,16 @@ export default function ArcCardsSection({
   return (
     <section
       ref={sectionRef}
-      className={cn("relative", backgroundClassName, className)}
+      className={cn("relative", className)}
       dir="rtl"
-      style={{ height: `${100 + total * 300}vh` }}
+      style={{
+        height: `${100 + total * 300}vh`,
+        backgroundImage: `url('/images/services-cards-bg.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+      }}
     >
       <style>{`
         @media (prefers-reduced-motion: reduce) {
