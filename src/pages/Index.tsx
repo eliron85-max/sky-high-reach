@@ -114,16 +114,9 @@ export default function Index() {
           </button>
         </section>
 
-        {/* PREMIUM DIVIDER */}
-        <div className="relative z-[5] -mb-1">
-          <div className="relative">
-            {/* Angled dark shape */}
-            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="block w-full h-[60px] sm:h-[80px]">
-              <polygon points="0,0 1440,40 1440,80 0,80" className="fill-[#1a1f2e] dark:fill-[#0d1117]" />
-            </svg>
-            {/* Gold accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
-          </div>
+        {/* TRUST STRIP between Hero and Services */}
+        <div className="relative z-[5]">
+          <TrustStrip />
         </div>
 
         {/* SERVICES SCROLL CARDS */}
@@ -163,7 +156,6 @@ export default function Index() {
             />
           </section>
 
-          <TrustStrip />
           <HomeTestimonials />
           <Contact />
         </div>
