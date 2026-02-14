@@ -83,7 +83,7 @@ export default function ArcCardsSection({
       dir="rtl"
       style={{
         height: `${100 + total * 300}vh`,
-        backgroundImage: `url('/images/services-cards-bg.png')`,
+        backgroundImage: `url('/images/services-cards-bg.webp')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
