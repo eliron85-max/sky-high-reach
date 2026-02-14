@@ -34,9 +34,21 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
 
       const vw = window.innerWidth || 1200;
       // Smooth linear scaling based on viewport width
-      const spread = Math.max(80, Math.min(280, (vw - 768) * (280 - 80) / (1920 - 768) + 80));
-      const yStep = Math.max(18, Math.min(46, (vw - 768) * (46 - 18) / (1920 - 768) + 18));
-      const rotation = vw >= 1200 ? 7 : vw >= 1024 ? 5 : 4;
+      let spread: number, yStep: number, rotation: number;
+      if (vw < 640) {
+        // Mobile: tighter fan
+        spread = Math.max(38, Math.min(60, (vw - 320) * (60 - 38) / (640 - 320) + 38));
+        yStep = Math.max(10, Math.min(16, (vw - 320) * (16 - 10) / (640 - 320) + 10));
+        rotation = 3;
+      } else if (vw < 768) {
+        spread = 70;
+        yStep = 16;
+        rotation = 4;
+      } else {
+        spread = Math.max(80, Math.min(280, (vw - 768) * (280 - 80) / (1920 - 768) + 80));
+        yStep = Math.max(18, Math.min(46, (vw - 768) * (46 - 18) / (1920 - 768) + 18));
+        rotation = vw >= 1200 ? 7 : vw >= 1024 ? 5 : 4;
+      }
 
       cards.forEach((card, i) => {
         const pos = i - mid;
@@ -106,7 +118,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
                 <div className="deck-dim absolute inset-0" />
                 <div className="deck-glow absolute inset-0" />
 
-                <div className="absolute bottom-6 right-6 text-white text-2xl font-semibold drop-shadow-[0_10px_22px_rgba(0,0,0,0.55)]">
+                <div className="absolute bottom-3 right-3 sm:bottom-6 sm:right-6 text-white text-base sm:text-2xl font-semibold drop-shadow-[0_10px_22px_rgba(0,0,0,0.55)]">
                   {item.title}
                 </div>
               </Link>
@@ -117,8 +129,8 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
 
       <style>{`
         .deck-card{
-          width: clamp(200px, 18vw, 340px);
-          height: clamp(280px, 25vw, 440px);
+          width: clamp(140px, 18vw, 340px);
+          height: clamp(200px, 25vw, 440px);
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 18px 40px rgba(0,0,0,.35);
