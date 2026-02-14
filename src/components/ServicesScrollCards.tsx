@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function ServicesScrollCards({ title, items, className = "" }: Props) {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
@@ -61,12 +61,16 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
   }, [items.length]);
 
   return (
-   <section
-  ref={sectionRef}
-  className={`relative w-full h-[120vh] overflow-hidden bg-cover bg-center ${className}`}
-  style={{ backgroundImage: "url('/services-bg.jpg')" }}
-  dir="rtl"
->
+    <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden ${className}`} dir="rtl">
+      {/* BG IMAGE (לא תלוי ב-className) */}
+      <div
+        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/services-bg.jpg')" }}
+        aria-hidden="true"
+      />
+      {/* שכבת כהות עדינה לרקע (אפשר לשנות שקיפות כאן) */}
+      <div className="absolute inset-0 -z-10 bg-black/20" aria-hidden="true" />
+
       <div className="sticky top-0 h-screen flex items-center justify-center">
         <h2 className="absolute top-16 text-4xl font-bold text-[#f5d58a]">{title}</h2>
 
@@ -88,10 +92,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
                   backgroundPosition: "center",
                 }}
               >
-                {/* שכבת כהות כללית */}
                 <div className="deck-dim absolute inset-0" />
-
-                {/* שכבת הארה לכרטיס הנבחר */}
                 <div className="deck-glow absolute inset-0" />
 
                 <div className="absolute bottom-6 right-6 text-white text-2xl font-semibold drop-shadow-[0_10px_22px_rgba(0,0,0,0.55)]">
@@ -121,14 +122,12 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
           will-change: transform;
         }
 
-        /* כהות ברירת מחדל לכל הכרטיסים */
         .deck-dim{
           background: rgba(0,0,0,0.48);
           transition: opacity 220ms ease;
           opacity: 1;
         }
 
-        /* הארה שמופיעה רק בהובר */
         .deck-glow{
           background:
             radial-gradient(900px 520px at 50% 28%, rgba(255,255,255,0.28), rgba(255,255,255,0) 60%),
@@ -138,7 +137,6 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
           pointer-events: none;
         }
 
-        /* הכרטיס הנבחר: יוצא מהחבילה + הכי מואר */
         .deck-card.is-hover{
           transform:
             translate(-50%, -50%)
