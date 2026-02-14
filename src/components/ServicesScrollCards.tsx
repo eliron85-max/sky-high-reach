@@ -61,7 +61,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
   }, [items.length]);
 
   return (
-    <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden ${className}`} dir="rtl">
+    <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden bg-[#1a1f2e] dark:bg-[#0d1117] ${className}`} dir="rtl">
       {/* ===== BACKGROUND IMAGE: light version for light mode, dark version for dark mode ===== */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat dark:hidden"
@@ -78,7 +78,10 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
       <div className="absolute inset-0 -z-10 bg-white/10 dark:bg-black/20" aria-hidden="true" />
 
       <div className="sticky top-0 h-screen flex items-center justify-center">
-        <h2 className="absolute top-16 text-4xl font-bold text-[#c9a84c] drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] [text-shadow:0_1px_3px_rgba(0,0,0,0.5),0_4px_12px_rgba(0,0,0,0.3)] px-8 py-3 rounded-2xl bg-black/30 backdrop-blur-sm">{title}</h2>
+        <div className="absolute top-12 sm:top-16 inset-x-0 flex flex-col items-center z-10 pointer-events-none">
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#c9a84c] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">{title}</h2>
+          <div className="mt-3 w-24 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
+        </div>
 
         <div className="relative w-full h-full">
           {items.map((item, i) => {
