@@ -507,3 +507,12 @@ aside#lovable-badge * {
   top: calc(var(--header-height) + 50vh - 32px) !important; /* על התפר של ההירו */
   z-index: 2147483647 !important;
 }
+
+/* Force light-mode text colors on sections with hardcoded light backgrounds */
+[data-force-light] .text-foreground,
+[data-force-light] .text-muted-foreground {
+  color: #1a1a1a !important;
+}
+[data-force-light] .text-muted-foreground {
+  color: #555 !important;
+}

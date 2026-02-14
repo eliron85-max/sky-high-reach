@@ -428,6 +428,7 @@ const DemolitionOrders = () => {
           ref={calculatorRef.ref} 
           className={`py-16 lg:py-24 scroll-reveal ${calculatorRef.isVisible ? 'visible' : ''}`}
           style={{ background: 'linear-gradient(180deg, hsl(40 50% 88%) 0%, hsl(40 40% 82%) 100%)' }}
+          data-force-light="true"
         >
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
