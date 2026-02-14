@@ -64,7 +64,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
     <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden ${className}`} dir="rtl">
       {/* ===== BACKGROUND: solid dark in light mode, image in dark mode ===== */}
       <div
-        className="absolute inset-0 -z-10 bg-[#1e2a3a] dark:bg-cover dark:bg-center dark:bg-no-repeat"
+        className="absolute inset-0 -z-10 bg-[#1a1f2e] dark:bg-cover dark:bg-center dark:bg-no-repeat"
         style={{ backgroundImage: "url('/images/services-cards-bg.webp')" }}
         aria-hidden="true"
       />
