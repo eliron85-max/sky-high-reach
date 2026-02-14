@@ -516,3 +516,12 @@ aside#lovable-badge * {
 [data-force-light] .text-muted-foreground {
   color: #555 !important;
 }
+
+/* Force visible input borders inside light-forced sections in dark mode */
+:root.dark [data-force-light] input,
+:root.dark [data-force-light] textarea,
+:root.dark [data-force-light] select {
+  border-color: #d1d5db !important;
+  background-color: white !important;
+  color: #1a1a1a !important;
+}
