@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-[#0a1628] text-white transition-colors duration-300"
+      className="bg-[#0a1628]/90 backdrop-blur-xl text-white transition-colors duration-300"
       dir={dir}
     >
       <div>
