@@ -28,35 +28,35 @@ const Contact = () => {
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   // ===== Styles (match reference) =====
-  const sectionClass = "py-12 sm:py-16 lg:py-20 bg-[#e9e9e9]";
+  const sectionClass = "relative py-12 sm:py-16 lg:py-20 overflow-hidden";
 
   // Rect frame like screenshot #2
-  const outerFrame = "max-w-6xl mx-auto border border-black/70 bg-transparent";
+  const outerFrame = "max-w-6xl mx-auto border border-white/20 bg-transparent";
 
   const inner = "px-6 py-10 md:px-14 md:py-14";
 
   const titleRow = "mx-auto flex max-w-4xl items-center justify-center gap-6";
-  const titleLine = "hidden md:block h-px flex-1 bg-black/70";
+  const titleLine = "hidden md:block h-px flex-1 bg-white/30";
 
-  // Light surface cards
-  const card = "rounded-[24px] border p-6 bg-white/60 backdrop-blur-xl border-white/40 shadow-lg";
+  // Glassmorphism cards
+  const card = "rounded-[24px] border p-6 bg-white/10 backdrop-blur-xl border-white/20 shadow-lg";
 
   // Fields: glassmorphism pills
   const field =
-    "h-12 rounded-full px-5 border bg-white/30 backdrop-blur-md border-white/40 text-black placeholder:text-black/40 " +
+    "h-12 rounded-full px-5 border bg-white/10 backdrop-blur-md border-white/25 text-white placeholder:text-white/50 " +
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c]/35 focus-visible:border-[#c9a84c]/60 " +
     "focus-visible:ring-offset-0 shadow-sm";
 
   const textarea =
-    "rounded-[22px] px-5 py-4 border bg-white/30 backdrop-blur-md border-white/40 text-black placeholder:text-black/40 " +
+    "rounded-[22px] px-5 py-4 border bg-white/10 backdrop-blur-md border-white/25 text-white placeholder:text-white/50 " +
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c]/35 focus-visible:border-[#c9a84c]/60 " +
     "focus-visible:ring-offset-0 shadow-sm";
 
-  const labelCls = "text-sm font-semibold text-black/70";
+  const labelCls = "text-sm font-semibold text-white/80";
 
   const uploadBtn =
     "flex items-center gap-2 px-5 h-12 rounded-full border cursor-pointer select-none " +
-    "bg-white/30 backdrop-blur-md border-white/40 text-black hover:border-[#c9a84c]/60 transition shadow-sm";
+    "bg-white/10 backdrop-blur-md border-white/25 text-white hover:border-[#c9a84c]/60 transition shadow-sm";
 
   const submitBtn =
     "w-full h-12 rounded-full font-extrabold text-base text-white " +
@@ -170,19 +170,24 @@ const Contact = () => {
 
   return (
     <section id="contact" dir={dir} className={sectionClass}>
-      <div className="container mx-auto px-4">
+      {/* Background image + dark overlay */}
+      <div className="absolute inset-0">
+        <img src="/images/facade-bg.webp" alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+      <div className="relative z-10 container mx-auto px-4">
         <div className={outerFrame}>
           <div className={inner}>
             {/* Title like screenshot */}
             <div className="text-center">
               <div className={titleRow}>
                 <div className={titleLine} />
-                <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black">
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white">
                   {t("contact.title")}
                 </h2>
                 <div className={titleLine} />
               </div>
-              <p className="mt-3 text-sm md:text-base text-black/70">
+              <p className="mt-3 text-sm md:text-base text-white/70">
                 {t("contact.subtitle")}
               </p>
             </div>
@@ -321,7 +326,7 @@ const Contact = () => {
                           <Button
                             type="button"
                             variant="outline"
-                            className={cn(field, "justify-between", "bg-white/30 hover:bg-white/40 border-white/40")}
+                            className={cn(field, "justify-between", "bg-white/10 hover:bg-white/15 border-white/25")}
                             disabled={isSubmitting}
                           >
                             <span className="truncate">
@@ -382,7 +387,7 @@ const Contact = () => {
                         accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx"
                       />
                     </label>
-                    {selectedFile && <span className="text-sm text-black/60">{selectedFile.name}</span>}
+                    {selectedFile && <span className="text-sm text-white/60">{selectedFile.name}</span>}
                   </div>
 
                   <Button type="submit" className={submitBtn} disabled={isSubmitting}>
@@ -401,15 +406,15 @@ const Contact = () => {
                 <div className={card}>
                   <div className="flex items-center gap-3">
                     <Phone className="text-[#c9a84c]" size={18} />
-                    <span className="text-black">055-6616326</span>
+                    <span className="text-white">055-6616326</span>
                   </div>
                   <div className="flex items-center gap-3 mt-4">
                     <Mail className="text-[#c9a84c]" size={18} />
-                    <span className="text-black">info@ropeaccess.co.il</span>
+                    <span className="text-white">info@ropeaccess.co.il</span>
                   </div>
                   <div className="flex items-center gap-3 mt-4">
                     <MapPin className="text-[#c9a84c]" size={18} />
-                    <span className="text-black">{t("contact.info.addressValue")}</span>
+                    <span className="text-white">{t("contact.info.addressValue")}</span>
                   </div>
                 </div>
               </div>
