@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function ServicesScrollCards({ title, items, className = "" }: Props) {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
 
   useEffect(() => {
@@ -62,13 +62,14 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
 
   return (
     <section ref={sectionRef} className={`relative w-full h-[120vh] overflow-hidden ${className}`} dir="rtl">
-      {/* BG IMAGE (לא תלוי ב-className) */}
+      {/* ===== BACKGROUND IMAGE ===== */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/services-bg.jpg')" }}
         aria-hidden="true"
       />
-      {/* שכבת כהות עדינה לרקע (אפשר לשנות שקיפות כאן) */}
+
+      {/* ===== DARK OVERLAY (שנה שקיפות כאן) ===== */}
       <div className="absolute inset-0 -z-10 bg-black/20" aria-hidden="true" />
 
       <div className="sticky top-0 h-screen flex items-center justify-center">
