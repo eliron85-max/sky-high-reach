@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-[#d2d4d6] dark:bg-hero-dark text-black dark:text-white transition-colors duration-300"
+      className="bg-white/40 backdrop-blur-xl dark:bg-hero-dark text-black dark:text-white transition-colors duration-300"
       dir={dir}
     >
       {/* Make "primary" readable on light footer (keeps original primary on dark) */}
