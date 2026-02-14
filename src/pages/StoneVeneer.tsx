@@ -494,50 +494,100 @@ const StoneVeneer = () => {
       </section>
 
       {/* Technology Advantages Section - Right after Hero */}
-      <section className="py-16 bg-gradient-to-b from-background to-muted">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">למה טכנולוגיה מתקדמת?</h2>
+      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-gray-50 to-slate-100 dark:from-[#0a0a0a] dark:via-[#111] dark:to-[#0a0a0a] relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 dark:bg-[#c9a84c]/5 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-500/5 dark:bg-[#c9a84c]/5 rounded-full blur-[100px]" />
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Title with decorative line */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">למה טכנולוגיה מתקדמת?</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-transparent via-primary dark:via-[#c9a84c] to-transparent mx-auto" />
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: "⚡",
                 title: "מהירות התקנה",
                 desc: "זמן ביצוע קצר ב-50% משיטות מסורתיות",
+                gradient: "from-orange-400 to-amber-500",
+                bgLight: "bg-orange-50",
+                bgDark: "dark:bg-orange-500/10",
               },
               {
                 icon: "🛡️",
                 title: "עמידות מרבית",
                 desc: "אחיזה חזקה פי 3 מחיפוי רגיל",
+                gradient: "from-blue-400 to-cyan-500",
+                bgLight: "bg-blue-50",
+                bgDark: "dark:bg-blue-500/10",
               },
               {
                 icon: "💧",
                 title: "עמידות במים",
                 desc: "איטום מושלם ומניעת חדירת רטיבות",
+                gradient: "from-sky-400 to-blue-500",
+                bgLight: "bg-sky-50",
+                bgDark: "dark:bg-sky-500/10",
               },
               {
                 icon: "🏆",
                 title: "אחריות מורחבת",
                 desc: "אחריות של 15 שנה על העבודה",
+                gradient: "from-amber-400 to-yellow-500",
+                bgLight: "bg-amber-50",
+                bgDark: "dark:bg-amber-500/10",
               },
               {
                 icon: "🏗️",
                 title: "ללא פיגומים",
                 desc: "עבודה בשיטת סנפלינג - חיסכון בעלויות ובזמן",
+                gradient: "from-red-400 to-orange-500",
+                bgLight: "bg-red-50",
+                bgDark: "dark:bg-red-500/10",
               },
               {
                 icon: "🔩",
                 title: "ללא קידוחים / עיגונים",
                 desc: "שיטה לא פולשנית ששומרת על שלמות המבנה",
+                gradient: "from-violet-400 to-purple-500",
+                bgLight: "bg-violet-50",
+                bgDark: "dark:bg-violet-500/10",
               },
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-card rounded-xl p-6 border border-border text-center hover:shadow-lg transition-shadow"
+                className={cn(
+                  "group relative rounded-2xl p-8 text-center transition-all duration-500",
+                  // Light mode
+                  "bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1",
+                  // Dark mode
+                  "dark:bg-white/[0.03] dark:border-[#c9a84c]/10 dark:hover:border-[#c9a84c]/30 dark:hover:shadow-[0_8px_40px_rgba(201,168,76,0.1)] dark:backdrop-blur-sm",
+                  // Stagger animation
+                  "opacity-0 translate-y-6 animate-[fade-in_0.6s_ease-out_forwards]",
+                )}
+                style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.desc}</p>
+                {/* Icon with colored background circle */}
+                <div className={cn(
+                  "w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center text-3xl transition-transform duration-300 group-hover:scale-110",
+                  item.bgLight, item.bgDark
+                )}>
+                  {item.icon}
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary dark:group-hover:text-[#c9a84c] transition-colors duration-300">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+
+                {/* Bottom accent line on hover */}
+                <div className={cn(
+                  "absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-1/2 transition-all duration-500 rounded-full",
+                  "bg-gradient-to-r", item.gradient,
+                  "dark:from-[#c9a84c] dark:to-[#d7b46a]"
+                )} />
               </div>
             ))}
           </div>
