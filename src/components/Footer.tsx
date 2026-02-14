@@ -8,13 +8,12 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-white/40 backdrop-blur-xl dark:bg-hero-dark text-black dark:text-white transition-colors duration-300"
+      className="bg-[#0a1628] text-white transition-colors duration-300"
       dir={dir}
     >
-      {/* Make "primary" readable on light footer (keeps original primary on dark) */}
-      <div className="[&_.text-primary]:text-slate-800 dark:[&_.text-primary]:text-primary">
+      <div>
         {/* Top Contact Strip */}
-        <div className="border-b border-primary/10 py-6">
+        <div className="border-b border-white/10 py-6">
           <div className="container mx-auto px-4">
             <div
               className={`grid grid-cols-1 md:grid-cols-3 gap-6 text-center ${
@@ -26,10 +25,10 @@ const Footer = () => {
                   dir === "rtl" ? "md:justify-start" : "md:justify-start"
                 } gap-3`}
               >
-                <Phone className="text-primary" size={20} />
+                <Phone className="text-[#c9a84c]" size={20} />
                 <div>
-                  <p className="text-sm text-black/60 dark:text-white/60">{t("footer.phone")}</p>
-                  <a href="tel:055-6616326" className="text-black dark:text-white hover:text-primary transition-colors">
+                  <p className="text-sm text-white/60">{t("footer.phone")}</p>
+                  <a href="tel:055-6616326" className="text-white hover:text-[#c9a84c] transition-colors">
                     055-6616326
                   </a>
                 </div>
@@ -40,12 +39,12 @@ const Footer = () => {
                   dir === "rtl" ? "md:justify-start" : "md:justify-start"
                 } gap-3`}
               >
-                <Mail className="text-primary" size={20} />
+                <Mail className="text-[#c9a84c]" size={20} />
                 <div>
-                  <p className="text-sm text-black/60 dark:text-white/60">{t("footer.email")}</p>
+                  <p className="text-sm text-white/60">{t("footer.email")}</p>
                   <a
                     href="mailto:info@ropeaccess.co.il"
-                    className="text-black dark:text-white hover:text-primary transition-colors"
+                    className="text-white hover:text-[#c9a84c] transition-colors"
                   >
                     info@ropeaccess.co.il
                   </a>
@@ -57,10 +56,10 @@ const Footer = () => {
                   dir === "rtl" ? "md:justify-start" : "md:justify-start"
                 } gap-3`}
               >
-                <MapPin className="text-primary" size={20} />
+                <MapPin className="text-[#c9a84c]" size={20} />
                 <div>
-                  <p className="text-sm text-black/60 dark:text-white/60">{t("footer.address")}</p>
-                  <p className="text-black dark:text-white">{t("footer.addressValue")}</p>
+                  <p className="text-sm text-white/60">{t("footer.address")}</p>
+                  <p className="text-white">{t("footer.addressValue")}</p>
                 </div>
               </div>
             </div>
@@ -73,11 +72,11 @@ const Footer = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
               {/* Right Navigation */}
               <nav className={`flex flex-col gap-3 ${dir === "rtl" ? "order-3 lg:order-1" : "order-1 lg:order-1"}`}>
-                <h3 className="text-primary font-semibold mb-2">{t("footer.quickNav")}</h3>
+                <h3 className="text-[#c9a84c] font-semibold mb-2">{t("footer.quickNav")}</h3>
 
                 <Link
                   to="/"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -85,7 +84,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   to="/about"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -93,7 +92,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   to="/services"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -101,7 +100,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   to="/projects"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -124,7 +123,7 @@ const Footer = () => {
                   />
                 </Link>
 
-                <p className="text-black/60 dark:text-white/60 text-center text-sm max-w-xs">
+                <p className="text-white/60 text-center text-sm max-w-xs">
                   {t("footer.companyDescription")}
                 </p>
 
@@ -133,7 +132,7 @@ const Footer = () => {
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black/60 dark:text-white/60 hover:text-primary transition-colors"
+                    className="text-white/60 hover:text-[#c9a84c] transition-colors"
                     aria-label="LinkedIn"
                   >
                     <Linkedin size={20} />
@@ -142,7 +141,7 @@ const Footer = () => {
                     href="https://facebook.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black/60 dark:text-white/60 hover:text-primary transition-colors"
+                    className="text-white/60 hover:text-[#c9a84c] transition-colors"
                     aria-label="Facebook"
                   >
                     <Facebook size={20} />
@@ -151,7 +150,7 @@ const Footer = () => {
                     href="https://instagram.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-black/60 dark:text-white/60 hover:text-primary transition-colors"
+                    className="text-white/60 hover:text-[#c9a84c] transition-colors"
                     aria-label="Instagram"
                   >
                     <Instagram size={20} />
@@ -161,11 +160,11 @@ const Footer = () => {
 
               {/* Left Navigation */}
               <nav className={`flex flex-col gap-3 ${dir === "rtl" ? "order-2 lg:order-3" : "order-3 lg:order-3"}`}>
-                <h3 className="text-primary font-semibold mb-2">{t("footer.moreInfo")}</h3>
+                <h3 className="text-[#c9a84c] font-semibold mb-2">{t("footer.moreInfo")}</h3>
 
                 <Link
                   to="/pricing"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -173,7 +172,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   to="/testimonials"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -181,7 +180,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   to="/contact"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -189,7 +188,7 @@ const Footer = () => {
                 </Link>
                 <Link
                   to="/accessibility"
-                  className={`text-black/80 dark:text-white/80 hover:text-primary transition-colors ${
+                  className={`text-white/80 hover:text-[#c9a84c] transition-colors ${
                     dir === "rtl" ? "text-right" : "text-left"
                   }`}
                 >
@@ -201,9 +200,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="border-t border-primary/10 py-6">
+        <div className="border-t border-white/10 py-6">
           <div className="container mx-auto px-4">
-            <p className="text-center text-sm text-black/60 dark:text-white/60">
+            <p className="text-center text-sm text-white/60">
               © {new Date().getFullYear()} {t("footer.copyright")}
             </p>
           </div>
