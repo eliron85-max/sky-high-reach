@@ -124,7 +124,7 @@ export default function Index() {
 
           <div className="relative bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
             {/* BOUNCING TEXT */}
-            <BouncingTextSection text="ברוכים הבאים לאתר א.א פרויקטים" />
+            <BouncingTextSection lines={["ברוכים הבאים לאתר", "א.א פרויקטים וגובה"]} />
 
             {/* TRUST STRIP */}
             <div className="relative z-[5]">
