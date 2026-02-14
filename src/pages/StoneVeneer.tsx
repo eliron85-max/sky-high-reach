@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { he } from "date-fns/locale";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ChevronLeft, ChevronRight, Send, Loader2, CalendarIcon, Phone, Mail, MapPin } from "lucide-react";
+import { ChevronLeft, ChevronRight, Send, Loader2, CalendarIcon, Phone, Mail, MapPin, Zap, Shield, Droplets, Award, Building2, Wrench } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { ImageWithSkeleton } from "@/components/ui/image-with-skeleton";
@@ -511,73 +511,82 @@ const StoneVeneer = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {[
               {
-                icon: "⚡",
+                Icon: Zap,
                 title: "מהירות התקנה",
                 desc: "זמן ביצוע קצר ב-50% משיטות מסורתיות",
                 gradient: "from-orange-400 to-amber-500",
-                bgLight: "bg-orange-50",
-                bgDark: "dark:bg-orange-500/10",
+                iconColor: "text-orange-500 dark:text-orange-400",
+                bgLight: "bg-gradient-to-br from-orange-50 to-amber-50",
+                bgDark: "dark:from-orange-500/15 dark:to-amber-500/10",
+                ringColor: "ring-orange-200 dark:ring-orange-500/20",
               },
               {
-                icon: "🛡️",
+                Icon: Shield,
                 title: "עמידות מרבית",
                 desc: "אחיזה חזקה פי 3 מחיפוי רגיל",
                 gradient: "from-blue-400 to-cyan-500",
-                bgLight: "bg-blue-50",
-                bgDark: "dark:bg-blue-500/10",
+                iconColor: "text-blue-500 dark:text-blue-400",
+                bgLight: "bg-gradient-to-br from-blue-50 to-cyan-50",
+                bgDark: "dark:from-blue-500/15 dark:to-cyan-500/10",
+                ringColor: "ring-blue-200 dark:ring-blue-500/20",
               },
               {
-                icon: "💧",
+                Icon: Droplets,
                 title: "עמידות במים",
                 desc: "איטום מושלם ומניעת חדירת רטיבות",
                 gradient: "from-sky-400 to-blue-500",
-                bgLight: "bg-sky-50",
-                bgDark: "dark:bg-sky-500/10",
+                iconColor: "text-sky-500 dark:text-sky-400",
+                bgLight: "bg-gradient-to-br from-sky-50 to-blue-50",
+                bgDark: "dark:from-sky-500/15 dark:to-blue-500/10",
+                ringColor: "ring-sky-200 dark:ring-sky-500/20",
               },
               {
-                icon: "🏆",
+                Icon: Award,
                 title: "אחריות מורחבת",
                 desc: "אחריות של 15 שנה על העבודה",
                 gradient: "from-amber-400 to-yellow-500",
-                bgLight: "bg-amber-50",
-                bgDark: "dark:bg-amber-500/10",
+                iconColor: "text-amber-500 dark:text-amber-400",
+                bgLight: "bg-gradient-to-br from-amber-50 to-yellow-50",
+                bgDark: "dark:from-amber-500/15 dark:to-yellow-500/10",
+                ringColor: "ring-amber-200 dark:ring-amber-500/20",
               },
               {
-                icon: "🏗️",
+                Icon: Building2,
                 title: "ללא פיגומים",
                 desc: "עבודה בשיטת סנפלינג - חיסכון בעלויות ובזמן",
                 gradient: "from-red-400 to-orange-500",
-                bgLight: "bg-red-50",
-                bgDark: "dark:bg-red-500/10",
+                iconColor: "text-red-500 dark:text-red-400",
+                bgLight: "bg-gradient-to-br from-red-50 to-orange-50",
+                bgDark: "dark:from-red-500/15 dark:to-orange-500/10",
+                ringColor: "ring-red-200 dark:ring-red-500/20",
               },
               {
-                icon: "🔩",
+                Icon: Wrench,
                 title: "ללא קידוחים / עיגונים",
                 desc: "שיטה לא פולשנית ששומרת על שלמות המבנה",
                 gradient: "from-violet-400 to-purple-500",
-                bgLight: "bg-violet-50",
-                bgDark: "dark:bg-violet-500/10",
+                iconColor: "text-violet-500 dark:text-violet-400",
+                bgLight: "bg-gradient-to-br from-violet-50 to-purple-50",
+                bgDark: "dark:from-violet-500/15 dark:to-purple-500/10",
+                ringColor: "ring-violet-200 dark:ring-violet-500/20",
               },
             ].map((item, i) => (
               <div
                 key={i}
                 className={cn(
                   "group relative rounded-2xl p-8 text-center transition-all duration-500",
-                  // Light mode
                   "bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1",
-                  // Dark mode
                   "dark:bg-white/[0.03] dark:border-[#c9a84c]/10 dark:hover:border-[#c9a84c]/30 dark:hover:shadow-[0_8px_40px_rgba(201,168,76,0.1)] dark:backdrop-blur-sm",
-                  // Stagger animation
                   "animate-fade-in-up",
                 )}
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
               >
-                {/* Icon with colored background circle */}
+                {/* Styled icon with gradient background */}
                 <div className={cn(
-                  "w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center text-3xl transition-transform duration-300 group-hover:scale-110",
-                  item.bgLight, item.bgDark
+                  "w-18 h-18 rounded-2xl mx-auto mb-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg ring-1",
+                  item.bgLight, item.bgDark, item.ringColor,
                 )}>
-                  {item.icon}
+                  <item.Icon className={cn("w-8 h-8", item.iconColor)} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary dark:group-hover:text-[#c9a84c] transition-colors duration-300">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
