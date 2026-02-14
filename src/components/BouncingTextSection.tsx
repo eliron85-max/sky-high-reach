@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { throttle } from "@/lib/throttle";
-import "@fontsource/rubik-bubbles";
+
 
 interface Props {
   text: string;
@@ -37,7 +37,7 @@ export default function BouncingTextSection({ text }: Props) {
       className="relative py-24 md:py-32 lg:py-40 overflow-hidden bg-background"
     >
       <div className="container mx-auto px-4" dir="rtl">
-        <h2 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-center leading-tight" style={{ fontFamily: "'Rubik Bubbles', cursive" }}>
+        <h2 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-center leading-tight" style={{ fontFamily: "'Ploni', sans-serif" }}>
           {chars.map((char, i) => {
             if (char === " ") {
               return (
