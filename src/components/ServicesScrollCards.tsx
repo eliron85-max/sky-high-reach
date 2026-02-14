@@ -33,12 +33,14 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
       const mid = (count - 1) / 2;
 
       const vw = window.innerWidth || 1200;
-      const spread = vw >= 1440 ? 280 : vw >= 1200 ? 240 : vw >= 1024 ? 160 : 120;
-      const yStep = vw >= 1440 ? 46 : vw >= 1200 ? 40 : vw >= 1024 ? 30 : 24;
+      // Smooth linear scaling based on viewport width
+      const spread = Math.max(80, Math.min(280, (vw - 768) * (280 - 80) / (1920 - 768) + 80));
+      const yStep = Math.max(18, Math.min(46, (vw - 768) * (46 - 18) / (1920 - 768) + 18));
+      const rotation = vw >= 1200 ? 7 : vw >= 1024 ? 5 : 4;
 
       cards.forEach((card, i) => {
         const pos = i - mid;
-        const r = pos * 7;
+        const r = pos * rotation;
 
         const x = pos * spread * clamped;
         const y = Math.abs(pos) * yStep * clamped;
