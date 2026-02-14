@@ -149,7 +149,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                 aria-expanded={servicesOpen}
               >
                 {t("nav.services")}
-                <span className="text-[14px] text-[#c9a84c] opacity-80">▼</span>
+                <span className="text-[14px] text-[#1a1a1a] dark:text-[#c9a84c] opacity-80">▼</span>
               </button>
 
               {servicesOpen && (
