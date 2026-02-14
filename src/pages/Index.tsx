@@ -116,7 +116,7 @@ export default function Index() {
 
         {/* SERVICES SCROLL CARDS */}
         <section id="next-section" className="relative z-0">
-          <ServicesScrollCards title={t("home.servicesTitle")} className="bg-[#bfe7d6]" items={services} />
+          <ServicesScrollCards title={t("home.servicesTitle")} items={services} />
         </section>
 
         {/* everything after services should be above the pinned cards */}
