@@ -92,7 +92,7 @@ export default function HomeStatsSection({
               {images[0] && (
                 <div
                   className={cn(
-                    "absolute left-[3%] top-0 w-[52%] h-[42%] overflow-hidden shadow-2xl rounded-sm",
+                    "absolute left-[3%] top-0 w-[52%] h-[42%] overflow-hidden shadow-2xl rounded-sm transition-shadow duration-500 hover:shadow-[0_0_25px_rgba(201,168,76,0.5)]",
                     show
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0",
@@ -102,7 +102,7 @@ export default function HomeStatsSection({
                   <img
                     src={images[0]}
                     alt=""
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-all duration-500 hover:scale-110 hover:brightness-110"
                     loading="lazy"
                   />
                 </div>
@@ -112,7 +112,7 @@ export default function HomeStatsSection({
               {images[1] && (
                 <div
                   className={cn(
-                    "absolute right-0 top-[22%] w-[52%] h-[38%] overflow-hidden shadow-2xl rounded-sm",
+                    "absolute right-0 top-[22%] w-[52%] h-[38%] overflow-hidden shadow-2xl rounded-sm transition-shadow duration-500 hover:shadow-[0_0_25px_rgba(201,168,76,0.5)]",
                     show
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0",
@@ -122,7 +122,7 @@ export default function HomeStatsSection({
                   <img
                     src={images[1]}
                     alt=""
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-all duration-500 hover:scale-110 hover:brightness-110"
                     loading="lazy"
                   />
                 </div>
@@ -132,7 +132,7 @@ export default function HomeStatsSection({
               {images[2] && (
                 <div
                   className={cn(
-                    "absolute left-0 top-[28%] w-[52%] h-[38%] overflow-hidden shadow-2xl rounded-sm",
+                    "absolute left-0 top-[28%] w-[52%] h-[38%] overflow-hidden shadow-2xl rounded-sm transition-shadow duration-500 hover:shadow-[0_0_25px_rgba(201,168,76,0.5)]",
                     show
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0",
@@ -142,7 +142,7 @@ export default function HomeStatsSection({
                   <img
                     src={images[2]}
                     alt=""
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-all duration-500 hover:scale-110 hover:brightness-110"
                     loading="lazy"
                   />
                 </div>
@@ -152,7 +152,7 @@ export default function HomeStatsSection({
               {images[3] && (
                 <div
                   className={cn(
-                    "absolute right-[5%] bottom-0 w-[55%] h-[36%] overflow-hidden shadow-2xl rounded-sm",
+                    "absolute right-[5%] bottom-0 w-[55%] h-[36%] overflow-hidden shadow-2xl rounded-sm transition-shadow duration-500 hover:shadow-[0_0_25px_rgba(201,168,76,0.5)]",
                     show
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0",
@@ -162,7 +162,7 @@ export default function HomeStatsSection({
                   <img
                     src={images[3]}
                     alt=""
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover transition-all duration-500 hover:scale-110 hover:brightness-110"
                     loading="lazy"
                   />
                 </div>
