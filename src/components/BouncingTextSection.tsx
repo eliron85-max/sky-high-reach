@@ -14,8 +14,9 @@ export default function BouncingTextSection({ lines }: Props) {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const vh = window.innerHeight;
-      // Slower, more gradual: spread progress over a larger scroll range
-      const raw = (vh - rect.top) / (vh + rect.height);
+      // Progress: 0 when section top hits viewport bottom, 1 when section center reaches viewport center
+      const sectionCenter = rect.top + rect.height / 2;
+      const raw = 1 - (sectionCenter - vh * 0.4) / (vh * 0.8);
       setProgress(Math.max(0, Math.min(1, raw)));
     };
 
@@ -51,10 +52,11 @@ export default function BouncingTextSection({ lines }: Props) {
 
                 const idx = globalCharIndex++;
                 const threshold = idx / totalNonSpace;
-                // Much more staggered: each char waits longer before animating
+                // Staggered but all complete by progress=1
+                const staggerStart = threshold * 0.6;
                 const charProgress = Math.max(
                   0,
-                  Math.min(1, (progress - threshold * 0.85) / 0.15)
+                  Math.min(1, (progress - staggerStart) / (1 - staggerStart))
                 );
 
                 const translateY = (1 - charProgress) * 120;
