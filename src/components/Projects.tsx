@@ -39,7 +39,7 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
           }}
         >
           {project.images[0] && project.images[0] !== '' ? (
-            <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover" loading="lazy" />
+            <img src={project.images[0]} alt={project.title} className="w-full h-full object-contain" loading="lazy" />
           ) : (
             <p className="text-muted-foreground flex items-center justify-center h-full">תמונת פרויקט</p>
           )}
