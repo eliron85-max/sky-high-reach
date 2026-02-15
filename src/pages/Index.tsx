@@ -103,7 +103,7 @@ export default function Index() {
 
       {/* ========== CURTAIN rising over Hero ========== */}
       <div className="relative z-10" style={{ marginTop: "-100vh" }}>
-        <div className="h-screen pointer-events-none" aria-hidden="true" />
+        {/* Removed spacer to make curtain rise immediately */}
         <div className="bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
           <TrustStrip />
           <section id="next-section" />
