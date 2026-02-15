@@ -165,18 +165,20 @@ const HomeTestimonials = () => {
                   }}
                 >
                   <div className="w-full h-full rounded-2xl shadow-xl overflow-hidden flex flex-col" style={{ background: '#0b141a' }}>
-                    {/* Dark WhatsApp header */}
-                    <div className="flex items-center justify-between px-3 py-2" style={{ background: '#1f2c34' }}>
-                      <div className="flex items-center gap-2 flex-1 min-w-0">
-                        <img src={t.avatar} alt={t.name} className="w-9 h-9 rounded-full object-cover border-2 border-[#c9a84c]" />
-                        <div className="flex flex-col min-w-0">
-                          <span className="font-semibold text-white text-sm truncate">{t.name} · {t.role}</span>
-                          <span className="text-[#8696a0] text-[11px]">נראה לאחרונה אתמול</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 text-[#aebac1]">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01z"/></svg>
+                    {/* WhatsApp green header */}
+                    <div className="flex items-center justify-between px-3 py-2.5" style={{ background: '#075e54' }}>
+                      <div className="flex items-center gap-3 text-white/90">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                      </div>
+                      <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
+                        <div className="flex flex-col min-w-0 items-end">
+                          <span className="font-semibold text-white text-sm truncate">{t.name}</span>
+                          <span className="text-white/70 text-[11px]">נראה לאחרונה אתמול</span>
+                        </div>
+                        <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="white" className="shrink-0"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
                       </div>
                     </div>
 
