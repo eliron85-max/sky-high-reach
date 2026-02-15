@@ -1,5 +1,5 @@
 // src/pages/Index.tsx
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
@@ -72,6 +72,29 @@ export default function Index() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  // ===== Curtain Reveal for Urban Renewal over Stats =====
+  const curtainRef = useRef<HTMLDivElement | null>(null);
+  const [curtainP, setCurtainP] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = curtainRef.current;
+      if (!el) return;
+
+      const r = el.getBoundingClientRect();
+      const h = window.innerHeight || 1;
+
+      // el height is 200vh. We map viewport passing through it into 0..1
+      const raw = 1 - r.top / h;
+      const clamped = Math.max(0, Math.min(1, raw));
+      setCurtainP(clamped);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-black">
       <Header />
@@ -138,8 +161,8 @@ export default function Index() {
             </section>
 
             {/* everything after services should be above the pinned cards */}
-            {/* everything after services should be above the pinned cards */}
             <div className="relative z-10">
+              {/* ===== STATS (sticky inside its own component) ===== */}
               <HomeStatsSection
                 titleGold={t("home.statsGold")}
                 titleBlack={t("home.statsBlack")}
@@ -151,18 +174,23 @@ export default function Index() {
                 images={[statsImage1, statsImage2, statsImage3, statsImage4]}
               />
 
-              {/* CURTAIN REVEAL מעל הסטטיסטיקות */}
-              <div className="relative z-20 -mt-[100svh]">
-                {/* “מסלול” גלילה כדי שהוילון יעלה חלק */}
-                <div className="h-[100svh] pointer-events-none" aria-hidden="true" />
-
-                <div className="relative overflow-hidden bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.28)]">
-                  <HomeUrbanRenewalHero
-                    images={urbanImages}
-                    titleTop={t("home.urbanTitleTop")}
-                    titleGold={t("home.urbanTitleGold")}
-                    subtitle={t("home.urbanSubtitle")}
-                  />
+              {/* ===== CURTAIN REVEAL: Urban Renewal עולה מעל הסטטיסטיקות ===== */}
+              <div ref={curtainRef} className="relative z-20" style={{ height: "200vh" }}>
+                <div className="sticky top-0 h-[100svh] overflow-hidden">
+                  <div
+                    className="h-full w-full bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.28)] overflow-hidden"
+                    style={{
+                      transform: `translateY(${(1 - curtainP) * 100}%)`,
+                      willChange: "transform",
+                    }}
+                  >
+                    <HomeUrbanRenewalHero
+                      images={urbanImages}
+                      titleTop={t("home.urbanTitleTop")}
+                      titleGold={t("home.urbanTitleGold")}
+                      subtitle={t("home.urbanSubtitle")}
+                    />
+                  </div>
                 </div>
               </div>
 
