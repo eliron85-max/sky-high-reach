@@ -144,8 +144,8 @@
     z-index: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(rgba(201, 168, 76, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201, 168, 76, 0.06) 1px, transparent 1px);
+      linear-gradient(rgba(201, 168, 76, 0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 168, 76, 0.18) 1px, transparent 1px);
     background-size: 80px 80px;
   }
 
@@ -157,7 +157,7 @@
     z-index: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(circle 2px at center, rgba(201, 168, 76, 0.25) 0%, transparent 70%);
+      radial-gradient(circle 3px at center, rgba(201, 168, 76, 0.55) 0%, transparent 70%);
     background-size: 80px 80px;
   }
 
