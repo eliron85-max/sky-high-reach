@@ -7,7 +7,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
 import facadeProject1 from "@/assets/facade-project-1.webp";
 import facadeProject2 from "@/assets/facade-project-2.webp";
-import facadeProject3 from "@/assets/facade-project-3.webp";
+
 
 interface Project {
   id: number;
@@ -117,13 +117,6 @@ const Projects = () => {
       category: "שיקום ושיפוץ מעטפת",
       location: "יפו",
       images: [facadeProject2],
-    },
-    {
-      id: 10,
-      title: "שיפוץ מעטפת בניין מגורים",
-      category: "שיקום ושיפוץ מעטפת",
-      location: "גני תקווה",
-      images: [facadeProject3],
     },
     {
       id: 7,
