@@ -115,7 +115,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
       />
 
       {/* ===== OVERLAY ===== */}
-      <div className="absolute inset-0 z-0 bg-white/10 dark:bg-black/20" aria-hidden="true" />
+      <div className="absolute inset-0 z-0 bg-black/40 dark:bg-black/20" aria-hidden="true" />
 
       <div className="sticky top-0 h-screen flex items-center justify-center z-[1]">
         <div className="absolute top-12 sm:top-16 inset-x-0 flex flex-col items-center z-10 pointer-events-none">
