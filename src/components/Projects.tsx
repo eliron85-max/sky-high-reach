@@ -6,7 +6,7 @@ import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
 import facadeProject1 from "@/assets/facade-project-4.webp";
-import facadeProject2 from "@/assets/facade-project-2.webp";
+
 import facadeProject5 from "@/assets/facade-project-5.webp";
 import netanyaProject from "@/assets/netanya-project.webp";
 
@@ -112,7 +112,7 @@ const Projects = () => {
       title: "שיקום חזית היסטורית",
       category: "שיקום ושיפוץ מעטפת",
       location: "יפו",
-      images: [facadeProject2],
+      images: [netanyaProject],
     },
     {
       id: 10,
@@ -126,7 +126,7 @@ const Projects = () => {
       title: "עיגון אבני חזית",
       category: "חיפוי ועיגון אבנים",
       location: "נתניה",
-      images: [netanyaProject],
+      images: ["project7.jpg"],
     },
     {
       id: 8,
