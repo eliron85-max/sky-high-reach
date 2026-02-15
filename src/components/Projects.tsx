@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -18,6 +19,7 @@ interface Project {
 }
 
 const Projects = () => {
+  const isMobile = useIsMobile();
   const { ref, isVisible } = useScrollReveal({ threshold: 0.01 });
   const [selectedCategory, setSelectedCategory] = useState("הכל");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -137,7 +139,7 @@ const Projects = () => {
               <div
                 key={project.id}
                 className="flex-none cursor-pointer transition-all duration-500"
-                style={{ width: "60%", minWidth: 0 }}
+                style={{ width: isMobile ? "85%" : "60%", minWidth: 0 }}
                 onClick={() => openProject(project)}>
 
                   <div
