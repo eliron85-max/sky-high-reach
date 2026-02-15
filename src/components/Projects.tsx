@@ -25,7 +25,7 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
   return (
     <div
       ref={cardRef}
-      className="group relative bg-card rounded-card overflow-hidden cursor-pointer hover:shadow-card-hover transition-all duration-300"
+      className="group relative rounded-card overflow-hidden cursor-pointer hover:shadow-card-hover transition-all duration-300"
       onClick={() => onOpen(project)}
     >
       {/* Image Placeholder with Parallax */}
@@ -173,7 +173,7 @@ const Projects = () => {
   };
 
   return (
-    <section ref={ref} id="projects" className={`py-16 lg:py-24 scroll-reveal ${isVisible ? 'visible' : ''}`} style={{ background: 'hsl(222 20% 5%)', backgroundImage: 'url(/images/grid-texture.webp)', backgroundRepeat: 'repeat' }}>
+    <section ref={ref} id="projects" className={`py-16 lg:py-24 scroll-reveal ${isVisible ? 'visible' : ''}`} style={{ background: 'hsl(222 20% 5%)' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
