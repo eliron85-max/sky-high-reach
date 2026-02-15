@@ -122,13 +122,13 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
       dir="rtl"
     >
       <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#c9a84c]/10 overflow-hidden">
-        <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_4s_linear_infinite] shadow-[0_0_6px_1px_rgba(201,168,76,0.4)]" />
+        <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_7s_linear_infinite] shadow-[0_0_6px_1px_rgba(201,168,76,0.4)]" />
       </div>
 
       {/* ================= ROW 1 (Laptop/Desktop: md+) ================= */}
       <div className="hidden md:block relative z-20 bg-white/30 dark:bg-black/20 backdrop-blur-2xl border-b border-white/20 dark:border-[#c9a84c]/20">
         <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#c9a84c]/10 overflow-hidden z-10">
-          <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_4s_linear_infinite] shadow-[0_0_6px_1px_rgba(201,168,76,0.4)]" />
+          <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_7s_linear_infinite] shadow-[0_0_6px_1px_rgba(201,168,76,0.4)]" />
         </div>
         <div className="mx-auto max-w-7xl px-4 lg:px-6 h-[150px] grid grid-cols-[1fr_auto_1fr] items-center gap-8">
           <nav className="flex items-center gap-6 xl:gap-8 text-[16px] xl:text-[18px] font-semibold justify-self-end min-w-0">
