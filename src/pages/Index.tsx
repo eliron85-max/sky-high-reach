@@ -138,40 +138,50 @@ export default function Index() {
             </section>
 
             {/* everything after services should be above the pinned cards */}
+            {/* Stats → Urban Renewal curtain reveal */}
             <div className="relative z-10">
-              <HomeStatsSection
-                titleGold={t("home.statsGold")}
-                titleBlack={t("home.statsBlack")}
-                stats={[
-                  { value: "500+", label: t("home.statsProjects") },
-                  { value: "15", label: t("home.statsExperience") },
-                  { value: "50+", label: t("home.statsCities") },
-                ]}
-                images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-              />
+              <div className="relative" style={{ height: "200vh" }}>
+                <div className="sticky top-0 z-0">
+                  <HomeStatsSection
+                    titleGold={t("home.statsGold")}
+                    titleBlack={t("home.statsBlack")}
+                    stats={[
+                      { value: "500+", label: t("home.statsProjects") },
+                      { value: "15", label: t("home.statsExperience") },
+                      { value: "50+", label: t("home.statsCities") },
+                    ]}
+                    images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+                  />
+                </div>
+              </div>
 
-              <HomeUrbanRenewalHero
-                images={urbanImages}
-                titleTop={t("home.urbanTitleTop")}
-                titleGold={t("home.urbanTitleGold")}
-                subtitle={t("home.urbanSubtitle")}
-              />
+              <div className="relative z-10 -mt-[100vh]">
+                <div className="h-screen pointer-events-none" aria-hidden="true" />
+                <div className="rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
+                  <HomeUrbanRenewalHero
+                    images={urbanImages}
+                    titleTop={t("home.urbanTitleTop")}
+                    titleGold={t("home.urbanTitleGold")}
+                    subtitle={t("home.urbanSubtitle")}
+                  />
 
-              <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-[0.35]"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
-                    backgroundSize: "60px 60px",
-                  }}
-                />
-              </section>
+                  <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 opacity-[0.35]"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
+                        backgroundSize: "60px 60px",
+                      }}
+                    />
+                  </section>
 
-              <HomeTestimonials />
-              <LaptopMockup />
-              <Contact />
+                  <HomeTestimonials />
+                  <LaptopMockup />
+                  <Contact />
+                </div>
+              </div>
             </div>
           </div>
         </div>
