@@ -193,9 +193,27 @@ const Contact = () => {
             </div>
 
             {/* Grid */}
-            <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="mt-10 grid grid-cols-1 lg:grid-cols-[1fr_2.5fr] gap-8">
+              {/* SIDE COLUMN - first in DOM, appears on the right in RTL */}
+              <div className="space-y-6 order-2 lg:order-1">
+                <div className={card}>
+                  <div className="flex items-center gap-3">
+                    <Phone className="text-[#c9a84c]" size={18} />
+                    <span className="text-white">055-6616326</span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-4">
+                    <Mail className="text-[#c9a84c]" size={18} />
+                    <span className="text-white">info@ropeaccess.co.il</span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-4">
+                    <MapPin className="text-[#c9a84c]" size={18} />
+                    <span className="text-white">{t("contact.info.addressValue")}</span>
+                  </div>
+                </div>
+              </div>
+
               {/* FORM */}
-              <div className="lg:col-span-2">
+              <div className="order-1 lg:order-2">
                 <form onSubmit={handleSubmit} className={cn(card, "space-y-6")}>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
@@ -401,23 +419,8 @@ const Contact = () => {
                 </form>
               </div>
 
-              {/* SIDE COLUMN */}
-              <div className="space-y-6">
-                <div className={card}>
-                  <div className="flex items-center gap-3">
-                    <Phone className="text-[#c9a84c]" size={18} />
-                    <span className="text-white">055-6616326</span>
-                  </div>
-                  <div className="flex items-center gap-3 mt-4">
-                    <Mail className="text-[#c9a84c]" size={18} />
-                    <span className="text-white">info@ropeaccess.co.il</span>
-                  </div>
-                  <div className="flex items-center gap-3 mt-4">
-                    <MapPin className="text-[#c9a84c]" size={18} />
-                    <span className="text-white">{t("contact.info.addressValue")}</span>
-                  </div>
-                </div>
-              </div>
+
+
             </div>
 
             {/* Calendar skin (kept from your original) */}
