@@ -148,7 +148,7 @@ export default function Index() {
         <div className="relative z-10 -mt-[100vh]">
           <div className="h-screen pointer-events-none" aria-hidden="true" />
           <div className="relative bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
-            <BouncingTextSection lines={["ברוכים הבאים לאתר", "א.א פרויקטים וגובה"]} />
+            
 
             <div className="relative z-[5]">
               <TrustStrip />
