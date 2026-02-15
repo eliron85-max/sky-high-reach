@@ -110,10 +110,11 @@ export default function HomeStatsSection({ titleBlack, titleGold, stats, images 
                     <div
                       key={index}
                       className={cn(
-                        "text-center sm:text-right transition-all duration-700",
-                        show ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
-                        index === 1 && "delay-100",
-                        index === 2 && "delay-200",
+                        "text-center sm:text-right transition-all duration-700 ease-out",
+                        show ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0",
+                        index === 0 && "delay-[0ms]",
+                        index === 1 && "delay-[200ms]",
+                        index === 2 && "delay-[400ms]",
                       )}
                     >
                       <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#d7b46a]">
