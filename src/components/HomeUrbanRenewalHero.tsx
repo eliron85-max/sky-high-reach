@@ -75,9 +75,9 @@ export default function HomeUrbanRenewalHero({
       />
 
       <div className="relative mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-6">
+        <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-8 justify-center">
           {/* ===== LEFT: IMAGES ===== */}
-          <div className="order-2 lg:order-1 lg:w-[85%]">
+          <div className="order-2 lg:order-1 lg:w-[70%]">
             <div className="grid grid-cols-2 gap-1 h-[500px] sm:h-[650px] lg:h-[800px]">
               {/* תמונה 1 - שמאל */}
               <div
@@ -126,7 +126,7 @@ export default function HomeUrbanRenewalHero({
           </div>
 
           {/* ===== RIGHT: TEXT ===== */}
-          <div className="order-1 lg:order-2 lg:w-[15%] flex items-center" dir="rtl">
+          <div className="order-1 lg:order-2 lg:w-[30%] flex items-center" dir="rtl">
             <div className="w-full lg:pr-8">
               <div className="relative">
                 <span className="absolute -right-4 top-0 hidden h-20 w-[6px] bg-[#d7b46a] sm:block" />
