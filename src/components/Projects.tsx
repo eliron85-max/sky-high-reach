@@ -35,24 +35,13 @@ const Projects = () => {
   const categories = [
     "הכל",
     "שיקום ושיפוץ מעטפת",
-    "חיפוי ועיגון אבנים",
-    "איטום בגובה",
-    "הרחקת מעופפים",
-    "עבודות גובה מיוחדות",
   ];
 
   const projects: Project[] = [
     { id: 1, title: "שיקום מעטפת בניין משרדים", category: "שיקום ושיפוץ מעטפת", location: "תל אביב", images: [facadeProject1] },
-    { id: 2, title: "חיפוי אבן טבעית", category: "חיפוי ועיגון אבנים", location: "ירושלים", images: ["project2.jpg"] },
-    { id: 3, title: "איטום גג בניין מגורים", category: "איטום בגובה", location: "חיפה", images: ["project3.jpg"] },
-    { id: 4, title: "התקנת רשתות הרחקת יונים", category: "הרחקת מעופפים", location: "רמת גן", images: ["project4.jpg"] },
-    { id: 5, title: "פרויקט אמנות בגובה", category: "עבודות גובה מיוחדות", location: "הרצליה", images: ["project5.jpg"] },
     { id: 6, title: "שיקום חזית היסטורית", category: "שיקום ושיפוץ מעטפת", location: "יפו", images: [netanyaProject] },
     { id: 10, title: "שיפוץ מעטפת בניין מגורים", category: "שיקום ושיפוץ מעטפת", location: "מרכז", images: [facadeProject5] },
     { id: 11, title: "שיקום מעטפת חיצונית", category: "שיקום ושיפוץ מעטפת", location: "מרכז", images: [facadeRestorationNew] },
-    { id: 7, title: "עיגון אבני חזית", category: "חיפוי ועיגון אבנים", location: "נתניה", images: ["project7.jpg"] },
-    { id: 8, title: "איטום מרפסות פנטהאוז", category: "איטום בגובה", location: "תל אביב", images: ["project8.jpg"] },
-    { id: 9, title: "הרחקת עופות ממגדלים", category: "הרחקת מעופפים", location: "רמת גן", images: ["project9.jpg"] },
   ];
 
   const filteredProjects =
