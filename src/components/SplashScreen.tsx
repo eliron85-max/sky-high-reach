@@ -92,7 +92,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
         <img
           src={logoImage}
           alt="א.א פרויקטים וגובה"
-          className="h-[120px] md:h-[180px] w-auto object-contain drop-shadow-[0_0_40px_rgba(201,168,76,0.5)]"
+          className="h-[400px] md:h-[600px] w-auto object-contain drop-shadow-[0_0_60px_rgba(201,168,76,0.5)]"
         />
 
         <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
