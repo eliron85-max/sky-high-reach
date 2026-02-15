@@ -48,8 +48,8 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
 
       {/* Card Info */}
       <div className="p-4">
-        <h3 className="font-semibold text-foreground mb-1">{project.title}</h3>
-        <p className="text-sm text-muted-foreground">{project.location}</p>
+        <h3 className="font-semibold text-white mb-1">{project.title}</h3>
+        <p className="text-sm text-white/60">{project.location}</p>
       </div>
     </div>
   );
@@ -173,13 +173,13 @@ const Projects = () => {
   };
 
   return (
-    <section ref={ref} id="projects" className={`py-16 lg:py-24 bg-secondary scroll-reveal ${isVisible ? 'visible' : ''}`}>
+    <section ref={ref} id="projects" className={`py-16 lg:py-24 scroll-reveal ${isVisible ? 'visible' : ''}`} style={{ background: 'hsl(222 20% 5%)', backgroundImage: 'url(/images/grid-texture.webp)', backgroundRepeat: 'repeat' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             הפרויקטים שלנו
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-white/60 max-w-2xl mx-auto">
             גלריה של פרויקטים מוצלחים שביצענו ברחבי הארץ
           </p>
         </div>
