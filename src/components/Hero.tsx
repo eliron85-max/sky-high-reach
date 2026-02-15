@@ -51,57 +51,56 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-[#c9a84c]/5 via-transparent to-[#c9a84c]/5" />
 
       {/* Content */}
-      <div className="container relative z-10 px-4 md:px-6 pt-header-offset lg:pt-header-offset-lg mx-auto">
+      <div className="container relative z-10 px-4 md:px-6 mx-auto flex items-center justify-center h-full">
         <div
           ref={contentRef}
           style={contentStyle}
-          className={`max-w-xl mx-auto text-center md:mx-0 ${
-            dir === "rtl" ? "md:mr-8 lg:mr-16 md:text-right" : "md:ml-8 lg:ml-16 md:text-left"
-          }`}
+          className="max-w-3xl mx-auto text-center"
         >
           <div key={currentSlide} className="animate-fade-in-up">
-            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
                 {slides[currentSlide].title}
               </span>
             </h1>
-            <p className="text-base md:text-4xl text-[#e8d5a3]/80 mb-6 leading-relaxed">
+            <p className="text-lg md:text-2xl lg:text-3xl text-white/80 mb-10 leading-relaxed max-w-2xl mx-auto">
               {slides[currentSlide].subtitle}
             </p>
           </div>
 
-          <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
-            <Button
-              onClick={() => scrollToSection("contact")}
-              size="lg"
-              className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95"
-            >
-              {t("hero.ctaPrimary")}
-            </Button>
-
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               onClick={() => scrollToSection("projects")}
               size="lg"
-              variant="outline"
-              className="border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all"
+              className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-6 text-lg rounded-full"
             >
               {t("hero.ctaSecondary")}
             </Button>
-          </div>
 
-          {/* Indicators */}
-          <div className="flex justify-center md:justify-start gap-2 mt-12">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`h-1 rounded-full transition-all ${
-                  index === currentSlide ? "w-8 bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" : "w-4 bg-[#c9a84c]/30"
-                }`}
-              />
-            ))}
+            <Button
+              onClick={() => scrollToSection("contact")}
+              size="lg"
+              className="bg-black/60 backdrop-blur-sm border border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-black/80 hover:border-[#c9a84c] transition-all px-8 py-6 text-lg rounded-full"
+            >
+              {t("hero.ctaPrimary")}
+            </Button>
           </div>
         </div>
+      </div>
+
+      {/* Vertical dot indicators on the side */}
+      <div className={`absolute ${dir === "rtl" ? "left-4 md:left-6" : "right-4 md:right-6"} top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3`}>
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all border ${
+              index === currentSlide
+                ? "bg-white border-white scale-125"
+                : "bg-white/40 border-white/60 hover:bg-white/60"
+            }`}
+          />
+        ))}
       </div>
 
       {/* Scroll cue covering green strip */}
@@ -123,24 +122,6 @@ const Hero = () => {
         <ChevronDown size={14} className="absolute bottom-2 text-[#e8d5a3] opacity-70" />
       </button>
 
-      {/* Arrows */}
-      <button
-        onClick={prevSlide}
-        className={`absolute ${
-          dir === "rtl" ? "left-4" : "right-4"
-        } top-1/2 -translate-y-1/2 z-20 text-[#c9a84c]/60 hover:text-[#e8d5a3] transition-colors p-2 hover:bg-[#c9a84c]/10 rounded-full`}
-      >
-        <ChevronLeft size={32} />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        className={`absolute ${
-          dir === "rtl" ? "right-4" : "left-4"
-        } top-1/2 -translate-y-1/2 z-20 text-[#c9a84c]/60 hover:text-[#e8d5a3] transition-colors p-2 hover:bg-[#c9a84c]/10 rounded-full`}
-      >
-        <ChevronRight size={32} />
-      </button>
     </section>
   );
 };
