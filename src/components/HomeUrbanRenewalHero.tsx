@@ -74,10 +74,10 @@ export default function HomeUrbanRenewalHero({
         }}
       />
 
-      <div className="relative w-full max-w-[1600px] pl-0 pr-4 sm:pr-6 lg:pr-8">
+      <div className="relative mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-6">
           {/* ===== LEFT: IMAGES ===== */}
-          <div className="order-2 lg:order-1 lg:w-[85%] lg:-ml-4">
+          <div className="order-2 lg:order-1 lg:w-[85%]">
             <div className="grid grid-cols-2 gap-1 h-[500px] sm:h-[650px] lg:h-[800px]">
               {/* תמונה 1 - שמאל */}
               <div
