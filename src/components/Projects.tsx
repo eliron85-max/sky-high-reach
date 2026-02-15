@@ -5,6 +5,9 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
+import facadeProject1 from "@/assets/facade-project-1.webp";
+import facadeProject2 from "@/assets/facade-project-2.webp";
+import facadeProject3 from "@/assets/facade-project-3.webp";
 
 interface Project {
   id: number;
@@ -32,13 +35,17 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
       {/* Image Placeholder with Parallax */}
       <div className="bg-muted flex items-center justify-center overflow-hidden relative aspect-[4/3] md:aspect-[3/2] lg:h-[100vh]">
         <div 
-          className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted-foreground/20"
+          className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/20"
           style={{ 
             transform: `translateY(${parallaxOffset}px)`,
             transition: 'transform 0.1s ease-out'
           }}
         >
-          <p className="text-muted-foreground">תמונת פרויקט</p>
+          {project.images[0]?.startsWith('/') || project.images[0]?.startsWith('http') || project.images[0]?.includes('/assets/') ? (
+            <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover" />
+          ) : (
+            <p className="text-muted-foreground flex items-center justify-center h-full">תמונת פרויקט</p>
+          )}
         </div>
       </div>
 
@@ -79,7 +86,7 @@ const Projects = () => {
       title: "שיקום מעטפת בניין משרדים",
       category: "שיקום ושיפוץ מעטפת",
       location: "תל אביב",
-      images: ["project1.jpg"],
+      images: [facadeProject1],
     },
     {
       id: 2,
@@ -114,7 +121,7 @@ const Projects = () => {
       title: "שיקום חזית היסטורית",
       category: "שיקום ושיפוץ מעטפת",
       location: "יפו",
-      images: ["project6.jpg"],
+      images: [facadeProject2, facadeProject3],
     },
     {
       id: 7,
