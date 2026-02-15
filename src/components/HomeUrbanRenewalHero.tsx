@@ -78,7 +78,7 @@ export default function HomeUrbanRenewalHero({
         <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-10">
           {/* ===== LEFT: IMAGES ===== */}
           <div className="order-2 lg:order-1 lg:w-[55%]">
-            <div className="grid grid-cols-2 gap-1 h-[400px] sm:h-[500px] lg:h-[620px]">
+            <div className="grid grid-cols-2 gap-1 h-[500px] sm:h-[650px] lg:h-[800px]">
               {/* תמונה 1 - שמאל */}
               <div
                 className={cn(
