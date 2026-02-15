@@ -59,8 +59,8 @@ export default function HomeUrbanRenewalHero({
       ref={sectionRef}
       dir="ltr"
       className={cn(
-        "relative w-full overflow-hidden bg-white",
-        "py-8 sm:py-12 lg:py-16"
+      "relative w-full overflow-hidden bg-white",
+        "py-12 sm:py-16 lg:py-24"
       )}
     >
       {/* רקע גריד עדין - קווים */}
@@ -78,7 +78,7 @@ export default function HomeUrbanRenewalHero({
         <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-10">
           {/* ===== LEFT: IMAGES ===== */}
           <div className="order-2 lg:order-1 lg:w-[55%]">
-            <div className="grid grid-cols-2 gap-1 h-[350px] sm:h-[450px] lg:h-[520px]">
+            <div className="grid grid-cols-2 gap-1 h-[400px] sm:h-[500px] lg:h-[620px]">
               {/* תמונה 1 - שמאל */}
               <div
                 className={cn(
@@ -130,7 +130,7 @@ export default function HomeUrbanRenewalHero({
             <div className="w-full lg:pr-8">
               <div className="relative">
                 <span className="absolute -right-4 top-0 hidden h-20 w-[6px] bg-[#d7b46a] sm:block" />
-                <h2 className="text-right text-3xl sm:text-4xl lg:text-[3.2rem] leading-[1.15] tracking-tight text-black">
+                <h2 className="text-right text-4xl sm:text-5xl lg:text-[3.8rem] leading-[1.15] tracking-tight text-black">
                   <span className="block font-light">{titleTop}</span>
                   <span className="block text-[#d7b46a] font-light mt-1">
                     {titleGold}
