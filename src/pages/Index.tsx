@@ -35,6 +35,8 @@ import stoneCladding5 from "@/assets/stone-cladding-5.webp";
 import stoneCladding6 from "@/assets/stone-cladding-6.webp";
 import stoneCladding7 from "@/assets/stone-cladding-7.webp";
 import stoneCladding8 from "@/assets/stone-cladding-8.webp";
+import urbanRenewal1 from "@/assets/urban-renewal-1.jpg";
+import urbanRenewal2 from "@/assets/urban-renewal-2.jpg";
 
 // Stats section images
 import statsImage1 from "@/assets/stats-1.webp";
@@ -51,6 +53,8 @@ const urbanImages = [
   stoneCladding6,
   stoneCladding7,
   stoneCladding8,
+  urbanRenewal1,
+  urbanRenewal2,
 ];
 
 export default function Index() {
