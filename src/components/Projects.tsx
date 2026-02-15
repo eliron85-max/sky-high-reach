@@ -7,6 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import facadeProject1 from "@/assets/facade-project-4.webp";
 import facadeProject5 from "@/assets/facade-project-5.webp";
 import netanyaProject from "@/assets/netanya-new.webp";
+import facadeRestorationNew from "@/assets/facade-restoration-new.webp";
 
 interface Project {
   id: number;
@@ -48,6 +49,7 @@ const Projects = () => {
     { id: 5, title: "פרויקט אמנות בגובה", category: "עבודות גובה מיוחדות", location: "הרצליה", images: ["project5.jpg"] },
     { id: 6, title: "שיקום חזית היסטורית", category: "שיקום ושיפוץ מעטפת", location: "יפו", images: [netanyaProject] },
     { id: 10, title: "שיפוץ מעטפת בניין מגורים", category: "שיקום ושיפוץ מעטפת", location: "מרכז", images: [facadeProject5] },
+    { id: 11, title: "שיקום מעטפת חיצונית", category: "שיקום ושיפוץ מעטפת", location: "מרכז", images: [facadeRestorationNew] },
     { id: 7, title: "עיגון אבני חזית", category: "חיפוי ועיגון אבנים", location: "נתניה", images: ["project7.jpg"] },
     { id: 8, title: "איטום מרפסות פנטהאוז", category: "איטום בגובה", location: "תל אביב", images: ["project8.jpg"] },
     { id: 9, title: "הרחקת עופות ממגדלים", category: "הרחקת מעופפים", location: "רמת גן", images: ["project9.jpg"] },
