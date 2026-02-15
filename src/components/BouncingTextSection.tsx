@@ -40,7 +40,7 @@ export default function BouncingTextSection({ lines }: Props) {
           return (
             <h2
               key={lineIdx}
-              className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-center leading-tight"
+              className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-center leading-tight"
               style={{ fontFamily: "'Heebo', sans-serif", fontWeight: 800 }}
             >
               {chars.map((char, i) => {
