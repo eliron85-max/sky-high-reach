@@ -29,12 +29,22 @@ export default function BouncingTextSection({ lines }: Props) {
 
   let globalCharIndex = 0;
 
+  // Parallax: text moves at ~50% scroll speed
+  const parallaxY = progress * 60; // pixels the text "lags" behind
+
   return (
     <div
       ref={sectionRef}
       className="relative py-24 md:py-32 lg:py-40 overflow-hidden bg-background"
     >
-      <div className="container mx-auto px-4" dir="rtl">
+      <div
+        className="container mx-auto px-4"
+        dir="rtl"
+        style={{
+          transform: `translateY(${parallaxY}px)`,
+          willChange: "transform",
+        }}
+      >
         {lines.map((line, lineIdx) => {
           const chars = line.split("");
           return (
