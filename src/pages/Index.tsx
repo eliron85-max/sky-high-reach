@@ -294,7 +294,7 @@ export default function Index() {
               />
 
               <HomeTestimonials />
-              <LaptopMockup />
+              
               <Contact />
             </div>
           </div>
