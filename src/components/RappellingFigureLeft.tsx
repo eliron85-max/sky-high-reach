@@ -6,7 +6,7 @@ import workerLeft from "@/assets/workerLeftNew.png";
 export default function RappellingFigureLeft() {
   const [figureY, setFigureY] = useState(0);
 
-  const figureWidth = 130;
+  const figureWidth = 184;
   const ropeLeft = useMemo(() => Math.round((136 / 300) * figureWidth), [figureWidth]);
 
   const ropeAttachOffset = 60;
