@@ -82,13 +82,13 @@
   }
 
   .dark {
-    --background: 220 13% 9%;
+    --background: 222 20% 5%;
     --foreground: 0 0% 98%;
 
-    --card: 220 13% 9%;
+    --card: 222 20% 6%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 13% 9%;
+    --popover: 222 20% 6%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 186 100% 42%;
@@ -111,7 +111,7 @@
     --input: 217 33% 17%;
     --ring: 186 100% 42%;
 
-    --sidebar-background: 220 13% 9%;
+    --sidebar-background: 222 20% 5%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 186 100% 42%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -133,6 +133,37 @@
     font-size: 16px;
     line-height: 1.6;
     direction: rtl;
+    position: relative;
+  }
+
+  /* Elegant golden grid texture for dark mode */
+  :root.dark body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(201, 168, 76, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 168, 76, 0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* Golden cross-hair glows at grid intersections */
+  :root.dark body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle 2px at center, rgba(201, 168, 76, 0.25) 0%, transparent 70%);
+    background-size: 80px 80px;
+  }
+
+  :root.dark body > * {
+    position: relative;
+    z-index: 1;
   }
 
   html {
