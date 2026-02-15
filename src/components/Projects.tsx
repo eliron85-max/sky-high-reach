@@ -30,7 +30,7 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
       onClick={() => onOpen(project)}
     >
       {/* Image Placeholder with Parallax */}
-      <div className="bg-muted flex items-center justify-center overflow-hidden relative aspect-[4/3] md:aspect-[4/3] lg:aspect-[16/10]">
+      <div className="bg-muted flex items-center justify-center overflow-hidden relative aspect-[4/3] md:aspect-[3/2] lg:h-[500px]">
         <div 
           className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted-foreground/20"
           style={{ 
