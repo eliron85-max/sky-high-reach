@@ -127,6 +127,13 @@
     @apply border-border;
   }
 
+  #root {
+    height: auto !important;
+    overflow: visible !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: "Ploni", "Rubik", "Heebo", sans-serif;
