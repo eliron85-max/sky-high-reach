@@ -233,10 +233,11 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
             aria-label={mobileOpen ? "סגור תפריט" : "פתח תפריט"}
           >
             {!mobileOpen ? (
-              <span className="flex flex-col gap-1.5">
-                <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-                <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-                <span className="w-7 h-[2px] bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+              <span className="flex flex-col gap-[6px]">
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
               </span>
             ) : (
               <span className="relative w-7 h-7">
