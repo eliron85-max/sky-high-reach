@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
-import facadeProject1 from "@/assets/facade-project-1.webp";
+import facadeProject1 from "@/assets/facade-project-4.webp";
 import facadeProject2 from "@/assets/facade-project-2.webp";
 
 
