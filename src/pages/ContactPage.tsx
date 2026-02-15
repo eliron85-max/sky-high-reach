@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SectionDivider from "@/components/SectionDivider";
 import Contact from "@/components/Contact";
 import { useTranslation } from "@/lib/i18n";
 
@@ -18,10 +19,12 @@ const ContactPage = () => {
               {t("contactPage.heroSubtitle")}
             </p>
           </div>
-        </section>
+         </section>
 
-        {/* Contact Section */}
-        <Contact />
+         <SectionDivider />
+
+         {/* Contact Section */}
+         <Contact />
       </main>
       <Footer />
     </div>

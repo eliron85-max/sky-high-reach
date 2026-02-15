@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SectionDivider from "@/components/SectionDivider";
 import { Award, Shield, Users } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useTranslation } from "@/lib/i18n";
@@ -26,10 +27,12 @@ const AboutPage = () => {
               {t("aboutPage.heroSubtitle")}
             </p>
           </div>
-        </section>
+         </section>
 
-        {/* Main Content */}
-        <section ref={ref} className={`py-16 lg:py-24 bg-secondary scroll-reveal ${isVisible ? 'visible' : ''}`}>
+         <SectionDivider />
+
+         {/* Main Content */}
+         <section ref={ref} className={`py-16 lg:py-24 bg-secondary scroll-reveal ${isVisible ? 'visible' : ''}`}>
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Text Content */}

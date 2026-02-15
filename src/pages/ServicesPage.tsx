@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SectionDivider from "@/components/SectionDivider";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Link } from "react-router-dom";
 import { ImageWithSkeleton } from "@/components/ui/image-with-skeleton";
@@ -82,10 +83,12 @@ const ServicesPage = () => {
               {t("servicesPage.heroSubtitle")}
             </p>
           </div>
-        </section>
+         </section>
 
-        {/* Services Grid */}
-        <section ref={ref} className={`py-16 lg:py-24 bg-background scroll-reveal ${isVisible ? 'visible' : ''}`}>
+         <SectionDivider />
+
+         {/* Services Grid */}
+         <section ref={ref} className={`py-16 lg:py-24 bg-background scroll-reveal ${isVisible ? 'visible' : ''}`}>
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {services.map((service, index) => (

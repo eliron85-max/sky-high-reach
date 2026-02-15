@@ -15,6 +15,7 @@ import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 
 import LaptopMockup from "@/components/LaptopMockup";
+import SectionDivider from "@/components/SectionDivider";
 import { useTranslation } from "@/lib/i18n";
 
 // Services images
@@ -232,6 +233,8 @@ export default function Index() {
             </section>
 
             <div className="relative z-10">
+              <SectionDivider />
+
               {/* STATS */}
               <HomeStatsSection
                 titleGold={t("home.statsGold")}
@@ -244,7 +247,7 @@ export default function Index() {
                 images={[statsImage1, statsImage2, statsImage3, statsImage4]}
               />
 
-              {/* URBAN “CURTAIN” over STATS */}
+              {/* URBAN "CURTAIN" over STATS */}
               <div ref={curtainRef} className="relative z-20" style={{ height: "200vh" }}>
                 <div className="sticky top-0 h-[100svh] overflow-hidden">
                   <div
@@ -276,8 +279,11 @@ export default function Index() {
                 />
               </section>
 
+              <SectionDivider />
               <HomeTestimonials />
+              <SectionDivider />
               <LaptopMockup />
+              <SectionDivider />
               <Contact />
             </div>
           </div>
