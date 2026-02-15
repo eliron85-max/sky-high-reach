@@ -89,31 +89,25 @@ const ServicesPage = () => {
 
          {/* Services Grid */}
          <section ref={ref} className={`py-16 lg:py-24 bg-background scroll-reveal ${isVisible ? 'visible' : ''}`}>
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
               {services.map((service, index) => (
                 <Link
                   key={index}
                   to={service.link}
-                  className={`group block animate-fade-in`}
+                  className="group block animate-fade-in"
                   style={{ animationDelay: `${index * 0.08}s`, animationFillMode: 'both' }}
                 >
-                  <div className="overflow-hidden rounded-xl bg-card border border-card-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                    <div className="aspect-[4/3] overflow-hidden">
-                      <ImageWithSkeleton
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="p-5 text-center">
-                      <h3 className="font-bold text-foreground text-lg mb-2">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
+                  <div className="relative w-full aspect-[3/2] overflow-hidden">
+                    <ImageWithSkeleton
+                      src={service.image}
+                      alt={service.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="py-3 px-1 text-right">
+                    <h3 className="text-foreground text-sm md:text-base font-medium tracking-wide">{service.title}</h3>
+                    <div className="mt-1 h-px w-0 bg-[#c9a84c] transition-all duration-500 group-hover:w-full mr-0 ml-auto" />
                   </div>
                 </Link>
               ))}
