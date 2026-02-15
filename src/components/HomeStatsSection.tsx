@@ -71,7 +71,7 @@ export default function HomeStatsSection({ titleBlack, titleGold, stats, images 
       className="relative z-0 w-full overflow-hidden bg-gradient-to-br from-stone-100 via-neutral-50 to-stone-200 dark:bg-none dark:bg-black"
     >
       {/* נותן “מסלול גלילה” כדי שהסטטיסטיקות ישארו sticky */}
-      <div className="relative min-h-[200vh]">
+      <div className="relative min-h-[130vh]">
         {/* השכבה שנדבקת למסך */}
         <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
           <div className="relative mx-auto flex h-full w-full max-w-7xl items-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
