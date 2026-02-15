@@ -158,7 +158,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
             <button
               onClick={goPrev}
               disabled={activeIndex === 0}
-              className="w-12 h-12 rounded-full border-2 border-[#c9a84c] bg-transparent flex items-center justify-center text-[#c9a84c] transition-opacity disabled:opacity-30"
+              className="w-12 h-12 rounded-full border-2 border-[#c9a84c] bg-black/50 backdrop-blur-sm flex items-center justify-center text-[#c9a84c] transition-opacity disabled:opacity-30 shadow-lg"
               aria-label="Previous"
             >
               <ChevronRight size={24} />
@@ -166,7 +166,7 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
             <button
               onClick={goNext}
               disabled={activeIndex === items.length - 1}
-              className="w-12 h-12 rounded-full border-2 border-[#c9a84c] bg-transparent flex items-center justify-center text-[#c9a84c] transition-opacity disabled:opacity-30"
+              className="w-12 h-12 rounded-full border-2 border-[#c9a84c] bg-black/50 backdrop-blur-sm flex items-center justify-center text-[#c9a84c] transition-opacity disabled:opacity-30 shadow-lg"
               aria-label="Next"
             >
               <ChevronLeft size={24} />
@@ -197,6 +197,12 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
           background: rgba(0,0,0,0.48);
           transition: opacity 220ms ease;
           opacity: 1;
+        }
+
+        @media (max-width: 639px){
+          .deck-dim{
+            background: rgba(0,0,0,0.22);
+          }
         }
 
         .deck-glow{
