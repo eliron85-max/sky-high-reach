@@ -10,6 +10,7 @@ import facadeProject5 from "@/assets/facade-project-5.webp";
 import netanyaProject from "@/assets/netanya-new.webp";
 import facadeRestorationNew from "@/assets/facade-restoration-new.webp";
 import stoneAnchoringSea from "@/assets/stone-anchoring-sea.webp";
+import stoneCladdinHeight from "@/assets/stone-cladding-height.webp";
 
 interface Project {
   id: number;
@@ -49,7 +50,8 @@ const Projects = () => {
   { id: 6, title: "שיקום חזית היסטורית", category: "שיקום ושיפוץ מעטפת", location: "יפו", images: [netanyaProject] },
   { id: 10, title: "שיפוץ מעטפת בניין מגורים", category: "שיקום ושיפוץ מעטפת", location: "מרכז", images: [facadeProject5] },
   { id: 11, title: "שיקום מעטפת חיצונית", category: "שיקום ושיפוץ מעטפת", location: "מרכז", images: [facadeRestorationNew] },
-  { id: 12, title: "חיפוי ועיגון מבנים", category: "חיפוי ועיגון אבנים", location: "מרכז", images: [stoneAnchoringSea] }];
+  { id: 12, title: "חיפוי ועיגון מבנים", category: "חיפוי ועיגון אבנים", location: "מרכז", images: [stoneAnchoringSea] },
+  { id: 13, title: "עבודות חיפוי בגובה", category: "חיפוי ועיגון אבנים", location: "מרכז", images: [stoneCladdinHeight] }];
 
 
   const filteredProjects =
