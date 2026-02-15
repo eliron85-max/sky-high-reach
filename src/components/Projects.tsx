@@ -20,16 +20,11 @@ interface Project {
 const ProjectCard = ({ project, index, onOpen }: { project: Project; index: number; onOpen: (project: Project) => void }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const parallaxOffset = useParallax(cardRef, 0.3);
-  const { ref: staggerRef, isVisible, style: staggerStyle } = useStaggeredReveal({ index, baseDelay: 100 });
 
   return (
     <div
-      ref={(el) => {
-        cardRef.current = el;
-        (staggerRef as any).current = el;
-      }}
-      className={`group relative bg-card rounded-card overflow-hidden cursor-pointer hover:shadow-card-hover transition-all duration-300 scroll-reveal-stagger ${isVisible ? 'visible' : ''}`}
-      style={staggerStyle}
+      ref={cardRef}
+      className="group relative bg-card rounded-card overflow-hidden cursor-pointer hover:shadow-card-hover transition-all duration-300"
       onClick={() => onOpen(project)}
     >
       {/* Image Placeholder with Parallax */}
@@ -41,8 +36,8 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
             transition: 'transform 0.1s ease-out'
           }}
         >
-          {project.images[0]?.startsWith('/') || project.images[0]?.startsWith('http') || project.images[0]?.includes('/assets/') ? (
-            <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover" />
+          {project.images[0] && project.images[0] !== '' ? (
+            <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover" loading="lazy" />
           ) : (
             <p className="text-muted-foreground flex items-center justify-center h-full">תמונת פרויקט</p>
           )}
@@ -66,7 +61,7 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
 };
 
 const Projects = () => {
-  const { ref, isVisible } = useScrollReveal();
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.01 });
   const [selectedCategory, setSelectedCategory] = useState("הכל");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
