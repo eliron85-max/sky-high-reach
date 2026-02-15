@@ -110,66 +110,69 @@ export default function Index() {
         </div>
       </div>
 
-      {/* ========== #3 HORIZONTAL TIMELINE ========== */}
-      <HorizontalTimeline
-        title="איך זה עובד?"
-        subtitle="מהרעיון ועד להשקה - צעד אחר צעד"
-        items={timelineItems}
-      />
+      {/* ========== Main content — above sticky hero ========== */}
+      <div className="relative z-10">
+        {/* ========== #3 HORIZONTAL TIMELINE ========== */}
+        <HorizontalTimeline
+          title="איך זה עובד?"
+          subtitle="מהרעיון ועד להשקה - צעד אחר צעד"
+          items={timelineItems}
+        />
 
-      {/* ========== #4 STATS COUNTER ========== */}
-      <HomeStatsSection
-        titleGold={t("home.statsGold")}
-        titleBlack={t("home.statsBlack")}
-        stats={[
-          { value: "500+", label: t("home.statsProjects") },
-          { value: "15", label: t("home.statsExperience") },
-          { value: "50+", label: t("home.statsCities") },
-        ]}
-        images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-      />
+        {/* ========== #4 STATS COUNTER ========== */}
+        <HomeStatsSection
+          titleGold={t("home.statsGold")}
+          titleBlack={t("home.statsBlack")}
+          stats={[
+            { value: "500+", label: t("home.statsProjects") },
+            { value: "15", label: t("home.statsExperience") },
+            { value: "50+", label: t("home.statsCities") },
+          ]}
+          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+        />
 
-      {/* ========== #5 URBAN RENEWAL ========== */}
-      <HomeUrbanRenewalHero
-        images={urbanImages}
-        titleTop={t("home.urbanTitleTop")}
-        titleGold={t("home.urbanTitleGold")}
-        subtitle={t("home.urbanSubtitle")}
-      />
+        {/* ========== #5 URBAN RENEWAL ========== */}
+        <HomeUrbanRenewalHero
+          images={urbanImages}
+          titleTop={t("home.urbanTitleTop")}
+          titleGold={t("home.urbanTitleGold")}
+          subtitle={t("home.urbanSubtitle")}
+        />
 
-      {/* ========== #6 STICKY REVEAL ========== */}
-      <StickyRevealSection
-        sectionTitle="השראה מהפרויקטים שלנו"
-        layers={revealLayers}
-      />
+        {/* ========== #6 STICKY REVEAL ========== */}
+        <StickyRevealSection
+          sectionTitle="השראה מהפרויקטים שלנו"
+          layers={revealLayers}
+        />
 
-      {/* ========== #7 STICKY SPLIT — ימין ========== */}
-      <StickySplitSection
-        image={facadeProject1}
-        title="שיקום מבנים מקצועי"
-        subtitle="שיקום חזיתות"
-        description="אנו מתמחים בשיקום ושיפוץ חזיתות מבנים, תוך שימוש בחומרים איכותיים וטכנולוגיות מתקדמות. הצוות המקצועי שלנו מחזיר את הזוהר לכל מבנה."
-        features={["שיקום חזיתות בטון ואבן", "עמידות לאורך שנים", "עבודה על פי תקנים מחמירים", "ניסיון של מעל 15 שנה"]}
-        imagePosition="right"
-        ctaText="לפרטים נוספים"
-        ctaHref="/facade-restoration"
-      />
+        {/* ========== #7 STICKY SPLIT — ימין ========== */}
+        <StickySplitSection
+          image={facadeProject1}
+          title="שיקום מבנים מקצועי"
+          subtitle="שיקום חזיתות"
+          description="אנו מתמחים בשיקום ושיפוץ חזיתות מבנים, תוך שימוש בחומרים איכותיים וטכנולוגיות מתקדמות. הצוות המקצועי שלנו מחזיר את הזוהר לכל מבנה."
+          features={["שיקום חזיתות בטון ואבן", "עמידות לאורך שנים", "עבודה על פי תקנים מחמירים", "ניסיון של מעל 15 שנה"]}
+          imagePosition="right"
+          ctaText="לפרטים נוספים"
+          ctaHref="/facade-restoration"
+        />
 
-      {/* ========== #8 STICKY SPLIT — שמאל ========== */}
-      <StickySplitSection
-        image={stoneVeneerImage}
-        title="חיפוי אבן טבעית"
-        subtitle="חיפוי ועיצוב"
-        description="חיפוי אבן טבעית הוא אמנות בפני עצמה. אנו מציעים מגוון רחב של אבנים טבעיות ועיצובים ייחודיים שמשדרגים כל מבנה למראה יוקרתי ובלתי נשכח."
-        features={["מגוון אבנים טבעיות", "עיצוב מותאם אישית", "התקנה מקצועית", "אחריות מלאה"]}
-        imagePosition="left"
-        ctaText="לפרטים נוספים"
-        ctaHref="/stone-veneer"
-      />
+        {/* ========== #8 STICKY SPLIT — שמאל ========== */}
+        <StickySplitSection
+          image={stoneVeneerImage}
+          title="חיפוי אבן טבעית"
+          subtitle="חיפוי ועיצוב"
+          description="חיפוי אבן טבעית הוא אמנות בפני עצמה. אנו מציעים מגוון רחב של אבנים טבעיות ועיצובים ייחודיים שמשדרגים כל מבנה למראה יוקרתי ובלתי נשכח."
+          features={["מגוון אבנים טבעיות", "עיצוב מותאם אישית", "התקנה מקצועית", "אחריות מלאה"]}
+          imagePosition="left"
+          ctaText="לפרטים נוספים"
+          ctaHref="/stone-veneer"
+        />
 
-      <HomeTestimonials />
-      <Contact />
-      <Footer />
+        <HomeTestimonials />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   );
 }
