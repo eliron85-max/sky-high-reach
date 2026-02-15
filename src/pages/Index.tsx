@@ -1,6 +1,5 @@
 // src/pages/Index.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
@@ -13,9 +12,8 @@ import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
-
+import BouncingTextSection from "@/components/BouncingTextSection";
 import LaptopMockup from "@/components/LaptopMockup";
-import SectionDivider from "@/components/SectionDivider";
 import { useTranslation } from "@/lib/i18n";
 
 // Services images
@@ -37,8 +35,6 @@ import stoneCladding5 from "@/assets/stone-cladding-5.webp";
 import stoneCladding6 from "@/assets/stone-cladding-6.webp";
 import stoneCladding7 from "@/assets/stone-cladding-7.webp";
 import stoneCladding8 from "@/assets/stone-cladding-8.webp";
-import urbanRenewal1 from "@/assets/urban-renewal-1.jpg";
-import urbanRenewal2 from "@/assets/urban-renewal-2.jpg";
 
 // Stats section images
 import statsImage1 from "@/assets/stats-1.webp";
@@ -55,26 +51,10 @@ const urbanImages = [
   stoneCladding6,
   stoneCladding7,
   stoneCladding8,
-  urbanRenewal1,
-  urbanRenewal2,
 ];
 
 export default function Index() {
-  const { t, dir } = useTranslation();
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slides = [
-    { title: t("hero.slide1Title"), subtitle: t("hero.slide1Subtitle") },
-    { title: t("hero.slide2Title"), subtitle: t("hero.slide2Subtitle") },
-    { title: t("hero.slide3Title"), subtitle: t("hero.slide3Subtitle") },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
+  const { t } = useTranslation();
 
   const services = [
     { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage, href: "/special-projects" },
@@ -89,11 +69,6 @@ export default function Index() {
 
   const scrollToNext = () => {
     const el = document.getElementById("next-section");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -155,55 +130,6 @@ export default function Index() {
 
             <div className="absolute inset-0 bg-black/45" />
 
-            {/* Hero Content */}
-            <div className="absolute inset-0 z-10 flex items-center justify-center px-4" dir={dir}>
-              <div className="max-w-3xl mx-auto text-center">
-                <div key={currentSlide} className="animate-fade-in-up">
-                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
-                      {slides[currentSlide].title}
-                    </span>
-                  </h1>
-                  <p className="text-lg md:text-2xl lg:text-3xl text-white/80 mb-10 leading-relaxed max-w-2xl mx-auto">
-                    {slides[currentSlide].subtitle}
-                  </p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Button
-                    onClick={() => scrollToSection("projects")}
-                    size="lg"
-                    className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-6 text-lg rounded-full"
-                  >
-                    {t("hero.ctaSecondary")}
-                  </Button>
-
-                  <Button
-                    onClick={() => scrollToSection("contact")}
-                    size="lg"
-                    className="bg-black/60 backdrop-blur-sm border border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-black/80 hover:border-[#c9a84c] transition-all px-8 py-6 text-lg rounded-full"
-                  >
-                    {t("hero.ctaPrimary")}
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Vertical dot indicators */}
-            <div className={`absolute ${dir === "rtl" ? "left-4 md:left-6" : "right-4 md:right-6"} top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3`}>
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all border ${
-                    index === currentSlide
-                      ? "bg-white border-white scale-125"
-                      : "bg-white/40 border-white/60 hover:bg-white/60"
-                  }`}
-                />
-              ))}
-            </div>
-
             <button
               type="button"
               onClick={scrollToNext}
@@ -222,7 +148,7 @@ export default function Index() {
         <div className="relative z-10 -mt-[100vh]">
           <div className="h-screen pointer-events-none" aria-hidden="true" />
           <div className="relative bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
-            
+            <BouncingTextSection lines={["ברוכים הבאים לאתר", "א.א פרויקטים וגובה"]} />
 
             <div className="relative z-[5]">
               <TrustStrip />
@@ -233,8 +159,6 @@ export default function Index() {
             </section>
 
             <div className="relative z-10">
-              <SectionDivider />
-
               {/* STATS */}
               <HomeStatsSection
                 titleGold={t("home.statsGold")}
@@ -247,7 +171,7 @@ export default function Index() {
                 images={[statsImage1, statsImage2, statsImage3, statsImage4]}
               />
 
-              {/* URBAN "CURTAIN" over STATS */}
+              {/* URBAN “CURTAIN” over STATS */}
               <div ref={curtainRef} className="relative z-20" style={{ height: "200vh" }}>
                 <div className="sticky top-0 h-[100svh] overflow-hidden">
                   <div
@@ -267,11 +191,20 @@ export default function Index() {
                 </div>
               </div>
 
-              <SectionDivider />
+              <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-[0.35]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
+                    backgroundSize: "60px 60px",
+                  }}
+                />
+              </section>
+
               <HomeTestimonials />
-              <SectionDivider />
               <LaptopMockup />
-              <SectionDivider />
               <Contact />
             </div>
           </div>
