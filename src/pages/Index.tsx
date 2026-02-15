@@ -138,6 +138,7 @@ export default function Index() {
             </section>
 
             {/* everything after services should be above the pinned cards */}
+            {/* everything after services should be above the pinned cards */}
             <div className="relative z-10">
               <HomeStatsSection
                 titleGold={t("home.statsGold")}
@@ -150,12 +151,20 @@ export default function Index() {
                 images={[statsImage1, statsImage2, statsImage3, statsImage4]}
               />
 
-              <HomeUrbanRenewalHero
-                images={urbanImages}
-                titleTop={t("home.urbanTitleTop")}
-                titleGold={t("home.urbanTitleGold")}
-                subtitle={t("home.urbanSubtitle")}
-              />
+              {/* CURTAIN REVEAL מעל הסטטיסטיקות */}
+              <div className="relative z-20 -mt-[100svh]">
+                {/* “מסלול” גלילה כדי שהוילון יעלה חלק */}
+                <div className="h-[100svh] pointer-events-none" aria-hidden="true" />
+
+                <div className="relative overflow-hidden bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.28)]">
+                  <HomeUrbanRenewalHero
+                    images={urbanImages}
+                    titleTop={t("home.urbanTitleTop")}
+                    titleGold={t("home.urbanTitleGold")}
+                    subtitle={t("home.urbanSubtitle")}
+                  />
+                </div>
+              </div>
 
               <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
                 <div
