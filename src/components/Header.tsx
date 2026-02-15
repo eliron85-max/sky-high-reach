@@ -104,7 +104,7 @@ export default function Header() {
   }, [mobileOpen]);
 
   const goldText =
-    "text-[#1a1a1a] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] hover:text-[#c9a84c] dark:hover:brightness-125 transition font-semibold";
+    "text-white dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] hover:text-[#c9a84c] dark:hover:brightness-125 transition font-semibold";
 
   const closeMobile = () => {
     setMobileOpen(false);
@@ -149,7 +149,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                 aria-expanded={servicesOpen}
               >
                 {t("nav.services")}
-                <span className="text-[14px] text-[#1a1a1a] dark:text-[#c9a84c] opacity-80">▼</span>
+                <span className="text-[14px] text-white dark:text-[#c9a84c] opacity-80">▼</span>
               </button>
 
               {servicesOpen && (
@@ -281,7 +281,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
               <Link
                 key={item.path}
                 to={item.path}
-                className="relative text-[#1a1a1a] hover:text-[#c9a84c] dark:text-[#e8d5a3] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#c9a84c] after:to-[#d4af37] dark:after:from-[#e8d5a3] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
+                className="relative text-white hover:text-[#c9a84c] dark:text-[#e8d5a3] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#c9a84c] after:to-[#d4af37] dark:after:from-[#e8d5a3] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
               >
                 {item.label}
               </Link>
