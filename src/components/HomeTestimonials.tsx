@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import chatBg from "@/assets/whatsapp-chat-bg.webp";
 
 import avatar1 from "@/assets/avatar-1.webp";
 import avatar2 from "@/assets/avatar-2.webp";
@@ -180,10 +181,12 @@ const HomeTestimonials = () => {
                     </div>
 
                     {/* Chat area */}
-                    <div className="flex-1 flex flex-col justify-center gap-2 px-3 py-3" style={{ background: '#0b141a' }}>
+                    <div className="flex-1 flex flex-col justify-center gap-2 px-3 py-3 relative" style={{ backgroundImage: `url(${chatBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                      {/* Dark overlay for readability */}
+                      <div className="absolute inset-0 bg-black/40" />
                       {/* Client message bubble (right, dark) */}
-                      <div className="self-end max-w-[85%] relative">
-                        <div className="rounded-lg px-3 py-2 text-white text-sm sm:text-base leading-relaxed" style={{ background: '#1f2c34', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
+                      <div className="self-end max-w-[85%] relative z-10">
+                        <div className="rounded-lg px-3 py-2 text-white text-sm sm:text-base leading-relaxed" style={{ background: 'rgba(31,44,52,0.9)', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
                           {t.text}
                           <div className="flex items-center justify-end gap-1 mt-1">
                             <span className="text-[#8696a0] text-[11px]">09:{String(20 + i).padStart(2, '0')}</span>
@@ -192,8 +195,8 @@ const HomeTestimonials = () => {
                       </div>
 
                       {/* Company response bubble (left, green) */}
-                      <div className="self-start max-w-[80%] relative">
-                        <div className="rounded-lg px-3 py-2 text-sm leading-relaxed" style={{ background: '#005c4b', color: '#e9edef', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
+                      <div className="self-start max-w-[80%] relative z-10">
+                        <div className="rounded-lg px-3 py-2 text-sm leading-relaxed" style={{ background: 'rgba(0,92,75,0.9)', color: '#e9edef', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
                           תודה 🙏 בטיחות לפני הכול. נשארנו זמינים לכל שאלה.
                           <div className="flex items-center justify-end gap-1 mt-1">
                             <span className="text-[#8696a0] text-[11px]">09:{String(21 + i).padStart(2, '0')}</span>
@@ -205,7 +208,7 @@ const HomeTestimonials = () => {
                       </div>
 
                       {/* Client follow-up bubble */}
-                      <div className="self-end max-w-[70%] relative">
+                      <div className="self-end max-w-[70%] relative z-10">
                         <div className="rounded-lg px-3 py-2 text-white text-sm leading-relaxed" style={{ background: '#1f2c34', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
                           ראו שאתם מקצוענים. תודה רבה.
                           <div className="flex items-center justify-end gap-1 mt-1">
