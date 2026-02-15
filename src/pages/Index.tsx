@@ -72,9 +72,17 @@ export default function Index() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  // ===== Curtain Reveal for Urban Renewal over Stats =====
+  // ===== Curtain Reveal over Stats =====
   const curtainRef = useRef<HTMLDivElement | null>(null);
   const [curtainP, setCurtainP] = useState(0);
+  const [vh, setVh] = useState(0);
+
+  useEffect(() => {
+    const setHeights = () => setVh(window.innerHeight || 0);
+    setHeights();
+    window.addEventListener("resize", setHeights, { passive: true });
+    return () => window.removeEventListener("resize", setHeights);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -84,7 +92,7 @@ export default function Index() {
       const r = el.getBoundingClientRect();
       const h = window.innerHeight || 1;
 
-      // el height is 200vh. We map viewport passing through it into 0..1
+      // 0..1 בתוך מסלול של 200vh
       const raw = 1 - r.top / h;
       const clamped = Math.max(0, Math.min(1, raw));
       setCurtainP(clamped);
@@ -101,14 +109,11 @@ export default function Index() {
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
 
-      {/* Right side */}
       <RappellingFigure />
-
-      {/* Left side */}
       <RappellingFigureLeft />
 
       <main>
-        {/* HERO VIDEO SECTION — sticky so content scrolls over it like a curtain */}
+        {/* HERO VIDEO SECTION */}
         <div className="relative" style={{ height: "200vh" }}>
           <section className="sticky top-0 z-0 w-full h-screen overflow-hidden">
             <video
@@ -125,7 +130,6 @@ export default function Index() {
 
             <div className="absolute inset-0 bg-black/45" />
 
-            {/* Scroll icon */}
             <button
               type="button"
               onClick={scrollToNext}
@@ -135,34 +139,27 @@ export default function Index() {
               <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
                 <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
               </div>
-
               <div className="mt-2 w-[10px] h-[10px] border-b-2 border-r-2 border-[#e8d5a3] rotate-45 opacity-90" />
             </button>
           </section>
         </div>
 
-        {/* CURTAIN CONTENT — scrolls up over the hero with rounded top corners */}
+        {/* CURTAIN CONTENT over HERO */}
         <div className="relative z-10 -mt-[100vh]">
-          {/* Rounded curtain edge */}
           <div className="h-screen pointer-events-none" aria-hidden="true" />
-
           <div className="relative bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
-            {/* BOUNCING TEXT */}
             <BouncingTextSection lines={["ברוכים הבאים לאתר", "א.א פרויקטים וגובה"]} />
 
-            {/* TRUST STRIP */}
             <div className="relative z-[5]">
               <TrustStrip />
             </div>
 
-            {/* SERVICES SCROLL CARDS */}
             <section id="next-section" className="relative z-0">
               <ServicesScrollCards title={t("home.servicesTitle")} items={services} />
             </section>
 
-            {/* everything after services should be above the pinned cards */}
             <div className="relative z-10">
-              {/* ===== STATS (sticky inside its own component) ===== */}
+              {/* STATS */}
               <HomeStatsSection
                 titleGold={t("home.statsGold")}
                 titleBlack={t("home.statsBlack")}
@@ -174,13 +171,13 @@ export default function Index() {
                 images={[statsImage1, statsImage2, statsImage3, statsImage4]}
               />
 
-              {/* ===== CURTAIN REVEAL: Urban Renewal עולה מעל הסטטיסטיקות ===== */}
+              {/* URBAN “CURTAIN” over STATS */}
               <div ref={curtainRef} className="relative z-20" style={{ height: "200vh" }}>
                 <div className="sticky top-0 h-[100svh] overflow-hidden">
                   <div
-                    className="h-full w-full bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.28)] overflow-hidden"
+                    className="absolute left-0 top-0 h-[100svh] w-full bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.28)] overflow-hidden"
                     style={{
-                      transform: `translateY(${(1 - curtainP) * 100}%)`,
+                      transform: `translateY(${Math.max(0, (1 - curtainP) * vh)}px)`,
                       willChange: "transform",
                     }}
                   >
