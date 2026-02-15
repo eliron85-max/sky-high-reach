@@ -43,7 +43,7 @@ export default function HomeStatsSection({
     <section
       ref={sectionRef}
       dir="rtl"
-      className="relative w-full overflow-hidden bg-black py-16 sm:py-20 lg:py-28"
+      className="relative w-full overflow-hidden bg-gradient-to-br from-stone-100 via-neutral-50 to-stone-200 dark:bg-none dark:bg-black py-16 sm:py-20 lg:py-28"
     >
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,7 +55,7 @@ export default function HomeStatsSection({
               <span className="absolute -right-4 top-0 hidden h-24 w-[6px] bg-[#d7b46a] sm:block" />
               <h2 className="text-right text-3xl sm:text-4xl lg:text-[3rem] leading-[1.2] tracking-tight">
                 <span className="block text-[#d7b46a] font-medium">{titleGold}</span>
-                <span className="block text-white font-light">{titleBlack}</span>
+                <span className="block text-gray-800 dark:text-white font-light">{titleBlack}</span>
               </h2>
             </div>
 
@@ -77,7 +77,7 @@ export default function HomeStatsSection({
                   <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#d7b46a]">
                     {stat.value}
                   </div>
-                  <div className="mt-1 text-sm sm:text-base text-white/70">
+                  <div className="mt-1 text-sm sm:text-base text-gray-500 dark:text-white/70">
                     {stat.label}
                   </div>
                 </div>
