@@ -163,26 +163,56 @@ const HomeTestimonials = () => {
                     animation: cardEntry >= 1 ? `testimonialFloat 4s ease-in-out ${i * 0.6}s infinite` : "none",
                   }}
                 >
-                  <div className="w-full h-full rounded-lg shadow-lg p-0 flex flex-col justify-between relative" style={{ background: '#dcf8c6' }}>
-                    {/* WhatsApp tail */}
-                    <div className="absolute -top-2 right-4 w-4 h-4 rotate-45" style={{ background: '#dcf8c6' }} />
-                    <div className="p-4 pb-2">
-                      {/* Contact header */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <img src={t.avatar} alt={t.name} className="w-9 h-9 rounded-full object-cover" />
-                        <span className="font-semibold text-[#075e54] text-sm">{t.name}</span>
-                        <span className="text-[#667781] text-xs">· {t.role}</span>
+                  <div className="w-full h-full rounded-2xl shadow-xl overflow-hidden flex flex-col" style={{ background: '#0b141a' }}>
+                    {/* Dark WhatsApp header */}
+                    <div className="flex items-center justify-between px-3 py-2" style={{ background: '#1f2c34' }}>
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <img src={t.avatar} alt={t.name} className="w-9 h-9 rounded-full object-cover border-2 border-[#c9a84c]" />
+                        <div className="flex flex-col min-w-0">
+                          <span className="font-semibold text-white text-sm truncate">{t.name} · {t.role}</span>
+                          <span className="text-[#8696a0] text-[11px]">נראה לאחרונה אתמול</span>
+                        </div>
                       </div>
-                      {/* Message text */}
-                      <p className="text-[#111b21] text-base sm:text-lg leading-relaxed" style={{ fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>{t.text}</p>
+                      <div className="flex items-center gap-3 text-[#aebac1]">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01z"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                      </div>
                     </div>
-                    {/* Timestamp + double check */}
-                    <div className="flex items-center justify-end gap-1 px-4 pb-3">
-                      <span className="text-[#667781] text-[11px]">09:{String(30 + i).padStart(2, '0')}</span>
-                      {/* Double check marks */}
-                      <svg viewBox="0 0 16 11" width="16" height="11" className="text-[#53bdeb]">
-                        <path fill="currentColor" d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.095a.463.463 0 0 0-.336-.153.457.457 0 0 0-.344.153.52.52 0 0 0 0 .72l2.382 2.477a.476.476 0 0 0 .68.01l6.588-8.136a.484.484 0 0 0-.084-.688ZM7.543.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178L.668 8.365a.484.484 0 0 0 .084.688.457.457 0 0 0 .304.102.493.493 0 0 0 .381-.178l6.19-7.636a.484.484 0 0 0-.084-.688Z" />
-                      </svg>
+
+                    {/* Chat area */}
+                    <div className="flex-1 flex flex-col justify-center gap-2 px-3 py-3" style={{ background: '#0b141a' }}>
+                      {/* Client message bubble (right, dark) */}
+                      <div className="self-end max-w-[85%] relative">
+                        <div className="rounded-lg px-3 py-2 text-white text-sm sm:text-base leading-relaxed" style={{ background: '#1f2c34', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
+                          {t.text}
+                          <div className="flex items-center justify-end gap-1 mt-1">
+                            <span className="text-[#8696a0] text-[11px]">09:{String(20 + i).padStart(2, '0')}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Company response bubble (left, green) */}
+                      <div className="self-start max-w-[80%] relative">
+                        <div className="rounded-lg px-3 py-2 text-sm leading-relaxed" style={{ background: '#005c4b', color: '#e9edef', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
+                          תודה 🙏 בטיחות לפני הכול. נשארנו זמינים לכל שאלה.
+                          <div className="flex items-center justify-end gap-1 mt-1">
+                            <span className="text-[#8696a0] text-[11px]">09:{String(21 + i).padStart(2, '0')}</span>
+                            <svg viewBox="0 0 16 11" width="16" height="11" className="text-[#53bdeb]">
+                              <path fill="currentColor" d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.095a.463.463 0 0 0-.336-.153.457.457 0 0 0-.344.153.52.52 0 0 0 0 .72l2.382 2.477a.476.476 0 0 0 .68.01l6.588-8.136a.484.484 0 0 0-.084-.688ZM7.543.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178L.668 8.365a.484.484 0 0 0 .084.688.457.457 0 0 0 .304.102.493.493 0 0 0 .381-.178l6.19-7.636a.484.484 0 0 0-.084-.688Z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Client follow-up bubble */}
+                      <div className="self-end max-w-[70%] relative">
+                        <div className="rounded-lg px-3 py-2 text-white text-sm leading-relaxed" style={{ background: '#1f2c34', fontFamily: "'Segoe UI', Helvetica, Arial, sans-serif" }}>
+                          ראו שאתם מקצוענים. תודה רבה.
+                          <div className="flex items-center justify-end gap-1 mt-1">
+                            <span className="text-[#8696a0] text-[11px]">09:{String(22 + i).padStart(2, '0')}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
