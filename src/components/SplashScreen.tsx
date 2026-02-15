@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import logoImage from "@/assets/logo-new.webp";
+import splashBg from "@/assets/splash-bg.webp";
 
 const SPARKLES = [
   { top: "28%", left: "38%", size: 18, delay: 0 },
@@ -54,15 +55,17 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-[999999] flex items-center justify-center"
+      className="fixed inset-0 z-[999999] flex items-center justify-center overflow-hidden"
       style={{
-        background: "#000000",
         opacity: phase === "fadeOut" ? 0 : 1,
         backdropFilter: phase === "fadeOut" ? "blur(20px)" : "none",
         WebkitBackdropFilter: phase === "fadeOut" ? "blur(20px)" : "none",
         transition: "opacity 0.7s ease-out, backdrop-filter 0.7s ease-out, -webkit-backdrop-filter 0.7s ease-out",
       }}
     >
+      {/* Background image */}
+      <img src={splashBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-black/50" />
       {/* Sparkles */}
       {SPARKLES.map((s, i) => (
         <svg
