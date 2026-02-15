@@ -1,7 +1,35 @@
 // src/components/HomeStatsSection.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
+function useCountUp(target: number, duration = 2000, start = false) {
+  const [value, setValue] = useState(0);
+  const rafRef = useRef<number>();
+
+  useEffect(() => {
+    if (!start) return;
+    const startTime = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      setValue(Math.round(eased * target));
+      if (progress < 1) rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(step);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [start, target, duration]);
+
+  return value;
+}
+
+function AnimatedStat({ value, show }: { value: string; show: boolean }) {
+  const numericMatch = value.match(/(\d+)/);
+  const numeric = numericMatch ? parseInt(numericMatch[1], 10) : 0;
+  const prefix = value.slice(0, value.indexOf(numericMatch?.[0] ?? ''));
+  const suffix = value.slice((numericMatch?.index ?? 0) + (numericMatch?.[0]?.length ?? 0));
+  const animatedValue = useCountUp(numeric, 2000, show);
+  return <>{prefix}{animatedValue}{suffix}</>;
+}
 type StatItem = {
   value: string;
   label: string;
@@ -72,7 +100,7 @@ export default function HomeStatsSection({ titleBlack, titleGold, stats, images 
                         index === 2 && "delay-200",
                       )}
                     >
-                      <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#d7b46a]">{stat.value}</div>
+                      <div className="text-4xl sm:text-5xl lg:text-6xl font-light text-[#d7b46a]"><AnimatedStat value={stat.value} show={show} /></div>
                       <div className="mt-1 text-sm sm:text-base text-gray-500 dark:text-white/70">{stat.label}</div>
                     </div>
                   ))}
