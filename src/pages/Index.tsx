@@ -14,7 +14,7 @@ import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 import LaptopMockup from "@/components/LaptopMockup";
 import HorizontalTimeline from "@/components/HorizontalTimeline";
-
+import SiteTourWizard from "@/components/SiteTourWizard";
 import StickyRevealSection from "@/components/StickyRevealSection";
 import StickySplitSection from "@/components/StickySplitSection";
 import { useTranslation } from "@/lib/i18n";
@@ -166,7 +166,7 @@ export default function Index() {
       <Header />
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
-      
+      <SiteTourWizard />
 
       <RappellingFigure />
       <RappellingFigureLeft />
