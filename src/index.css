@@ -146,7 +146,7 @@
     background-image: url('/images/grid-texture.webp');
     background-repeat: repeat;
     background-size: 300px;
-    opacity: 0.55;
+    opacity: 0.75;
   }
 
   :root.dark body > * {
