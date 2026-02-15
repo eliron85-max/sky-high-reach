@@ -8,7 +8,7 @@ import { useSharedParallax as useParallax } from "@/hooks/useSharedParallax";
 import facadeProject1 from "@/assets/facade-project-4.webp";
 
 import facadeProject5 from "@/assets/facade-project-5.webp";
-import netanyaProject from "@/assets/netanya-project.webp";
+import netanyaProject from "@/assets/netanya-new.webp";
 
 
 interface Project {
