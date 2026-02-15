@@ -172,7 +172,7 @@ const Contact = () => {
     <section id="contact" dir={dir} className={sectionClass}>
       {/* Background image + dark overlay */}
       <div className="absolute inset-0">
-        <img src="/images/facade-bg.webp" alt="" className="w-full h-full object-cover" style={{ objectPosition: 'center 20%' }} />
+        <img src="/images/facade-bg.webp" alt="" className="w-full h-full object-cover" style={{ objectPosition: 'center 0%' }} />
         <div className="absolute inset-0 bg-black/60" />
       </div>
       <div className="relative z-10 container mx-auto px-4">
