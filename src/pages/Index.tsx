@@ -267,18 +267,6 @@ export default function Index() {
                 </div>
               </div>
 
-              <section className="relative w-full bg-white h-[200px] sm:h-[280px] lg:h-[350px] overflow-hidden">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-[0.35]"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px)",
-                    backgroundSize: "60px 60px",
-                  }}
-                />
-              </section>
-
               <SectionDivider />
               <HomeTestimonials />
               <SectionDivider />
