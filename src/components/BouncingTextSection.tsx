@@ -30,7 +30,7 @@ export default function BouncingTextSection({ lines }: Props) {
   let globalCharIndex = 0;
 
   // Parallax: text moves at ~50% scroll speed
-  const parallaxY = progress * 60; // pixels the text "lags" behind
+  const parallaxY = progress * 150; // pixels the text "lags" behind
 
   return (
     <div
