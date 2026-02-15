@@ -13,11 +13,7 @@ const Footer = () => {
     >
       <div>
         {/* Top Contact Strip */}
-        <div className="relative py-6">
-          {/* Shimmer line bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/10 overflow-hidden">
-            <div className="absolute inset-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c]/60 to-transparent animate-[shimmer-line_3s_ease-in-out_infinite]" />
-          </div>
+        <div className="border-b border-white/10 py-6">
           <div className="container mx-auto px-4">
             <div
               className={`grid grid-cols-1 md:grid-cols-3 gap-6 text-center ${
@@ -204,11 +200,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="relative py-6">
-          {/* Shimmer line top */}
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/10 overflow-hidden">
-            <div className="absolute inset-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c]/60 to-transparent animate-[shimmer-line_3s_ease-in-out_infinite]" />
-          </div>
+        <div className="border-t border-white/10 py-6">
           <div className="container mx-auto px-4">
             <p className="text-center text-sm text-white/60">
               © {new Date().getFullYear()} {t("footer.copyright")}
