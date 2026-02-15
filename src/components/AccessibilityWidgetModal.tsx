@@ -42,54 +42,18 @@ const AccessibilityWidgetModal = ({ isOpen, onClose }: AccessibilityWidgetModalP
     // Font size
     root.style.fontSize = `${newSettings.fontSize}%`;
 
-    // High contrast
-    if (newSettings.highContrast) {
-      body.classList.add("high-contrast");
-    } else {
-      body.classList.remove("high-contrast");
-    }
+    // Toggle accessibility classes with correct prefix
+    const toggleClass = (className: string, enabled: boolean) => {
+      body.classList.toggle(className, enabled);
+    };
 
-    // Grayscale
-    if (newSettings.grayscale) {
-      body.classList.add("grayscale-mode");
-    } else {
-      body.classList.remove("grayscale-mode");
-    }
-
-    // Link highlight
-    if (newSettings.linkHighlight) {
-      body.classList.add("link-highlight");
-    } else {
-      body.classList.remove("link-highlight");
-    }
-
-    // Big cursor
-    if (newSettings.bigCursor) {
-      body.classList.add("big-cursor");
-    } else {
-      body.classList.remove("big-cursor");
-    }
-
-    // Pause animations
-    if (newSettings.pauseAnimations) {
-      body.classList.add("pause-animations");
-    } else {
-      body.classList.remove("pause-animations");
-    }
-
-    // Dyslexic font
-    if (newSettings.dyslexicFont) {
-      body.classList.add("dyslexic-font");
-    } else {
-      body.classList.remove("dyslexic-font");
-    }
-
-    // Text spacing
-    if (newSettings.textSpacing) {
-      body.classList.add("text-spacing");
-    } else {
-      body.classList.remove("text-spacing");
-    }
+    toggleClass("accessibility-high-contrast", newSettings.highContrast);
+    toggleClass("accessibility-grayscale", newSettings.grayscale);
+    toggleClass("accessibility-link-highlight", newSettings.linkHighlight);
+    toggleClass("accessibility-big-cursor", newSettings.bigCursor);
+    toggleClass("accessibility-pause-animations", newSettings.pauseAnimations);
+    toggleClass("accessibility-dyslexic-font", newSettings.dyslexicFont);
+    toggleClass("accessibility-text-spacing", newSettings.textSpacing);
 
     // Save to localStorage
     localStorage.setItem("accessibility-settings", JSON.stringify(newSettings));
