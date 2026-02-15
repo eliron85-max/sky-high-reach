@@ -49,8 +49,8 @@ const ProjectCard = ({ project, index, onOpen }: { project: Project; index: numb
 
       {/* Card Info */}
       <div className="p-4">
-        <h3 className="font-semibold text-white mb-1">{project.title}</h3>
-        <p className="text-sm text-white/60">{project.location}</p>
+        <h3 className="font-semibold text-black dark:text-white mb-1">{project.title}</h3>
+        <p className="text-sm text-black/60 dark:text-white/60">{project.location}</p>
       </div>
     </div>
   );
@@ -174,13 +174,13 @@ const Projects = () => {
   };
 
   return (
-    <section ref={ref} id="projects" className={`py-16 lg:py-24 scroll-reveal ${isVisible ? 'visible' : ''}`} style={{ background: 'hsl(222 20% 5%)' }}>
+    <section ref={ref} id="projects" className={`py-16 lg:py-24 scroll-reveal ${isVisible ? 'visible' : ''} bg-white dark:bg-[hsl(222_20%_5%)]`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-black dark:text-white mb-4">
             הפרויקטים שלנו
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className="text-black/60 dark:text-white/60 max-w-2xl mx-auto">
             גלריה של פרויקטים מוצלחים שביצענו ברחבי הארץ
           </p>
         </div>
@@ -195,7 +195,7 @@ const Projects = () => {
               className={
                 selectedCategory === category
                   ? "bg-transparent border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c]/10 rounded-full shadow-[0_0_8px_rgba(201,168,76,0.3)]"
-                  : "bg-transparent border border-[#c9a84c]/50 text-foreground hover:border-[#c9a84c] hover:text-[#c9a84c] hover:bg-[#c9a84c]/10 rounded-full"
+                  : "bg-transparent border border-[#c9a84c]/50 text-black dark:text-foreground hover:border-[#c9a84c] hover:text-[#c9a84c] hover:bg-[#c9a84c]/10 rounded-full"
               }
             >
               {category}
