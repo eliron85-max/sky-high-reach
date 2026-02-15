@@ -173,11 +173,11 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
             </div>
           </nav>
 
-          <Link to="/" className="justify-self-center" aria-label="א.א פרויקטים וגובה">
+          <Link to="/" className="justify-self-center group" aria-label="א.א פרויקטים וגובה">
             <img
               src={logoImage}
               alt="א.א פרויקטים וגובה"
-              className="h-[110px] lg:h-[135px] w-auto object-contain"
+              className="h-[110px] lg:h-[135px] w-auto object-contain transition-transform duration-300 group-hover:animate-wing-flap"
               draggable={false}
             />
           </Link>
@@ -249,14 +249,14 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
 
           <Link
             to="/"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group"
             aria-label="א.א פרויקטים וגובה"
             onClick={closeMobile}
           >
             <img
               src={logoImage}
               alt="א.א פרויקטים וגובה"
-              className="h-[72px] w-auto max-w-[170px] object-contain"
+              className="h-[72px] w-auto max-w-[170px] object-contain transition-transform duration-300 group-hover:animate-wing-flap"
               draggable={false}
             />
           </Link>
