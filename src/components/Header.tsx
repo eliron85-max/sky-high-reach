@@ -122,7 +122,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
       dir="rtl"
     >
       <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#c9a84c]/10 overflow-hidden">
-        <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_2s_linear_infinite] shadow-[0_0_8px_2px_rgba(201,168,76,0.5)]" />
+        <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_4s_linear_infinite] shadow-[0_0_8px_2px_rgba(201,168,76,0.5)]" />
       </div>
 
       {/* ================= ROW 1 (Laptop/Desktop: md+) ================= */}
