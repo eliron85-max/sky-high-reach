@@ -116,7 +116,14 @@ const Projects = () => {
       title: "שיקום חזית היסטורית",
       category: "שיקום ושיפוץ מעטפת",
       location: "יפו",
-      images: [facadeProject2, facadeProject3],
+      images: [facadeProject2],
+    },
+    {
+      id: 10,
+      title: "שיפוץ מעטפת בניין מגורים",
+      category: "שיקום ושיפוץ מעטפת",
+      location: "גני תקווה",
+      images: [facadeProject3],
     },
     {
       id: 7,
