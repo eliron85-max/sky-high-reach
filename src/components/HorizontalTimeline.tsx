@@ -24,8 +24,17 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const headerInView = useInView(headerRef, { once: true });
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // No scroll-jacking on mobile
     const handle = () => {
       const el = sectionRef.current;
       if (!el) return;
@@ -44,14 +53,76 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
       window.removeEventListener("scroll", handle);
       window.removeEventListener("resize", handle);
     };
-  }, []);
+  }, [isMobile]);
 
+  // Desktop: horizontal scroll-jacking
   const trackWidth = items.length * CARD_W + (items.length - 1) * GAP;
   const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
   const maxTranslate = Math.max(0, trackWidth - viewportWidth + 120);
   const translateX = -progress * maxTranslate;
   const lineProgress = progress;
 
+  // ─── MOBILE: simple vertical cards ───
+  if (isMobile) {
+    return (
+      <section className="py-16 px-4 bg-background" dir="rtl">
+        <motion.div
+          ref={headerRef}
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="text-[#c9a84c] text-sm tracking-[0.3em]">{subtitle}</span>
+          <h2 className="text-3xl font-light mt-4">
+            <span className="bg-gradient-to-l from-[#e8d5a3] via-[#c9a84c] to-[#9a7530] bg-clip-text text-transparent">
+              {title}
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Vertical timeline */}
+        <div className="relative max-w-sm mx-auto">
+          {/* Central line */}
+          <div className="absolute right-6 top-0 bottom-0 w-px bg-border" />
+
+          {items.map((item, i) => (
+            <motion.div
+              key={i}
+              className="relative pr-16 pb-8 last:pb-0"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              {/* Step dot on line */}
+              <div className="absolute right-[14px] top-0 w-6 h-6 rounded-full bg-[#c9a84c] border-2 border-[#c9a84c] shadow-[0_0_12px_rgba(201,168,76,0.5)] flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-background" />
+              </div>
+
+              {/* Card */}
+              <div className="rounded-2xl border border-[#c9a84c]/30 bg-card/50 backdrop-blur-md p-5 shadow-[0_0_20px_rgba(201,168,76,0.08)]">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#c9a84c]/10 flex items-center justify-center text-[#c9a84c]">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <span className="text-[#c9a84c] text-xs font-bold">שלב {item.step}</span>
+                    <h3 className="text-lg font-medium text-foreground">{item.title}</h3>
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // ─── DESKTOP: horizontal scroll-jacking ───
   return (
     <section
       ref={sectionRef}
@@ -79,15 +150,15 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
         </motion.div>
 
         {/* Track line */}
-        <div className="relative mx-8 md:mx-16 mb-6">
+        <div className="relative mx-16 mb-6">
           <div className="h-px bg-border w-full" />
           <div
             className="absolute top-0 right-0 h-px bg-[#c9a84c] transition-none"
             style={{ width: `${lineProgress * 100}%` }}
           />
-          {/* Step markers on the line */}
+          {/* Step markers */}
           <div className="flex justify-between absolute inset-x-0 -top-3">
-            {items.map((item, i) => {
+            {items.map((_, i) => {
               const pos = i / (items.length - 1);
               const isActive = progress >= pos - 0.05;
               return (
@@ -111,7 +182,7 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
         </div>
 
         {/* Horizontal scrolling cards */}
-        <div className="overflow-hidden px-8 md:px-16">
+        <div className="overflow-hidden px-16">
           <div
             className="flex will-change-transform"
             style={{
@@ -133,7 +204,6 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   dir="rtl"
                 >
-                  {/* Icon card */}
                   <div className={cn(
                     "rounded-2xl border p-8 mb-5 transition-all duration-300",
                     "bg-card/50 backdrop-blur-md",
