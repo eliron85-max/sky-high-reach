@@ -164,12 +164,12 @@ export default function ServicesScrollCards({ title, items, className = "" }: Pr
           transform:
             translate(-50%, -50%)
             translateX(var(--x, 0px))
-            translateY(calc(var(--y, 0px) - 32px))
+            translateY(calc(var(--y, 0px) - 60px))
             rotate(0deg)
-            scale(1.09);
+            scale(1.18);
           z-index: 999;
-          box-shadow: 0 30px 80px rgba(0,0,0,.50);
-          filter: saturate(1.12) contrast(1.06) brightness(0.85);
+          box-shadow: 0 40px 90px rgba(0,0,0,.55), 0 0 30px rgba(201,168,76,0.25);
+          filter: saturate(1.15) contrast(1.08) brightness(0.9);
         }
 
         .deck-card.is-hover .deck-dim{
