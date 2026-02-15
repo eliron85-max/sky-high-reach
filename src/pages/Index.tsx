@@ -141,7 +141,7 @@ export default function Index() {
             {/* Stats → Urban Renewal curtain reveal */}
             <div className="relative z-10">
               <div className="relative" style={{ height: "200vh" }}>
-                <div className="sticky top-0 z-0">
+                <div className="sticky top-0 z-0 h-screen flex items-center">
                   <HomeStatsSection
                     titleGold={t("home.statsGold")}
                     titleBlack={t("home.statsBlack")}
@@ -157,7 +157,7 @@ export default function Index() {
 
               <div className="relative z-10 -mt-[100vh]">
                 <div className="h-screen pointer-events-none" aria-hidden="true" />
-                <div className="rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
+                <div className="bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
                   <HomeUrbanRenewalHero
                     images={urbanImages}
                     titleTop={t("home.urbanTitleTop")}
