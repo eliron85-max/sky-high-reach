@@ -47,45 +47,33 @@ export default function BouncingTextSection({ lines }: Props) {
 
         {lines.map((line, lineIdx) => {
           const chars = line.split("");
-          return;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          return (
+            <div key={lineIdx} className="flex flex-wrap justify-center gap-0 text-3xl md:text-5xl lg:text-6xl font-extrabold font-heebo leading-tight mb-2">
+              {chars.map((char, charIdx) => {
+                if (char === " ") {
+                  return <span key={charIdx} className="w-3 md:w-4" />;
+                }
+                const idx = globalCharIndex++;
+                const revealAt = idx / totalNonSpace;
+                const isVisible = progress > revealAt;
+                return (
+                  <span
+                    key={charIdx}
+                    className="inline-block transition-all duration-500"
+                    style={{
+                      opacity: isVisible ? 1 : 0.15,
+                      transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                      backgroundImage: "linear-gradient(to bottom, #e8d5a3, #c9a84c)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
+            </div>
+          );
         })}
       </div>
     </div>);

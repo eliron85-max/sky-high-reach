@@ -121,8 +121,8 @@ border-b border-white/10
 transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"}`}
       dir="rtl"
     >
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/10 overflow-hidden">
-        <div className="absolute inset-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c]/70 to-transparent animate-[shimmer-line_3s_ease-in-out_infinite]" />
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5 overflow-hidden">
+        <div className="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent opacity-80 animate-[shimmer-line_2.5s_ease-in-out_infinite] blur-[0.5px]" />
       </div>
 
       {/* ================= ROW 1 (Laptop/Desktop: md+) ================= */}
