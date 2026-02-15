@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
-import ServicesScrollCards from "@/components/ServicesScrollCards";
+
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
@@ -19,15 +19,6 @@ import StickySplitSection from "@/components/StickySplitSection";
 import { useTranslation } from "@/lib/i18n";
 import { ClipboardList, Ruler, HardHat, CheckCircle, Sparkles } from "lucide-react";
 
-// Services images
-import facadeRestorationImage from "@/assets/facade-restoration.webp";
-import waterproofingImage from "@/assets/waterproofing.webp";
-import birdControlImage from "@/assets/bird-control.webp";
-import specialProjectsImage from "@/assets/special-projects.webp";
-import stoneCladdingImage from "@/assets/stone-cladding.jpg";
-import demolitionOrdersImage from "@/assets/demolition-orders.webp";
-import pipingGuttersImage from "@/assets/piping-gutters.webp";
-import heightSolutionsImage from "@/assets/height-solutions.webp";
 
 import stoneCladding1 from "@/assets/stone-cladding-1.webp";
 import stoneCladding2 from "@/assets/stone-cladding-2.webp";
@@ -55,16 +46,6 @@ const urbanImages = [
 export default function Index() {
   const { t } = useTranslation();
 
-  const services = [
-    { title: t("home.serviceCards.specialProjects"), image: specialProjectsImage, href: "/special-projects" },
-    { title: t("home.serviceCards.birdControl"), image: birdControlImage, href: "/bird-control" },
-    { title: t("home.serviceCards.waterproofing"), image: waterproofingImage, href: "/waterproofing" },
-    { title: t("home.serviceCards.facadeRestoration"), image: facadeRestorationImage, href: "/facade-restoration" },
-    { title: t("home.serviceCards.stoneVeneer"), image: stoneCladdingImage, href: "/stone-veneer" },
-    { title: t("home.serviceCards.demolitionOrders"), image: demolitionOrdersImage, href: "/demolition-orders" },
-    { title: t("home.serviceCards.pipingGutters"), image: pipingGuttersImage, href: "/piping-gutters" },
-    { title: t("home.serviceCards.heightSolutions"), image: heightSolutionsImage, href: "/height-solutions" },
-  ];
 
   const scrollToNext = () => {
     const el = document.getElementById("next-section");
@@ -125,9 +106,7 @@ export default function Index() {
         <div className="h-screen pointer-events-none" aria-hidden="true" />
         <div className="bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
           <TrustStrip />
-          <section id="next-section">
-            <ServicesScrollCards title={t("home.servicesTitle")} items={services} />
-          </section>
+          <section id="next-section" />
         </div>
       </div>
 
