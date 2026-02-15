@@ -134,12 +134,12 @@ export default function HomeStatsSection({ titleBlack, titleGold, stats, images 
                     <div
                       key={i}
                       className={cn(
-                        "absolute overflow-hidden shadow-lg transition-all duration-700",
-                        show ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
-                        i === 0 && "left-[5%] top-0 w-[45%] h-[38%]",
-                        i === 1 && "right-0 top-[25%] w-[48%] h-[35%] delay-100",
-                        i === 2 && "left-0 top-[30%] w-[48%] h-[35%] delay-150",
-                        i === 3 && "right-[10%] bottom-0 w-[50%] h-[32%] delay-200",
+                        "absolute overflow-hidden shadow-lg transition-all duration-700 ease-out",
+                        show ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0",
+                        i === 0 && "left-[5%] top-0 w-[45%] h-[38%] delay-[100ms]",
+                        i === 1 && "right-0 top-[25%] w-[48%] h-[35%] delay-[300ms]",
+                        i === 2 && "left-0 top-[30%] w-[48%] h-[35%] delay-[500ms]",
+                        i === 3 && "right-[10%] bottom-0 w-[50%] h-[32%] delay-[700ms]",
                       )}
                     >
                       <img src={img} alt="" className="h-full w-full object-cover" loading="lazy" />
