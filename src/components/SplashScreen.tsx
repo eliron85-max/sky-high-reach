@@ -58,7 +58,9 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
       style={{
         background: "#000000",
         opacity: phase === "fadeOut" ? 0 : 1,
-        transition: "opacity 0.7s ease-out",
+        backdropFilter: phase === "fadeOut" ? "blur(20px)" : "none",
+        WebkitBackdropFilter: phase === "fadeOut" ? "blur(20px)" : "none",
+        transition: "opacity 0.7s ease-out, backdrop-filter 0.7s ease-out, -webkit-backdrop-filter 0.7s ease-out",
       }}
     >
       {/* Sparkles */}
@@ -97,7 +99,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
 
         {/* Big percentage counter */}
         <div
-          className="text-[80px] md:text-[120px] font-black leading-none tracking-tighter"
+          className="text-[48px] md:text-[72px] font-black leading-none tracking-tighter"
           style={{
             background: "linear-gradient(180deg, #e8d5a3 0%, #c9a84c 50%, #9a7530 100%)",
             WebkitBackgroundClip: "text",
