@@ -379,35 +379,24 @@
 }
 
 /* ===== Accessibility styles ===== */
-.accessibility-high-contrast {
+
+.accessibility-high-contrast #root {
   filter: contrast(1.4);
 }
 
-.accessibility-high-contrast * {
+.accessibility-high-contrast *:not([data-a11y-modal] *) {
   border-color: currentColor !important;
 }
 
-.accessibility-grayscale {
+.accessibility-grayscale #root {
   filter: grayscale(100%);
 }
 
-.accessibility-link-highlight a {
-  background-color: yellow !important;
-  color: black !important;
-  text-decoration: underline !important;
-  padding: 2px 4px !important;
+.accessibility-high-contrast.accessibility-grayscale #root {
+  filter: contrast(1.4) grayscale(100%);
 }
 
-.accessibility-big-cursor,
-.accessibility-big-cursor * {
-  cursor:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath fill='black' stroke='white' stroke-width='1' d='M5.5 3.21V20.8l4.33-4.33h8.88L5.5 3.21z'/%3E%3C/svg%3E")
-      0 0,
-    auto !important;
-}
-
-.accessibility-pause-animations,
-.accessibility-pause-animations * {
+.accessibility-pause-animations *:not([data-a11y-modal]):not([data-a11y-modal] *) {
   animation: none !important;
   transition: none !important;
 }

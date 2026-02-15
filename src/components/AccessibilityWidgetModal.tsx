@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { X, ZoomIn, ZoomOut, RotateCcw, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -103,8 +104,8 @@ const AccessibilityWidgetModal = ({ isOpen, onClose }: AccessibilityWidgetModalP
 
   if (!isOpen) return null;
 
-  return (
-    <>
+  return createPortal(
+    <div data-a11y-modal>
       {/* Overlay */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
@@ -219,7 +220,8 @@ const AccessibilityWidgetModal = ({ isOpen, onClose }: AccessibilityWidgetModalP
           </Link>
         </div>
       </div>
-    </>
+    </div>,
+    document.body
   );
 };
 
