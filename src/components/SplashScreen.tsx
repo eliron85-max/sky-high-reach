@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import logoImage from "@/assets/logo-new.webp";
 
 const SPARKLES = [
@@ -12,16 +12,39 @@ const SPARKLES = [
   { top: "50%", left: "35%", size: 10, delay: 0.1 },
 ];
 
+const LOAD_DURATION = 2800; // ms for 0→100
+
 export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
   const [phase, setPhase] = useState<"loading" | "fadeOut" | "done">("loading");
+  const [percent, setPercent] = useState(0);
+  const rafRef = useRef<number>(0);
+  const startRef = useRef<number>(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("fadeOut"), 2200);
+    startRef.current = performance.now();
+
+    const tick = (now: number) => {
+      const elapsed = now - startRef.current;
+      const progress = Math.min(elapsed / LOAD_DURATION, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setPercent(Math.round(eased * 100));
+
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+
+    const t1 = setTimeout(() => setPhase("fadeOut"), LOAD_DURATION + 200);
     const t2 = setTimeout(() => {
       setPhase("done");
       onFinish();
-    }, 2900);
+    }, LOAD_DURATION + 900);
+
     return () => {
+      cancelAnimationFrame(rafRef.current);
       clearTimeout(t1);
       clearTimeout(t2);
     };
@@ -33,7 +56,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
     <div
       className="fixed inset-0 z-[999999] flex items-center justify-center"
       style={{
-        background: "linear-gradient(135deg, #0a0e1a 0%, #1a1f35 40%, #0d1220 100%)",
+        background: "#000000",
         opacity: phase === "fadeOut" ? 0 : 1,
         transition: "opacity 0.7s ease-out",
       }}
@@ -62,35 +85,47 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
         </svg>
       ))}
 
-      {/* Logo + text */}
-      <div className="flex flex-col items-center gap-6 animate-[fadeInScale_0.8s_ease-out_both]">
+      {/* Logo + counter */}
+      <div className="flex flex-col items-center gap-8 animate-[fadeInScale_0.8s_ease-out_both]">
         <img
           src={logoImage}
           alt="א.א פרויקטים וגובה"
-          className="h-[100px] md:h-[140px] w-auto object-contain drop-shadow-[0_0_30px_rgba(201,168,76,0.4)]"
+          className="h-[120px] md:h-[180px] w-auto object-contain drop-shadow-[0_0_40px_rgba(201,168,76,0.5)]"
         />
 
-        <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
+        <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent" />
+
+        {/* Big percentage counter */}
+        <div
+          className="text-[80px] md:text-[120px] font-black leading-none tracking-tighter"
+          style={{
+            background: "linear-gradient(180deg, #e8d5a3 0%, #c9a84c 50%, #9a7530 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "none",
+            filter: "drop-shadow(0 0 30px rgba(201,168,76,0.3))",
+          }}
+        >
+          {percent}%
+        </div>
 
         {/* Loading bar */}
-        <div className="w-48 h-[3px] rounded-full bg-white/10 overflow-hidden mt-4">
+        <div className="w-64 md:w-80 h-[4px] rounded-full bg-white/10 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#c9a84c] to-[#e8d5a3] rounded-full"
+            className="h-full bg-gradient-to-r from-[#c9a84c] to-[#e8d5a3] rounded-full transition-none"
             style={{
-              animation: "loadBar 2s ease-in-out forwards",
+              width: `${percent}%`,
             }}
           />
         </div>
+
+        <span className="text-white/40 text-xs tracking-[0.3em] uppercase mt-2">Loading</span>
       </div>
 
       <style>{`
         @keyframes fadeInScale {
           0% { opacity: 0; transform: scale(0.8); }
           100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes loadBar {
-          0% { width: 0%; }
-          100% { width: 100%; }
         }
       `}</style>
     </div>
