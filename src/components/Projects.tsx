@@ -193,8 +193,8 @@ const Projects = () => {
               variant={selectedCategory === category ? "default" : "outline"}
               className={
                 selectedCategory === category
-                  ? "bg-primary text-primary-foreground hover:bg-primary-hover rounded-full"
-                  : "border-primary text-foreground hover:bg-primary/10 rounded-full"
+                  ? "bg-transparent border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c]/10 rounded-full shadow-[0_0_8px_rgba(201,168,76,0.3)]"
+                  : "bg-transparent border border-[#c9a84c]/50 text-foreground hover:border-[#c9a84c] hover:text-[#c9a84c] hover:bg-[#c9a84c]/10 rounded-full"
               }
             >
               {category}
