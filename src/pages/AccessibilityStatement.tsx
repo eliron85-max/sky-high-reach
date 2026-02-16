@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-import { ScrollToTopButton } from "@/components/ScrollToTopButton";
+
 import { 
   Accessibility, 
   Phone, 
@@ -22,7 +22,7 @@ const AccessibilityStatement = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <ScrollToTopButton />
+      
       
       <main className="pt-header-offset lg:pt-header-offset-lg pb-16">
         <div className="container mx-auto px-4 max-w-4xl">

@@ -8,7 +8,6 @@ import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
 import HomeStatsSection from "@/components/HomeStatsSection";
-import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
@@ -89,7 +88,6 @@ export default function Index() {
     <div className="min-h-screen bg-black">
       <Header />
       <FloatingLanguageSwitcher />
-      <ScrollToTopButton />
       
       <RappellingFigure />
       <RappellingFigureLeft />
