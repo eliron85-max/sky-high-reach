@@ -90,7 +90,7 @@ export default function Index() {
       <Header />
       <FloatingLanguageSwitcher />
       <ScrollToTopButton />
-      <SiteTourWizard />
+      
       <RappellingFigure />
       <RappellingFigureLeft />
 
