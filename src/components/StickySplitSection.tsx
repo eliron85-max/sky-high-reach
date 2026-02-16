@@ -133,7 +133,7 @@ export default function StickySplitSection({
   );
 
   return (
-    <div ref={sectionRef} style={{ height: "200vh" }} className="relative">
+    <div ref={sectionRef} style={{ height: "150vh" }} className="relative">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <div className="flex flex-col lg:flex-row h-full">
           {imagePosition === "right" ? (
