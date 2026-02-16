@@ -1,6 +1,7 @@
 import { Accessibility } from "lucide-react";
 import React, { Suspense, useState, useCallback } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { ScrollToTopButton } from "./ScrollToTopButton";
 
 // Lazy load the full widget modal
 const AccessibilityWidgetModal = React.lazy(() => import("./AccessibilityWidgetModal"));
@@ -18,8 +19,8 @@ const AccessibilityButton = () => {
 
   return (
     <>
-      {/* Theme toggle + Accessibility button stack */}
-      <div className="fixed bottom-24 left-4 z-40 flex flex-col items-center gap-2">
+      {/* Theme toggle + Accessibility button + ScrollToTop stack */}
+      <div className="fixed bottom-6 left-4 z-40 flex flex-col items-center gap-3">
         <ThemeToggle />
         <button
           onClick={handleOpen}
@@ -29,6 +30,7 @@ const AccessibilityButton = () => {
         >
           <Accessibility className="h-6 w-6" />
         </button>
+        <ScrollToTopButton inline />
       </div>
 
       {/* Lazy loaded modal */}
