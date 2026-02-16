@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 interface ScrollToTopButtonProps {
   inline?: boolean;
@@ -40,27 +40,35 @@ export const ScrollToTopButton = ({ inline = false }: ScrollToTopButtonProps) =>
 
   if (!isVisible) return null;
 
-  const baseClasses = "w-12 h-12 rounded-full bg-transparent border border-[#c9a84c] text-[#c9a84c] hover:bg-[#c9a84c]/10 flex items-center justify-center shadow-lg transition";
+  const label = isAtBottom ? "גלול למעלה" : "גלול למטה";
+  const Icon = isAtBottom ? ArrowUp : ArrowDown;
 
-  if (inline) {
-    return (
-      <button
-        onClick={handleClick}
-        className={baseClasses}
-        aria-label={isAtBottom ? "גלול למעלה" : "גלול למטה"}
-      >
-        {isAtBottom ? <ChevronUp size={24} strokeWidth={2.5} /> : <ChevronDown size={24} strokeWidth={2.5} />}
-      </button>
-    );
-  }
-
-  return (
+  const content = (
     <button
       onClick={handleClick}
-      className={`fixed bottom-6 left-4 z-50 ${baseClasses}`}
-      aria-label={isAtBottom ? "גלול למעלה" : "גלול למטה"}
+      className="flex flex-col items-center gap-1 bg-transparent border-none text-[#c9a84c] hover:text-[#c9a84c]/80 transition cursor-pointer group"
+      aria-label={label}
     >
-      {isAtBottom ? <ChevronUp size={24} strokeWidth={2.5} /> : <ChevronDown size={24} strokeWidth={2.5} />}
+      <span className="text-xs font-medium tracking-wide select-none">{label} {isAtBottom ? "↑" : "↓"}</span>
+      <Icon
+        size={20}
+        strokeWidth={2}
+        className="animate-[bounceArrow_1.5s_ease-in-out_infinite]"
+      />
+      <style>{`
+        @keyframes bounceArrow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(6px); }
+        }
+      `}</style>
     </button>
+  );
+
+  if (inline) return content;
+
+  return (
+    <div className="fixed bottom-6 left-4 z-50">
+      {content}
+    </div>
   );
 };
