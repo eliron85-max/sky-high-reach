@@ -116,7 +116,7 @@ export default function Header() {
       ref={headerRef}
       data-mobile-open={mobileOpen ? "true" : "false"}
       className={`fixed top-0 left-0 right-0 z-50 overflow-visible [padding-top:env(safe-area-inset-top)]
-backdrop-blur-lg supports-[backdrop-filter]:bg-black/3 bg-black/5
+backdrop-blur-sm supports-[backdrop-filter]:bg-black/0 bg-black/2
 border-b border-white/10
 transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full"}`}
       dir="rtl"
@@ -126,7 +126,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
       </div>
 
       {/* ================= ROW 1 (Laptop/Desktop: md+) ================= */}
-      <div className="hidden md:block relative z-20 bg-white/5 dark:bg-black/5 backdrop-blur-lg border-b border-white/10 dark:border-[#c9a84c]/20">
+      <div className="hidden md:block relative z-20 bg-white/2 dark:bg-black/2 backdrop-blur-sm border-b border-white/5 dark:border-[#c9a84c]/10">
         <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#c9a84c]/10 overflow-hidden z-10">
           <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent animate-[shimmer-line_7s_linear_infinite] shadow-[0_0_6px_1px_rgba(201,168,76,0.4)]" />
         </div>
@@ -274,7 +274,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
       </div>
 
       {/* ================= ROW 2 (Laptop/Desktop: md+) ================= */}
-      <div className="hidden md:block relative z-10 bg-white/5 dark:bg-black/5 backdrop-blur-lg border-t border-white/10 dark:border-[#c9a84c]/10">
+      <div className="hidden md:block relative z-10 bg-white/2 dark:bg-black/2 backdrop-blur-sm border-t border-white/5 dark:border-[#c9a84c]/5">
         <div dir="ltr" className="mx-auto max-w-7xl px-6 h-[60px] grid grid-cols-[auto_1fr_auto] items-center">
           <div className="flex items-center">
             <LanguageSwitcher />
