@@ -33,7 +33,7 @@ export const ScrollToTopButton = ({ inline = false }: ScrollToTopButtonProps) =>
     } else {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   };
@@ -43,32 +43,32 @@ export const ScrollToTopButton = ({ inline = false }: ScrollToTopButtonProps) =>
   const label = isAtBottom ? "גלול למעלה" : "גלול למטה";
   const Icon = isAtBottom ? ArrowUp : ArrowDown;
 
-  const content = (
-    <button
-      onClick={handleClick}
-      className="flex flex-col items-center gap-1 bg-transparent border-none text-[#c9a84c] hover:text-[#c9a84c]/80 transition cursor-pointer group"
-      aria-label={label}
-    >
+  const content =
+  <button
+    onClick={handleClick}
+    className="flex flex-col items-center gap-1 bg-transparent border-none text-[#c9a84c] hover:text-[#c9a84c]/80 transition cursor-pointer group"
+    aria-label={label}>
+
       <span className="text-xs font-medium tracking-wide select-none">{label} {isAtBottom ? "↑" : "↓"}</span>
-      <Icon
-        size={20}
-        strokeWidth={2}
-        className="animate-[bounceArrow_1.5s_ease-in-out_infinite]"
-      />
+      
+
+
+
+
       <style>{`
         @keyframes bounceArrow {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(6px); }
         }
       `}</style>
-    </button>
-  );
+    </button>;
+
 
   if (inline) return content;
 
   return (
     <div className="fixed bottom-6 left-4 z-50">
       {content}
-    </div>
-  );
+    </div>);
+
 };
