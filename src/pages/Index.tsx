@@ -45,7 +45,25 @@ const urbanImages = [
 
 export default function Index() {
   const { t } = useTranslation();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [heroDrift, setHeroDrift] = useState(0);
 
+  useEffect(() => {
+    const DRIFT_MAX = 140;
+    const onScroll = () => {
+      const el = heroRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const totalScroll = el.offsetHeight - vh;
+      const scrolled = -rect.top;
+      const p = Math.max(0, Math.min(1, scrolled / totalScroll));
+      setHeroDrift(p * DRIFT_MAX);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToNext = () => {
     const el = document.getElementById("next-section");
@@ -77,10 +95,11 @@ export default function Index() {
       <RappellingFigureLeft />
 
       {/* ========== #1 HERO VIDEO ========== */}
-      <div className="relative" style={{ height: "200vh" }}>
+      <div ref={heroRef} className="relative" style={{ height: "200vh" }}>
         <section className="sticky top-0 z-0 w-full h-screen overflow-hidden">
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            style={{ transform: `translateY(${heroDrift}px)` }}
             autoPlay muted loop playsInline preload="auto"
             poster="/hero-poster.jpg"
           >
@@ -103,8 +122,9 @@ export default function Index() {
 
       {/* ========== CURTAIN rising over Hero ========== */}
       <div className="relative z-10" style={{ marginTop: "-100vh" }}>
-        {/* Removed spacer to make curtain rise immediately */}
-        <div className="bg-background rounded-t-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
+        {/* postScreens=1 — one screen of hero still visible before curtain rises */}
+        <div className="h-screen pointer-events-none" aria-hidden="true" />
+        <div className="bg-background rounded-t-[28px] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
           <TrustStrip />
           <section id="next-section" />
         </div>

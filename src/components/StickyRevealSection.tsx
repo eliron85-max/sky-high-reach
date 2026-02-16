@@ -10,9 +10,11 @@ type RevealLayer = {
 type Props = {
   layers: RevealLayer[];
   sectionTitle?: string;
+  scrollScreens?: number;
+  postScreens?: number;
 };
 
-export default function StickyRevealSection({ layers, sectionTitle }: Props) {
+export default function StickyRevealSection({ layers, sectionTitle, scrollScreens = 2.5, postScreens = 0 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
@@ -39,7 +41,7 @@ export default function StickyRevealSection({ layers, sectionTitle }: Props) {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: `${(totalLayers + 1) * 100}vh` }}
+      style={{ height: `${(scrollScreens + postScreens) * 100}vh` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Title overlay */}
