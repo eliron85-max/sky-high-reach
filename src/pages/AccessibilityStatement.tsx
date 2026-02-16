@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
+
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { 
   Accessibility, 
@@ -21,7 +21,7 @@ const AccessibilityStatement = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <FloatingLanguageSwitcher />
+      
       <ScrollToTopButton />
       
       <main className="pt-header-offset lg:pt-header-offset-lg pb-16">
