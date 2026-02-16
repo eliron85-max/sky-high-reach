@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Accessibility } from "lucide-react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { ThemeToggle } from "./ThemeToggle";
+
 import { useTranslation } from "@/lib/i18n";
 import logoImage from "@/assets/logo-new.webp";
 
@@ -207,7 +207,6 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                 <Accessibility className="w-5 h-5" />
               </button>
 
-              <ThemeToggle />
 
               <Link
                 to="/contact"
@@ -387,7 +386,6 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
               <div className="h-full flex flex-col px-6 pt-4 pb-6">
                 <div className="flex items-center justify-between mb-4">
                   <LanguageSwitcher />
-                  <ThemeToggle />
                 </div>
 
                 <img src={logoImage} className="h-[60px] w-auto object-contain" alt="logo" />
