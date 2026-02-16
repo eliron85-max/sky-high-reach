@@ -39,13 +39,31 @@ import stoneVeneerImage from "@/assets/stone-veneer.webp";
 import facadeRestorationNew from "@/assets/facade-restoration-new.webp";
 
 const urbanImages = [
-  stoneCladding1, stoneCladding2, stoneCladding3, stoneCladding4,
-  stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8,
-];
+stoneCladding1, stoneCladding2, stoneCladding3, stoneCladding4,
+stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8];
+
 
 export default function Index() {
   const { t } = useTranslation();
   const heroRef = useRef<HTMLDivElement>(null);
+  const [heroDrift, setHeroDrift] = useState(0);
+
+  useEffect(() => {
+    const DRIFT_MAX = 140;
+    const onScroll = () => {
+      const el = heroRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const totalScroll = el.offsetHeight - vh;
+      const scrolled = -rect.top;
+      const p = Math.max(0, Math.min(1, scrolled / totalScroll));
+      setHeroDrift(p * DRIFT_MAX);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollToNext = () => {
     const el = document.getElementById("next-section");
@@ -53,24 +71,24 @@ export default function Index() {
   };
 
   const timelineItems = [
-    { step: 1, title: "פגישת ייעוץ", description: "פגישה ראשונית להבנת הצרכים, סקר המבנה ותכנון ראשוני של הפרויקט.", icon: <ClipboardList className="w-7 h-7" /> },
-    { step: 2, title: "מדידות ותכנון", description: "ביצוע מדידות מדויקות, הכנת תוכניות עבודה מפורטות והצעת מחיר סופית.", icon: <Ruler className="w-7 h-7" /> },
-    { step: 3, title: "ביצוע הפרויקט", description: "צוות מקצועי ומנוסה מבצע את העבודה תוך הקפדה על לוחות זמנים ותקנים.", icon: <HardHat className="w-7 h-7" /> },
-    { step: 4, title: "בדיקה ואישור", description: "בקרת איכות מקיפה, תיקונים סופיים ומסירת הפרויקט המושלם.", icon: <CheckCircle className="w-7 h-7" /> },
-    { step: 5, title: "אחריות ושירות", description: "ליווי לאחר המסירה, אחריות מלאה ושירות לקוחות זמין בכל עת.", icon: <Sparkles className="w-7 h-7" /> },
-  ];
+  { step: 1, title: "פגישת ייעוץ", description: "פגישה ראשונית להבנת הצרכים, סקר המבנה ותכנון ראשוני של הפרויקט.", icon: <ClipboardList className="w-7 h-7" /> },
+  { step: 2, title: "מדידות ותכנון", description: "ביצוע מדידות מדויקות, הכנת תוכניות עבודה מפורטות והצעת מחיר סופית.", icon: <Ruler className="w-7 h-7" /> },
+  { step: 3, title: "ביצוע הפרויקט", description: "צוות מקצועי ומנוסה מבצע את העבודה תוך הקפדה על לוחות זמנים ותקנים.", icon: <HardHat className="w-7 h-7" /> },
+  { step: 4, title: "בדיקה ואישור", description: "בקרת איכות מקיפה, תיקונים סופיים ומסירת הפרויקט המושלם.", icon: <CheckCircle className="w-7 h-7" /> },
+  { step: 5, title: "אחריות ושירות", description: "ליווי לאחר המסירה, אחריות מלאה ושירות לקוחות זמין בכל עת.", icon: <Sparkles className="w-7 h-7" /> }];
+
 
   const revealLayers = [
-    { image: stoneCladding1, title: "חיפוי אבן טבעית", subtitle: "מראה יוקרתי ועמיד לאורך שנים" },
-    { image: facadeRestorationNew, title: "שיקום מבנים", subtitle: "החזרת הזוהר למבנים ישנים" },
-    { image: stoneCladding5, title: "פרויקטים מיוחדים", subtitle: "פתרונות מותאמים לכל אתגר" },
-    { image: stoneCladding3, title: "מומחיות בגובה", subtitle: "עבודה מקצועית בכל גובה" },
-  ];
+  { image: stoneCladding1, title: "חיפוי אבן טבעית", subtitle: "מראה יוקרתי ועמיד לאורך שנים" },
+  { image: facadeRestorationNew, title: "שיקום מבנים", subtitle: "החזרת הזוהר למבנים ישנים" },
+  { image: stoneCladding5, title: "פרויקטים מיוחדים", subtitle: "פתרונות מותאמים לכל אתגר" },
+  { image: stoneCladding3, title: "מומחיות בגובה", subtitle: "עבודה מקצועית בכל גובה" }];
+
 
   return (
     <div className="min-h-screen bg-black">
       <Header />
-      
+      <FloatingLanguageSwitcher />
       <ScrollToTopButton />
       <SiteTourWizard />
       <RappellingFigure />
@@ -80,10 +98,11 @@ export default function Index() {
       <div ref={heroRef} className="relative" style={{ height: "200vh" }}>
         <section className="sticky top-0 z-0 w-full h-screen overflow-hidden">
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            style={{ transform: `translateY(${heroDrift}px)` }}
             autoPlay muted loop playsInline preload="auto"
-            poster="/hero-poster.jpg"
-          >
+            poster="/hero-poster.jpg">
+
             <source src="/hero.webm" type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-black/45" />
@@ -91,8 +110,8 @@ export default function Index() {
             type="button"
             onClick={scrollToNext}
             aria-label="גלול למטה"
-            className="absolute left-1/2 -translate-x-1/2 z-[99999] bottom-[12px] sm:bottom-[14px] flex flex-col items-center"
-          >
+            className="absolute left-1/2 -translate-x-1/2 z-[99999] bottom-[12px] sm:bottom-[14px] flex flex-col items-center">
+
             <div className="relative w-[28px] h-[56px] rounded-full border-2 border-[#e8d5a3] bg-black/40 backdrop-blur-sm">
               <div className="absolute left-1/2 top-[10px] -translate-x-1/2 w-[6px] h-[10px] rounded-full bg-[#e8d5a3] heroScrollDot" />
             </div>
@@ -117,34 +136,34 @@ export default function Index() {
         <HorizontalTimeline
           title="איך זה עובד?"
           subtitle="מהרעיון ועד להשקה - צעד אחר צעד"
-          items={timelineItems}
-        />
+          items={timelineItems} />
+
 
         {/* ========== #4 STATS COUNTER ========== */}
         <HomeStatsSection
           titleGold={t("home.statsGold")}
           titleBlack={t("home.statsBlack")}
           stats={[
-            { value: "500+", label: t("home.statsProjects") },
-            { value: "15", label: t("home.statsExperience") },
-            { value: "50+", label: t("home.statsCities") },
-          ]}
-          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-        />
+          { value: "500+", label: t("home.statsProjects") },
+          { value: "15", label: t("home.statsExperience") },
+          { value: "50+", label: t("home.statsCities") }]
+          }
+          images={[statsImage1, statsImage2, statsImage3, statsImage4]} />
+
 
         {/* ========== #5 URBAN RENEWAL ========== */}
         <HomeUrbanRenewalHero
           images={urbanImages}
           titleTop={t("home.urbanTitleTop")}
           titleGold={t("home.urbanTitleGold")}
-          subtitle={t("home.urbanSubtitle")}
-        />
+          subtitle={t("home.urbanSubtitle")} />
+
 
         {/* ========== #6 STICKY REVEAL ========== */}
         <StickyRevealSection
           sectionTitle="השראה מהפרויקטים שלנו"
-          layers={revealLayers}
-        />
+          layers={revealLayers} />
+
 
         {/* ========== #7 STICKY SPLIT — ימין ========== */}
         <StickySplitSection
@@ -155,8 +174,8 @@ export default function Index() {
           features={["שיקום חזיתות בטון ואבן", "עמידות לאורך שנים", "עבודה על פי תקנים מחמירים", "ניסיון של מעל 15 שנה"]}
           imagePosition="right"
           ctaText="לפרטים נוספים"
-          ctaHref="/facade-restoration"
-        />
+          ctaHref="/facade-restoration" />
+
 
         {/* ========== #8 STICKY SPLIT — שמאל ========== */}
         <StickySplitSection
@@ -167,13 +186,13 @@ export default function Index() {
           features={["מגוון אבנים טבעיות", "עיצוב מותאם אישית", "התקנה מקצועית", "אחריות מלאה"]}
           imagePosition="left"
           ctaText="לפרטים נוספים"
-          ctaHref="/stone-veneer"
-        />
+          ctaHref="/stone-veneer" />
+
 
         <HomeTestimonials />
         <Contact />
         <Footer />
       </div>
-    </div>
-  );
+    </div>);
+
 }
