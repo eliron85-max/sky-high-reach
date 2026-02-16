@@ -79,7 +79,7 @@ export const ThemeToggle = () => {
             {/* Button */}
             <button
               onClick={handleClick}
-              className="relative h-10 w-10 rounded-full bg-black/90 dark:bg-black flex items-center justify-center border border-white/10 hover:border-white/20 transition-all duration-300 shadow-lg"
+              className="relative h-12 w-12 rounded-full bg-black/90 dark:bg-black flex items-center justify-center border border-white/10 hover:border-white/20 transition-all duration-300 shadow-lg"
               aria-label={tooltipText}>
 
               <Sun className="h-5 w-5 text-white rotate-0 scale-100 transition-all duration-300 dark:-rotate-90 dark:scale-0" />
