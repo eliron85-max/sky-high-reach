@@ -103,24 +103,6 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Scroll cue covering green strip */}
-      <button
-        type="button"
-        onClick={() => scrollToSection("next-section")}
-        className="absolute left-1/2 -translate-x-1/2 z-30
-                   bottom-[-20px]
-                   h-14 w-14 rounded-full
-                   bg-black/40 backdrop-blur-md
-                   border border-[#c9a84c]/60
-                   shadow-[0_10px_30px_rgba(0,0,0,0.35)]
-                   grid place-items-center"
-        aria-label="Scroll down"
-      >
-        <span className="relative h-8 w-5 rounded-full border-2 border-[#e8d5a3]">
-          <span className="absolute left-1/2 -translate-x-1/2 top-1.5 h-1.5 w-1.5 rounded-full bg-[#e8d5a3] animate-bounce" />
-        </span>
-        <ChevronDown size={14} className="absolute bottom-2 text-[#e8d5a3] opacity-70" />
-      </button>
 
     </section>
   );
