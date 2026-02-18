@@ -56,7 +56,7 @@ const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
 
 const CARD_W = 320;
 const GAP = 36;
-const SCROLL_VH = 6;
+const SCROLL_VH = 9;
 
 const HorizontalTimeline = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
