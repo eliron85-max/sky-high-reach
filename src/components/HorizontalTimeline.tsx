@@ -54,8 +54,8 @@ const milestones = [
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
 
-const CARD_W = 320;
-const GAP = 36;
+const CARD_W = 180;
+const GAP = 16;
 const SCROLL_VH = 9;
 
 const HorizontalTimeline = () => {
@@ -168,14 +168,14 @@ const HorizontalTimeline = () => {
                       <img
                         src={m.image}
                         alt={m.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-700"
                         loading="lazy"
                         decoding="async"
                       />
                     </div>
-                    <span className="text-[#dfc798] text-3xl font-bold" style={{ fontFamily: "Montserrat, sans-serif" }}>{m.year}</span>
-                    <h3 className="text-xl font-bold mt-2 mb-2 text-white">{m.title}</h3>
-                    <p className="text-white/60 leading-relaxed text-sm">{m.description}</p>
+                    <span className="text-[#dfc798] text-xl font-bold" style={{ fontFamily: "Montserrat, sans-serif" }}>{m.year}</span>
+                    <h3 className="text-sm font-bold mt-1 mb-1 text-white">{m.title}</h3>
+                    <p className="text-white/60 leading-relaxed text-xs">{m.description}</p>
                   </motion.div>
                 );
               })}
