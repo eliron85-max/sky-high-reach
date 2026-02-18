@@ -103,13 +103,11 @@ export default function StickyCoverTransition({
       lastPRef.current = p;
       lastDriftRef.current = driftInner;
 
-      // HERO
-      const heroY = -20 * c;
-      const heroScale = 1 - 0.06 * c;
+      // HERO — stays fixed, no movement
       const heroDim = 0.18 * c;
 
       if (heroRef.current) {
-        heroRef.current.style.transform = `translate3d(0, ${heroY}px, 0) scale(${heroScale})`;
+        heroRef.current.style.transform = 'none';
       }
       if (dimRef.current) {
         dimRef.current.style.background = `rgba(0,0,0,${heroDim})`;
