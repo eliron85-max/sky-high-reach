@@ -15,6 +15,7 @@ import RappellingFigureLeft from "@/components/RappellingFigureLeft";
 import HorizontalTimeline from "@/components/HorizontalTimeline";
 import SiteTourWizard from "@/components/SiteTourWizard";
 import StickyRevealSection from "@/components/StickyRevealSection";
+import SectionDivider from "@/components/SectionDivider";
 import StickySplitSection from "@/components/StickySplitSection";
 import { useTranslation } from "@/lib/i18n";
 
@@ -83,6 +84,8 @@ export default function Index() {
 
       {/* ========== Main content — above sticky hero ========== */}
       <div className="relative z-10 -mt-[100vh]">
+        {/* ========== DIVIDER ========== */}
+        <SectionDivider className="bg-hero-dark" />
         {/* ========== #3 HORIZONTAL TIMELINE ========== */}
         <HorizontalTimeline />
 
