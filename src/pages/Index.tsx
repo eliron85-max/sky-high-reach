@@ -86,20 +86,27 @@ export default function Index() {
       <div className="relative z-10 -mt-[100vh]">
         {/* ========== TRUST STRIP DIVIDER ========== */}
         <TrustStrip />
-        {/* ========== #3 HORIZONTAL TIMELINE ========== */}
-        <HorizontalTimeline />
 
-
-        {/* ========== #4 STATS COUNTER ========== */}
-        <HomeStatsSection
-          titleGold={t("home.statsGold")}
-          titleBlack={t("home.statsBlack")}
-          stats={[
-          { value: "500+", label: t("home.statsProjects") },
-          { value: "15", label: t("home.statsExperience") },
-          { value: "50+", label: t("home.statsCities") }]
-          }
-          images={[statsImage1, statsImage2, statsImage3, statsImage4]} />
+        {/* ========== STATS peels off to reveal TIMELINE ========== */}
+        <div className="relative">
+          {/* Stats — scrolls naturally (on top) */}
+          <div className="relative z-10">
+            <HomeStatsSection
+              titleGold={t("home.statsGold")}
+              titleBlack={t("home.statsBlack")}
+              stats={[
+                { value: "500+", label: t("home.statsProjects") },
+                { value: "15", label: t("home.statsExperience") },
+                { value: "50+", label: t("home.statsCities") },
+              ]}
+              images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+            />
+          </div>
+          {/* Timeline — sticky behind, revealed as stats scrolls away */}
+          <div className="sticky top-0 z-0">
+            <HorizontalTimeline />
+          </div>
+        </div>
 
 
         {/* ========== #5 URBAN RENEWAL ========== */}
