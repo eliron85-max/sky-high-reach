@@ -82,7 +82,7 @@ export default function Index() {
       />
 
       {/* ========== Main content — above sticky hero ========== */}
-      <div className="relative z-10">
+      <div className="relative z-10 -mt-[100vh]">
         {/* ========== #3 HORIZONTAL TIMELINE ========== */}
         <HorizontalTimeline />
 
