@@ -58,7 +58,7 @@ export default function Index() {
 
       {/* ========== #1 HERO → CURTAIN (StickyCoverTransition) ========== */}
       <StickyCoverTransition
-        coverScreens={2}
+        coverScreens={1}
         postScreens={0}
         driftMaxPx={0}
         secondRadiusPx={28}
