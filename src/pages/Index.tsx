@@ -1,8 +1,9 @@
 // src/pages/Index.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
+import StickyCoverTransition from "@/components/StickyCoverTransition";
 
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
@@ -44,30 +45,6 @@ stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8];
 
 export default function Index() {
   const { t } = useTranslation();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [heroDrift, setHeroDrift] = useState(0);
-
-  useEffect(() => {
-    const DRIFT_MAX = 140;
-    const onScroll = () => {
-      const el = heroRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const totalScroll = el.offsetHeight - vh;
-      const scrolled = -rect.top;
-      const p = Math.max(0, Math.min(1, scrolled / totalScroll));
-      setHeroDrift(p * DRIFT_MAX);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const scrollToNext = () => {
-    const el = document.getElementById("next-section");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
 
   const timelineItems = [
   { step: 1, title: "פגישת ייעוץ", description: "פגישה ראשונית להבנת הצרכים, סקר המבנה ותכנון ראשוני של הפרויקט.", icon: <ClipboardList className="w-7 h-7" /> },
@@ -75,9 +52,6 @@ export default function Index() {
   { step: 3, title: "ביצוע הפרויקט", description: "צוות מקצועי ומנוסה מבצע את העבודה תוך הקפדה על לוחות זמנים ותקנים.", icon: <HardHat className="w-7 h-7" /> },
   { step: 4, title: "בדיקה ואישור", description: "בקרת איכות מקיפה, תיקונים סופיים ומסירת הפרויקט המושלם.", icon: <CheckCircle className="w-7 h-7" /> },
   { step: 5, title: "אחריות ושירות", description: "ליווי לאחר המסירה, אחריות מלאה ושירות לקוחות זמין בכל עת.", icon: <Sparkles className="w-7 h-7" /> }];
-
-
-
 
   return (
     <div className="min-h-screen bg-black">
@@ -87,30 +61,30 @@ export default function Index() {
       <RappellingFigure />
       <RappellingFigureLeft />
 
-      {/* ========== #1 HERO VIDEO ========== */}
-      <div ref={heroRef} className="relative" style={{ height: "200vh" }}>
-        <section className="sticky top-0 z-0 w-full h-screen overflow-hidden">
-          <video
-            className="absolute inset-0 w-full h-full object-cover will-change-transform"
-            style={{ transform: `translateY(${heroDrift}px)` }}
-            autoPlay muted loop playsInline preload="auto"
-            poster="/hero-poster.jpg">
-
-            <source src="/hero.webm" type="video/webm" />
-          </video>
-          <div className="absolute inset-0 bg-black/45" />
-        </section>
-      </div>
-
-      {/* ========== CURTAIN rising over Hero ========== */}
-      <div className="relative z-10" style={{ marginTop: "-100vh" }}>
-        {/* postScreens=1 — one screen of hero still visible before curtain rises */}
-        <div className="h-screen pointer-events-none" aria-hidden="true" />
-        <div className="bg-background rounded-t-[28px] shadow-[0_-20px_60px_rgba(0,0,0,0.3)]">
-          <TrustStrip />
-          <section id="next-section" />
-        </div>
-      </div>
+      {/* ========== #1 HERO → CURTAIN (StickyCoverTransition) ========== */}
+      <StickyCoverTransition
+        coverScreens={2}
+        postScreens={0}
+        driftMaxPx={0}
+        secondRadiusPx={28}
+        first={
+          <section className="w-full h-full overflow-hidden">
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay muted loop playsInline preload="auto"
+              poster="/hero-poster.jpg">
+              <source src="/hero.webm" type="video/webm" />
+            </video>
+            <div className="absolute inset-0 bg-black/45" />
+          </section>
+        }
+        second={
+          <div className="h-full w-full flex flex-col">
+            <TrustStrip />
+            <section id="next-section" />
+          </div>
+        }
+      />
 
       {/* ========== Main content — above sticky hero ========== */}
       <div className="relative z-10">
