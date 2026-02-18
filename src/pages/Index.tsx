@@ -84,18 +84,8 @@ export default function Index() {
 
       {/* ========== Main content — above sticky hero ========== */}
       <div className="relative z-10 -mt-[100vh]">
-        {/* ========== DIVIDER ========== */}
-        <div className="bg-hero-dark py-6" aria-hidden="true">
-          <div className="mx-auto max-w-4xl px-8 flex items-center gap-4">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/60 to-[#c9a84c]" />
-            <div className="flex items-center gap-1.5">
-              <div className="w-1 h-1 rotate-45 bg-[#c9a84c]/40" />
-              <div className="w-2 h-2 rotate-45 border border-[#c9a84c]/70 bg-[#c9a84c]/20" />
-              <div className="w-1 h-1 rotate-45 bg-[#c9a84c]/40" />
-            </div>
-            <div className="flex-1 h-px bg-gradient-to-l from-transparent via-[#c9a84c]/60 to-[#c9a84c]" />
-          </div>
-        </div>
+        {/* ========== TRUST STRIP DIVIDER ========== */}
+        <TrustStrip />
         {/* ========== #3 HORIZONTAL TIMELINE ========== */}
         <HorizontalTimeline />
 
