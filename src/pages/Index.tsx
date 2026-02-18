@@ -17,7 +17,7 @@ import SiteTourWizard from "@/components/SiteTourWizard";
 import StickyRevealSection from "@/components/StickyRevealSection";
 import StickySplitSection from "@/components/StickySplitSection";
 import { useTranslation } from "@/lib/i18n";
-import { ClipboardList, Ruler, HardHat, CheckCircle, Sparkles } from "lucide-react";
+
 
 
 import stoneCladding1 from "@/assets/stone-cladding-1.webp";
@@ -46,12 +46,7 @@ stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8];
 export default function Index() {
   const { t } = useTranslation();
 
-  const timelineItems = [
-  { step: 1, title: "פגישת ייעוץ", description: "פגישה ראשונית להבנת הצרכים, סקר המבנה ותכנון ראשוני של הפרויקט.", icon: <ClipboardList className="w-7 h-7" /> },
-  { step: 2, title: "מדידות ותכנון", description: "ביצוע מדידות מדויקות, הכנת תוכניות עבודה מפורטות והצעת מחיר סופית.", icon: <Ruler className="w-7 h-7" /> },
-  { step: 3, title: "ביצוע הפרויקט", description: "צוות מקצועי ומנוסה מבצע את העבודה תוך הקפדה על לוחות זמנים ותקנים.", icon: <HardHat className="w-7 h-7" /> },
-  { step: 4, title: "בדיקה ואישור", description: "בקרת איכות מקיפה, תיקונים סופיים ומסירת הפרויקט המושלם.", icon: <CheckCircle className="w-7 h-7" /> },
-  { step: 5, title: "אחריות ושירות", description: "ליווי לאחר המסירה, אחריות מלאה ושירות לקוחות זמין בכל עת.", icon: <Sparkles className="w-7 h-7" /> }];
+
 
   return (
     <div className="min-h-screen bg-black">
@@ -89,10 +84,7 @@ export default function Index() {
       {/* ========== Main content — above sticky hero ========== */}
       <div className="relative z-10">
         {/* ========== #3 HORIZONTAL TIMELINE ========== */}
-        <HorizontalTimeline
-          title="איך זה עובד?"
-          subtitle="מהרעיון ועד להשקה - צעד אחר צעד"
-          items={timelineItems} />
+        <HorizontalTimeline />
 
 
         {/* ========== #4 STATS COUNTER ========== */}
