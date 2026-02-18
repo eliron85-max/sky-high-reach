@@ -54,7 +54,7 @@ const milestones = [
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
 
-const CARD_W = 180;
+const CARD_W = 220;
 const GAP = 16;
 const SCROLL_VH = 9;
 
