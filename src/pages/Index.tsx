@@ -49,7 +49,7 @@ export default function Index() {
 
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-hero-dark">
       <Header />
       <FloatingLanguageSwitcher />
       
