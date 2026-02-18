@@ -77,11 +77,6 @@ export default function Index() {
   { step: 5, title: "אחריות ושירות", description: "ליווי לאחר המסירה, אחריות מלאה ושירות לקוחות זמין בכל עת.", icon: <Sparkles className="w-7 h-7" /> }];
 
 
-  const revealLayers = [
-  { image: stoneCladding1, title: "חיפוי אבן טבעית", subtitle: "מראה יוקרתי ועמיד לאורך שנים" },
-  { image: facadeRestorationNew, title: "שיקום מבנים", subtitle: "החזרת הזוהר למבנים ישנים" },
-  { image: stoneCladding5, title: "פרויקטים מיוחדים", subtitle: "פתרונות מותאמים לכל אתגר" },
-  { image: stoneCladding3, title: "מומחיות בגובה", subtitle: "עבודה מקצועית בכל גובה" }];
 
 
   return (
@@ -148,8 +143,27 @@ export default function Index() {
 
         {/* ========== #6 STICKY REVEAL ========== */}
         <StickyRevealSection
-          sectionTitle="השראה מהפרויקטים שלנו"
-          layers={revealLayers} />
+          first={
+            <div className="h-full w-full relative">
+              <img src={stoneCladding1} alt="חיפוי אבן טבעית" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute bottom-[15%] inset-x-0 text-center px-4" dir="rtl">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">חיפוי אבן טבעית</h3>
+                <p className="text-white/70 text-sm sm:text-base max-w-lg mx-auto">מראה יוקרתי ועמיד לאורך שנים</p>
+              </div>
+            </div>
+          }
+          second={
+            <div className="h-full w-full relative">
+              <img src={facadeRestorationNew} alt="שיקום מבנים" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute bottom-[15%] inset-x-0 text-center px-4" dir="rtl">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-3">שיקום מבנים</h3>
+                <p className="text-white/70 text-sm sm:text-base max-w-lg mx-auto">החזרת הזוהר למבנים ישנים</p>
+              </div>
+            </div>
+          }
+        />
 
 
         {/* ========== #7 STICKY SPLIT — ימין ========== */}
