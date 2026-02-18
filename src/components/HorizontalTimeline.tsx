@@ -33,34 +33,48 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Desktop: horizontal scroll-jacking
+  const trackWidth = items.length * CARD_W + (items.length - 1) * GAP;
+  const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
+  const maxTranslate = Math.max(0, trackWidth - viewportWidth + 120);
+  const translateX = progress * maxTranslate;
+  const lineProgress = progress;
+
   useEffect(() => {
-    if (isMobile) return; // No scroll-jacking on mobile
-    const handle = () => {
+    if (isMobile) return;
+    let raf: number | null = null;
+
+    const apply = () => {
+      raf = null;
       const el = sectionRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight || 1;
       const totalScroll = vh * SCROLL_VH;
       const scrolled = -rect.top;
-      const raw = scrolled / totalScroll;
-      setProgress(Math.max(0, Math.min(1, raw)));
+      const p = Math.max(0, Math.min(1, scrolled / totalScroll));
+      setProgress(p);
+
+      const trackEl = document.querySelector('[data-timeline-track]') as HTMLElement;
+      const lineEl = document.querySelector('[data-timeline-line]') as HTMLElement;
+      if (trackEl) trackEl.style.transform = `translate3d(${p * maxTranslate}px, 0, 0)`;
+      if (lineEl) lineEl.style.width = `${p * 100}%`;
     };
 
-    handle();
-    window.addEventListener("scroll", handle, { passive: true });
-    window.addEventListener("resize", handle);
+    const onScroll = () => {
+      if (raf != null) return;
+      raf = requestAnimationFrame(apply);
+    };
+
+    apply();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      window.removeEventListener("scroll", handle);
-      window.removeEventListener("resize", handle);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf != null) cancelAnimationFrame(raf);
     };
-  }, [isMobile]);
-
-  // Desktop: horizontal scroll-jacking
-  const trackWidth = items.length * CARD_W + (items.length - 1) * GAP;
-  const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
-  const maxTranslate = Math.max(0, trackWidth - viewportWidth + 120);
-  const translateX = -progress * maxTranslate;
-  const lineProgress = progress;
+  }, [isMobile, maxTranslate]);
 
   // ─── MOBILE: simple vertical cards ───
   if (isMobile) {
@@ -153,6 +167,7 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
         <div className="relative mx-16 mb-6">
           <div className="h-px bg-border w-full" />
           <div
+            data-timeline-line
             className="absolute top-0 right-0 h-px bg-[#c9a84c] transition-none"
             style={{ width: `${lineProgress * 100}%` }}
           />
@@ -184,6 +199,7 @@ export default function HorizontalTimeline({ title, subtitle, items }: Props) {
         {/* Horizontal scrolling cards */}
         <div className="overflow-hidden px-16">
           <div
+            data-timeline-track
             className="flex will-change-transform"
             style={{
               gap: `${GAP}px`,
