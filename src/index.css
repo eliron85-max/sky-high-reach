@@ -177,7 +177,7 @@
   }
 
   .text-gold {
-    color: #e6d5a0;
+    color: #e4d9bc;
   }
 }
 
@@ -620,7 +620,7 @@ aside#lovable-badge * {
 /* Force light-mode text colors on sections with hardcoded light backgrounds */
 [data-force-light] .text-foreground,
 [data-force-light] .text-muted-foreground {
-  color: #1a1a1a !important;
+  color: #0c1d2f !important;
 }
 [data-force-light] .text-muted-foreground {
   color: #555 !important;
@@ -632,5 +632,5 @@ aside#lovable-badge * {
 :root.dark [data-force-light] select {
   border-color: #d1d5db !important;
   background-color: white !important;
-  color: #1a1a1a !important;
+  color: #0c1d2f !important;
 }

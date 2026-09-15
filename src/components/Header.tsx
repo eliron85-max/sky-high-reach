@@ -157,12 +157,12 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
 
               {servicesOpen && (
                 <div className="absolute right-0 top-full pt-3 z-[100]">
-                  <div className="min-w-[260px] rounded-xl border border-border dark:border-[#c9a84c]/30 bg-white dark:bg-gradient-to-b dark:from-[#1a1a1a] dark:to-[#0a0a0a] shadow-xl dark:shadow-[#c9a84c]/10 p-4">
+                  <div className="min-w-[260px] rounded-xl border border-border dark:border-[#c9a84c]/30 bg-white dark:bg-gradient-to-b dark:from-[#0c1d2f] dark:to-[#050f1a] shadow-xl dark:shadow-[#c9a84c]/10 p-4">
                     {serviceLinks.map((item) => (
                       <Link
                         key={item.path}
                         to={item.path}
-                        className="block py-2 text-[#1a1a1a] hover:text-[#c9a84c] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e4d9bc] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
+                        className="block py-2 text-[#0c1d2f] hover:text-[#c9a84c] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e4d9bc] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
                       >
                         {item.label}
                       </Link>
@@ -210,7 +210,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
 
               <Link
                 to="/contact"
-                className="quote-shimmer hp-cta inline-flex items-center justify-center h-9 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
+                className="quote-shimmer hp-cta inline-flex items-center justify-center h-9 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#e4d9bc] hover:to-[#c9a84c] transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
                 {t("nav.cta")}
               </Link>
@@ -233,10 +233,10 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
           >
             {!mobileOpen ? (
               <span className="flex flex-col gap-[6px]">
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#f5e6b8] via-[#d4af37] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
               </span>
             ) : (
               <span className="relative w-7 h-7">
@@ -284,7 +284,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
               <Link
                 key={item.path}
                 to={item.path}
-                className="relative text-white hover:text-[#c9a84c] dark:text-[#e4d9bc] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#c9a84c] after:to-[#d4af37] dark:after:from-[#e4d9bc] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
+                className="relative text-white hover:text-[#c9a84c] dark:text-[#e4d9bc] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#c9a84c] after:to-[#c9a84c] dark:after:from-[#e4d9bc] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
               >
                 {item.label}
               </Link>
@@ -299,14 +299,14 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
         <div className="fixed inset-0 z-[2147483647] md:hidden bg-black overflow-hidden min-h-[100dvh]" dir="rtl">
           <div className="fixed inset-0 z-[2147483647] grid grid-cols-[1.15fr_0.85fr] min-h-[100dvh]">
             <nav
-              className="bg-[#d7cfbf] text-[#1b1b1b] h-full min-h-[100dvh] overflow-hidden text-right relative"
+              className="bg-[#d7cfbf] text-[#0c1d2f] h-full min-h-[100dvh] overflow-hidden text-right relative"
               dir="rtl"
             >
               <div className="h-[64px] flex items-center justify-start px-5">
                 <button
                   type="button"
                   onClick={closeMobile}
-                  className="w-11 h-11 rounded-xl border border-black/20 text-[#1b1b1b] hover:bg-black/10 flex items-center justify-center"
+                  className="w-11 h-11 rounded-xl border border-black/20 text-[#0c1d2f] hover:bg-black/10 flex items-center justify-center"
                   aria-label="סגור תפריט"
                 >
                   ✕

@@ -96,7 +96,7 @@ export default function HomeStatsSection({ titleBlack, titleGold, stats, images 
       <div
         aria-hidden
         className="pointer-events-none absolute bottom-0 right-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-15"
-        style={{ background: "radial-gradient(circle, #4f46e5 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #2b4a6f 0%, transparent 70%)" }}
       />
 
       <div className="relative min-h-[100svh]">

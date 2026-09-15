@@ -86,7 +86,7 @@ export default function Index() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
                 <button
                   onClick={() => scrollToSection("projects")}
-                  className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full shadow-[0_10px_30px_-10px_rgba(201,168,76,0.5)]"
+                  className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#e4d9bc] hover:to-[#c9a84c] transition-all duration-300 hover:scale-105 active:scale-95 px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full shadow-[0_10px_30px_-10px_rgba(201,168,76,0.5)]"
                 >
                   {t("hero.ctaSecondary")}
                 </button>
