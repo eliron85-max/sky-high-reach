@@ -11,8 +11,24 @@ import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import AccessibilityButton from "./components/AccessibilityButton";
 import SplashScreen from "./components/SplashScreen";
 
+// Lazy load with one automatic reload if a stale chunk 404s after a new deploy
+const lazyWithRetry = <T extends { default: React.ComponentType<any> }>(
+  factory: () => Promise<T>
+) =>
+  React.lazy(() =>
+    factory().catch((err) => {
+      const key = "chunk-reloaded";
+      if (!sessionStorage.getItem(key)) {
+        sessionStorage.setItem(key, "1");
+        window.location.reload();
+        return new Promise<T>(() => {});
+      }
+      throw err;
+    })
+  );
+
 // Lazy load all pages for code splitting
-const Index = React.lazy(() => import("./pages/Index"));
+const Index = lazyWithRetry(() => import("./pages/Index"));
 const AboutPage = React.lazy(() => import("./pages/AboutPage"));
 const ServicesPage = React.lazy(() => import("./pages/ServicesPage"));
 const ProjectsPage = React.lazy(() => import("./pages/ProjectsPage"));
