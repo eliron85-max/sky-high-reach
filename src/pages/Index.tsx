@@ -108,7 +108,6 @@ export default function Index() {
         }
         second={
           <div className="h-full w-full flex flex-col">
-            <TrustStrip />
             <section id="next-section" />
           </div>
         }
