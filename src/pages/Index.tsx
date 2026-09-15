@@ -3,7 +3,7 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
-import StickyCoverTransition from "@/components/StickyCoverTransition";
+
 
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
@@ -60,61 +60,50 @@ export default function Index() {
       <RappellingFigure />
       <RappellingFigureLeft />
 
-      {/* ========== #1 HERO → CURTAIN (StickyCoverTransition) ========== */}
-      <StickyCoverTransition
-        coverScreens={2}
-        postScreens={0}
-        driftMaxPx={0}
-        secondRadiusPx={28}
-        first={
-          <section className="w-full h-full overflow-hidden relative" dir="rtl">
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay muted loop playsInline preload="auto"
-              poster="/hero-poster.jpg">
-              <source src="/hero.webm" type="video/webm" />
-            </video>
-            <div className="absolute inset-0 bg-black/45" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+      {/* ========== #1 HERO ========== */}
+      <div className="h-screen w-full overflow-hidden relative" dir="rtl">
+        <section className="w-full h-full overflow-hidden relative">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay muted loop playsInline preload="auto"
+            poster="/hero-poster.jpg">
+            <source src="/hero.webm" type="video/webm" />
+          </video>
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
 
-            {/* Hero content */}
-            <div className="absolute inset-0 flex items-center justify-center px-4">
-              <div className="max-w-4xl mx-auto text-center">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 leading-[1.08]">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c]">
-                    {t("hero.slide1Title")}
-                  </span>
-                </h1>
-                <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/85 mb-10 md:mb-14 leading-relaxed max-w-3xl mx-auto">
-                  {t("hero.slide1Subtitle")}
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-                  <button
-                    onClick={() => scrollToSection("projects")}
-                    className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full shadow-[0_10px_30px_-10px_rgba(201,168,76,0.5)]"
-                  >
-                    {t("hero.ctaSecondary")}
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="bg-black/60 backdrop-blur-sm border border-[#c9a84c]/50 text-[#e4d9bc] hover:bg-black/80 hover:border-[#c9a84c] transition-all px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full"
-                  >
-                    {t("hero.ctaPrimary")}
-                  </button>
-                </div>
+          {/* Hero content */}
+          <div className="absolute inset-0 flex items-center justify-center px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 leading-[1.08]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c]">
+                  {t("hero.slide1Title")}
+                </span>
+              </h1>
+              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/85 mb-10 md:mb-14 leading-relaxed max-w-3xl mx-auto">
+                {t("hero.slide1Subtitle")}
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+                <button
+                  onClick={() => scrollToSection("projects")}
+                  className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full shadow-[0_10px_30px_-10px_rgba(201,168,76,0.5)]"
+                >
+                  {t("hero.ctaSecondary")}
+                </button>
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="bg-black/60 backdrop-blur-sm border border-[#c9a84c]/50 text-[#e4d9bc] hover:bg-black/80 hover:border-[#c9a84c] transition-all px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full"
+                >
+                  {t("hero.ctaPrimary")}
+                </button>
               </div>
             </div>
-          </section>
-        }
-        second={
-          <div className="h-full w-full flex flex-col bg-hero-dark">
-            <section id="next-section" className="h-full w-full bg-hero-dark" />
           </div>
-        }
-      />
+        </section>
+      </div>
 
-      {/* ========== Main content — above sticky hero ========== */}
-      <div className="relative z-10 -mt-[100vh]">
+      {/* ========== Main content ========== */}
+      <div className="relative z-10">
         {/* ========== TRUST STRIP DIVIDER ========== */}
         <TrustStrip />
 
