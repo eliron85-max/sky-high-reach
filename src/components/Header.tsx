@@ -233,10 +233,10 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
           >
             {!mobileOpen ? (
               <span className="flex flex-col gap-[6px]">
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
-                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(212,175,55,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(201,168,76,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(201,168,76,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(201,168,76,0.5)]" />
+                <span className="w-8 h-[3px] rounded-full bg-gradient-to-r from-[#e4d9bc] via-[#c9a84c] to-[#c9a84c] shadow-[0_0_6px_rgba(201,168,76,0.5)]" />
               </span>
             ) : (
               <span className="relative w-7 h-7">

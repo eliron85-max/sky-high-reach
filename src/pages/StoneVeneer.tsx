@@ -524,10 +524,10 @@ const StoneVeneer = () => {
                 Icon: Shield,
                 title: "עמידות מרבית",
                 desc: "אחיזה חזקה פי 3 מחיפוי רגיל",
-                gradient: "from-blue-400 to-cyan-500",
+                gradient: "from-blue-400 to-amber-500",
                 iconColor: "text-blue-500 dark:text-blue-400",
-                bgLight: "bg-gradient-to-br from-blue-50 to-cyan-50",
-                bgDark: "dark:from-blue-500/15 dark:to-cyan-500/10",
+                bgLight: "bg-gradient-to-br from-blue-50 to-amber-50",
+                bgDark: "dark:from-blue-500/15 dark:to-amber-500/10",
                 ringColor: "ring-blue-200 dark:ring-blue-500/20",
               },
               {
