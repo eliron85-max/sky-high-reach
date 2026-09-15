@@ -70,7 +70,13 @@ const AdminInquiries = () => {
       return true;
     } catch (error) {
       console.error("Error fetching inquiries");
+      toast({
+        title: "שגיאה",
+        description: "לא ניתן לטעון את הפניות",
+        variant: "destructive",
+      });
       return false;
+
     } finally {
       setIsLoading(false);
     }
