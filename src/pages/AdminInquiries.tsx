@@ -95,10 +95,15 @@ const AdminInquiries = () => {
         return;
       }
 
-      // 2) ההרשאה נאכפת בצד השרת (RLS) — פשוט מנסים לטעון את הפניות
-      const allowed = await fetchInquiries();
+      // 2) בדיקת הרשאה מול טבלת התפקידים (נאכף גם בצד השרת ע"י RLS)
+      const { data: roles, error: rolesError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
 
-      if (!allowed) {
+      if (rolesError || !roles) {
         toast({
           title: "גישה נדחתה",
           description: "אין לך הרשאות לצפות בדף זה",
@@ -109,6 +114,8 @@ const AdminInquiries = () => {
       }
 
       setAuthChecked(true);
+      fetchInquiries();
+
     };
 
     guard();
