@@ -73,14 +73,32 @@ interface InquiryNotificationRequest {
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  console.log("Received request to send inquiry notification");
+  const origin = req.headers.get("origin");
+  const corsHeaders = buildCorsHeaders(origin);
 
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
+  if (req.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Reject calls that do not come from the site itself
+  if (!isAllowedOrigin(origin)) {
+    console.log("Blocked request from disallowed origin");
+    return new Response(JSON.stringify({ error: "Forbidden" }), {
+      status: 403,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
   try {
+
     const requestData = await req.json();
     const {
       fullName,
