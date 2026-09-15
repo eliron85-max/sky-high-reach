@@ -107,8 +107,8 @@ export default function Index() {
           </section>
         }
         second={
-          <div className="h-full w-full flex flex-col">
-            <section id="next-section" />
+          <div className="h-full w-full flex flex-col bg-hero-dark">
+            <section id="next-section" className="h-full w-full bg-hero-dark" />
           </div>
         }
       />
