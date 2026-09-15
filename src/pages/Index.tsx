@@ -73,8 +73,8 @@ export default function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
 
           {/* Hero content */}
-          <div className="absolute inset-0 flex items-center justify-center px-4">
-            <div className="max-w-4xl mx-auto text-center">
+          <div className="absolute inset-0 flex items-center justify-center px-4 sm:justify-end sm:px-12 md:px-16 lg:px-24">
+            <div className="max-w-2xl w-full text-center sm:text-right">
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 leading-[1.08]">
                 <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c]">
                   {t("hero.slide1Title")}
