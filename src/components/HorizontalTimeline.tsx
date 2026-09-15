@@ -108,11 +108,11 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      <div className="relative max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 space-y-10 lg:space-y-12">
+      <div className="relative max-w-[2400px] mx-auto px-2 md:px-4 lg:px-6 space-y-12 lg:space-y-16">
         {rows.map((row, rowIdx) => (
           <div
             key={rowIdx}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           >
             {row.map((m, i) => (
               <motion.article
@@ -132,7 +132,7 @@ const HorizontalTimeline = () => {
                   <img
                     src={m.image}
                     alt={m.title}
-                    className="w-full h-80 lg:h-[460px] object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    className="w-full h-96 lg:h-[560px] object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
                   />
@@ -141,9 +141,9 @@ const HorizontalTimeline = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
 
                   {/* year overlay */}
-                  <div className="absolute top-5 right-5 lg:top-6 lg:right-6">
+                  <div className="absolute top-6 right-6 lg:top-8 lg:right-8">
                     <span
-                      className="block text-4xl lg:text-5xl font-light tracking-tight text-gold-gradient"
+                      className="block text-5xl lg:text-6xl font-light tracking-tight text-gold-gradient"
                       style={{ fontFamily: "Montserrat, sans-serif" }}
                     >
                       {m.year}
@@ -152,17 +152,17 @@ const HorizontalTimeline = () => {
                 </div>
 
                 {/* content */}
-                <div className="relative p-8 lg:p-10">
-                  <h3 className="text-2xl lg:text-3xl font-medium text-white mb-4 transition-colors duration-500 group-hover:text-[#f4e4a8]">
+                <div className="relative p-10 lg:p-14">
+                  <h3 className="text-3xl lg:text-4xl font-medium text-white mb-5 transition-colors duration-500 group-hover:text-[#f4e4a8]">
                     {m.title}
                   </h3>
 
-                  <p className="text-white/55 leading-relaxed text-base lg:text-lg font-light">
+                  <p className="text-white/55 leading-relaxed text-lg lg:text-xl font-light">
                     {m.description}
                   </p>
 
                   {/* hover gold underline */}
-                  <span className="absolute bottom-0 right-8 left-8 h-px gold-divider scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right" />
+                  <span className="absolute bottom-0 right-10 left-10 h-px gold-divider scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right" />
                 </div>
               </motion.article>
             ))}
