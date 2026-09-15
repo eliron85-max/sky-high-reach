@@ -14,9 +14,8 @@ const Hero = () => {
   const { style: contentStyle } = useParallax(contentRef, { speed: 0.1 });
 
   const slides = [
-    { id: 1, title: t("hero.slide1Title"), subtitle: t("hero.slide1Subtitle") },
-    { id: 2, title: t("hero.slide2Title"), subtitle: t("hero.slide2Subtitle") },
-    { id: 3, title: t("hero.slide3Title"), subtitle: t("hero.slide3Subtitle") },
+    { id: 1, title: t("hero.slide2Title"), subtitle: t("hero.slide2Subtitle") },
+    { id: 2, title: t("hero.slide3Title"), subtitle: t("hero.slide3Subtitle") },
   ];
 
   useEffect(() => {
@@ -102,7 +101,6 @@ const Hero = () => {
           />
         ))}
       </div>
-
 
     </section>
   );
