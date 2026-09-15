@@ -47,7 +47,10 @@ stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8];
 export default function Index() {
   const { t } = useTranslation();
 
-
+  const scrollToSection = (sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-hero-dark">
