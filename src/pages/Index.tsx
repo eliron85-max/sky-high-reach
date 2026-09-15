@@ -73,17 +73,17 @@ export default function Index() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
 
           {/* Hero content */}
-          <div className="absolute inset-0 flex items-center justify-center px-4">
-            <div className="max-w-4xl mx-auto text-center">
+          <div className="absolute inset-0 flex items-center justify-center px-4 sm:justify-end sm:px-12 md:px-16 lg:px-24">
+            <div className="max-w-2xl w-full text-center sm:text-right">
               <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 leading-[1.08]">
                 <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c]">
                   {t("hero.slide1Title")}
                 </span>
               </h1>
-              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/85 mb-10 md:mb-14 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/85 mb-10 md:mb-14 leading-relaxed max-w-3xl mx-auto sm:mx-0">
                 {t("hero.slide1Subtitle")}
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 md:gap-6">
                 <button
                   onClick={() => scrollToSection("projects")}
                   className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#e4d9bc] hover:to-[#c9a84c] transition-all duration-300 hover:scale-105 active:scale-95 px-10 py-5 md:px-12 md:py-6 text-lg md:text-xl rounded-full shadow-[0_10px_30px_-10px_rgba(201,168,76,0.5)]"
