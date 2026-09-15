@@ -67,13 +67,10 @@ const AdminInquiries = () => {
 
       if (error) throw error;
       setInquiries((data as Inquiry[]) || []);
+      return true;
     } catch (error) {
-      console.error("Error fetching inquiries:", error);
-      toast({
-        title: "שגיאה",
-        description: "לא ניתן לטעון את הפניות. ודא שיש לך הרשאות מנהל.",
-        variant: "destructive",
-      });
+      console.error("Error fetching inquiries");
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -98,13 +95,10 @@ const AdminInquiries = () => {
         return;
       }
 
-      // 2) Use server-side RPC to check admin status (prevents client-side bypass)
-      const { data: isAdminResult, error } = await supabase.rpc("has_role", {
-        _user_id: user.id,
-        _role: "admin",
-      });
+      // 2) ההרשאה נאכפת בצד השרת (RLS) — פשוט מנסים לטעון את הפניות
+      const allowed = await fetchInquiries();
 
-      if (error || !isAdminResult) {
+      if (!allowed) {
         toast({
           title: "גישה נדחתה",
           description: "אין לך הרשאות לצפות בדף זה",
@@ -114,15 +108,14 @@ const AdminInquiries = () => {
         return;
       }
 
-      // 3) רק אחרי אדמין אמיתי — טוענים פניות
       setAuthChecked(true);
-      fetchInquiries();
     };
 
     guard();
     
     return () => subscription.unsubscribe();
   }, [navigate, toast]);
+
 
   const updateStatus = async (id: string, newStatus: InquiryStatus) => {
     try {
