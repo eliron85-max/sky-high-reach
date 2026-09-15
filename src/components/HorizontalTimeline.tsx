@@ -79,7 +79,7 @@ const HorizontalTimeline = () => {
         <span className="inline-block text-[#c9a84c] text-xs md:text-sm tracking-[0.45em] uppercase mb-5">
           המסע שלנו
         </span>
-        <h2 className="text-7xl md:text-9xl lg:text-[12rem] font-light text-white tracking-tight leading-[0.9]">
+        <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.95]">
           <span className="gold-shimmer-text">ציוני</span>{" "}
           <span className="text-white/95">דרך</span>
         </h2>
@@ -110,7 +110,7 @@ const HorizontalTimeline = () => {
                   <img
                     src={m.image}
                     alt={m.title}
-                    className="w-full h-72 lg:h-80 object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    className="w-full h-80 lg:h-96 object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
                   />
@@ -128,7 +128,7 @@ const HorizontalTimeline = () => {
                 </div>
 
                 {/* content */}
-                <div className="relative p-6 lg:p-7">
+                <div className="relative p-7 lg:p-8">
                   <h3 className="text-xl lg:text-2xl font-medium text-white mb-3 transition-colors duration-500 group-hover:text-[#f4e4a8]">
                     {m.title}
                   </h3>
