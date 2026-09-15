@@ -108,11 +108,11 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      <div className="relative container mx-auto px-4 space-y-8 lg:space-y-10">
+      <div className="relative max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 space-y-10 lg:space-y-12">
         {rows.map((row, rowIdx) => (
           <div
             key={rowIdx}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
           >
             {row.map((m, i) => (
               <motion.article
