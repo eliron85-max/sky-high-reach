@@ -29,22 +29,22 @@ const lazyWithRetry = <T extends { default: React.ComponentType<any> }>(
 
 // Lazy load all pages for code splitting
 const Index = lazyWithRetry(() => import("./pages/Index"));
-const AboutPage = React.lazy(() => import("./pages/AboutPage"));
-const ServicesPage = React.lazy(() => import("./pages/ServicesPage"));
-const ProjectsPage = React.lazy(() => import("./pages/ProjectsPage"));
-const PricingPage = React.lazy(() => import("./pages/PricingPage"));
-const TestimonialsPage = React.lazy(() => import("./pages/TestimonialsPage"));
-const ContactPage = React.lazy(() => import("./pages/ContactPage"));
-const DemolitionOrders = React.lazy(() => import("./pages/DemolitionOrders"));
-const FacadeRestoration = React.lazy(() => import("./pages/FacadeRestoration"));
-const StoneVeneer = React.lazy(() => import("./pages/StoneVeneer"));
-const Waterproofing = React.lazy(() => import("./pages/Waterproofing"));
-const BirdControl = React.lazy(() => import("./pages/BirdControl"));
-const SpecialProjects = React.lazy(() => import("./pages/SpecialProjects"));
-const AccessibilityStatement = React.lazy(() => import("./pages/AccessibilityStatement"));
-const AuthPage = React.lazy(() => import("./pages/AuthPage"));
-const AdminInquiries = React.lazy(() => import("./pages/AdminInquiries"));
-const NotFound = React.lazy(() => import("./pages/NotFound"));
+const AboutPage = lazyWithRetry(() => import("./pages/AboutPage"));
+const ServicesPage = lazyWithRetry(() => import("./pages/ServicesPage"));
+const ProjectsPage = lazyWithRetry(() => import("./pages/ProjectsPage"));
+const PricingPage = lazyWithRetry(() => import("./pages/PricingPage"));
+const TestimonialsPage = lazyWithRetry(() => import("./pages/TestimonialsPage"));
+const ContactPage = lazyWithRetry(() => import("./pages/ContactPage"));
+const DemolitionOrders = lazyWithRetry(() => import("./pages/DemolitionOrders"));
+const FacadeRestoration = lazyWithRetry(() => import("./pages/FacadeRestoration"));
+const StoneVeneer = lazyWithRetry(() => import("./pages/StoneVeneer"));
+const Waterproofing = lazyWithRetry(() => import("./pages/Waterproofing"));
+const BirdControl = lazyWithRetry(() => import("./pages/BirdControl"));
+const SpecialProjects = lazyWithRetry(() => import("./pages/SpecialProjects"));
+const AccessibilityStatement = lazyWithRetry(() => import("./pages/AccessibilityStatement"));
+const AuthPage = lazyWithRetry(() => import("./pages/AuthPage"));
+const AdminInquiries = lazyWithRetry(() => import("./pages/AdminInquiries"));
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 const queryClient = new QueryClient();
 const App = () => {
   const [splashDone, setSplashDone] = useState(false);
