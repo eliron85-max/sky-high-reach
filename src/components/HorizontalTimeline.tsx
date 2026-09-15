@@ -79,7 +79,7 @@ const HorizontalTimeline = () => {
         <span className="inline-block text-[#c9a84c] text-xs md:text-sm tracking-[0.45em] uppercase mb-5">
           המסע שלנו
         </span>
-        <h2 className="text-6xl md:text-8xl lg:text-9xl font-light text-white tracking-tight leading-[0.95]">
+        <h2 className="text-7xl md:text-9xl lg:text-[12rem] font-light text-white tracking-tight leading-[0.9]">
           <span className="gold-shimmer-text">ציוני</span>{" "}
           <span className="text-white/95">דרך</span>
         </h2>
