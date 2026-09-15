@@ -80,7 +80,7 @@ export default function Index() {
                   {t("hero.slide1Title")}
                 </span>
               </h1>
-              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/85 mb-10 md:mb-14 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-white/85 mb-10 md:mb-14 leading-relaxed max-w-3xl mx-auto sm:mx-0">
                 {t("hero.slide1Subtitle")}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 md:gap-6">
