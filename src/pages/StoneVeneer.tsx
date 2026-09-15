@@ -475,7 +475,7 @@ const StoneVeneer = () => {
             <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
               <button
                 onClick={scrollToContact}
-                className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-4 rounded-button"
+                className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#e4d9bc] hover:to-[#c9a84c] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-4 rounded-button"
               >
                 בקשת הצעת מחיר
               </button>
@@ -494,7 +494,7 @@ const StoneVeneer = () => {
       </section>
 
       {/* Technology Advantages Section - Right after Hero */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-gray-50 to-slate-100 dark:from-[#0a0a0a] dark:via-[#111] dark:to-[#0a0a0a] relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-gray-50 to-slate-100 dark:from-[#050f1a] dark:via-[#0a1725] dark:to-[#050f1a] relative overflow-hidden">
         {/* Decorative background elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 dark:bg-[#c9a84c]/5 rounded-full blur-[100px]" />
@@ -524,10 +524,10 @@ const StoneVeneer = () => {
                 Icon: Shield,
                 title: "עמידות מרבית",
                 desc: "אחיזה חזקה פי 3 מחיפוי רגיל",
-                gradient: "from-blue-400 to-cyan-500",
+                gradient: "from-blue-400 to-amber-500",
                 iconColor: "text-blue-500 dark:text-blue-400",
-                bgLight: "bg-gradient-to-br from-blue-50 to-cyan-50",
-                bgDark: "dark:from-blue-500/15 dark:to-cyan-500/10",
+                bgLight: "bg-gradient-to-br from-blue-50 to-amber-50",
+                bgDark: "dark:from-blue-500/15 dark:to-amber-500/10",
                 ringColor: "ring-blue-200 dark:ring-blue-500/20",
               },
               {
@@ -608,7 +608,7 @@ const StoneVeneer = () => {
         ref={beforeAfterRef.ref}
         className={`py-section scroll-reveal relative overflow-hidden ${beforeAfterRef.isVisible ? "visible" : ""}`}
         style={{
-          background: "linear-gradient(to bottom, #0f172a, #1e293b, #0f172a)",
+          background: "linear-gradient(to bottom, #081522, #0e2438, #081522)",
         }}
       >
         {/* Decorative background elements */}
@@ -632,7 +632,7 @@ const StoneVeneer = () => {
                 key={index}
                 className="relative rounded-2xl p-5 md:p-8 border-2 border-amber-500/30 transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_60px_rgba(245,158,11,0.2)] group"
                 style={{
-                  background: "linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%)",
+                  background: "linear-gradient(135deg, #0e2438 0%, #081522 50%, #0e2438 100%)",
                 }}
               >
                 {/* Golden glow shadow */}

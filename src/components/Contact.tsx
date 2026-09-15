@@ -60,8 +60,8 @@ const Contact = () => {
 
   const submitBtn =
     "w-full h-12 rounded-full font-extrabold text-base text-white " +
-    "bg-gradient-to-b from-[#e6c36a] to-[#b8963d] " +
-    "hover:from-[#f1d07e] hover:to-[#c39a3b] transition";
+    "bg-gradient-to-b from-[#c9a84c] to-[#b8963d] " +
+    "hover:from-[#d7b46a] hover:to-[#c39a3b] transition";
 
   // ===== Locale =====
   const getDateLocale = () => {

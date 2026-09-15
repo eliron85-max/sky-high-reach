@@ -68,7 +68,7 @@ const ProjectCard = ({
         
         {/* Project Title - Always Visible */}
         <div className="absolute bottom-0 inset-x-0 p-4 text-center">
-          <h3 className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#f2e0b6] via-[#e8c777] to-[#c9a84c] drop-shadow-lg">
+          <h3 className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] via-[#ddc189] to-[#c9a84c] drop-shadow-lg">
             {project.title}
           </h3>
         </div>
@@ -185,7 +185,7 @@ const HomeProjects = () => {
     <section 
       ref={ref} 
       id="home-projects" 
-      className={`py-16 lg:py-24 bg-[#0a0a0a] relative overflow-hidden scroll-reveal ${isVisible ? 'visible' : ''}`}
+      className={`py-16 lg:py-24 bg-[#050f1a] relative overflow-hidden scroll-reveal ${isVisible ? 'visible' : ''}`}
     >
       {/* Decorative Patterns - Left & Right */}
       <DecorativePattern className="top-1/4 -left-8 opacity-60 hidden lg:block" />
@@ -196,10 +196,10 @@ const HomeProjects = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header - oaharon style */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#f2e0b6] via-[#e8c777] to-[#8a6b2e]">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] via-[#ddc189] to-[#8a6b2e]">
             פרויקטים נבחרים
           </h2>
-          <div className="w-1.5 h-12 md:h-16 bg-gradient-to-b from-[#e8c777] via-[#c9a84c] to-[#8a6b2e] rounded-full" />
+          <div className="w-1.5 h-12 md:h-16 bg-gradient-to-b from-[#ddc189] via-[#c9a84c] to-[#8a6b2e] rounded-full" />
         </div>
 
         {/* Projects Grid - 3x2 */}
@@ -230,7 +230,7 @@ const HomeProjects = () => {
         {/* Project Modal */}
         <Dialog open={!!selectedProject} onOpenChange={closeProject}>
           <DialogContent 
-            className="max-w-4xl bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-primary/30" 
+            className="max-w-4xl bg-gradient-to-br from-[#0c1d2f] to-[#050f1a] border border-primary/30" 
             dir="rtl"
           >
             {selectedProject && (

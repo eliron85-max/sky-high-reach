@@ -72,7 +72,7 @@ const Hero = () => {
             <Button
               onClick={() => scrollToSection("projects")}
               size="lg"
-              className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-6 text-lg rounded-full"
+              className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#e4d9bc] hover:to-[#c9a84c] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-6 text-lg rounded-full"
             >
               {t("hero.ctaSecondary")}
             </Button>
