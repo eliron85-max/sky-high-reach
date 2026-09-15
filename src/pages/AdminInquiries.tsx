@@ -98,13 +98,15 @@ const AdminInquiries = () => {
         return;
       }
 
-      // 2) Use server-side RPC to check admin status (prevents client-side bypass)
-      const { data: isAdminResult, error } = await supabase.rpc("has_role", {
-        _user_id: user.id,
-        _role: "admin",
-      });
+      // 2) Check admin status via user_roles (RLS returns empty for non-admins)
+      const { data: roleRow, error } = await supabase
+        .from("user_roles")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
 
-      if (error || !isAdminResult) {
+      if (error || !roleRow) {
         toast({
           title: "גישה נדחתה",
           description: "אין לך הרשאות לצפות בדף זה",
