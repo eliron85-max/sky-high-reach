@@ -1,0 +1,61 @@
+/* ===== Unified premium site palette ===== */
+
+@layer base {
+  :root,
+  .dark {
+    color-scheme: dark;
+
+    --background: 220 49% 8%;
+    --foreground: 60 13% 96%;
+
+    --card: 219 40% 14%;
+    --card-foreground: 60 13% 96%;
+
+    --popover: 219 40% 14%;
+    --popover-foreground: 60 13% 96%;
+
+    --primary: 44 54% 54%;
+    --primary-foreground: 220 49% 8%;
+    --primary-light: 44 60% 78%;
+
+    --secondary: 219 42% 11%;
+    --secondary-foreground: 60 13% 96%;
+
+    --muted: 219 42% 11%;
+    --muted-foreground: 218 15% 70%;
+
+    --accent: 44 54% 54%;
+    --accent-foreground: 220 49% 8%;
+
+    --border: 218 31% 22%;
+    --input: 218 31% 22%;
+    --ring: 44 54% 54%;
+
+    --hero-dark: 220 49% 8%;
+    --hero-overlay: 220 49% 8% / 0.9;
+
+    --sidebar-background: 220 49% 8%;
+    --sidebar-foreground: 60 13% 96%;
+    --sidebar-primary: 44 54% 54%;
+    --sidebar-primary-foreground: 220 49% 8%;
+    --sidebar-accent: 219 42% 11%;
+    --sidebar-accent-foreground: 60 13% 96%;
+    --sidebar-border: 218 31% 22%;
+    --sidebar-ring: 44 54% 54%;
+  }
+
+  html,
+  body,
+  #root {
+    background: #0b1220 !important;
+  }
+
+  body {
+    color: #f5f5f2;
+  }
+
+  /* Keep the existing texture subtle rather than allowing it to change the perceived background. */
+  :root.dark body::before {
+    opacity: 0.12 !important;
+  }
+}
