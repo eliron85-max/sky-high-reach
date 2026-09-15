@@ -462,11 +462,11 @@ const StoneVeneer = () => {
             {/* Animated content */}
             <div className="animate-fade-in-up">
               <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight lg:text-6xl">
-                <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-justify">
+                <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-justify">
                   חיפוי אבן בטכנולוגיה מתקדמת
                 </span>
               </h1>
-              <p className="text-base text-[#e8d5a3]/80 mb-6 leading-relaxed md:text-4xl">
+              <p className="text-base text-[#e4d9bc]/80 mb-6 leading-relaxed md:text-4xl">
                 שיטה חדשנית לחיפוי חזיתות באבן המשלבת טכנולוגיה מתקדמת עם מסורת מלאכת האבן
               </p>
             </div>
@@ -475,7 +475,7 @@ const StoneVeneer = () => {
             <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
               <button
                 onClick={scrollToContact}
-                className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-4 rounded-button"
+                className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-4 rounded-button"
               >
                 בקשת הצעת מחיר
               </button>
@@ -484,7 +484,7 @@ const StoneVeneer = () => {
                   const techSection = document.querySelector("section:nth-of-type(2)");
                   if (techSection) techSection.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="border border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all px-8 py-4 rounded-button"
+                className="border border-[#c9a84c]/50 text-[#e4d9bc] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all px-8 py-4 rounded-button"
               >
                 למידע נוסף
               </button>

@@ -59,7 +59,7 @@ const Hero = () => {
         >
           <div key={currentSlide} className="animate-fade-in-up">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c]">
                 {slides[currentSlide].title}
               </span>
             </h1>
@@ -72,7 +72,7 @@ const Hero = () => {
             <Button
               onClick={() => scrollToSection("projects")}
               size="lg"
-              className="bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-6 text-lg rounded-full"
+              className="bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 hover:scale-105 active:scale-95 px-8 py-6 text-lg rounded-full"
             >
               {t("hero.ctaSecondary")}
             </Button>
@@ -80,7 +80,7 @@ const Hero = () => {
             <Button
               onClick={() => scrollToSection("contact")}
               size="lg"
-              className="bg-black/60 backdrop-blur-sm border border-[#c9a84c]/50 text-[#e8d5a3] hover:bg-black/80 hover:border-[#c9a84c] transition-all px-8 py-6 text-lg rounded-full"
+              className="bg-black/60 backdrop-blur-sm border border-[#c9a84c]/50 text-[#e4d9bc] hover:bg-black/80 hover:border-[#c9a84c] transition-all px-8 py-6 text-lg rounded-full"
             >
               {t("hero.ctaPrimary")}
             </Button>

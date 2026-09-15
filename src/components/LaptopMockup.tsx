@@ -51,7 +51,7 @@ const LaptopMockup: React.FC = () => {
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           style={{ fontFamily: "'Heebo', sans-serif" }}>
           האתר שלנו{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#c9a84c] to-[#e8d5a3]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#c9a84c] to-[#e4d9bc]">
             בפעולה
           </span>
         </h2>

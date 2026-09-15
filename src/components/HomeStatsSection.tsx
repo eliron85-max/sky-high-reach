@@ -86,7 +86,7 @@ export default function HomeStatsSection({ titleBlack, titleGold, stats, images 
     <section
       ref={sectionRef}
       dir="rtl"
-      className="relative z-0 w-full overflow-hidden bg-gradient-to-br from-[#0b1220] via-[#0a0f1a] to-[#050810] cinematic-grain"
+      className="relative z-0 w-full overflow-hidden bg-gradient-to-br from-[#0c1d2f] via-[#081522] to-[#040d17] cinematic-grain"
     >
       <div
         aria-hidden

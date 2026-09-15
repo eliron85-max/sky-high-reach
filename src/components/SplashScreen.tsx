@@ -104,7 +104,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
         <div
           className="text-[48px] md:text-[72px] font-black leading-none tracking-tighter"
           style={{
-            background: "linear-gradient(180deg, #e8d5a3 0%, #c9a84c 50%, #9a7530 100%)",
+            background: "linear-gradient(180deg, #e4d9bc 0%, #c9a84c 50%, #9a7530 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             textShadow: "none",
@@ -117,7 +117,7 @@ export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
         {/* Loading bar */}
         <div className="w-64 md:w-80 h-[4px] rounded-full bg-white/10 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#c9a84c] to-[#e8d5a3] rounded-full transition-none"
+            className="h-full bg-gradient-to-r from-[#c9a84c] to-[#e4d9bc] rounded-full transition-none"
             style={{
               width: `${percent}%`,
             }}

@@ -138,7 +138,7 @@ const HorizontalTimeline = () => {
                   />
 
                   {/* cinematic gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#081522] via-[#081522]/30 to-transparent" />
 
                   {/* year overlay */}
                   <div className="absolute top-6 right-6 lg:top-8 lg:right-8">
@@ -153,7 +153,7 @@ const HorizontalTimeline = () => {
 
                 {/* content */}
                 <div className="relative p-10 lg:p-14">
-                  <h3 className="text-3xl lg:text-4xl font-medium text-white mb-5 transition-colors duration-500 group-hover:text-[#f4e4a8]">
+                  <h3 className="text-3xl lg:text-4xl font-medium text-white mb-5 transition-colors duration-500 group-hover:text-[#e9dcb8]">
                     {m.title}
                   </h3>
 

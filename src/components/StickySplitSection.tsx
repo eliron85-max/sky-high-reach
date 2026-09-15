@@ -92,7 +92,7 @@ export default function StickySplitSection({
         )}
 
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light leading-tight mb-6">
-          <span className="bg-gradient-to-l from-[#e8d5a3] via-[#c9a84c] to-[#9a7530] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-l from-[#e4d9bc] via-[#c9a84c] to-[#9a7530] bg-clip-text text-transparent">
             {title}
           </span>
         </h2>

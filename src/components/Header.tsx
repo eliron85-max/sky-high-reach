@@ -104,7 +104,7 @@ export default function Header() {
   }, [mobileOpen]);
 
   const goldText =
-    "text-white dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] hover:text-[#c9a84c] dark:hover:brightness-125 transition font-semibold";
+    "text-white dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e4d9bc] dark:to-[#c9a84c] hover:text-[#c9a84c] dark:hover:brightness-125 transition font-semibold";
 
   const closeMobile = () => {
     setMobileOpen(false);
@@ -162,7 +162,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
                       <Link
                         key={item.path}
                         to={item.path}
-                        className="block py-2 text-[#1a1a1a] hover:text-[#c9a84c] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e8d5a3] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
+                        className="block py-2 text-[#1a1a1a] hover:text-[#c9a84c] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-[#e4d9bc] dark:to-[#c9a84c] dark:hover:brightness-125 transition"
                       >
                         {item.label}
                       </Link>
@@ -210,7 +210,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
 
               <Link
                 to="/contact"
-                className="quote-shimmer hp-cta inline-flex items-center justify-center h-9 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
+                className="quote-shimmer hp-cta inline-flex items-center justify-center h-9 px-4 xl:px-6 rounded-full bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold hover:from-[#f0ddb0] hover:to-[#d4af37] transition-all duration-300 whitespace-nowrap flex-shrink-0"
               >
                 {t("nav.cta")}
               </Link>
@@ -240,8 +240,8 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
               </span>
             ) : (
               <span className="relative w-7 h-7">
-                <span className="absolute left-1/2 top-1/2 w-7 h-[2px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
-                <span className="absolute left-1/2 top-1/2 w-7 h-[2px] -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-gradient-to-r from-[#e8d5a3] to-[#c9a84c]" />
+                <span className="absolute left-1/2 top-1/2 w-7 h-[2px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-gradient-to-r from-[#e4d9bc] to-[#c9a84c]" />
+                <span className="absolute left-1/2 top-1/2 w-7 h-[2px] -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-gradient-to-r from-[#e4d9bc] to-[#c9a84c]" />
               </span>
             )}
           </button>
@@ -264,7 +264,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
             <Link
               to="/contact"
               onClick={closeMobile}
-              className="hp-cta inline-flex items-center justify-center h-10 px-3 rounded-full bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
+              className="hp-cta inline-flex items-center justify-center h-10 px-3 rounded-full bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c] text-black font-bold whitespace-nowrap text-[14px]"
             >
               {t("nav.cta")}
             </Link>
@@ -284,7 +284,7 @@ transition-transform duration-700 ${isVisible || mobileOpen ? "translate-y-0" : 
               <Link
                 key={item.path}
                 to={item.path}
-                className="relative text-white hover:text-[#c9a84c] dark:text-[#e8d5a3] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#c9a84c] after:to-[#d4af37] dark:after:from-[#e8d5a3] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
+                className="relative text-white hover:text-[#c9a84c] dark:text-[#e4d9bc] dark:hover:text-[#c9a84c] transition-colors duration-200 after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#c9a84c] after:to-[#d4af37] dark:after:from-[#e4d9bc] dark:after:to-[#c9a84c] after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-right"
               >
                 {item.label}
               </Link>

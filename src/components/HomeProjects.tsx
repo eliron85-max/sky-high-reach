@@ -236,7 +236,7 @@ const HomeProjects = () => {
             {selectedProject && (
               <>
                 <DialogHeader>
-                  <DialogTitle className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#e8d5a3] to-primary">
+                  <DialogTitle className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#e4d9bc] to-primary">
                     {selectedProject.title}
                   </DialogTitle>
                 </DialogHeader>
