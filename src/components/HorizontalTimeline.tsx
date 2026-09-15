@@ -91,7 +91,7 @@ const HorizontalTimeline = () => {
 
       <div className="relative container mx-auto px-4 space-y-8 lg:space-y-10">
         {[topRow, bottomRow].map((row, rowIdx) => (
-          <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {row.map((m, i) => (
               <motion.article
                 key={m.year}
