@@ -93,7 +93,7 @@ export default function SiteTourWizard() {
         {/* Progress */}
         <div className="h-1 bg-white/5">
           <div
-            className="h-full bg-gradient-to-r from-[#c9a84c] to-[#e8d5a3] transition-all duration-500"
+            className="h-full bg-gradient-to-r from-[#c9a84c] to-[#e4d9bc] transition-all duration-500"
             style={{ width: `${(step + 1) / TOUR_STEPS.length * 100}%` }} />
 
         </div>

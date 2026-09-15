@@ -90,11 +90,11 @@ const HeroWithCards = () => {
         {/* Main Title */}
         <div className="text-center mt-4 md:mt-8 mb-4 md:mb-12">
           <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold mb-1 md:mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e4d9bc] to-[#c9a84c]">
               {t("hero.slide1Title")}
             </span>
           </h1>
-          <p className="text-sm md:text-2xl text-[#e8d5a3]/80 max-w-2xl mx-auto px-2">
+          <p className="text-sm md:text-2xl text-[#e4d9bc]/80 max-w-2xl mx-auto px-2">
             {t("hero.slide1Subtitle")}
           </p>
         </div>
@@ -126,8 +126,8 @@ const HeroWithCards = () => {
         {/* Scroll Down Arrow */}
         <button onClick={() => scrollToSection("services")} className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer group" aria-label={t("hero.nextSlide")}>
           <div className="flex flex-col items-center">
-            <ChevronDown size={40} className="text-[#c9a84c] group-hover:text-[#e8d5a3] transition-colors duration-300" strokeWidth={3} />
-            <ChevronDown size={40} className="text-[#c9a84c]/50 group-hover:text-[#e8d5a3]/50 transition-colors duration-300 -mt-6" strokeWidth={3} />
+            <ChevronDown size={40} className="text-[#c9a84c] group-hover:text-[#e4d9bc] transition-colors duration-300" strokeWidth={3} />
+            <ChevronDown size={40} className="text-[#c9a84c]/50 group-hover:text-[#e4d9bc]/50 transition-colors duration-300 -mt-6" strokeWidth={3} />
           </div>
         </button>
       </div>

@@ -63,7 +63,7 @@ export default function BouncingTextSection({ lines }: Props) {
                     style={{
                       opacity: isVisible ? 1 : 0.15,
                       transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                      backgroundImage: "linear-gradient(to bottom, #e8d5a3, #c9a84c)",
+                      backgroundImage: "linear-gradient(to bottom, #e4d9bc, #c9a84c)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                     }}

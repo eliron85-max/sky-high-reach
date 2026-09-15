@@ -254,7 +254,7 @@
 
   /* ===== Premium cinematic utilities ===== */
   .text-gold-gradient {
-    background: linear-gradient(135deg, #f4e4a8 0%, #c9a84c 45%, #8b6f2a 100%);
+    background: linear-gradient(135deg, #e9dcb8 0%, #c9a84c 45%, #7d6428 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -315,9 +315,9 @@
     background: linear-gradient(
       90deg,
       #c9a84c 0%,
-      #f4e4a8 25%,
+      #e9dcb8 25%,
       #ffffff 50%,
-      #f4e4a8 75%,
+      #e9dcb8 75%,
       #c9a84c 100%
     );
     background-size: 200% 100%;
