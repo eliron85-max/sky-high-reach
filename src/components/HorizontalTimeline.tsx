@@ -63,7 +63,7 @@ const HorizontalTimeline = () => {
       className="relative bg-hero-dark py-24 md:py-32 overflow-hidden cinematic-grain"
       dir="rtl"
     >
-      {/* ambient gold glow */}
+      {/* ambient gold glows */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-30"
@@ -73,7 +73,6 @@ const HorizontalTimeline = () => {
         }}
       />
 
-      {/* ambient blue glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 left-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-20"
@@ -83,7 +82,6 @@ const HorizontalTimeline = () => {
         }}
       />
 
-      {/* heading */}
       <motion.div
         className="relative text-center mb-20 px-4"
         initial={{ opacity: 0, y: 40 }}
@@ -110,27 +108,16 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      {/* timeline grid */}
-      <div className="relative container mx-auto px-4 space-y-10 lg:space-y-14">
+      <div className="relative container mx-auto px-4 space-y-8 lg:space-y-10">
         {rows.map((row, rowIdx) => (
           <div
             key={rowIdx}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           >
             {row.map((m, i) => (
               <motion.article
                 key={m.year}
-                className="
-                  group
-                  relative
-                  glass-panel
-                  glass-panel-hover
-                  rounded-3xl
-                  overflow-hidden
-                  border
-                  border-white/10
-                  bg-[#0b1220]/80
-                "
+                className="group relative glass-panel glass-panel-hover rounded-3xl overflow-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -140,139 +127,24 @@ const HorizontalTimeline = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                {/* visual area */}
-                <div className="relative px-5 pt-6 pb-2 sm:px-6 sm:pt-7">
-                  {/* glow behind laptop */}
-                  <div
-                    aria-hidden
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-x-8
-                      top-8
-                      h-40
-                      rounded-full
-                      blur-3xl
-                      opacity-30
-                      transition-opacity
-                      duration-700
-                      group-hover:opacity-50
-                    "
-                    style={{
-                      background:
-                        i % 2 === 0
-                          ? "radial-gradient(circle, #c9a84c 0%, transparent 70%)"
-                          : "radial-gradient(circle, #4f46e5 0%, transparent 70%)",
-                    }}
+                {/* image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={m.image}
+                    alt={m.title}
+                    className="w-full h-72 lg:h-80 object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
                   />
 
-                  {/* laptop */}
-                  <div className="relative z-10 mx-auto w-full">
-                    {/* laptop screen frame */}
-                    <div
-                      className="
-                        relative
-                        mx-auto
-                        w-full
-                        max-w-[560px]
-                        aspect-[16/10]
-                        rounded-[18px]
-                        border-[6px]
-                        border-[#202936]
-                        bg-[#080d15]
-                        shadow-[0_25px_70px_rgba(0,0,0,0.55)]
-                        overflow-hidden
-                        transition-transform
-                        duration-700
-                        group-hover:-translate-y-1
-                      "
-                    >
-                      {/* screen image */}
-                      <div className="absolute inset-[5px] overflow-hidden rounded-[10px] bg-black">
-                        <img
-                          src={m.image}
-                          alt={m.title}
-                          className="
-                            w-full
-                            h-full
-                            object-cover
-                            transition-transform
-                            duration-[1400ms]
-                            ease-[cubic-bezier(0.16,1,0.3,1)]
-                            group-hover:scale-105
-                          "
-                          loading="lazy"
-                          decoding="async"
-                        />
+                  {/* cinematic gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
 
-                        {/* cinematic overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a]/70 via-transparent to-transparent" />
-                      </div>
-
-                      {/* camera dot */}
-                      <div
-                        aria-hidden
-                        className="
-                          absolute
-                          top-1
-                          left-1/2
-                          -translate-x-1/2
-                          h-1.5
-                          w-1.5
-                          rounded-full
-                          bg-[#3f4a57]
-                        "
-                      />
-                    </div>
-
-                    {/* laptop base */}
-                    <div
-                      aria-hidden
-                      className="
-                        relative
-                        mx-auto
-                        -mt-1
-                        h-3
-                        w-[88%]
-                        rounded-b-[12px]
-                        bg-gradient-to-b
-                        from-[#aeb8c4]
-                        via-[#727d89]
-                        to-[#3f4751]
-                        shadow-[0_18px_28px_rgba(0,0,0,0.45)]
-                      "
-                    />
-
-                    {/* laptop bottom lip */}
-                    <div
-                      aria-hidden
-                      className="
-                        relative
-                        mx-auto
-                        h-2
-                        w-[68%]
-                        rounded-b-full
-                        bg-[#4a535d]
-                        opacity-70
-                      "
-                    />
-                  </div>
-
-                  {/* year */}
-                  <div className="absolute top-8 right-8 z-20">
+                  {/* year overlay */}
+                  <div className="absolute top-4 right-4">
                     <span
-                      className="
-                        block
-                        text-3xl
-                        sm:text-4xl
-                        lg:text-5xl
-                        font-light
-                        tracking-tight
-                        text-gold-gradient
-                      "
-                      style={{
-                        fontFamily: "Montserrat, sans-serif",
-                      }}
+                      className="block text-3xl lg:text-4xl font-light tracking-tight text-gold-gradient"
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
                     >
                       {m.year}
                     </span>
@@ -280,52 +152,17 @@ const HorizontalTimeline = () => {
                 </div>
 
                 {/* content */}
-                <div className="relative px-6 pb-7 pt-4 lg:px-7 lg:pb-8 lg:pt-5 text-center">
-                  <h3
-                    className="
-                      text-2xl
-                      lg:text-3xl
-                      font-medium
-                      text-white
-                      mb-3
-                      transition-colors
-                      duration-500
-                      group-hover:text-[#f4e4a8]
-                    "
-                  >
+                <div className="relative p-6 lg:p-7">
+                  <h3 className="text-xl lg:text-2xl font-medium text-white mb-3 transition-colors duration-500 group-hover:text-[#f4e4a8]">
                     {m.title}
                   </h3>
 
-                  <p
-                    className="
-                      text-white/55
-                      leading-relaxed
-                      text-sm
-                      lg:text-[15px]
-                      font-light
-                      max-w-md
-                      mx-auto
-                    "
-                  >
+                  <p className="text-white/55 leading-relaxed text-sm lg:text-[15px] font-light">
                     {m.description}
                   </p>
 
                   {/* hover gold underline */}
-                  <span
-                    className="
-                      absolute
-                      bottom-0
-                      right-8
-                      left-8
-                      h-px
-                      gold-divider
-                      scale-x-0
-                      group-hover:scale-x-100
-                      transition-transform
-                      duration-700
-                      origin-center
-                    "
-                  />
+                  <span className="absolute bottom-0 right-6 left-6 h-px gold-divider scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right" />
                 </div>
               </motion.article>
             ))}
