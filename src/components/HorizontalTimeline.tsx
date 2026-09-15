@@ -88,13 +88,13 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      <div className="relative container mx-auto px-4 space-y-10 lg:space-y-12">
+      <div className="relative w-full max-w-[1800px] mx-auto px-4 md:px-6 lg:px-8 space-y-10 lg:space-y-12">
         {[topRow, bottomRow].map((row, rowIdx) => (
           <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {row.map((m, i) => (
               <motion.article
                 key={m.year}
-                className="group relative glass-panel glass-panel-hover rounded-3xl overflow-hidden"
+                className="group relative glass-panel glass-panel-hover rounded-3xl overflow-hidden h-full"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -104,15 +104,15 @@ const HorizontalTimeline = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden aspect-[1.35/1]">
                   <img
                     src={m.image}
                     alt={m.title}
-                    className="w-full h-[500px] lg:h-[600px] object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/20 to-transparent" />
                   <div className="absolute top-5 right-5">
                     <span
                       className="block text-4xl lg:text-5xl font-light tracking-tight text-gold-gradient"
@@ -123,7 +123,7 @@ const HorizontalTimeline = () => {
                   </div>
                 </div>
 
-                <div className="relative p-8 lg:p-10">
+                <div className="relative p-8 lg:p-9 min-h-[175px] flex flex-col justify-center">
                   <h3 className="text-2xl lg:text-3xl font-medium text-white mb-4 transition-colors duration-500 group-hover:text-[#f4e4a8]">
                     {m.title}
                   </h3>
