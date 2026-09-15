@@ -56,6 +56,7 @@ export default function HomeUrbanRenewalHero({
   const quaternaryIndex = (currentIndex + 3) % images.length;
   return (
     <section
+      id="projects"
       ref={sectionRef}
       dir="ltr"
       className={cn(
