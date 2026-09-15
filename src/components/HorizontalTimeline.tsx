@@ -57,7 +57,6 @@ const HorizontalTimeline = () => {
 
   return (
     <section className="relative bg-hero-dark py-24 md:py-32 overflow-hidden cinematic-grain" dir="rtl">
-      {/* ambient gold glows */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-30"
@@ -89,7 +88,7 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      <div className="relative container mx-auto px-4 space-y-8 lg:space-y-10">
+      <div className="relative container mx-auto px-4 space-y-10 lg:space-y-12">
         {[topRow, bottomRow].map((row, rowIdx) => (
           <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {row.map((m, i) => (
@@ -105,21 +104,18 @@ const HorizontalTimeline = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
-                {/* image */}
                 <div className="relative overflow-hidden">
                   <img
                     src={m.image}
                     alt={m.title}
-                    className="w-full h-80 lg:h-96 object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    className="w-full h-[500px] lg:h-[600px] object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
                   />
-                  {/* cinematic gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
-                  {/* year overlay */}
-                  <div className="absolute top-4 right-4">
+                  <div className="absolute top-5 right-5">
                     <span
-                      className="block text-3xl lg:text-4xl font-light tracking-tight text-gold-gradient"
+                      className="block text-4xl lg:text-5xl font-light tracking-tight text-gold-gradient"
                       style={{ fontFamily: "Montserrat, sans-serif" }}
                     >
                       {m.year}
@@ -127,15 +123,13 @@ const HorizontalTimeline = () => {
                   </div>
                 </div>
 
-                {/* content */}
-                <div className="relative p-7 lg:p-8">
-                  <h3 className="text-xl lg:text-2xl font-medium text-white mb-3 transition-colors duration-500 group-hover:text-[#f4e4a8]">
+                <div className="relative p-8 lg:p-10">
+                  <h3 className="text-2xl lg:text-3xl font-medium text-white mb-4 transition-colors duration-500 group-hover:text-[#f4e4a8]">
                     {m.title}
                   </h3>
-                  <p className="text-white/55 leading-relaxed text-sm lg:text-[15px] font-light">
+                  <p className="text-white/55 leading-relaxed text-base lg:text-lg font-light">
                     {m.description}
                   </p>
-                  {/* hover gold underline */}
                   <span className="absolute bottom-0 right-6 left-6 h-px gold-divider scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right" />
                 </div>
               </motion.article>
