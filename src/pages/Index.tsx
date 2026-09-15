@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import StickyCoverTransition from "@/components/StickyCoverTransition";
+import Hero from "@/components/Hero";
 
 import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
@@ -18,8 +19,6 @@ import StickyRevealSection from "@/components/StickyRevealSection";
 
 import StickySplitSection from "@/components/StickySplitSection";
 import { useTranslation } from "@/lib/i18n";
-
-
 
 import stoneCladding1 from "@/assets/stone-cladding-1.webp";
 import stoneCladding2 from "@/assets/stone-cladding-2.webp";
@@ -40,14 +39,12 @@ import stoneVeneerImage from "@/assets/stone-veneer.webp";
 import facadeRestorationNew from "@/assets/facade-restoration-new.webp";
 
 const urbanImages = [
-stoneCladding1, stoneCladding2, stoneCladding3, stoneCladding4,
-stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8];
-
+  stoneCladding1, stoneCladding2, stoneCladding3, stoneCladding4,
+  stoneCladding5, stoneCladding6, stoneCladding7, stoneCladding8
+];
 
 export default function Index() {
   const { t } = useTranslation();
-
-
 
   return (
     <div className="min-h-screen bg-hero-dark">
@@ -63,17 +60,7 @@ export default function Index() {
         postScreens={0}
         driftMaxPx={0}
         secondRadiusPx={28}
-        first={
-          <section className="w-full h-full overflow-hidden">
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay muted loop playsInline preload="auto"
-              poster="/hero-poster.jpg">
-              <source src="/hero.webm" type="video/webm" />
-            </video>
-            <div className="absolute inset-0 bg-black/45" />
-          </section>
-        }
+        first={<Hero />}
         second={
           <div className="h-full w-full flex flex-col">
             <TrustStrip />
@@ -108,14 +95,12 @@ export default function Index() {
           </div>
         </div>
 
-
         {/* ========== #5 URBAN RENEWAL ========== */}
         <HomeUrbanRenewalHero
           images={urbanImages}
           titleTop={t("home.urbanTitleTop")}
           titleGold={t("home.urbanTitleGold")}
           subtitle={t("home.urbanSubtitle")} />
-
 
         {/* ========== #6 STICKY REVEAL ========== */}
         <StickyRevealSection
@@ -141,7 +126,6 @@ export default function Index() {
           }
         />
 
-
         {/* ========== #7 STICKY SPLIT — ימין ========== */}
         <StickySplitSection
           image={facadeProject1}
@@ -152,7 +136,6 @@ export default function Index() {
           imagePosition="right"
           ctaText="לפרטים נוספים"
           ctaHref="/facade-restoration" />
-
 
         {/* ========== #8 STICKY SPLIT — שמאל ========== */}
         <StickySplitSection
@@ -165,11 +148,10 @@ export default function Index() {
           ctaText="לפרטים נוספים"
           ctaHref="/stone-veneer" />
 
-
         <HomeTestimonials />
         <Contact />
         <Footer />
       </div>
-    </div>);
-
+    </div>
+  );
 }
