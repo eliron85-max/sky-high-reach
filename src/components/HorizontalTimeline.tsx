@@ -52,21 +52,32 @@ const milestones = [
 ];
 
 const HorizontalTimeline = () => {
-  const topRow = milestones.slice(0, 4);
-  const bottomRow = milestones.slice(4);
+  const rows = [
+    milestones.slice(0, 3),
+    milestones.slice(3, 6),
+    milestones.slice(6),
+  ];
 
   return (
-    <section className="relative bg-hero-dark py-24 md:py-32 overflow-hidden cinematic-grain" dir="rtl">
+    <section
+      className="relative bg-hero-dark py-24 md:py-32 overflow-hidden cinematic-grain"
+      dir="rtl"
+    >
       {/* ambient gold glows */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-30"
-        style={{ background: "radial-gradient(circle, #c9a84c 0%, transparent 70%)" }}
+        style={{
+          background: "radial-gradient(circle, #c9a84c 0%, transparent 70%)",
+        }}
       />
+
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 left-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-20"
-        style={{ background: "radial-gradient(circle, #4f46e5 0%, transparent 70%)" }}
+        style={{
+          background: "radial-gradient(circle, #4f46e5 0%, transparent 70%)",
+        }}
       />
 
       <motion.div
@@ -74,24 +85,33 @@ const HorizontalTimeline = () => {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{
+          duration: 0.8,
+          ease: [0.16, 1, 0.3, 1],
+        }}
       >
         <span className="inline-block text-[#c9a84c] text-xs md:text-sm tracking-[0.45em] uppercase mb-5">
           המסע שלנו
         </span>
+
         <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.95]">
           <span className="gold-shimmer-text">ציוני</span>{" "}
           <span className="text-white/95">דרך</span>
         </h2>
+
         <div className="mx-auto mt-8 h-px w-32 gold-divider" />
+
         <p className="mt-6 text-white/55 max-w-xl mx-auto text-base md:text-lg leading-relaxed font-light">
           רצף של רגעים מכוננים — מהיום הראשון ועד המהפכה הבאה
         </p>
       </motion.div>
 
       <div className="relative container mx-auto px-4 space-y-8 lg:space-y-10">
-        {[topRow, bottomRow].map((row, rowIdx) => (
-          <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {rows.map((row, rowIdx) => (
+          <div
+            key={rowIdx}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
             {row.map((m, i) => (
               <motion.article
                 key={m.year}
@@ -114,13 +134,17 @@ const HorizontalTimeline = () => {
                     loading="lazy"
                     decoding="async"
                   />
+
                   {/* cinematic gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
+
                   {/* year overlay */}
                   <div className="absolute top-4 right-4">
                     <span
                       className="block text-3xl lg:text-4xl font-light tracking-tight text-gold-gradient"
-                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                      style={{
+                        fontFamily: "Montserrat, sans-serif",
+                      }}
                     >
                       {m.year}
                     </span>
@@ -132,9 +156,11 @@ const HorizontalTimeline = () => {
                   <h3 className="text-xl lg:text-2xl font-medium text-white mb-3 transition-colors duration-500 group-hover:text-[#f4e4a8]">
                     {m.title}
                   </h3>
+
                   <p className="text-white/55 leading-relaxed text-sm lg:text-[15px] font-light">
                     {m.description}
                   </p>
+
                   {/* hover gold underline */}
                   <span className="absolute bottom-0 right-6 left-6 h-px gold-divider scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right" />
                 </div>
