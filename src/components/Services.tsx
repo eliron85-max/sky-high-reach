@@ -114,10 +114,10 @@ const Services = () => {
     },
 
     {
-      title: t("services.items.heightSolutions.title"),
-      description: t("services.items.heightSolutions.description"),
+      title: "צביעה בגובה",
+      description: "שירותי צביעה מקצועיים בגובה",
       image: heightSolutionsImage,
-      link: "/height-solutions",
+      link: "/height-painting",
     },
   ];
 
