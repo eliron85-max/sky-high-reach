@@ -32,7 +32,7 @@ const HorizontalTimeline = () => {
             {row.map((m, i) => (
               <motion.article key={m.year} className="group relative glass-panel glass-panel-hover rounded-3xl overflow-hidden w-full" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.9, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}>
                 <div className="relative overflow-hidden aspect-[4/3]">
-                  <img src={m.image} alt={m.title} className="w-full h-full object-cover transition-transform duration-[600000ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.10]" loading="lazy" decoding="async" />
+                  <img src={m.image} alt={m.title} className="w-full h-full object-cover group-hover:scale-[1.10]" style={{ transition: "transform 60s linear" }} loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-[#0a0f1a]/30 to-transparent" />
                   <div className="absolute top-5 right-5"><span className="block text-4xl lg:text-5xl font-light tracking-tight text-gold-gradient" style={{ fontFamily: "Montserrat, sans-serif" }}>{m.year}</span></div>
                 </div>
