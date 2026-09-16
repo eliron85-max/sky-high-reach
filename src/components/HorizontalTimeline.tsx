@@ -88,13 +88,13 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      <div className="relative w-full max-w-[1600px] mx-auto px-4 space-y-10 lg:space-y-12">
+      <div className="relative w-full max-w-none mx-auto px-4 md:px-6 lg:px-8 space-y-10 lg:space-y-12">
         {[topRow, bottomRow].map((row, rowIdx) => (
-          <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
             {row.map((m, i) => (
               <motion.article
                 key={m.year}
-                className="group relative glass-panel glass-panel-hover rounded-3xl overflow-hidden"
+                className="group relative glass-panel glass-panel-hover rounded-3xl overflow-hidden w-full"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
