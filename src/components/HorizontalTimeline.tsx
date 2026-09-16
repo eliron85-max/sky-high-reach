@@ -52,8 +52,11 @@ const milestones = [
 ];
 
 const HorizontalTimeline = () => {
-  const topRow = milestones.slice(0, 4);
-  const bottomRow = milestones.slice(4);
+  const rows = [
+    milestones.slice(0, 3),
+    milestones.slice(3, 6),
+    milestones.slice(6, 8),
+  ];
 
   return (
     <section className="relative bg-hero-dark py-24 md:py-32 overflow-hidden cinematic-grain" dir="rtl">
@@ -88,8 +91,8 @@ const HorizontalTimeline = () => {
         </p>
       </motion.div>
 
-      <div className="relative w-full max-w-none mx-auto px-4 md:px-6 lg:px-8 space-y-10 lg:space-y-12">
-        {[topRow, bottomRow].map((row, rowIdx) => (
+      <div className="relative w-full max-w-none mx-auto px-4 md:px-6 lg:px-8 space-y-6 lg:space-y-8">
+        {rows.map((row, rowIdx) => (
           <div key={rowIdx} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
             {row.map((m, i) => (
               <motion.article
