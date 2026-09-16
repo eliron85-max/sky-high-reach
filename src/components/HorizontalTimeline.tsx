@@ -111,7 +111,7 @@ const HorizontalTimeline = () => {
                   <img
                     src={m.image}
                     alt={m.title}
-                    className="w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-[3200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
                   />
