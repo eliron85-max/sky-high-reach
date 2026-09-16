@@ -1,15 +1,16 @@
 name: Visual Regression Tests
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: visual-tests-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   visual-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
@@ -24,13 +25,14 @@ jobs:
         run: npm ci
 
       - name: Install Playwright test package
-        run: npm install --no-save @playwright/test
+        run: npm install --no-save --no-package-lock @playwright/test
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium webkit
 
       - name: Run visual tests
-        run: npx playwright test
+        timeout-minutes: 6
+        run: npx playwright test --reporter=line
         env:
           CI: true
 
