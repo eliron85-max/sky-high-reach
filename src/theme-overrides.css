@@ -1,6 +1,5 @@
 /* ===== Unified premium site palette ===== */
 
-@layer base {
   :root,
   .dark {
     color-scheme: dark;
@@ -58,4 +57,3 @@
   :root.dark body::before {
     opacity: 0.12 !important;
   }
-}
