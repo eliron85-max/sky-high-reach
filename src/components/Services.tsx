@@ -58,12 +58,6 @@ const Services = () => {
       link: "/facade-restoration",
     },
     {
-      title: t("services.items.stoneVeneer.title"),
-      description: t("services.items.stoneVeneer.description"),
-      image: stoneVeneerImage,
-      link: "/stone-veneer",
-    },
-    {
       title: t("services.items.waterproofing.title"),
       description: t("services.items.waterproofing.description"),
       image: waterproofingImage,
@@ -80,6 +74,12 @@ const Services = () => {
       description: t("services.items.specialWorks.description"),
       image: specialProjectsImage,
       link: "/special-projects",
+    },
+    {
+      title: t("services.items.stoneVeneer.title"),
+      description: t("services.items.stoneVeneer.description"),
+      image: stoneVeneerImage,
+      link: "/stone-veneer",
     },
     {
       title: t("services.items.safetyInspections.title"),
