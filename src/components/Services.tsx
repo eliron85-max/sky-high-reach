@@ -99,6 +99,12 @@ const Services = () => {
       image: heightSolutionsImage,
       link: "/height-solutions",
     },
+    {
+      title: t("services.items.heightSolutions.title"),
+      description: t("services.items.heightSolutions.description"),
+      image: heightSolutionsImage,
+      link: "/height-solutions",
+    },
   ];
 
   return (
@@ -112,7 +118,7 @@ const Services = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-6 md:px-12 lg:px-20 pb-10">
           {services.map((service, index) => (
-            <ServiceTile key={service.link} service={service} index={index} isVisible={isVisible} />
+            <ServiceTile key={`${service.link}-${index}`} service={service} index={index} isVisible={isVisible} />
           ))}
         </div>
       </div>
