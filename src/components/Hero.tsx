@@ -56,6 +56,17 @@ const Hero = () => {
           style={contentStyle}
           className="max-w-3xl mx-auto text-center"
         >
+          <div key={currentSlide} className="animate-fade-in-up">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#e8d5a3] to-[#c9a84c]">
+                {slides[currentSlide].title}
+              </span>
+            </h1>
+            <p className="text-lg md:text-2xl lg:text-3xl text-white/80 mb-10 leading-relaxed max-w-2xl mx-auto">
+              {slides[currentSlide].subtitle}
+            </p>
+          </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               onClick={() => scrollToSection("projects")}
