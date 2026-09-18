@@ -10,6 +10,7 @@ import TrustStrip from "@/components/TrustStrip";
 import Contact from "@/components/Contact";
 import HomeUrbanRenewalHero from "@/components/HomeUrbanRenewalHero";
 import HomeStatsSection from "@/components/HomeStatsSection";
+import ProcessStepsSection from "@/components/ProcessStepsSection";
 import { FloatingLanguageSwitcher } from "@/components/FloatingLanguageSwitcher";
 import RappellingFigure from "@/components/RappellingFigure";
 import RappellingFigureLeft from "@/components/RappellingFigureLeft";
@@ -76,19 +77,9 @@ export default function Index() {
 
         {/* ========== STATS peels off to reveal TIMELINE ========== */}
         <div className="relative">
-          {/* Stats — scrolls naturally (on top) */}
-          <div className="relative z-10">
-            <HomeStatsSection
-              titleGold={t("home.statsGold")}
-              titleBlack={t("home.statsBlack")}
-              stats={[
-                { value: "500+", label: t("home.statsProjects") },
-                { value: "15", label: t("home.statsExperience") },
-                { value: "50+", label: t("home.statsCities") },
-              ]}
-              images={[statsImage1, statsImage2, statsImage3, statsImage4]}
-            />
-          </div>
+          {/* New process steps section */}
+          <ProcessStepsSection />
+
           {/* Timeline — sticky behind, revealed as stats scrolls away */}
           <div className="sticky top-0 z-0">
             <HorizontalTimeline />
@@ -149,6 +140,19 @@ export default function Index() {
           ctaHref="/stone-veneer" />
 
         <HomeTestimonials />
+
+        {/* Stats moved to the bottom, immediately before Contact */}
+        <HomeStatsSection
+          titleGold={t("home.statsGold")}
+          titleBlack={t("home.statsBlack")}
+          stats={[
+            { value: "500+", label: t("home.statsProjects") },
+            { value: "15", label: t("home.statsExperience") },
+            { value: "50+", label: t("home.statsCities") },
+          ]}
+          images={[statsImage1, statsImage2, statsImage3, statsImage4]}
+        />
+
         <Contact />
         <Footer />
       </div>
