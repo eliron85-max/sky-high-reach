@@ -33,14 +33,6 @@ export default function ProcessStepsSection() {
       dir="rtl"
       className="relative w-full overflow-hidden bg-white dark:bg-black py-24 lg:py-32"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-[-180px] right-[-10%] h-[500px] w-[500px] rounded-full blur-[150px] opacity-20"
-        style={{
-          background:
-            "radial-gradient(circle, #c9a84c 0%, transparent 70%)",
-        }}
-      />
 
       <div className="relative mx-auto w-full max-w-[1500px] px-6 lg:px-10">
         <motion.div
