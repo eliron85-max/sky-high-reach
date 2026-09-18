@@ -27,11 +27,6 @@ const HorizontalTimeline = () => {
         style={{ background: "radial-gradient(circle, #c9a84c 0%, transparent 70%)" }}
       />
 
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-40 left-[-10%] h-[500px] w-[500px] rounded-full blur-[140px] opacity-20"
-        style={{ background: "radial-gradient(circle, #4f46e5 0%, transparent 70%)" }}
-      />
 
       <motion.div
         className="relative text-center mb-20 px-4"
