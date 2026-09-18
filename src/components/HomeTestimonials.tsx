@@ -2,13 +2,6 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import chatBg from "@/assets/whatsapp-chat-bg.webp";
 
-import avatar1 from "@/assets/avatar-1.webp";
-import avatar2 from "@/assets/avatar-2.webp";
-import avatar3 from "@/assets/avatar-3.webp";
-import avatar4 from "@/assets/avatar-4.webp";
-import avatar5 from "@/assets/avatar-5.webp";
-import avatar6 from "@/assets/avatar-6.webp";
-import avatar7 from "@/assets/avatar-7.webp";
 
 interface Testimonial {
   id: number;
@@ -19,13 +12,13 @@ interface Testimonial {
 }
 
 const testimonials: Testimonial[] = [
-  { id: 1, name: "דודו בוזגלו", role: "מנהל פרויקטים", text: "עבדנו עם החברה על מספר פרויקטים מורכבים. המקצועיות והאמינות שהם מפגינים היא ברמה הגבוהה ביותר. ממליץ בחום!", avatar: avatar1 },
-  { id: 2, name: "שרה לוי", role: "יזמית נדל״ן", text: "תוצאות מעולות בשיפוץ חזית הבניין שלנו. הצוות היה מקצועי, עמד בלוחות הזמנים והתוצאה עלתה על הציפיות.", avatar: avatar2 },
-  { id: 3, name: "משה אברהם", role: "וועד בית, רמת גן", text: "פתרון מקצועי לבעיית הרטיבות שנמשכה שנים. עבודה יסודית ומקיפה עם אחריות מלאה. תודה רבה!", avatar: avatar3 },
-  { id: 4, name: "רחל גולדשטיין", role: "מנהלת נכסים", text: "שירות אדיב, מקצועי ואמין. ביצעו עבודות גובה מורכבות בבניין שלנו בצורה מושלמת ובטוחה.", avatar: avatar4 },
-  { id: 5, name: "יוסי כהן", role: "קבלן שיפוצים", text: "עבודה ברמה גבוהה מאוד, צוות מקצועי שמבין את העבודה לעומק. שיתוף פעולה מעולה מתחילת הפרויקט ועד סופו.", avatar: avatar5 },
-  { id: 6, name: "מיכל דוד", role: "דיירת, תל אביב", text: "הגיעו בזמן, עבדו בצורה נקייה ומסודרת, והתוצאה הסופית פשוט מדהימה. הבניין נראה כמו חדש!", avatar: avatar6 },
-  { id: 7, name: "אבי ישראלי", role: "מהנדס בניין", text: "מקצוענים אמיתיים. טיפלו בבעיות איטום מורכבות עם פתרונות חכמים ויצירתיים. ממליץ לכל פרויקט גובה.", avatar: avatar7 },
+  { id: 1, name: "דודו בוזגלו", role: "מנהל פרויקטים", text: "עבדנו עם החברה על מספר פרויקטים מורכבים. המקצועיות והאמינות שהם מפגינים היא ברמה הגבוהה ביותר. ממליץ בחום!" },
+  { id: 2, name: "שרה לוי", role: "יזמית נדל״ן", text: "תוצאות מעולות בשיפוץ חזית הבניין שלנו. הצוות היה מקצועי, עמד בלוחות הזמנים והתוצאה עלתה על הציפיות." },
+  { id: 3, name: "משה אברהם", role: "וועד בית, רמת גן", text: "פתרון מקצועי לבעיית הרטיבות שנמשכה שנים. עבודה יסודית ומקיפה עם אחריות מלאה. תודה רבה!" },
+  { id: 4, name: "רחל גולדשטיין", role: "מנהלת נכסים", text: "שירות אדיב, מקצועי ואמין. ביצעו עבודות גובה מורכבות בבניין שלנו בצורה מושלמת ובטוחה." },
+  { id: 5, name: "יוסי כהן", role: "קבלן שיפוצים", text: "עבודה ברמה גבוהה מאוד, צוות מקצועי שמבין את העבודה לעומק. שיתוף פעולה מעולה מתחילת הפרויקט ועד סופו." },
+  { id: 6, name: "מיכל דוד", role: "דיירת, תל אביב", text: "הגיעו בזמן, עבדו בצורה נקייה ומסודרת, והתוצאה הסופית פשוט מדהימה. הבניין נראה כמו חדש!" },
+  { id: 7, name: "אבי ישראלי", role: "מהנדס בניין", text: "מקצוענים אמיתיים. טיפלו בבעיות איטום מורכבות עם פתרונות חכמים ויצירתיים. ממליץ לכל פרויקט גובה." },
 ];
 
 const BACKGROUND_TEXT = "לקוחות ממליצים עלינו";
@@ -177,7 +170,7 @@ const HomeTestimonials = () => {
                           <span className="font-semibold text-white text-sm truncate">{t.name}</span>
                           <span className="text-white/70 text-[11px]">נראה לאחרונה אתמול</span>
                         </div>
-                        <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+                        <div className="w-10 h-10 rounded-full bg-[#c9a84c]/20 border border-[#c9a84c]/40 flex items-center justify-center text-white font-semibold text-sm">{t.name.charAt(0)}</div>
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="white" className="shrink-0"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
                       </div>
                     </div>
